@@ -1,0 +1,143 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>mikenakis</groupId>
+	<artifactId>assessment-parent</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>claims</module>
+		<module>main</module>
+		<module>print</module>
+		<module>test</module>
+	</modules>
+
+	<url>https://github.com/mikenakis/Public</url>
+
+	<licenses>
+		<license>
+			<name>No Permission License - All Rights Reserved</name>
+			<url>https://choosealicense.com/no-permission/</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Mike Nakis</name>
+			<email>pom.xml@michael.gr</email>
+			<organization>michael.gr</organization>
+			<organizationUrl>http://michael.gr</organizationUrl>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+
+	<build>
+<!--		<directory>OUT</directory>-->
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+
+					<compilerArgs>
+
+						<!-- The "enable-preview" option "Enables preview features of the JVM". Since this home project of mine is all about experimentation, we want this. -->
+						<arg>--enable-preview</arg>
+
+						<!-- The "preview" sub-option of the "Xlint" option will generate a warning for each use of a preview feature.  Since we are explicitly enabling preview
+						     features using the "enable-preview" compiler argument, this sub-option is entirely useless, so we disable it. -->
+						<arg>-Xlint:-preview</arg>
+
+						<!-- The "-parameters" option "Generates metadata for reflection on method parameters." That's good, we want this. -->
+						<arg>-parameters</arg>
+
+						<!-- The "-Xlint" option enables all recommended warnings. We will then suppress some that we have no use for. -->
+						<arg>-Xlint</arg>
+
+						<!-- The "try" sub-option of the "Xlint" option is mind-bogglingly stupid.
+							It lives in a simplistic world in which resources are always created, used, and disposed within a single function, so it aims to warn you that you
+							forgot to dispose a resource within the function that created it.
+							The following possibilities never occurred to the mastermind who invented this option:
+							- You might invoke a function which creates a resource and returns it, to be used and of course disposed by the caller.
+							- You might create a resource and store it as a member variable of an object, which will of course dispose the resource when it gets disposed.
+							So, the only reasonable thing to do with this warning is to always keep it disabled. -->
+						<arg>-Xlint:-try</arg>
+
+						<!-- The "serial" sub-option of the "Xlint" option "Warns about missing serialVersionUID definitions on serializable classes".
+						    In other words, every single time you extend some predefined class, you will be hit with an annoying warning just because the class you are extending
+						    happens to be serializable, a feature which you usually have no use for, don't care about, and don't want to be bothered about. -->
+						<arg>-Xlint:-serial</arg>
+
+						<!-- The "cast" sub-option of the "Xlint" option "Warns about the use of unnecessary casts." -->
+						<!-- <arg>-Xlint:-cast</arg> -->
+
+						<!-- If there are any warnings, we want compilation to fail. We don't want any half-measures. -->
+						<arg>-Werror</arg>
+
+						<!-- PEARL: When the packaging is 'jar', IntellijIdea creates a "target/generated-sources/annotations" directory in our source tree each time we build.
+							IntellijIdea insists on doing this, despite the fact that:
+							- We have specified that we do not want any annotation processing to take place. (In this case, the directory still gets created, and is empty.)
+							- We may have specified our output folder to be in some place well outside our source tree. (Precisely because we do not want our source code tree
+							  being littered with all kinds of annoying directories that have absolutely no reason being in our source code tree.)
+							The only way I have found to prevent this is by explicitly disabling annotation processing with -proc:none.
+							However, the use of this option causes the following message to appear in the build window of IntellijIdea:
+							  java: User-specified option "-proc:none" is ignored for "<project>". This compilation parameter is set automatically according to project settings.
+							Note that the 'java:' prefix suggests that this message is issued by the java compiler, while in fact it is issued by IntellijIdea. -->
+						<arg>-Xlint:-processing</arg>
+
+					</compilerArgs>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<includes>
+						<!-- PEARL: maven-surefire-plugin "inclusions" and "exclusions".
+							1. The maven-surefire-plugin unnecessarily complicates things with a useless concept of "inclusions" and "exclusions".
+							   (Which I was not aware of this because IntellijIdea has no such concept: it always just runs all tests. Which was never a problem. Which proves
+							    that inclusions and exclusions are useless, and constitute over-engineering.)
+							2. The maven-surefire-plugin sabotages the developer with default inclusions that will not run tests unless their names adhere to a certain convention
+							   which is essentially secret, since you cannot possibly know what the convention is unless you go read documentation. Specifically, they require the
+							   class name to contain the word "Test".
+							   (That's what you often achieve when you unnecessarily complicate things: you sabotage people.)
+							We correct this problem here by annihilating the plugin's concept of inclusions.  -->
+						<include>**/*.java</include>
+					</includes>
+					<argLine>--enable-preview</argLine>
+					<!-- magical incantation needed for the enable-preview option to work, from https://stackoverflow.com/a/69754577/773113 -->
+					<reuseForks>true</reuseForks>
+					<useFile>false</useFile>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/donalib</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/donalib</url>
+		</repository>
+	</distributionManagement>
+
+</project>
