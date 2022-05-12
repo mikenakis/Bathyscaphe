@@ -129,14 +129,14 @@
 	<repositories>
 		<repository>
 			<id>repsy-mikenakis-public</id>
-			<url>https://repo.repsy.io/mvn/mikenakis/donalib</url>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-assessment</url>
 		</repository>
 	</repositories>
 
 	<distributionManagement>
 		<repository>
 			<id>repsy-mikenakis-public</id>
-			<url>https://repo.repsy.io/mvn/mikenakis/donalib</url>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-assessment</url>
 		</repository>
 	</distributionManagement>
 
