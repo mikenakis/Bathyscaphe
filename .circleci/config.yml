@@ -1,0 +1,34 @@
+version: 2.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          context: my-context
+
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+
+
+
+
+
+
+
+
+
+      - run: mvn -s .circleci/mvn-settings.xml clean | grep -Ev "Download(ing|ed)"
+      - run: mvn -s .circleci/mvn-settings.xml install | grep -Ev "Download(ing|ed)"
+      - run: mvn -s .circleci/mvn-settings.xml deploy -DskipTests -Dmaven.install.skip=true
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/test-results
