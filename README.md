@@ -1,5 +1,6 @@
 # Assessment
-Deep Assessment of object immutability (And coming soon: deep assessment of object thread-safety)
+Deep immutability (and coming soon: thread-safety) assessment for Java objects
+
 By Mike Nakis (michael.gr)
 
 <p align="center">
@@ -13,10 +14,10 @@ TODO
 
 ## License
 
-For the time being, this creative work is explicitly published under ***No License***.
+For the time being, this software is explicitly published under ***No License***.
 
-In the near future this software will be made available under a dual license scheme. You will be able to choose between:
-1. A restrictive non-commercial license (Probably GNU AGPL) free of charge.
+In the near future it will be made available under a dual license scheme. You will be able to choose between:
+1. A restrictive non-commercial free license (Probably GNU AGPL).
 2. A commercial license for a small fee.
 
 This means that for the time being, I remain the exclusive copyright holder of this creative work, 

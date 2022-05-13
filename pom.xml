@@ -13,7 +13,7 @@
 		<module>test</module>
 	</modules>
 
-	<url>https://github.com/mikenakis/Public</url>
+	<url>https://github.com/mikenakis/Assessment</url>
 
 	<licenses>
 		<license>
@@ -38,7 +38,6 @@
 	</properties>
 
 	<build>
-<!--		<directory>OUT</directory>-->
 		<plugins>
 
 			<plugin>
@@ -51,22 +50,26 @@
 
 					<compilerArgs>
 
-						<!-- The "enable-preview" option "Enables preview features of the JVM". Since this home project of mine is all about experimentation, we want this. -->
+						<!-- The "enable-preview" option "Enables preview features of the JVM". Since home projects of mine are all about experimentation, we want this. -->
 						<arg>--enable-preview</arg>
+
+						<!-- The "-parameters" option "Generates metadata for reflection on method parameters." That's good, we want this. -->
+						<arg>-parameters</arg>
+
+						<!-- If there are any warnings, we want compilation to fail. I pity all those who a) don't have as many as possible warnings enabled, and b) don't have
+						     their build configured to treat warnings as errors. -->
+						<arg>-Werror</arg>
+
+						<!-- The "-Xlint" option enables all recommended warnings. We will then suppress some that we have no use for. -->
+						<arg>-Xlint</arg>
 
 						<!-- The "preview" sub-option of the "Xlint" option will generate a warning for each use of a preview feature.  Since we are explicitly enabling preview
 						     features using the "enable-preview" compiler argument, this sub-option is entirely useless, so we disable it. -->
 						<arg>-Xlint:-preview</arg>
 
-						<!-- The "-parameters" option "Generates metadata for reflection on method parameters." That's good, we want this. -->
-						<arg>-parameters</arg>
-
-						<!-- The "-Xlint" option enables all recommended warnings. We will then suppress some that we have no use for. -->
-						<arg>-Xlint</arg>
-
 						<!-- The "try" sub-option of the "Xlint" option is mind-bogglingly stupid.
 							It lives in a simplistic world in which resources are always created, used, and disposed within a single function, so it aims to warn you that you
-							forgot to dispose a resource within the function that created it.
+							forgot to dispose of a resource within the function that created it.
 							The following possibilities never occurred to the mastermind who invented this option:
 							- You might invoke a function which creates a resource and returns it, to be used and of course disposed by the caller.
 							- You might create a resource and store it as a member variable of an object, which will of course dispose the resource when it gets disposed.
@@ -75,25 +78,26 @@
 
 						<!-- The "serial" sub-option of the "Xlint" option "Warns about missing serialVersionUID definitions on serializable classes".
 						    In other words, every single time you extend some predefined class, you will be hit with an annoying warning just because the class you are extending
-						    happens to be serializable, a feature which you usually have no use for, don't care about, and don't want to be bothered about. -->
+						    happens to be serializable, a feature which you usually have no use for, don't care about, and don't want to be bothered with. -->
 						<arg>-Xlint:-serial</arg>
 
-						<!-- The "cast" sub-option of the "Xlint" option "Warns about the use of unnecessary casts." -->
-						<!-- <arg>-Xlint:-cast</arg> -->
-
-						<!-- If there are any warnings, we want compilation to fail. We don't want any half-measures. -->
-						<arg>-Werror</arg>
-
 						<!-- PEARL: When the packaging is 'jar', IntellijIdea creates a "target/generated-sources/annotations" directory in our source tree each time we build.
-							IntellijIdea insists on doing this, despite the fact that:
-							- We have specified that we do not want any annotation processing to take place. (In this case, the directory still gets created, and is empty.)
-							- We may have specified our output folder to be in some place well outside our source tree. (Precisely because we do not want our source code tree
-							  being littered with all kinds of annoying directories that have absolutely no reason being in our source code tree.)
-							The only way I have found to prevent this is by explicitly disabling annotation processing with -proc:none.
-							However, the use of this option causes the following message to appear in the build window of IntellijIdea:
-							  java: User-specified option "-proc:none" is ignored for "<project>". This compilation parameter is set automatically according to project settings.
-							Note that the 'java:' prefix suggests that this message is issued by the java compiler, while in fact it is issued by IntellijIdea. -->
-						<arg>-Xlint:-processing</arg>
+							 IntellijIdea insists on doing this, despite the fact that:
+							 - We have specified that we do not want any annotation processing to take place. (In this case, the directory still gets created, and is empty.)
+							 - We have specified that our output folder is something other than 'target'. (IntellijIdea will nonetheless create a directory called 'target'.)
+							 This is related to some other very strange behavior of IntellijIdea: if you go to Settings... / Build, Execution, Deployment / Compiler / Annotation
+							 Processors you will find that the 'Enable annotation processing' checkbox is unchecked. However, as it turns out, this only applies to the mysterious,
+							 nonsensical 'Default' branch of the mysterious, nonsensical tree that appears to the left of the checkbox. If you scroll down that tree, you will
+							 discover that there are more branches, and for those branches 'Enable annotation processing' is checked, and the "target/generated-sources/annotations"
+							 directory is specified. I have no idea how or why IntellijIdea creates those branches, and why it configures them like that. The only way I have found
+							 to prevent all that nonsense from affecting the directories created is by explicitly disabling annotation processing here, with -proc:none.
+							 PEARL on PEARL: the use of this option causes the following message to appear in the build window of IntellijIdea:
+							   java: User-specified option "-proc:none" is ignored for "<project>". This compilation parameter is set automatically according to project settings.
+							 Still, I would rather have this silly warning appear during build, than have weird empty extra target folders created.
+							 - Note that the 'java:' prefix suggests that this message is issued by the java compiler, while in fact it is issued by IntellijIdea.
+							 - Note that -Xlint:-processing does not help at all in suppressing this warning.
+							 - Note that contrary to what the warning message says, the -proc:none option is not ignored, because the annoying directories are not created.	-->
+						<arg>-proc:none</arg>
 
 					</compilerArgs>
 				</configuration>
