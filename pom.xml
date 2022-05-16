@@ -156,7 +156,7 @@
 
 	<distributionManagement>
 		<repository>
-			<id>repsy-mikenakis-bathyscaphe</id>
+			<id>repsy-mikenakis-public</id>
 			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-bathyscaphe</url>
 		</repository>
 	</distributionManagement>
