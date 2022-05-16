@@ -20,7 +20,7 @@
 	<licenses>
 		<license>
 			<name>Dual license (See LICENSE.md)</name>
-			<url>https://github.com/mikenakis/Assessment/blob/master/LICENSE.md</url>
+			<url>https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -39,9 +39,7 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:https://github.com/mikenakis/Assessment.git</connection>
-		<developerConnection>${project.scm.connection}</developerConnection>
-		<url>${project.url}</url>
+		<url>https://github.com/mikenakis/Bathyscaphe.git</url>
 	</scm>
 
 	<properties>
@@ -52,8 +50,8 @@
 
 	<build>
 
-		<sourceDirectory>sources</sourceDirectory>
-		<testSourceDirectory>sources</testSourceDirectory>
+		<sourceDirectory>source</sourceDirectory>
+		<testSourceDirectory>source</testSourceDirectory>
 
 		<plugins>
 

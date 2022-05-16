@@ -18,7 +18,7 @@ TODO
 
 ## License
                        
-See LICENSE.md (https://github.com/mikenakis/Assessment/blob/master/LICENSE.md)
+See LICENSE.md (https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md)
 
 If you want to do anything with this creative work, contact me.
 
