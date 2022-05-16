@@ -1,6 +1,8 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- IMPORTANT: For project url, licenses, developers, scm, etc. please see parent pom -->
+
 	<parent>
 		<groupId>mikenakis</groupId>
 		<artifactId>assessment-parent</artifactId>
@@ -9,9 +11,8 @@
 	<artifactId>assessment</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-	</build>
+	<name>mikenakis:assessment</name>
+	<description>Deep assessment of immutability and thread safety.</description>
 
 	<dependencies>
 

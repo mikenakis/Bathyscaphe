@@ -3,9 +3,13 @@ Deep immutability (and coming soon: thread-safety) assessment for Java objects
 
 By Mike Nakis (michael.gr)
 
+**_bathyscaph_** [bath-i-skaf] (noun) A submersible vessel that carries a crew, is able to maneuver independently, and
+is capable of reaching great depths.
+
 <p align="center">
 <img title="mikenakis-assessment logo" src="mikenakis-assessment-logo.svg" width="256"/><br/>
-The mikenakis-assessment logo, a line drawing of <i>bathyscaphe Trieste</i><br/>
+The mikenakis-assessment logo, a line drawing of <i>bathyscaph Trieste</i><br/>
+by Mike Nakis, based on a line drawing found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 
 ## Description
@@ -13,16 +17,8 @@ The mikenakis-assessment logo, a line drawing of <i>bathyscaphe Trieste</i><br/>
 TODO
 
 ## License
-
-For the time being, this software is explicitly published under ***No License***.
-
-In the near future it will be made available under a dual license scheme. You will be able to choose between:
-1. A restrictive non-commercial free license (Probably GNU AGPL).
-2. A commercial license for a small fee.
-
-This means that for the time being, I remain the exclusive copyright holder of this creative work, 
-and you may not do anything with it other than view its source code and admire it. 
-More information here: [michael.gr - Open Source but No License.](https://blog.michael.gr/2018/04/open-source-but-no-license.html)
+                       
+See LICENSE.md (https://github.com/mikenakis/Assessment/blob/master/LICENSE.md)
 
 If you want to do anything with this creative work, contact me.
 

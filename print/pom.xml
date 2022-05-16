@@ -1,6 +1,8 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- IMPORTANT: For project url, licenses, developers, scm, etc. please see parent pom -->
+
 	<parent>
 		<groupId>mikenakis</groupId>
 		<artifactId>assessment-parent</artifactId>
@@ -9,9 +11,8 @@
 	<artifactId>assessment-print</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-	</build>
+	<name>mikenakis:assessment-print</name>
+	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
 
 	<dependencies>
 
