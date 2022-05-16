@@ -1,15 +1,15 @@
-# Assessment
+# Bathyscaphe
 Deep immutability (and coming soon: thread-safety) assessment for Java objects
 
 By Mike Nakis (michael.gr)
 
-**_bathyscaph_** [bath-i-skaf] (noun) A submersible vessel that carries a crew, is able to maneuver independently, and
+**_bathyscaphe_** (ˈbæθɪˌskeɪf, -ˌskæf) (noun) A submersible vessel that carries a crew, is able to maneuver independently, and
 is capable of reaching great depths.
 
 <p align="center">
-<img title="mikenakis-assessment logo" src="mikenakis-assessment-logo.svg" width="256"/><br/>
-The mikenakis-assessment logo, a line drawing of <i>bathyscaph Trieste</i><br/>
-by Mike Nakis, based on a line drawing found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
+<img title="mikenakis:bathyscaphe logo" src="mikenakis-bathyscaphe-logo.svg" width="256"/><br/>
+The mikenakis:bathyscaphe logo, a line drawing of <i>bathyscaphe Trieste</i><br/>
+by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 
 ## Description

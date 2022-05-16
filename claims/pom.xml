@@ -5,14 +5,14 @@
 
 	<parent>
 		<groupId>mikenakis</groupId>
-		<artifactId>assessment-parent</artifactId>
+		<artifactId>bathyscaphe-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>assessment-claims</artifactId>
+	<artifactId>bathyscaphe-claims</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>mikenakis:assessment-claims</name>
-	<description>Annotations and interfaces to use in your code for interoperability with mikenakis:assessment</description>
+	<name>mikenakis:bathyscaphe-claims</name>
+	<description>Annotations and interfaces to use in your code for interoperability with mikenakis:bathyscaphe</description>
 
 	<dependencies>
 		<!-- yay! no dependencies! -->

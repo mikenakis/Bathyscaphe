@@ -5,20 +5,20 @@
 
 	<parent>
 		<groupId>mikenakis</groupId>
-		<artifactId>assessment-parent</artifactId>
+		<artifactId>bathyscaphe-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>assessment</artifactId>
+	<artifactId>bathyscaphe</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>mikenakis:assessment</name>
-	<description>Deep assessment of immutability and thread safety.</description>
+	<name>mikenakis:bathyscaphe</name>
+	<description>Deep assessment of immutability and thread safety for java objects.</description>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>mikenakis</groupId>
-			<artifactId>assessment-claims</artifactId>
+			<artifactId>bathyscaphe-claims</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 

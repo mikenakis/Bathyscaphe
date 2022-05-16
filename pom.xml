@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>mikenakis</groupId>
-	<artifactId>assessment-parent</artifactId>
+	<artifactId>bathyscaphe-parent</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -13,9 +13,9 @@
 		<module>test</module>
 	</modules>
 
-	<name>mikenakis:assessment-parent</name>
-	<description>Parent pom for mikenakis:assessment and related modules.</description>
-	<url>https://github.com/mikenakis/Assessment</url>
+	<name>mikenakis:bathyscaphe-parent</name>
+	<description>Parent pom for mikenakis:bathyscaphe and related modules.</description>
+	<url>https://github.com/mikenakis/Bathyscaphe</url>
 
 	<licenses>
 		<license>
@@ -157,7 +157,7 @@
 	<distributionManagement>
 		<repository>
 			<id>repsy-mikenakis-public</id>
-			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-assessment</url>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-bathyscaphe</url>
 		</repository>
 	</distributionManagement>
 

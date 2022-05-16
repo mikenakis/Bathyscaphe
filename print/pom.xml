@@ -5,20 +5,20 @@
 
 	<parent>
 		<groupId>mikenakis</groupId>
-		<artifactId>assessment-parent</artifactId>
+		<artifactId>bathyscaphe-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>assessment-print</artifactId>
+	<artifactId>bathyscaphe-print</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>mikenakis:assessment-print</name>
+	<name>mikenakis:bathyscaphe-print</name>
 	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>mikenakis</groupId>
-			<artifactId>assessment</artifactId>
+			<artifactId>bathyscaphe</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
