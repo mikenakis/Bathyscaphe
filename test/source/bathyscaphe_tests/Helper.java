@@ -6,15 +6,24 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAsses
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.print.AssessmentPrinter;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
 final class Helper
 {
 	private Helper()
 	{
 	}
 
-	static ObjectAssessment assess( Object object )
+	static ObjectAssessment assess( Object object, PrintStream printStream )
 	{
-		System.out.println( "assessment for object " + AssessmentPrinter.stringFromObjectIdentity( object ) + ":" );
+		printStream.print( "assessment for " + AssessmentPrinter.objectName( object ) + ":\n" );
 		ObjectAssessment assessment;
 		try
 		{
@@ -27,10 +36,46 @@ final class Helper
 		}
 		catch( Throwable throwable )
 		{
-			System.out.println( "    " + throwable.getClass().getName() + " : " + throwable.getMessage() );
+			printStream.print( "    " + throwable.getClass().getName() + " : " + throwable.getMessage() + "\n" );
 			throw throwable;
 		}
-		AssessmentPrinter.getObjectAssessmentTextTree( assessment ).forEach( s -> System.out.println( "    " + s ) );
+		AssessmentPrinter.getObjectAssessmentTextTree( assessment ).forEach( s -> printStream.print( "    " + s + "\n" ) );
 		return assessment;
+	}
+
+	static void createEmptyPrint( Class<?> testClass )
+	{
+		Path path = getPrintPath( testClass );
+		try
+		{
+			Files.writeString( path, "" );
+		}
+		catch( IOException e )
+		{
+			throw new RuntimeException( e );
+		}
+	}
+
+	private static Path getPrintPath( Class<?> testClass )
+	{
+		var workingDirectory = MyTestKit.getWorkingDirectory();
+		Path printsPath = workingDirectory.resolve( "prints" );
+		return printsPath.resolve( testClass.getSimpleName() + ".txt" );
+	}
+
+	static PrintStream getPrintStream( Class<?> testClass )
+	{
+		Path path = getPrintPath( testClass );
+		OutputStream outputStream;
+		try
+		{
+			outputStream = Files.newOutputStream( path, StandardOpenOption.APPEND );
+		}
+		catch( IOException e )
+		{
+			throw new RuntimeException( e );
+		}
+		outputStream = new BufferedOutputStream( outputStream, 1024 * 1024 );
+		return new PrintStream( outputStream, true, StandardCharsets.UTF_8 );
 	}
 }

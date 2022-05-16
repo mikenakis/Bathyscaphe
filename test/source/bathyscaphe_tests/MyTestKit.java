@@ -2,6 +2,9 @@ package bathyscaphe_tests;
 
 import io.github.mikenakis.debug.Debug;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 final class MyTestKit
 {
 	private MyTestKit()
@@ -42,5 +45,17 @@ final class MyTestKit
 			assert Debug.expectingException;
 			Debug.expectingException = false;
 		}
+	}
+
+	// PEARL: Windows has a stupid notion of a "current directory", which is a mutable global variable of process-wide scope.
+	//        This means that any thread can modify it, and all other threads will be affected by the modification.
+	//        (And in a DotNet process, any AppDomain can modify it, and all other AppDomains will be affected! So much for AppDomain isolation!)
+	//        Java does not exactly have such a notion, but the "user.dir" system property (which you can get and set) is effectively the same.
+	// NOTE:  When maven is running tests, the "user.dir" system property contains the root directory of the current module being tested.
+	//        When testana is running tests, it sets the "user.dir" property accordingly.
+	//        Thus, when running tests either via maven or via testana, we can obtain the path to the root directory of the current module.
+	public static Path getWorkingDirectory()
+	{
+		return Paths.get( System.getProperty( "user.dir" ) ).toAbsolutePath().normalize();
 	}
 }

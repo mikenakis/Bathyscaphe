@@ -13,7 +13,6 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableField
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.NonEmptyArrayMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.SelfAssessedMutableObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.ArrayMutableTypeAssessment;
@@ -95,12 +94,12 @@ public final class AssessmentPrinter
 
 	private void getMutableFieldAssessmentText( MutableFieldAssessment mutableFieldAssessment )
 	{
-		append( "field " + fieldName( mutableFieldAssessment.field ) + " is mutable" );
+		append( fieldName( mutableFieldAssessment.field ) + " is mutable" );
 		switch( mutableFieldAssessment )
 		{
-			case ArrayMutableFieldAssessment ignored -> append( " because is an array and it has not been annotated with @" + InvariableArray.class.getSimpleName() );
-			case MutableFieldTypeMutableFieldAssessment assessment -> append( " because it is of mutable type " + className( assessment.fieldTypeAssessment.type ) );
-			case VariableMutableFieldAssessment ignored -> append( " because it is not final and it has not been annotated with @" + Invariable.class.getSimpleName() );
+			case ArrayMutableFieldAssessment ignored -> append( " because is an array, and it has not been annotated with @" + InvariableArray.class.getSimpleName() );
+			case MutableFieldTypeMutableFieldAssessment assessment -> append( " because it is of mutable " + typeName( assessment.fieldTypeAssessment.type ) );
+			case VariableMutableFieldAssessment ignored -> append( " because it is not final, and it has not been annotated with @" + Invariable.class.getSimpleName() );
 			//DoNotCover
 			default -> throw new AssertionError( mutableFieldAssessment );
 		}
@@ -108,7 +107,7 @@ public final class AssessmentPrinter
 
 	private void getProvisoryFieldAssessmentText( ProvisoryFieldTypeProvisoryFieldAssessment provisoryFieldAssessment )
 	{
-		append( "field " + fieldName( provisoryFieldAssessment.field ) + " is provisory because it is of provisory type " + className( provisoryFieldAssessment.field.getType() ) );
+		append( fieldName( provisoryFieldAssessment.field ) + " is provisory because it is of provisory " + typeName( provisoryFieldAssessment.field.getType() ) );
 	}
 
 	private void getTypeAssessmentText( TypeAssessment typeAssessment )
@@ -125,13 +124,13 @@ public final class AssessmentPrinter
 
 	private void getMutableTypeAssessmentText( MutableTypeAssessment mutableTypeAssessment )
 	{
-		append( "class " + className( mutableTypeAssessment.type ) + " is mutable" );
+		append( className( mutableTypeAssessment.type ) + " is mutable" );
 		switch( mutableTypeAssessment )
 		{
 			case ArrayMutableTypeAssessment ignore -> append( " because it is an array class" );
 			case MultiReasonMutableTypeAssessment ignore -> append( " due to multiple reasons" );
-			case MutableFieldMutableTypeAssessment assessment -> append( " because field " + fieldName( assessment.fieldAssessment.field ) + " is mutable" );
-			case MutableSuperclassMutableTypeAssessment assessment -> append( " because it extends mutable class " + className( assessment.superclassAssessment.type ) );
+			case MutableFieldMutableTypeAssessment assessment -> append( " because " + fieldName( assessment.fieldAssessment.field ) + " is mutable" );
+			case MutableSuperclassMutableTypeAssessment assessment -> append( " because it extends mutable " + className( assessment.superclassAssessment.type ) );
 			case ArrayOfMutableElementTypeMutableTypeAssessment ignore -> append( " because it is an array of mutable element type" );
 			//DoNotCover
 			default -> throw new AssertionError( mutableTypeAssessment );
@@ -140,15 +139,15 @@ public final class AssessmentPrinter
 
 	private void getProvisoryTypeAssessmentText( ProvisoryTypeAssessment provisoryTypeAssessment )
 	{
-		append( "class " + className( provisoryTypeAssessment.type ) + " is provisory" );
+		append( typeName( provisoryTypeAssessment.type ) + " is provisory" );
 		switch( provisoryTypeAssessment )
 		{
-			case CompositeProvisoryTypeAssessment<?,?> assessment -> append( " because it " + modeName( assessment.mode ) + " composite" );
+			case CompositeProvisoryTypeAssessment<?,?> assessment -> append( " because it " + modeName( assessment.mode ) + " a composite class" );
 			case ExtensibleProvisoryTypeAssessment assessment -> append( " because it " + modeName( assessment.mode ) + " an extensible class" );
 			case InterfaceProvisoryTypeAssessment ignore -> append( " because it is an interface" );
 			case MultiReasonProvisoryTypeAssessment ignore -> append( " due to multiple reasons" );
-			case ProvisorySuperclassProvisoryTypeAssessment assessment -> append( " because it extends provisory type " + className( assessment.superclassAssessment.type ) );
-			case ProvisoryFieldProvisoryTypeAssessment assessment -> append( " because field " + fieldName( assessment.fieldAssessment.field ) + " is provisory" );
+			case ProvisorySuperclassProvisoryTypeAssessment assessment -> append( " because it extends provisory " + className( assessment.superclassAssessment.type ) );
+			case ProvisoryFieldProvisoryTypeAssessment assessment -> append( " because " + fieldName( assessment.fieldAssessment.field ) + " is provisory" );
 			case ArrayOfProvisoryElementTypeProvisoryTypeAssessment ignore -> append( " because it is an array of provisory element type" );
 			case SelfAssessableProvisoryTypeAssessment ignore -> append( " because instances of this type are self-assessable" );
 			//DoNotCover
@@ -169,13 +168,13 @@ public final class AssessmentPrinter
 
 	private void getMutableObjectAssessmentText( MutableObjectAssessment mutableObjectAssessment )
 	{
-		append( "object " + stringFromObjectIdentity( mutableObjectAssessment.object() ) + " is mutable" );
+		append( objectName( mutableObjectAssessment.object() ) + " is mutable" );
 		switch( mutableObjectAssessment )
 		{
 			case MutableSuperclassMutableObjectAssessment ignore -> append( " because its superclass is mutable" );
-			case MutableArrayElementMutableObjectAssessment assessment -> append( " because it is an invariable array, and element " + stringFromObjectIdentity( assessment.elementAssessment.object() ) + " at index " + assessment.elementIndex + " is mutable" );
-			case MutableComponentMutableObjectAssessment<?,?> assessment -> append( " because it is a composite, and element " + stringFromObjectIdentity( assessment.elementAssessment.object() ) + " at index " + assessment.elementIndex + " is mutable" );
-			case MutableFieldValueMutableObjectAssessment assessment -> append( " because it is of provisory type " + className( assessment.typeAssessment().type ) + " and field " + fieldName( assessment.provisoryFieldAssessment.field ) + " has mutable value." );
+			case MutableArrayElementMutableObjectAssessment assessment -> append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
+			case MutableComponentMutableObjectAssessment<?,?> assessment -> append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
+			case MutableFieldValueMutableObjectAssessment assessment -> append( " because " + fieldName( assessment.provisoryFieldAssessment.field ) + " contains mutable " + objectName( assessment.fieldValueAssessment.object() ) );
 			case NonEmptyArrayMutableObjectAssessment ignore -> append( " because it is a non-empty array" );
 			case MutableClassMutableObjectAssessment ignore -> append( " because it is of a mutable class" );
 			case SelfAssessedMutableObjectAssessment ignore -> append( " because it assessed itself as mutable" );
@@ -194,19 +193,34 @@ public final class AssessmentPrinter
 			};
 	}
 
+	private static String typeName( Class<?> jvmClass )
+	{
+		return "type '" + getClassName( jvmClass ) + "'";
+	}
+
 	private static String className( Class<?> jvmClass )
 	{
-		return "'" + MyKit.getClassName( jvmClass ) + "'";
+		return "class '" + getClassName( jvmClass ) + "'";
 	}
 
 	private static String fieldName( @SuppressWarnings( "TypeMayBeWeakened" ) Field field )
 	{
-		return "'" + field.getName() + "'";
+		return "field '" + field.getName() + "'";
 	}
 
-	public static String stringFromObjectIdentity( Object object )
+	public static String objectName( Object object )
 	{
+		if( object == null )
+			return "null";
 		assert !(object instanceof Class<?>);
-		return MyKit.identityString( object );
+		return "instance of '" + getClassName( object.getClass() ) + "'";
+	}
+
+	private static String getClassName( Class<?> jvmClass )
+	{
+		String text = jvmClass.getCanonicalName();
+		if( text == null )
+			return jvmClass.getName();
+		return text;
 	}
 }

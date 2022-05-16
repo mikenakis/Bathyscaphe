@@ -7,6 +7,7 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableCompo
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,24 @@ import java.util.List;
 @SuppressWarnings( { "FieldMayBeFinal", "InstanceVariableMayNotBeInitialized" } )
 public class T21_SuperficiallyImmutableJdkList
 {
+	private static final Class<?> thisClass = T21_SuperficiallyImmutableJdkList.class;
+
+	static
+	{
+		Helper.createEmptyPrint( thisClass );
+	}
+
+	private final PrintStream printStream = Helper.getPrintStream( thisClass );
+
 	public T21_SuperficiallyImmutableJdkList()
 	{
 		if( !MyKit.areAssertionsEnabled() )
 			throw new AssertionError();
 	}
 
-	private static ObjectAssessment assess( Object object )
+	private ObjectAssessment assess( Object object )
 	{
-		return Helper.assess( object );
+		return Helper.assess( object, printStream );
 	}
 
 	/**

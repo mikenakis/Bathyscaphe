@@ -52,30 +52,6 @@ public final class MyKit
 		return uncheckedClassCast( object.getClass() );
 	}
 
-	/**
-	 * Obtains a string of the form type-name@hex-number which "for the most part" uniquely identifies an object. NOTE: there are no guarantees that the
-	 * returned string will be truly unique.
-	 *
-	 * @param object the {@link Object} whose identity string is requested.
-	 *
-	 * @return the identity string of the object.
-	 */
-	public static String identityString( Object object )
-	{
-		if( object == null )
-			return "null";
-		int identityHashCode = System.identityHashCode( object );
-		return getClassName( object.getClass() ) + "@" + Integer.toHexString( identityHashCode );
-	}
-
-	public static String getClassName( Class<?> jvmClass )
-	{
-		String text = jvmClass.getCanonicalName();
-		if( text == null )
-			return jvmClass.getName();
-		return text;
-	}
-
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Reflection stuff
 

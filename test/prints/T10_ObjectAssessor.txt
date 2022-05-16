@@ -1,0 +1,136 @@
+assessment for null:
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'java.lang.Object':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'java.lang.Object[]':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'java.lang.Integer[]':
+    ■ instance of 'java.lang.Integer[]' is mutable because it is a non-empty array. (NonEmptyArrayMutableObjectAssessment)
+    └─■ class 'java.lang.Integer[]' is mutable because it is an array class. (ArrayMutableTypeAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$1$ImmutableClassWithStaticMutableField':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$2$Derived':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$2$Derived' is mutable because its superclass is mutable. (MutableSuperclassMutableObjectAssessment)
+    ├─■ type 'bathyscaphe_tests.T10_ObjectAssessor$2$Derived' is provisory because it extends provisory class 'bathyscaphe_tests.T10_ObjectAssessor$2$Superclass'. (ProvisorySuperclassProvisoryTypeAssessment)
+    │ └─■ type 'bathyscaphe_tests.T10_ObjectAssessor$2$Superclass' is provisory because field 'provisoryFieldWithMutableValue' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
+    │   └─■ field 'provisoryFieldWithMutableValue' is provisory because it is of provisory type 'java.lang.Object'. (ProvisoryFieldTypeProvisoryFieldAssessment)
+    │     └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
+    └─■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$2$Derived' is mutable because field 'provisoryFieldWithMutableValue' contains mutable instance of 'java.lang.StringBuilder'. (MutableFieldValueMutableObjectAssessment)
+      ├─■ type 'bathyscaphe_tests.T10_ObjectAssessor$2$Superclass' is provisory because field 'provisoryFieldWithMutableValue' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
+      │ └─■ field 'provisoryFieldWithMutableValue' is provisory because it is of provisory type 'java.lang.Object'. (ProvisoryFieldTypeProvisoryFieldAssessment)
+      │   └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
+      └─■ instance of 'java.lang.StringBuilder' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+        └─■ class 'java.lang.StringBuilder' is mutable because it extends mutable class 'java.lang.AbstractStringBuilder'. (MutableSuperclassMutableTypeAssessment)
+          └─■ class 'java.lang.AbstractStringBuilder' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'value' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'value' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'coder' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'coder' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
+              └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$3$SelfReferencingProvisoryClass':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$4$ClassExtendingSelfReferencingProvisoryClass':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$5$ClassWithInvariableFieldOfInterfaceTypeWithValueOfImmutableType':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$6$ClassWithInvariableFieldOfInterfaceTypeWithMutableValue':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$6$ClassWithInvariableFieldOfInterfaceTypeWithMutableValue' is mutable because field 'mutableField' contains mutable instance of 'java.util.ArrayList'. (MutableFieldValueMutableObjectAssessment)
+    ├─■ type 'bathyscaphe_tests.T10_ObjectAssessor$6$ClassWithInvariableFieldOfInterfaceTypeWithMutableValue' is provisory because field 'mutableField' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
+    │ └─■ field 'mutableField' is provisory because it is of provisory type 'java.util.List'. (ProvisoryFieldTypeProvisoryFieldAssessment)
+    │   └─■ type 'java.util.List' is provisory because it is an interface. (InterfaceProvisoryTypeAssessment)
+    └─■ instance of 'java.util.ArrayList' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+      └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+        ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)
+        │ └─■ class 'java.util.AbstractList' is mutable because field 'modCount' is mutable. (MutableFieldMutableTypeAssessment)
+        │   └─■ field 'modCount' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+        ├─■ class 'java.util.ArrayList' is mutable because field 'elementData' is mutable. (MutableFieldMutableTypeAssessment)
+        │ └─■ field 'elementData' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+        └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
+          └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$7$ProvisorySelfAssessableClassWhichSelfAssessesPositively':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$8$ProvisorySelfAssessableClassWhichSelfAssessesNegatively':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$8$ProvisorySelfAssessableClassWhichSelfAssessesNegatively' is mutable because it assessed itself as mutable. (SelfAssessedMutableObjectAssessment)
+    └─■ type 'bathyscaphe_tests.T10_ObjectAssessor$8$ProvisorySelfAssessableClassWhichSelfAssessesNegatively' is provisory because instances of this type are self-assessable. (SelfAssessableProvisoryTypeAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$9$ClassWithArrayField':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$9$ClassWithArrayField' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'bathyscaphe_tests.T10_ObjectAssessor$9$ClassWithArrayField' is mutable because field 'array' is mutable. (MutableFieldMutableTypeAssessment)
+      └─■ field 'array' is mutable because is an array, and it has not been annotated with @InvariableArray. (ArrayMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$11$ClassWithInvariableArrayOfProvisoryType':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$11$ClassWithInvariableArrayOfProvisoryType' is mutable because field 'arrayField' contains mutable instance of 'java.lang.Object[]'. (MutableFieldValueMutableObjectAssessment)
+    ├─■ type 'bathyscaphe_tests.T10_ObjectAssessor$11$ClassWithInvariableArrayOfProvisoryType' is provisory because field 'arrayField' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
+    │ └─■ field 'arrayField' is provisory because it is of provisory type 'java.lang.Object[]'. (ProvisoryFieldTypeProvisoryFieldAssessment)
+    │   └─■ type 'java.lang.Object[]' is provisory because it is an array of provisory element type. (ArrayOfProvisoryElementTypeProvisoryTypeAssessment)
+    │     └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
+    └─■ instance of 'java.lang.Object[]' is mutable because index 0 contains mutable instance of 'java.lang.StringBuilder'. (MutableArrayElementMutableObjectAssessment)
+      └─■ instance of 'java.lang.StringBuilder' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+        └─■ class 'java.lang.StringBuilder' is mutable because it extends mutable class 'java.lang.AbstractStringBuilder'. (MutableSuperclassMutableTypeAssessment)
+          └─■ class 'java.lang.AbstractStringBuilder' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'value' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'value' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'coder' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'coder' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
+              └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$12$ClassWithInvariableArrayOfProvisoryType':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$13$ClassWithInvariableArrayInvariableFieldOfMutableElementType':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$13$ClassWithInvariableArrayInvariableFieldOfMutableElementType' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'bathyscaphe_tests.T10_ObjectAssessor$13$ClassWithInvariableArrayInvariableFieldOfMutableElementType' is mutable because field 'arrayOfMutableElements' is mutable. (MutableFieldMutableTypeAssessment)
+      └─■ field 'arrayOfMutableElements' is mutable because it is of mutable type 'java.util.ArrayList[]'. (MutableFieldTypeMutableFieldAssessment)
+        └─■ class 'java.util.ArrayList[]' is mutable because it is an array of mutable element type. (ArrayOfMutableElementTypeMutableTypeAssessment)
+          └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+            ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)
+            │ └─■ class 'java.util.AbstractList' is mutable because field 'modCount' is mutable. (MutableFieldMutableTypeAssessment)
+            │   └─■ field 'modCount' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            ├─■ class 'java.util.ArrayList' is mutable because field 'elementData' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'elementData' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
+              └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$14$ClassWithPublicFieldAnnotatedInvariable':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMustBePrivateException : field=public java.lang.Integer bathyscaphe_tests.T10_ObjectAssessor$14$ClassWithPublicFieldAnnotatedInvariable.publicFieldAnnotatedInvariable
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$15$ClassWithProtectedFieldAnnotatedInvariable':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMustBePrivateException : field=protected java.lang.Integer bathyscaphe_tests.T10_ObjectAssessor$15$ClassWithProtectedFieldAnnotatedInvariable.protectedFieldAnnotatedInvariable
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$16$ClassWithPublicFieldAnnotatedInvariable':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMustBePrivateException : field=java.lang.Integer bathyscaphe_tests.T10_ObjectAssessor$16$ClassWithPublicFieldAnnotatedInvariable.packagePrivateFieldAnnotatedInvariable
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$17$ClassWithInvariableFieldAnnotatedInvariable':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMayNotAlreadyBeInvariableException : field=private final java.lang.Integer bathyscaphe_tests.T10_ObjectAssessor$17$ClassWithInvariableFieldAnnotatedInvariable.invariableFieldAnnotatedInvariable
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$18$ClassWithMutableFieldAnnotatedInvariable':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$18$ClassWithMutableFieldAnnotatedInvariable' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'bathyscaphe_tests.T10_ObjectAssessor$18$ClassWithMutableFieldAnnotatedInvariable' is mutable because field 'mutableFieldAnnotatedInvariable' is mutable. (MutableFieldMutableTypeAssessment)
+      └─■ field 'mutableFieldAnnotatedInvariable' is mutable because it is of mutable type 'java.util.ArrayList'. (MutableFieldTypeMutableFieldAssessment)
+        └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+          ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)
+          │ └─■ class 'java.util.AbstractList' is mutable because field 'modCount' is mutable. (MutableFieldMutableTypeAssessment)
+          │   └─■ field 'modCount' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+          ├─■ class 'java.util.ArrayList' is mutable because field 'elementData' is mutable. (MutableFieldMutableTypeAssessment)
+          │ └─■ field 'elementData' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+          └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
+            └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$19$ClassWithInvariableArrayInvariableFieldOfImmutableElementType':
+    ■ immutable. (ImmutableObjectAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$20$ClassWithPublicFieldAnnotatedInvariableArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException : field=public final int[] bathyscaphe_tests.T10_ObjectAssessor$20$ClassWithPublicFieldAnnotatedInvariableArray.publicFieldAnnotatedInvariableArray
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$20$ClassWithProtectedFieldAnnotatedInvariableArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException : field=protected final int[] bathyscaphe_tests.T10_ObjectAssessor$20$ClassWithProtectedFieldAnnotatedInvariableArray.protectedFieldAnnotatedInvariableArray
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$20$ClassWithPackagePrivateFieldAnnotatedInvariableArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException : field=final int[] bathyscaphe_tests.T10_ObjectAssessor$20$ClassWithPackagePrivateFieldAnnotatedInvariableArray.packagePrivateFieldAnnotatedInvariableArray
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$21$ClassWithNonArrayField':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedInvariableArrayException : field=private java.lang.Object bathyscaphe_tests.T10_ObjectAssessor$21$ClassWithNonArrayField.nonArrayField
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$22$ClassWithVariableFieldAnnotatedAsInvariableArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedInvariableArrayException : field=private java.lang.Object[] bathyscaphe_tests.T10_ObjectAssessor$22$ClassWithVariableFieldAnnotatedAsInvariableArray.variableField
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$26$ClassWithMutableField':
+    ■ instance of 'bathyscaphe_tests.T10_ObjectAssessor$26$ClassWithMutableField' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'bathyscaphe_tests.T10_ObjectAssessor$26$ClassWithMutableField' is mutable because field 'mutableField' is mutable. (MutableFieldMutableTypeAssessment)
+      └─■ field 'mutableField' is mutable because it is of mutable type 'java.util.ArrayList'. (MutableFieldTypeMutableFieldAssessment)
+        └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+          ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)
+          │ └─■ class 'java.util.AbstractList' is mutable because field 'modCount' is mutable. (MutableFieldMutableTypeAssessment)
+          │   └─■ field 'modCount' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+          ├─■ class 'java.util.ArrayList' is mutable because field 'elementData' is mutable. (MutableFieldMutableTypeAssessment)
+          │ └─■ field 'elementData' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+          └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
+            └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+assessment for instance of 'bathyscaphe_tests.T10_ObjectAssessor$28$ImmutableSelfAssessableClass':
+    java.lang.AssertionError : io.github.mikenakis.bathyscaphe.internal.type.exceptions.SelfAssessableClassMustNotBeImmutableException: jvmClass=class bathyscaphe_tests.T10_ObjectAssessor$28$ImmutableSelfAssessableClass

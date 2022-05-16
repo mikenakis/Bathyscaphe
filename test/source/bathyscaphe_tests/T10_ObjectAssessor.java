@@ -27,6 +27,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.exceptions.SelfAssessableCl
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedInvariableArrayException;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,15 +39,24 @@ import java.util.List;
 @SuppressWarnings( { "FieldMayBeFinal", "InstanceVariableMayNotBeInitialized" } )
 public class T10_ObjectAssessor
 {
+	private static final Class<?> thisClass = T10_ObjectAssessor.class;
+
+	static
+	{
+		Helper.createEmptyPrint( thisClass );
+	}
+
+	private final PrintStream printStream = Helper.getPrintStream( thisClass );
+
 	public T10_ObjectAssessor()
 	{
 		if( !MyKit.areAssertionsEnabled() )
 			throw new AssertionError();
 	}
 
-	private static ObjectAssessment assess( Object object )
+	private ObjectAssessment assess( Object object )
 	{
-		return Helper.assess( object );
+		return Helper.assess( object, printStream );
 	}
 
 	@Test public void null_is_immutable()
@@ -99,7 +109,7 @@ public class T10_ObjectAssessor
 		{
 			static class Superclass
 			{
-				@SuppressWarnings( "unused" ) final Object provisoryFieldAssessedAsMutable = new StringBuilder();
+				@SuppressWarnings( "unused" ) final Object provisoryFieldWithMutableValue = new StringBuilder();
 			}
 
 			static final class Derived extends Superclass
@@ -117,7 +127,7 @@ public class T10_ObjectAssessor
 				assert mutableSuperclassMutableObjectAssessment.mutableSuperObjectAssessment.typeAssessment() instanceof ProvisoryFieldProvisoryTypeAssessment;
 				var mutableFieldValueMutableObjectAssessment = (MutableFieldValueMutableObjectAssessment)mutableSuperclassMutableObjectAssessment.mutableSuperObjectAssessment;
 				assert mutableFieldValueMutableObjectAssessment.fieldValueAssessment instanceof MutableClassMutableObjectAssessment;
-				assert mutableFieldValueMutableObjectAssessment.fieldValueAssessment.object() == object.provisoryFieldAssessedAsMutable;
+				assert mutableFieldValueMutableObjectAssessment.fieldValueAssessment.object() == object.provisoryFieldWithMutableValue;
 			}
 		}.run();
 	}

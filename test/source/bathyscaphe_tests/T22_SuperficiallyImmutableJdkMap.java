@@ -6,8 +6,10 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
+import org.junit.After;
 import org.junit.Test;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -17,15 +19,31 @@ import java.util.Map;
 @SuppressWarnings( { "FieldMayBeFinal", "InstanceVariableMayNotBeInitialized" } )
 public class T22_SuperficiallyImmutableJdkMap
 {
+	private static final Class<?> thisClass = T22_SuperficiallyImmutableJdkMap.class;
+
+	static
+	{
+		Helper.createEmptyPrint( thisClass );
+	}
+
+	private final PrintStream printStream = Helper.getPrintStream( thisClass );
+
 	public T22_SuperficiallyImmutableJdkMap()
 	{
 		if( !MyKit.areAssertionsEnabled() )
 			throw new AssertionError();
 	}
 
-	private static ObjectAssessment assess( Object object )
+	@After
+	public void close()
 	{
-		return Helper.assess( object );
+		if( printStream != System.out )
+			printStream.close();
+	}
+
+	private ObjectAssessment assess( Object object )
+	{
+		return Helper.assess( object, printStream );
 	}
 
 	/**
