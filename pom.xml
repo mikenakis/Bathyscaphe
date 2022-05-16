@@ -149,8 +149,8 @@
 
 	<repositories>
 		<repository>
-			<id>repsy-mikenakis-debug</id>
-			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-debug</url>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
 		</repository>
 	</repositories>
 
