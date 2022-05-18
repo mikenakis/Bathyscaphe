@@ -2,6 +2,7 @@ package io.github.mikenakis.bathyscaphe.print;
 
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
+import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
@@ -48,7 +49,12 @@ import java.util.List;
  */
 public final class AssessmentPrinter
 {
-	public static List<String> getObjectAssessmentTextTree( ObjectAssessment assessment )
+	public static List<String> getText( ObjectMustBeImmutableException objectMustBeImmutableException )
+	{
+		return getText( objectMustBeImmutableException.mutableObjectAssessment );
+	}
+
+	public static List<String> getText( ObjectAssessment assessment )
 	{
 		List<String> lines = new ArrayList<>();
 		TextTree.tree( assessment, Assessment::children, AssessmentPrinter::getAssessmentText, s -> lines.add( s ) );

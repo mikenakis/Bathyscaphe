@@ -76,7 +76,7 @@ public class T21_SuperficiallyImmutableJdkList
 
 	@Test public void superficially_immutable_jdk_list_of_size_1_with_a_mutable_element_is_actually_mutable()
 	{
-		Object mutableElement = new ArrayList<>();
+		Object mutableElement = new StringBuilder();
 		List<?> object = List.of( mutableElement );
 		ObjectAssessment assessment = assess( object );
 		checkMutableAssessmentOfSuperficiallyImmutableJdkList( mutableElement, object, assessment, 1 );

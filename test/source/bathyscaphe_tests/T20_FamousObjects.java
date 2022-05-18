@@ -1,7 +1,7 @@
 package bathyscaphe_tests;
 
-import io.github.mikenakis.bathyscaphe.ObjectAssessor;
-import io.github.mikenakis.bathyscaphe.exceptions.ObjectMustBeImmutableException;
+import io.github.mikenakis.bathyscaphe.Bathyscaphe;
+import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import org.junit.Test;
 
@@ -119,23 +119,23 @@ public class T20_FamousObjects
 			getClass().getDeclaredMethods()[0], getClass().getConstructors()[0], URI.create( "file:///" ), getUrl(), Locale.ROOT, //
 			getStackTraceElement(), File.listRoots()[0] );
 		for( Object object : objects )
-			assert ObjectAssessor.instance.mustBeImmutableAssertion( object );
+			assert Bathyscaphe.objectMustBeImmutableAssertion( object );
 	}
 
 	@Test public void optional_is_mutable_or_immutable_depending_on_payload()
 	{
-		ObjectAssessor.instance.mustBeImmutableAssertion( Optional.empty() );
-		ObjectAssessor.instance.mustBeImmutableAssertion( Optional.of( 1 ) );
-		MyTestKit.expect( ObjectMustBeImmutableException.class, () -> ObjectAssessor.instance.mustBeImmutableAssertion( Optional.of( new StringBuilder() ) ) );
+		Bathyscaphe.objectMustBeImmutableAssertion( Optional.empty() );
+		Bathyscaphe.objectMustBeImmutableAssertion( Optional.of( 1 ) );
+		MyTestKit.expect( ObjectMustBeImmutableException.class, () -> Bathyscaphe.objectMustBeImmutableAssertion( Optional.of( new StringBuilder() ) ) );
 	}
 
 	@Test public void certain_classes_are_messed_up()
 	{
 		/* PEARL: ZoneId.systemDefault() returns an instance of ZoneRegion, which is mutable! And since ZoneRegion is jdk-internal, we cannot preassess it! */
-		MyTestKit.expect( ObjectMustBeImmutableException.class, () -> ObjectAssessor.instance.mustBeImmutableAssertion( ZoneId.systemDefault() ) );
+		MyTestKit.expect( ObjectMustBeImmutableException.class, () -> Bathyscaphe.objectMustBeImmutableAssertion( ZoneId.systemDefault() ) );
 
 		/* PEARL: Clock.systemUTC() returns an instance of SystemClock, which is inaccessible, so we cannot assess it! */
-		MyTestKit.expect( InaccessibleObjectException.class, () -> ObjectAssessor.instance.mustBeImmutableAssertion( Clock.systemUTC() ) );
+		MyTestKit.expect( InaccessibleObjectException.class, () -> Bathyscaphe.objectMustBeImmutableAssertion( Clock.systemUTC() ) );
 	}
 
 	@Test public void famous_mutable_objects_are_mutable()
@@ -144,6 +144,6 @@ public class T20_FamousObjects
 			new Random(), Pattern.compile( "" ).matcher( "" ), new StringBuilder(), new LinkedHashMap<>(), new LinkedHashSet<>(), //
 			new SimpleDateFormat( "", Locale.ROOT ), new StringTokenizer( "" ), new ConcurrentHashMap<>(), KeyStroke.getKeyStroke( 'c' ) );
 		for( Object object : objects )
-			MyTestKit.expect( ObjectMustBeImmutableException.class, () -> ObjectAssessor.instance.mustBeImmutableAssertion( object ) );
+			MyTestKit.expect( ObjectMustBeImmutableException.class, () -> Bathyscaphe.objectMustBeImmutableAssertion( object ) );
 	}
 }

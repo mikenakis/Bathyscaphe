@@ -1,4 +1,4 @@
-package io.github.mikenakis.bathyscaphe.exceptions;
+package io.github.mikenakis.bathyscaphe;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.mykit.UncheckedException;

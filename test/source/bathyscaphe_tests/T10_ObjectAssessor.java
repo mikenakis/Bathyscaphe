@@ -1,7 +1,7 @@
 package bathyscaphe_tests;
 
+import io.github.mikenakis.bathyscaphe.Bathyscaphe;
 import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
-import io.github.mikenakis.bathyscaphe.ObjectAssessor;
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
@@ -279,7 +279,7 @@ public class T10_ObjectAssessor
 
 			@Override public void run()
 			{
-				assert ObjectAssessor.instance.mustBeImmutableAssertion( new ClassWithInvariableArrayFieldOfCircularReferenceElementType() );
+				assert Bathyscaphe.objectMustBeImmutableAssertion( new ClassWithInvariableArrayFieldOfCircularReferenceElementType() );
 			}
 		}.run();
 	}
@@ -527,7 +527,7 @@ public class T10_ObjectAssessor
 			@Override public void run()
 			{
 				var exception = MyTestKit.expect( PreassessedClassMustNotAlreadyBeImmutableException.class, () -> //
-					ObjectAssessor.instance.addImmutablePreassessment( AlreadyImmutableClass.class ) );
+					Bathyscaphe.addImmutablePreassessment( AlreadyImmutableClass.class ) );
 				assert exception.jvmClass == AlreadyImmutableClass.class;
 			}
 		}.run();
@@ -543,7 +543,7 @@ public class T10_ObjectAssessor
 			@Override public void run()
 			{
 				var exception = MyTestKit.expect( PreassessedTypeMustBeClassException.class, () -> //
-					ObjectAssessor.instance.addImmutablePreassessment( Interface.class ) );
+					Bathyscaphe.addImmutablePreassessment( Interface.class ) );
 				assert exception.type == Interface.class;
 			}
 		}.run();
@@ -553,7 +553,7 @@ public class T10_ObjectAssessor
 	{
 		Class<?> arrayClass = int[].class;
 		var exception = MyTestKit.expect( PreassessedTypeMustBeClassException.class, () -> //
-			ObjectAssessor.instance.addImmutablePreassessment( arrayClass ) );
+			Bathyscaphe.addImmutablePreassessment( arrayClass ) );
 		assert exception.type == arrayClass;
 	}
 
@@ -566,9 +566,9 @@ public class T10_ObjectAssessor
 
 			@Override public void run()
 			{
-				assert ObjectAssessor.instance.mustBeImmutableAssertion( new ImmutableClass() );
+				assert Bathyscaphe.objectMustBeImmutableAssertion( new ImmutableClass() );
 				MyTestKit.expect( PreassessedClassMustNotBePreviouslyAssessedException.class, () -> //
-					ObjectAssessor.instance.addImmutablePreassessment( ImmutableClass.class ) );
+					Bathyscaphe.addImmutablePreassessment( ImmutableClass.class ) );
 			}
 		}.run();
 	}
@@ -586,7 +586,7 @@ public class T10_ObjectAssessor
 			{
 				assert assess( new ClassWithMutableField() ) instanceof MutableObjectAssessment;
 				MyTestKit.expect( PreassessedClassMustNotBePreviouslyAssessedException.class, () -> //
-					ObjectAssessor.instance.addImmutablePreassessment( ClassWithMutableField.class ) );
+					Bathyscaphe.addImmutablePreassessment( ClassWithMutableField.class ) );
 			}
 		}.run();
 	}
@@ -602,8 +602,8 @@ public class T10_ObjectAssessor
 
 			@Override public void run()
 			{
-				ObjectAssessor.instance.addImmutablePreassessment( ProvisoryClass.class );
-				assert ObjectAssessor.instance.mustBeImmutableAssertion( new ProvisoryClass() );
+				Bathyscaphe.addImmutablePreassessment( ProvisoryClass.class );
+				assert Bathyscaphe.objectMustBeImmutableAssertion( new ProvisoryClass() );
 			}
 		}.run();
 	}
@@ -640,7 +640,7 @@ public class T10_ObjectAssessor
 
 			@Override public void run()
 			{
-				assert ObjectAssessor.instance.mustBeImmutableAssertion( new SuperClass() );
+				assert Bathyscaphe.objectMustBeImmutableAssertion( new SuperClass() );
 			}
 		}.run();
 	}

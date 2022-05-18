@@ -1,11 +1,11 @@
-package io.github.mikenakis.bathyscaphe;
+package io.github.mikenakis.bathyscaphe.internal;
 
-import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
-import io.github.mikenakis.bathyscaphe.exceptions.ObjectMustBeImmutableException;
+import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableArrayElementMutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableFieldValueMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperclassMutableObjectAssessment;
@@ -13,7 +13,6 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.NonEmptyArra
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.SelfAssessedMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.helpers.IterableOnArrayObject;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
-import io.github.mikenakis.bathyscaphe.internal.mykit.collections.IdentityLinkedHashSet;
 import io.github.mikenakis.bathyscaphe.internal.type.TypeAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
@@ -33,7 +32,7 @@ import java.lang.reflect.Array;
 import java.util.Set;
 
 /**
- * Deeply assesses the nature of objects. For now, objects can be of mutable or immutable nature.
+ * Deeply assesses the nature of objects. DO NOT USE; FOR INTERNAL USE ONLY.
  *
  * @author michael.gr
  */
@@ -52,17 +51,7 @@ public final class ObjectAssessor
 		typeAssessor.addImmutablePreassessment( jvmClass );
 	}
 
-	public boolean mustBeImmutableAssertion( Object object )
-	{
-		Set<Object> visitedValues = new IdentityLinkedHashSet<>();
-		ObjectAssessment assessment = assessRecursively( object, visitedValues );
-		if( assessment instanceof MutableObjectAssessment mutableObjectAssessment )
-			throw new ObjectMustBeImmutableException( mutableObjectAssessment );
-		assert assessment instanceof ImmutableObjectAssessment;
-		return true;
-	}
-
-	private <T> ObjectAssessment assessRecursively( T object, Set<Object> visitedValues )
+	public <T> ObjectAssessment assessRecursively( T object, Set<Object> visitedValues )
 	{
 		if( object == null )
 			return ImmutableObjectAssessment.instance;

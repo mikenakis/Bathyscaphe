@@ -1,7 +1,7 @@
 package bathyscaphe_tests;
 
-import io.github.mikenakis.bathyscaphe.ObjectAssessor;
-import io.github.mikenakis.bathyscaphe.exceptions.ObjectMustBeImmutableException;
+import io.github.mikenakis.bathyscaphe.Bathyscaphe;
+import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.print.AssessmentPrinter;
@@ -27,7 +27,7 @@ final class Helper
 		ObjectAssessment assessment;
 		try
 		{
-			assert ObjectAssessor.instance.mustBeImmutableAssertion( object );
+			assert Bathyscaphe.objectMustBeImmutableAssertion( object );
 			assessment = ImmutableObjectAssessment.instance;
 		}
 		catch( ObjectMustBeImmutableException exception )
@@ -39,7 +39,7 @@ final class Helper
 			printStream.print( "    " + throwable.getClass().getName() + " : " + throwable.getMessage() + "\n" );
 			throw throwable;
 		}
-		AssessmentPrinter.getObjectAssessmentTextTree( assessment ).forEach( s -> printStream.print( "    " + s + "\n" ) );
+		AssessmentPrinter.getText( assessment ).forEach( s -> printStream.print( "    " + s + "\n" ) );
 		return assessment;
 	}
 
