@@ -64,9 +64,11 @@ This annotation instructs bathyscaphe to consider the array pointed by an array 
 
 In a hypothetical re-implementation of `java.lang.String`, the array of characters would be marked as `@InvariableArray` to instruct bathyscaphe to ignore the fact that it is an array, since arrays are by definition mutable.    
 
-Note that it is an error to annotate an array with `@InvariableArray` unless the array field itself is either `final` or annotated with `@Invariable`. Also note that it is an error to use any of these annotations on non-private fields.
+Note that it is an error to annotate an array with `@InvariableArray` unless the array field itself is either `final` or annotated with `@Invariable`. Also note that it is an error to use any of these annotations on non-private fields. Bathyscaphe never ignores erroneously used annotations; whenever mistakes of that kind are encountered, it throws an appropriate exception.
 
-Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can tell for sure whether it is mutable or immutable. For example, sometimes we write classes that are 'freezable', meaning that they begin their life as mutable, and at some later moment they are 'frozen', thus becoming immutable from that moment on. For this purpose, bathyscaphe defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will invoke instances of your class to ask them whether they are immutable or not. 
+Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are 'freezable', meaning that they begin their life as mutable, and at some later moment they are 'frozen', thus becoming immutable from that moment on. For this purpose, bathyscaphe defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will invoke instances of your class to ask them whether they are immutable or not.
+
+### Diagnostics for Troubleshooting
 
 Naturally, when an object that we intended to be immutable is assessed by bathyscaphe as mutable, we would like to have an explanation as to exactly why this assessment was issued, so that we can find where the problem is, and correct it. For this reason, there is a separate module called mikenakis:bathyscaphe-print which can be used to obtain detailed diagnostics from an `ObjectMustBeImmutableException`.
 
