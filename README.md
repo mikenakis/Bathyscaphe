@@ -1,9 +1,6 @@
-# mikenakis:bathyscaphe
+# Bathyscaphe
 
 #### Deep immutability (and coming soon: thread-safety) assessment for Java objects
-
-**_bathyscaphe_** (ˈbæθɪˌskeɪf, -ˌskæf) (noun) A submersible vessel that carries a crew, is able to maneuver independently, and
-is capable of reaching great depths.
 
 <p align="center">
 <img title="mikenakis:bathyscaphe logo" src="mikenakis-bathyscaphe-logo.svg" width="256"/><br/>
@@ -13,7 +10,9 @@ by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/
 
 ## Description
 
-Bathyscaphe is a java library that can be used to inspect objects at runtime and assert that they are immutable.  For a lengthy explanation what problem it solves, why it is even a problem, how it works, etc. see the corresponding post in my blog: https://blog.michael.gr/2022/05/deep-immutability-assessment.html    
+Bathyscaphe is a java library that can be used to inspect objects at runtime and assert that they are immutable.
+
+For an article explaining what problem it solves, why it is even a problem, how it works, a glossary of terms, etc. see the corresponding post in my blog: https://blog.michael.gr/2022/05/deep-immutability-assessment.html
 
 ## Reference
 
