@@ -128,6 +128,8 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 
 ## Poor man's issue and TODO tracking
 
+TODO: possibly rename 'claims' to 'promises'.
+
 TODO: reduce the size of the assessment hierarchy by replacing some leaf classes with parameters to their common base class.
 
 TODO: fix some TODOs in the code.
