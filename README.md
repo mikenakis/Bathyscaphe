@@ -13,26 +13,9 @@ by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/
 
 ## Description
 
-mikenakis:bathyscaphe is a java library that can be used to inspect objects at runtime and assert that they are immutable.
+Bathyscaphe is a java library that can be used to inspect objects at runtime and assert that they are immutable.  For a lengthy explanation what problem it solves, why it is even a problem, how it works, etc. see the corresponding post in my blog: https://blog.michael.gr/2022/05/deep-immutability-assessment.html    
 
-Many times we can tell whether an object is mutable or immutable by just looking at its class: some classes are definitely mutable, while some classes are definitely immutable. There exist static analysis tools that can determine this; however, in many cases it is not enough to just look at the class in order to determine whether an object is immutable, and static analysis tools that nonetheless try to do so give assessments that are wrong, or in the best case useless:
-1. _Effectively immutable_ classes behave in a perfectly immutable fashion, but under the hood they are strictly-speaking mutable, due to a number of reasons, for example because they perform lazy initialization, or because they contain arrays, which are by definition mutable. The most famous example of such a class is `java.lang.String`.
-    - Static analysis tools tend to erroneously classify effectively immutable classes as mutable, which is a false negative. 
-    - Note that `java.lang.String` is not so much of a problem, because it can be treated as a special case, but special-casing is a drastic measure which should be used as seldom as possible, and certainly not for every single effectively-immutable class that we write.
-2. _Superficially immutable_ classes are classes which are unmodifiable, but they contain members whose immutability they cannot vouch for. The most famous example of classes in this category are the so-called unmodifiable collection classes of java, such as result of invoking `java.util.List.of()`.    
-    - Some static analysis tools erroneously report superficially immutable classes as immutable, which is a false positive, as we can easily prove with `List.of( new StringBuilder() )`. 
-    - Some static analysis tools erroneously report superficially immutable classes as mutable, which is a false negative, as we can easily prove with `List.of( 1, 2, 3 )`.
-
-So, to the question "is the result of `List.of()` immutable?" the only correct answer is "I don't know". We cannot issue a conclusive immutability assessment just by looking at the class returned by `List.of()`, so we need to assess the immutability of each and every instance of that class at runtime. That's what mikenakis:bathyscaphe does.
-
-For any given class, mikenakis:bathyscaphe can issue three possible assessments:
-  - Mutable
-  - Immutable
-  - Provisory
-
-The first two are straightforward: if the class of an object has been conclusively assessed as mutable or immutable, the object receives the same assessment, and we are done. However, if the class of an object has been assessed as provisory, this means that the object _might_ be immutable, but it needs to be more thoroughly examined. mikenakis:bathyscaphe does all this examination, and finally issues an assessment for an object: the object is either mutable or immutable.  
-
-Bathyscaphe has a very small interface. It exposes only a couple of static methods, it defines a couple of annotations that you can use in your classes, and it defines an interface that your classes may, on a rare occasion, implement. Let's look at those in detail.
+## Reference
 
 One method exposed by bathyscaphe is:
 
@@ -66,19 +49,19 @@ In a hypothetical re-implementation of `java.lang.String`, the array of characte
 
 Note that it is an error to annotate an array with `@InvariableArray` unless the array field itself is either `final` or annotated with `@Invariable`. Also note that it is an error to use any of these annotations on non-private fields. Bathyscaphe never ignores erroneously used annotations; whenever mistakes of that kind are encountered, it throws an appropriate exception.
 
-Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are 'freezable', meaning that they begin their life as mutable, and at some later moment they are 'frozen', thus becoming immutable from that moment on. For this purpose, bathyscaphe defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will invoke instances of your class to ask them whether they are immutable or not.
+Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are 'freezable', meaning that they begin their life as mutable, and at some moment they are 'frozen', thus becoming immutable from that moment on. In order to cover these cases, Bathyscaphe defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will invoke instances of your class to ask them whether they are immutable or not.
 
 ### Diagnostics for Troubleshooting
 
-Naturally, when an object that we intended to be immutable is assessed by bathyscaphe as mutable, we would like to have an explanation as to exactly why this assessment was issued, so that we can find where the problem is, and correct it. For this reason, there is a separate module called mikenakis:bathyscaphe-print which can be used to obtain detailed diagnostics from an `ObjectMustBeImmutableException`.
+Naturally, when an object that we intended to be immutable is assessed by bathyscaphe as mutable, we would like to have an explanation as to exactly why this assessment was issued, so that we can find where the problem is, and fix it. For this reason, there is a separate module called bathyscaphe-print which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
 
-mikenakis:bathyscaphe-print can be used as follows:
+bathyscaphe-print can be used as follows:
 
 	catch( ObjectMustBeImmutableException e )
 	{
 		AssessmentPrinter.getText( e ).forEach( System.out::println );
 
-If you assert the immutability of `List.of( new ArrayList<>() )`, and you use the above construct to print the text generated from the exception thrown, you will see something like this: (Note: the exact text is subject to change.)
+If you use the above construct to print the text generated from the exception thrown as a result of attempting to assert the immutability of the expression `List.of( new ArrayList<>() )`, you will see something like this: (Note: the exact text is subject to change.)
 
     ■ instance of 'java.util.ImmutableCollections.List12' is mutable because index 0 contains mutable instance of 'java.lang.StringBuilder'. (MutableComponentMutableObjectAssessment)
     ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
@@ -92,15 +75,49 @@ If you assert the immutability of `List.of( new ArrayList<>() )`, and you use th
           └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
             └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 
-## License
+## License and Copyright
+                       
+All modules that comprise Bathyscaphe are Copyright © 2022, Michael Belivanakis.
 
-See LICENSE.md (https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md)
+The bathyscaphe-claims module is published under the Apache License v2.0. 
 
-If you want to do anything with this creative work, contact me.
+A copy of the APACHE-2.0 license is included with Bathyscaphe, and it can also be found on the Apache website, for example here: https://www.apache.org/licenses/LICENSE-2.0
+
+The rest of the modules are published under a dual-license scheme. You can choose among the following:
+  - The GNU Affero General Public License (GNU AGPL) v.3
+  - The Bathyscaphe "Alternative Terms" Commercial License (BATCL) v.1
+
+### The GNU Affero General Public License (GNU AGPL) v.3
+
+Bathyscaphe is free software; you can redistribute it and/or modify it under the terms of the GNU Affero General Public License (AGPL) v.3 as published by the Free Software Foundation.
+
+A copy of the GNU AGPL v.3 is included with Bathyscape, and it can also be found on the GNU website, for example here: https://www.gnu.org/licenses/agpl-3.0.en.html
+
+### The Bathyscaphe "Alternative Terms" Commercial License (BATCL) v.1
+
+Non-free versions of Bathyscaphe are available under terms different from those of the GNU AGPL, in that they do not require you to publish the source code of everything that you create that makes use of Bathyscaphe. For these alternative terms you must purchase a commercial license from the author. 
+
+Bathyscaphe includes a copy of the BATCL v.1, and you can also find it on the Bathyscaphe website, for example here: (TODO)
+
+The commercial license is issued for a specific version of the software. If you wish to use another version, you need a new license. This is necessary in order to fund the continuous development of the software.
+
+If you use the software without taking any action regarding licensing, then the license which applies by default is the GNU AGPL v.3 licence, so be sure that you comply with it.
+
+### Disclaimer
+
+This software is distributed WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the full text of the license for more details.
+
+### Governing Law
+
+These licenses and any dispute arising out of or in connection with these licenses, shall be governed by and construed in accordance with the laws of The Netherlands.
+
+### Violations    
+
+If you have good reasons to believe that an organization or individual is using this software in ways which are not compliant with the GNU AGPL v.3, while at the same time they have not purchased a commercial license for the particular version of the software that they are using, please contact the author.
 
 ## Contacting the author
 
-You can find my e-mail address in the form of an image on the right sidebar of my blog, at https://blog.michael.gr
+The author's e-mail address can be found on the sidebar of his blog: https://blog.michael.gr.
 
 ## Coding style
 
