@@ -1,6 +1,6 @@
 Bathyscaphe Alternative Terms Commercial License Agreement 1.0
 
-The Bathyscaphe Library ("Software") was developed by Michael Belivanakis ("MikeNakis").
+The Bathyscaphe Library ("Software") was developed by Michael Belivanakis, a.k.a. MikeNakis.
 
 This Bathyscaphe Alternative Terms Commercial License Agreement (the "Agreement"), effective as of the date that MikeNakis receives payment for it ("Effective Date"), sets forth the terms of use governing your ("Developer") use of the Software. Developer shall include Developer’s Affiliates, provided that at all times Developer shall be fully responsible and liable for any Affiliate’s use or misuse of the Software. "Affiliate" shall mean any legal entity that is controlled by Developer. For the purposes of this definition, the term "control" means (i) beneficial ownership of at least fifty percent (50%) of the voting securities of a corporation or other business organization with voting securities or (ii) a fifty percent (50%) or greater interest in the net assets or profits of a partnership or other business organization without voting securities.
 
@@ -16,7 +16,7 @@ Absent Developer’s agreement to the terms below, Developer shall have no right
 
 5. DELIVERY. Upon receipt by MikeNakis of the License Fee, Developer is licensed to use Software under the terms of Agreement. Developer agrees to accept the Software as is. Developer agrees and acknowledges that MikeNakis shall not be required to: (a) load the Software onto Developer’s machines; (b) test for proper operation; (c) perform debugging; (d) make corrections; (e) provide maintenance, service, or updates; or (f) assist in the understanding, implementation or use of the Software. This Agreement does not grant Developer any right to any updates or new versions of the Software.
 
-6. COPYRIGHT NOTICE. Developer shall include in all end user licenses, in the same point font style and size as the related text, the following: "Copyright Notice. The software [or "Portions of the software"] incorporated herein is Copyright ©2022, Michael Belivanakis ("MikeNakis"). All Rights Reserved. 
+6. COPYRIGHT NOTICE. Developer shall include in all end user licenses, in the same point font style and size as the related text, the following: "Copyright Notice. The software [or "Portions of the software"] incorporated herein is Copyright ©2022, Michael Belivanakis ("MikeNakis"). All Rights Reserved.
 
 The name "MikeNakis" (alone or as part of another name) the domain name michael.gr or other insignia, words, or names that identify MikeNakis may not be used to endorse or promote products derived from this Software without specific prior written permission.
 
@@ -37,14 +37,3 @@ Developer will obtain and carry general commercial liability insurance and umbre
 13. MISCELLANEOUS. This Agreement represents the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior negotiations or discussions, whether written or oral. Developer shall comply with all laws and regulations applicable to the exercise of its rights under this Agreement. These terms may be modified or amended only in writing signed by authorized representatives of MikeNakis and Developer. This Agreement may not be assigned without MikeNakis’s prior written consent.
 
 The failure of MikeNakis to enforce at any time any of the provisions of the Agreement will in no way be construed to be a present or future waiver of such provisions, nor in any way affect the ability to enforce each and every such provision thereafter. The provisions that by their nature are intended to survive termination of this Agreement shall survive termination of this Agreement, including but not limited to: Sections "NO WARRANTIES", "LIMITATION OF LIABILITY", "INDEMNIFICATION; INSURANCE", "GOVERNING LAW", "NON-USE OF NAME", "TERMINATION" and "MISCELLANEOUS".
-
-Instructions for purchasing a license
-
-- Send money via paypal 
-  - Recipient's e-mail address: paypal@michael.gr
-  - Amount: 128.00
-  - Currency: EUR
-  - Payment reference ("What's this payment for?"): the name "Bathyscaphe" followed by the version number that you want to license.
-  - Your shipping address: make sure your legal address is selected.
-- As soon as we receive the fee we will acknowledge reception by e-mail.
-- As soon as you receive the acknowledgement, you are licensed.
