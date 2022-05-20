@@ -12,7 +12,7 @@ by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/
 
 Bathyscaphe is a java library that can be used to inspect objects at runtime and assert that they are immutable.
 
-For an article explaining what problem it solves, why it is even a problem, how it works, a glossary of terms, etc. see the corresponding post in my blog: https://blog.michael.gr/2022/05/deep-immutability-assessment.html
+For an article explaining what problem it solves, why it is even a problem, how it works, a glossary of terms, etc. see the corresponding post in my blog: https://blog.michael.gr/2022/05/bathyscaphe.html
 
 ## Reference
 
@@ -84,7 +84,9 @@ A copy of the APACHE-2.0 license is included with Bathyscaphe, and it can also b
 
 The rest of the modules are published under a dual-license scheme. You can choose among the following:
   - The GNU Affero General Public License (GNU AGPL) v.3
-  - The Bathyscaphe "Alternative Terms" Commercial License (BATCL) v.1
+  - The Bathyscaphe Alternative Terms Commercial License (BATCL) v.1
+
+If you use the software without taking any action regarding licensing, then the license which applies by default is the GNU AGPL v.3 licence.
 
 ### The GNU Affero General Public License (GNU AGPL) v.3
 
@@ -92,15 +94,13 @@ Bathyscaphe is free software; you can redistribute it and/or modify it under the
 
 A copy of the GNU AGPL v.3 is included with Bathyscape, and it can also be found on the GNU website, for example here: https://www.gnu.org/licenses/agpl-3.0.en.html
 
-### The Bathyscaphe "Alternative Terms" Commercial License (BATCL) v.1
+### The Bathyscaphe Alternative Terms Commercial License (BATCL) v.1
 
 Non-free versions of Bathyscaphe are available under terms different from those of the GNU AGPL, in that they do not require you to publish the source code of everything that you create that makes use of Bathyscaphe. For these alternative terms you must purchase a commercial license from the author. 
 
 Bathyscaphe includes a copy of the BATCL v.1, and you can also find it on the Bathyscaphe website, for example here: (TODO)
 
 The commercial license is issued for a specific version of the software. If you wish to use another version, you need a new license. This is necessary in order to fund the continuous development of the software.
-
-If you use the software without taking any action regarding licensing, then the license which applies by default is the GNU AGPL v.3 licence, so be sure that you comply with it.
 
 ### Disclaimer
 
