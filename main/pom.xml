@@ -1,4 +1,4 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- IMPORTANT: For project url, licenses, developers, scm, etc. please see parent pom -->
@@ -6,10 +6,10 @@
 	<parent>
 		<groupId>mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.1</version>
 	</parent>
 	<artifactId>bathyscaphe</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1</version>
 
 	<name>mikenakis:bathyscaphe</name>
 	<description>Deep immutability assessment for java objects.</description>
@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>mikenakis</groupId>
 			<artifactId>bathyscaphe-claims</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
 
 	</dependencies>
