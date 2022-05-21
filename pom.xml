@@ -52,8 +52,8 @@
 		<url>https://github.com/mikenakis/Bathyscaphe.git</url>
 		<connection>scm:git:https://github.com/mikenakis/Bathyscaphe.git</connection>
 		<developerConnection>scm:git:https://github.com/mikenakis/Bathyscaphe.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
