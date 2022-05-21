@@ -14,7 +14,7 @@ by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/
 
 Bathyscaphe is a java library that can inspect objects at runtime and assert that they are immutable.
 
-For an article explaining what problem it solves, why it is even a problem, why Bathyscaphe is preferable to alternatives, etc. see the corresponding post in my blog: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
+For an explanation of what problem it solves, why it is even a problem, why Bathyscaphe is preferable to alternatives, etc. see the corresponding post in my blog: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 Bathyscaphe consists of 4 modules:
 
@@ -67,48 +67,6 @@ Bathyscaphe involves three licenses:
 - The bathyscaphe-claims module is available under the Apache License, so that Bathyscaphe annotations can be freely used on any code with minimal licensing concerns.
 - The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which in a nutshell means that any software making use of Bathyscaphe must in turn be open-sourced under the same license, even if the software would not normally be distributed, as the case is, for example, with server-side software.
 - Developers who do not wish to be bound by the limitations of GNUAGPL can purchase from the author a Bathyscaphe Alternative Terms Commercial License (BATCL) for a small fee. Payment is done simply and quickly, via paypal. Please look at the end of LICENSE.md for instructions.
-
-## Appendix: Glossary
-
-Note: some of the glossary terms (i.e. variable / invariable, extensible / inextensible) are introduced in order to mitigate the ambiguities caused by Java's unfortunate choice to reuse certain language keywords (i.e. `final`) to mean entirely different things in different situations. (i.e. a `final` class vs. a `final` field.)
-
-- **_Assessment_** - the result of examining an object or a class to determine whether it is immutable or not. Bathyscaphe contains a hierarchy of assessments, which is divided into a few distinct sub-hierarchies, one for type assessments, one for object assessments, one for field assessments, and one for field value assessments, but they all share a common ancestor for the purpose of constructing assessment trees, where the children of an assessment are the reasons due to which the assessment was issued. Also see **_Type assessment_**, **_Object assessment_**.
-
-
-- **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
-
-
-- **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
-
-
-- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays, which are by definition mutable. The most famous example of such a class is `java.lang.String`.
-
-
-- **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` it the class definition. Also see opposite: **_Inextensible Class_**.
-
-
-- **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
-
-
-- **_Inextensible Class_** - a class that may not be sub-classed (extended.) Corresponds to the presence of the language keyword `final` in the class definition. Also see opposite: **_Extensible Class_**.
-
-
-- **_Invariable Field_** - a field that cannot be mutated. Corresponds to the presence of the language keyword `final` in the field definition. Note that invariability here refers only to the field itself, and it is entirely without regards to whether the object referenced by the field is immutable or not. Also see opposite: **_Variable Field_**.
-
-
-- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. Bathyscaphe has a hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why a particular assessment was issued. Also see **_Assessment_**, **_Type Assessment_**.
-
-
-- **_Shallow Immutability_** - see **_Superficial Immutability_**
-
-
-- **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely inconsequential. Also see opposite: **_Deep Immutability_**.
-
-
-- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. Bathyscaphe has a single assessment to represent class immutability, but an entire hierarchy of assessments to represent all the different ways in which a class may fall short of being immutable. The information contained in a type assessment provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used later by Bathyscaphe in order to assess the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
-
-
-- **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
 
 ## How to use
     
@@ -183,6 +141,56 @@ The above code will emit the following text to the standard output:<br/>
           │ └─■ field 'coder' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
           └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
             └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+
+### Other things worth noting
+
+If you decide to incorporate Bathyscaphe in a project, the first thing you are likely to do is what I did: introduce your own HashMap class which asserts that every key added to it is immutable. In doing so you might discover some bugs in your code, but you will also notice something strange: Bathyscaphe is preventing you from using reference types as keys, which kind of makes sense because they are in fact mutable, but you have never had any issues with that before, so why is it becoming a problem now?
+
+What is happening is that your reference types do not override `hashCode()`, so they inherit the identity hash-code from `Object`, which remains constant throughout the lifetime of your object, despite the mutations it undergoes during its lifetime. So, it has been working, but it has only been working by accident. 
+
+Bathyscaphe is meant to be used precisely in order to avoid accidents, so you cannot keep doing this anymore. From now on, you will have to be using `IdentityHashMap` for reference types, and `HashMap` for value types. 
+
+## Glossary
+
+Note: some of the glossary terms (i.e. variable / invariable, extensible / inextensible) are introduced in order to mitigate the ambiguities caused by Java's unfortunate decision to reuse certain language keywords (i.e. `final`) to mean entirely different things in different situations. (i.e. a `final` class vs. a `final` field.)
+
+- **_Assessment_** - the result of examining an object or a class to determine whether it is immutable or not. Bathyscaphe contains a hierarchy of assessments, which is divided into a few distinct sub-hierarchies, one for type assessments, one for object assessments, one for field assessments, and one for field value assessments, but they all share a common ancestor for the purpose of constructing assessment trees, where the children of an assessment are the reasons due to which the assessment was issued. Also see **_Type assessment_**, **_Object assessment_**.
+
+
+- **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
+
+
+- **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
+
+
+- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays, which are by definition mutable. The most famous example of such a class is `java.lang.String`.
+
+
+- **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` it the class definition. Also see opposite: **_Inextensible Class_**.
+
+
+- **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
+
+
+- **_Inextensible Class_** - a class that may not be sub-classed (extended.) Corresponds to the presence of the language keyword `final` in the class definition. Also see opposite: **_Extensible Class_**.
+
+
+- **_Invariable Field_** - a field that cannot be mutated. Corresponds to the presence of the language keyword `final` in the field definition. Note that invariability here refers only to the field itself, and it is entirely without regards to whether the object referenced by the field is immutable or not. Also see opposite: **_Variable Field_**.
+
+
+- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. Bathyscaphe has one object assessment to express that an object is immutable, but an entire hierarchy of object assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why a particular assessment was issued. Also see **_Assessment_**, **_Type Assessment_**.
+
+
+- **_Shallow Immutability_** - see **_Superficial Immutability_**
+
+
+- **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely inconsequential. Also see opposite: **_Deep Immutability_**.
+
+
+- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. Bathyscaphe has a single assessment to represent class immutability, but an entire hierarchy of assessments to represent all the different ways in which a class may fall short of being immutable. The information contained in a type assessment provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used later by Bathyscaphe in order to assess the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
+
+
+- **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
 
 ## Contacting the author
 
