@@ -47,8 +47,11 @@
 	<organization>
 		<name>michael.gr</name>
 	</organization>
+
 	<scm>
 		<url>https://github.com/mikenakis/Bathyscaphe.git</url>
+		<connection>scm:git:https://github.com/mikenakis/Bathyscaphe.git</connection>
+		<developerConnection>scm:git:git@github.com:mikenakis/Bathyscaphe.git</developerConnection>
 	</scm>
 
 	<properties>
