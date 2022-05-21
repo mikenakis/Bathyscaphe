@@ -13,10 +13,10 @@
 	<parent>
 		<groupId>mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.1</version>
 	</parent>
 	<artifactId>bathyscaphe-print</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1</version>
 
 	<name>mikenakis:bathyscaphe-print</name>
 	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
@@ -26,7 +26,7 @@
 		<dependency>
 			<groupId>mikenakis</groupId>
 			<artifactId>bathyscaphe</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
 
 	</dependencies>
