@@ -161,9 +161,14 @@
 
 	<distributionManagement>
 		<repository>
+			<id>github</id>
+			<name>GitHub MikeNakis Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>
+		</repository>
+		<snapshotRepository>
 			<id>repsy-mikenakis-public</id>
 			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
-		</repository>
+		</snapshotRepository>
 	</distributionManagement>
 
 </project>
