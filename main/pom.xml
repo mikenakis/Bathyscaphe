@@ -13,10 +13,10 @@
 	<parent>
 		<groupId>mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
 	</parent>
 	<artifactId>bathyscaphe</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2</version>
 
 	<name>mikenakis:bathyscaphe</name>
 	<description>Deep immutability assessment for java objects.</description>
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>mikenakis</groupId>
 			<artifactId>bathyscaphe-claims</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.2</version>
 		</dependency>
 
 	</dependencies>
