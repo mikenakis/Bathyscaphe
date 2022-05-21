@@ -1,15 +1,22 @@
+<!--
+  ~ Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+  ~
+  ~ Licensed under a dual-license scheme; see LICENSE.md for details.
+  ~ You may not use this file except in compliance with one of the licenses.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!-- IMPORTANT: For project url, licenses, developers, scm, etc. please see parent pom -->
+	<!-- IMPORTANT: SEE THE PARENT POM for project url, licensing information, developers, scm, etc. -->
 
 	<parent>
 		<groupId>mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.1</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>bathyscaphe-print</artifactId>
-	<version>1.1</version>
+	<version>1.0-SNAPSHOT</version>
 
 	<name>mikenakis:bathyscaphe-print</name>
 	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
@@ -19,7 +26,7 @@
 		<dependency>
 			<groupId>mikenakis</groupId>
 			<artifactId>bathyscaphe</artifactId>
-			<version>1.1</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

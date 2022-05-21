@@ -1,3 +1,5 @@
+[![CI-Workflow](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml) [![Release-Workflow](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+
 # Bathyscaphe
 
 #### Deep immutability (and coming soon: thread-safety) assessment for Java objects

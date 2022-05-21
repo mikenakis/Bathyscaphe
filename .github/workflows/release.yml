@@ -1,4 +1,4 @@
-name: Bathyscaphe-Release-Workflow
+name: Release-Workflow
 on:
   workflow_dispatch:
     inputs:
@@ -25,6 +25,12 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
+      - name: Set-up-JDK-Step
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+          distribution: 'zulu'
+
       - name: Cache-local-Maven-repository-Step
         uses: actions/cache@v2
         with:
@@ -32,11 +38,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-
-      - name: Set-up-JDK-Step
-        uses: actions/setup-java@v1
-        with:
-          java-version: 17
 
       - name: Configure-Git-User-Step
         run: |
@@ -46,7 +47,7 @@ jobs:
       - name: Make-Release-Step
         run: mvn release:prepare release:perform -B -s .github/mvn-settings.xml -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
-#          CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
-#          CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
+          #          CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
+          #          CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}

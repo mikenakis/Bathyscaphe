@@ -1,4 +1,4 @@
-name: Bathyscaphe-CI-Workflow
+name: CI-Workflow
 
 on:
   pull_request:
@@ -10,29 +10,32 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        java: [ '17' ]
-        os: [ 'ubuntu-latest' ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout-Source-Code-Step
+        uses: actions/checkout@v2
 
-    - name: Set-up-JDK-Step
-      uses: actions/setup-java@v2
-      with:
-        java-version: ${{ matrix.java }}
-        distribution: 'zulu'
 
-    - name: print-Java-version-Step
-      run: java -version
 
-    - uses: actions/cache@v2
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+      - name: Set-up-JDK-Step
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: 'zulu'
 
-    - name: Build-Step
-      run: mvn -B clean install --file pom.xml
+      - name: Cache-local-Maven-repository-Step
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+
+
+
+
+
+      - name: Build-Step
+        run: mvn -B clean install --file pom.xml
