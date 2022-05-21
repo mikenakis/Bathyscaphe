@@ -21,6 +21,10 @@
 	<name>mikenakis:bathyscaphe-print</name>
 	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
 
+	<build>
+		<sourceDirectory>source</sourceDirectory>
+	</build>
+
 	<dependencies>
 
 		<dependency>

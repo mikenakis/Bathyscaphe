@@ -63,9 +63,6 @@
 
 	<build>
 
-		<sourceDirectory>source</sourceDirectory>
-		<testSourceDirectory>source</testSourceDirectory>
-
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -76,10 +73,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.2.0</version>
 					<configuration>
 						<doclint>none</doclint>
 					</configuration>
-					<version>3.2.0</version>
+					<additionalOptions>--enable-preview</additionalOptions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>

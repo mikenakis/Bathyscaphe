@@ -21,6 +21,10 @@
 	<name>mikenakis:bathyscaphe-test</name>
 	<description>Automated software tests for mikenakis:bathyscaphe.</description>
 
+	<build>
+		<testSourceDirectory>source</testSourceDirectory>
+	</build>
+
 	<dependencies>
 
 		<dependency>

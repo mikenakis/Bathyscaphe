@@ -21,6 +21,10 @@
 	<name>mikenakis:bathyscaphe-claims</name>
 	<description>Annotations and interfaces to use in your code for interoperability with mikenakis:bathyscaphe</description>
 
+	<build>
+		<sourceDirectory>source</sourceDirectory>
+	</build>
+
 	<dependencies>
 		<!-- yay! no dependencies! -->
 	</dependencies>

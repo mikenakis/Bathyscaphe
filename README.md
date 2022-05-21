@@ -6,7 +6,7 @@
 
 <p align="center">
 <img title="mikenakis:bathyscaphe logo" src="mikenakis-bathyscaphe-logo.svg" width="256"/><br/>
-The mikenakis:bathyscaphe logo, a line drawing of <i>bathyscaphe Trieste</i><br/>
+The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
 by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 

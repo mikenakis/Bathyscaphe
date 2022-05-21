@@ -21,6 +21,10 @@
 	<name>mikenakis:bathyscaphe</name>
 	<description>Deep immutability assessment for java objects.</description>
 
+	<build>
+		<sourceDirectory>source</sourceDirectory>
+	</build>
+
 	<dependencies>
 
 		<dependency>
