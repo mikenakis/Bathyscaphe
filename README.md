@@ -14,7 +14,7 @@ by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/
 
 Bathyscaphe is a java library that can inspect objects at runtime and assert that they are immutable.
 
-For an article explaining what problem it solves, why it is even a problem, why Bathyscaphe is preferable to alternatives, etc. see the corresponding post in my blog: https://blog.michael.gr/2022/05/bathyscaphe.html
+For an article explaining what problem it solves, why it is even a problem, why Bathyscaphe is preferable to alternatives, etc. see the corresponding post in my blog: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 Bathyscaphe consists of 4 modules:
 
@@ -75,7 +75,7 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Assessment_** - the result of examining an object or a class to determine whether it is immutable or not. Bathyscaphe contains a hierarchy of assessments, which is divided into a few distinct sub-hierarchies, one for type assessments, one for object assessments, one for field assessments, and one for field value assessments, but they all share a common ancestor for the purpose of constructing assessment trees, where the children of an assessment are the reasons due to which the assessment was issued. Also see **_Type assessment_**, **_Object assessment_**.
 
 
-- **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See https://en.wikipedia.org/wiki/Bathyscaphe
+- **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
 
 
 - **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
@@ -87,7 +87,7 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` it the class definition. Also see opposite: **_Inextensible Class_**.
 
 
-- **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: https://blog.michael.gr/2022/05/bathyscaphe.html
+- **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 
 - **_Inextensible Class_** - a class that may not be sub-classed (extended.) Corresponds to the presence of the language keyword `final` in the class definition. Also see opposite: **_Extensible Class_**.
@@ -162,7 +162,7 @@ bathyscaphe-print can be used as follows:
 
 	try
 	{
-		assert Bathyscaphe.objectMustBeImmutableAssertion( List.of( new ArrayList<>() ) );  
+		assert Bathyscaphe.objectMustBeImmutableAssertion( List.of( new StringBuilder() ) );  
 	}
 	catch( ObjectMustBeImmutableException e )
 	{
