@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under the APACHE-2.0 license; see LICENSE.md for details.
+ * You may not use this file except in compliance with the license.
+ */
+
 package io.github.mikenakis.bathyscaphe.annotations;
 
 import java.lang.annotation.ElementType;
@@ -15,13 +22,13 @@ import java.lang.annotation.Target;
  * <p>
  * - the field is written multiple times, but in a thread-safe way, and the field does not participate in the hashCode computation.
  * <p>
- * For example, in an alternative implementation of class {@link java.lang.String}, the cached hashCode field would be marked with this annotation, thus
+ * For example, in a hypothetical re-implementation of class {@link java.lang.String}, the cached hashCode field would be marked with this annotation, thus
  * allowing the class to be assessed as immutable.
  * <p>
  * Note that this annotation only makes sense on fields that are {@code private}.
  * <p>
- * Note that if a field is marked as {@link Invariable}, this only promises shallow immutability; if the type of the field is a reference type, then that type
- * will also be assessed in order to determine whether the field is deeply immutable.
+ * Note that this annotation only promises shallow immutability; Bathyscaphe will also examine the field type, and possibly also the field value, in order to
+ * assess deep immutability.
  * <p>
  * Also see jdk.internal.vm.annotation.Stable which gives a similar promise but for slightly different purposes. (Strangely enough, in {@link java.lang.String}
  * even though the character array is marked with jdk.internal.vm.annotation.Stable, the cached hashcode is not; I do not know why.)

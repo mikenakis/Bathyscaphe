@@ -18,7 +18,7 @@ Bathyscaphe consists of 4 modules:
 
 1. **bathyscaphe-claims** contains annotations that you can add to some of your classes to aid immutability assessment. For example, when a field is not declared as final, but you want to promise that it will behave as if it was final, you can annotate the field with `@Invariable.` Most client code is expected to make use of only this module of bathyscaphe. The jar file is microscopic, since it contains no code, only a few definitions.
 1. **bathyscaphe** is the core immutability assessment library. A software system is likely to only invoke this library in a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might invoke bathyscaphe to ascertain that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
-1. **bathyscaphe-print** is a diagnostic aid which can be used to generate detailed human-readable text explaining precisely why a particular assessment was issued, in the event that an object which you intended to be immutable turns out to be mutable.
+1. **bathyscaphe-print** provides a method that generates detailed human-readable text explaining precisely why a particular assessment was issued, in the event that an object which was intended to be immutable turns out to be mutable.
 1. **bathyscaphe-test** is, of course, the tests, which are extensive and achieve close to 100% coverage.
 
 ## How it works
@@ -41,12 +41,14 @@ The "Technology Readiness Level" (TRL) so-to-speak of the project is "5: Technol
 
 The library works, it appears to be problem-free, and it produces very good results; furthermore, the library has extensive tests that achieve full coverage, and they all pass; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use. Bathyscaphe will need to receive some extensive beta testing in at least one commercial-scale environment before it can be considered as ready for general availability.
 
-In the meantime, Bathyscaphe is likely to undergo extensive refactoring: my understanding of certain concepts may change, which means that classes and methods may be renamed. Since there is probably still a lot of work ahead, I do not yet intend to hinder the evolution of Bathyscaphe in the name of maintaining backwards compatibility; therefore, at this early stage, there is a conundrum associated with integrating Bathyscaphe into a project:
+In the meantime, Bathyscaphe is likely to undergo refactoring, and I do not yet intend to hinder the evolution of Bathyscaphe in the name of maintaining backwards compatibility; therefore, at this early stage, there is a conundrum associated with integrating Bathyscaphe into a project:
 
 - Either you pick a version and you stick to it, in which case you will not be receiving improvements as Bathyscaphe evolves,
 - Or you keep upgrading to the latest version of Bathyscaphe, but with every upgrade your code might not compile anymore, and may need modifications to make it compile again.
 
-Luckily, Bathyscaphe has a very small interface, so most changes to Bathyscaphe are likely to be internal. Even if some change to Bathyscaphe is to affect client code, the client code is likely to only need small and highly localized modifications. Unluckily, the interface of Bathyscaphe also includes some annotations, and annotations tend to spread far and wide, so some of the changes that might be made to Bathyscaphe may necessitate extensive modifications to client code.
+Luckily, Bathyscaphe has a very small interface, so most changes to Bathyscaphe are likely to be internal. Even if some change to Bathyscaphe is to affect client code, the client code is likely to only need small and highly localized modifications. 
+
+Unluckily, the interface of Bathyscaphe also includes some annotations, and annotations tend to spread far and wide, so some of the changes that might be made to Bathyscaphe may necessitate extensive modifications to client code.
 
 So, if you decide to try Bathyscaphe in its current state, choose wisely, and use at your own risk.
 
@@ -54,15 +56,15 @@ Note that I have placed as many classes as possible in an "internal" package; it
 
 ## Copyright, License, and legal stuff
 
-All modules that comprise Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis.
+All modules that comprise Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
-This is only a summary of the options available for licensing Bathyscaphe. As a summary, it may be so incomplete and inaccurate as to be false, so for the real thing, please see the LICENSE.md file which is included with Bathyscaphe, and can also be found here: https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md
+This is only a summary of the options available for licensing Bathyscaphe. As a summary, it may be so incomplete and inaccurate as to be false; so, for the real thing, please see the LICENSE.md file.
 
 Bathyscaphe involves three licenses:
 
 - The bathyscaphe-claims module is available under the Apache License, so that Bathyscaphe annotations can be freely used on any code with minimal licensing concerns.
-- The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which basically means that any software making use of Bathyscaphe must in turn be open-sourced under the same license, even if the software would not normally be distributed, as the case is, for example, with server-side software.
-- Developers who do not wish to be bound by the limitations of GNUAGPL can purchase from the author a Bathyscaphe Alternative Terms Commercial License (BATCL) for a small fee. Payment is very simple and quick, via paypal. Please look at the end of LICENSE.md for instructions.
+- The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which in a nutshell means that any software making use of Bathyscaphe must in turn be open-sourced under the same license, even if the software would not normally be distributed, as the case is, for example, with server-side software.
+- Developers who do not wish to be bound by the limitations of GNUAGPL can purchase from the author a Bathyscaphe Alternative Terms Commercial License (BATCL) for a small fee. Payment is done simply and quickly, via paypal. Please look at the end of LICENSE.md for instructions.
 
 ## Appendix: Glossary
 
@@ -197,6 +199,9 @@ TODO: the actual types of generic arguments of fields can be discovered using re
 
 TODO: possible bug: how will assessment go if an object has provisory fields and is also iterable?
 
+TODO: the @InvariableArray annotation might benefit from an integer parameter indicating the number of dimensions for which invariability is promised, so that we can declare an invariable array of
+ invariable arrays, etc.
+ 
 <strike>TODO:</strike> add a quick check for records -- No, actually, this will not buy us anything, because a record may contain mutable members. Come to think of it, if records allow mutable members, then what is the point in records?
 
 <strike>TODO:</strike> use bytecode analysis to determine whether a class mutates a field or an array outside its constructor. This may alleviate the need for invariability annotations in some cases. -- No, actually, this will gain us very little, because fields that are only mutated within constructors are usually declared as final anyway; it is bad practice to not declare them as final. Fields that are not declared final are typically so because they are in fact mutated outside the constructor. (For example, the cached hashcode in `java.lang.String`.) The only thing that this would buy us is detection of invariable array fields without the need to annotate them with `@InvariableArray`, but this is a marginal benefit. (Who uses arrays anyway?) 

@@ -2,7 +2,7 @@
 
 ## Copyright
 
-All modules that comprise Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis.
+All modules that comprise Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 ## Disclaimer
 

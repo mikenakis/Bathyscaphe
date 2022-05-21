@@ -1,6 +1,6 @@
 Bathyscaphe Alternative Terms Commercial License Agreement 1.0
 
-The Bathyscaphe Library ("Software") was developed by Michael Belivanakis, a.k.a. MikeNakis.
+The Bathyscaphe Library ("Software") was developed by Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 This Bathyscaphe Alternative Terms Commercial License Agreement (the "Agreement"), effective as of the date that MikeNakis receives payment for it ("Effective Date"), sets forth the terms of use governing your ("Developer") use of the Software. Developer shall include Developer’s Affiliates, provided that at all times Developer shall be fully responsible and liable for any Affiliate’s use or misuse of the Software. "Affiliate" shall mean any legal entity that is controlled by Developer. For the purposes of this definition, the term "control" means (i) beneficial ownership of at least fifty percent (50%) of the voting securities of a corporation or other business organization with voting securities or (ii) a fifty percent (50%) or greater interest in the net assets or profits of a partnership or other business organization without voting securities.
 
