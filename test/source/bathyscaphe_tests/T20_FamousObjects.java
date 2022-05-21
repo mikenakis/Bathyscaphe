@@ -3,6 +3,7 @@ package bathyscaphe_tests;
 import io.github.mikenakis.bathyscaphe.Bathyscaphe;
 import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
+import io.github.mikenakis.debug.Debug;
 import org.junit.Test;
 
 import javax.swing.KeyStroke;
