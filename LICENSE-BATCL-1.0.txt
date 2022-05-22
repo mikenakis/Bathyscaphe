@@ -1,39 +1,146 @@
 Bathyscaphe Alternative Terms Commercial License Agreement 1.0
 
-The Bathyscaphe Library ("Software") was developed by Michael Belivanakis, a.k.a. MikeNakis, michael.gr
+The Bathyscaphe Library ("Software") was developed by Michael Belivanakis,
+a.k.a. MikeNakis, michael.gr
 
-This Bathyscaphe Alternative Terms Commercial License Agreement (the "Agreement"), effective as of the date that MikeNakis receives payment for it ("Effective Date"), sets forth the terms of use governing your ("Developer") use of the Software. Developer shall include Developer’s Affiliates, provided that at all times Developer shall be fully responsible and liable for any Affiliate’s use or misuse of the Software. "Affiliate" shall mean any legal entity that is controlled by Developer. For the purposes of this definition, the term "control" means (i) beneficial ownership of at least fifty percent (50%) of the voting securities of a corporation or other business organization with voting securities or (ii) a fifty percent (50%) or greater interest in the net assets or profits of a partnership or other business organization without voting securities.
+This Bathyscaphe Alternative Terms Commercial License Agreement (the
+"Agreement"), effective as of the date that MikeNakis receives payment for it
+("Effective Date"), sets forth the terms of use governing your ("Developer")
+use of the Software. Developer shall include Developer’s Affiliates, provided
+that at all times Developer shall be fully responsible and liable for any
+Affiliate’s use or misuse of the Software. "Affiliate" shall mean any legal
+entity that is controlled by Developer. For the purposes of this definition,
+the term "control" means (i) beneficial ownership of at least fifty percent
+(50%) of the voting securities of a corporation or other business organization
+with voting securities or (ii) a fifty percent (50%) or greater interest in
+the net assets or profits of a partnership or other business organization
+without voting securities.
 
-Absent Developer’s agreement to the terms below, Developer shall have no rights to the Software for any purpose whatsoever.
+Absent Developer’s agreement to the terms below, Developer shall have no
+rights to the Software for any purpose whatsoever.
 
-1. LICENSE GRANT. MikeNakis grants to Developer a perpetual, non-exclusive, worldwide, revocable, non-sublicensable, non-transferable license to access, install, reproduce, recompile, use, modify, derivitize, or otherwise adapt and distribute the Software in a Developer product or Developer service to end users in accordance with the terms and conditions of this Agreement.
+1. LICENSE GRANT. MikeNakis grants to Developer a perpetual, non-exclusive,
+worldwide, revocable, non-sublicensable, non-transferable license to access,
+install, reproduce, recompile, use, modify, derivitize, or otherwise adapt and
+distribute the Software in a Developer product or Developer service to end
+users in accordance with the terms and conditions of this Agreement.
 
-2. RESTRICTIONS ON USE. Software remains the property of MikeNakis and Developer agrees not to: (a) incorporate the Software into a commercial product released under an open source license; (b) distribute a commercial product containing Software to any third party without an end user license agreement binding such third party to substantially the same terms and conditions as are contained in this Agreement as such relate to the Software, including but not limited to Section "NO WARRANTIES" and Section "LIMITATION OF LIABILITY", and must include the specific language set forth in Section "COPYRIGHT NOTICE". For clarity, Developer may not distribute Software except as an integrated part of Developer’s commercial product or service.
+2. RESTRICTIONS ON USE. Software remains the property of MikeNakis and
+Developer agrees not to: (a) incorporate the Software into a commercial
+product released under an open source license; (b) distribute a commercial
+product containing Software to any third party without an end user license
+agreement binding such third party to substantially the same terms and
+conditions as are contained in this Agreement as such relate to the Software,
+including but not limited to Section "NO WARRANTIES" and Section "LIMITATION
+OF LIABILITY", and must include the specific language set forth in Section
+"COPYRIGHT NOTICE". For clarity, Developer may not distribute Software except
+as an integrated part of Developer’s commercial product or service.
 
-3. OWNERSHIP AND COPYRIGHT NOTICE. This Agreement does not transfer any ownership of the Software to Developer. Nothing in this Agreement shall be construed to grant Developer, by implication or otherwise, any intellectual property rights in the Software, or any other intellectual property or other proprietary rights of MikeNakis, other than as specifically set forth in this Agreement. Developer shall not remove or delete, and shall retain in the Software, the copyright, trademark, or other notices pertaining to the Software as is provided with the Software.
+3. OWNERSHIP AND COPYRIGHT NOTICE. This Agreement does not transfer any
+ownership of the Software to Developer. Nothing in this Agreement shall be
+construed to grant Developer, by implication or otherwise, any intellectual
+property rights in the Software, or any other intellectual property or other
+proprietary rights of MikeNakis, other than as specifically set forth in this
+Agreement. Developer shall not remove or delete, and shall retain in the
+Software, the copyright, trademark, or other notices pertaining to the
+Software as is provided with the Software.
 
-4. LICENSE FEE. In consideration of the rights granted hereunder, Developer shall pay to MikeNakis a license issue fee ("License Fee") of one hundred twenty eight Euros (€128.00), which shall be the sole sum payable by Developer hereunder. This payment is nonrefundable and shall be without deduction of exchange, collection, or other charges, and, specifically, without deduction of withholding or similar taxes or other government imposed fees or taxes. This Agreement does not grant Developer any right to any updates or new versions of the Software.
+4. LICENSE FEE. In consideration of the rights granted hereunder, Developer
+shall pay to MikeNakis a license issue fee ("License Fee") of one hundred
+twenty eight Euros (€128.00), which shall be the sole sum payable by Developer
+hereunder. This payment is nonrefundable and shall be without deduction of
+exchange, collection, or other charges, and, specifically, without deduction
+of withholding or similar taxes or other government imposed fees or taxes.
+This Agreement does not grant Developer any right to any updates or new
+versions of the Software.
 
-5. DELIVERY. Upon receipt by MikeNakis of the License Fee, Developer is licensed to use Software under the terms of Agreement. Developer agrees to accept the Software as is. Developer agrees and acknowledges that MikeNakis shall not be required to: (a) load the Software onto Developer’s machines; (b) test for proper operation; (c) perform debugging; (d) make corrections; (e) provide maintenance, service, or updates; or (f) assist in the understanding, implementation or use of the Software. This Agreement does not grant Developer any right to any updates or new versions of the Software.
+5. DELIVERY. Upon receipt by MikeNakis of the License Fee, Developer is
+licensed to use Software under the terms of Agreement. Developer agrees to
+accept the Software as is. Developer agrees and acknowledges that MikeNakis
+shall not be required to: (a) load the Software onto Developer’s machines; (b)
+test for proper operation; (c) perform debugging; (d) make corrections; (e)
+provide maintenance, service, or updates; or (f) assist in the understanding,
+implementation or use of the Software. This Agreement does not grant Developer
+any right to any updates or new versions of the Software.
 
-6. COPYRIGHT NOTICE. Developer shall include in all end user licenses, in the same point font style and size as the related text, the following: "Copyright Notice. The software [or "Portions of the software"] incorporated herein is Copyright ©2022, Michael Belivanakis ("MikeNakis"). All Rights Reserved.
+6. COPYRIGHT NOTICE. Developer shall include in all end user licenses, in the
+same point font style and size as the related text, the following: "Copyright
+Notice. The software [or "Portions of the software"] incorporated herein is
+Copyright ©2022, Michael Belivanakis ("MikeNakis"). All Rights Reserved.
 
-The name "MikeNakis" (alone or as part of another name) the domain name michael.gr or other insignia, words, or names that identify MikeNakis may not be used to endorse or promote products derived from this Software without specific prior written permission.
+The name "MikeNakis" (alone or as part of another name) the domain name
+michael.gr or other insignia, words, or names that identify MikeNakis may not
+be used to endorse or promote products derived from this Software without
+specific prior written permission.
 
-7. NO WARRANTIES. THE SOFTWARE IS PROVIDED “AS IS.” TO THE FULLEST EXTENT PERMITTED BY LAW, MikeNakis HEREBY DISCLAIMS ALL WARRANTIES OF ANY KIND (EXPRESS, IMPLIED OR OTHERWISE) REGARDING THE SOFTWARE, INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, DESIGN, FITNESS FOR A PARTICULAR PURPOSE, SATISFACTORY QUALITY, OWNERSHIP, AND NON-INFRINGEMENT. MikeNakis MAKES NO WARRANTY ABOUT THE ACCURACY, RELIABILITY, COMPLETENESS, TIMELINESS, SUFFICIENCY OR QUALITY OF THE SOFTWARE. MikeNakis DOES NOT WARRANT THAT THE SOFTWARE WILL OPERATE WITHOUT ERROR OR INTERRUPTION, OR THAT THE SOFTWARE IS FREE OF COMPUTER VIRUSES OR OTHER HARMFUL COMPUTER CODE.
+7. NO WARRANTIES. THE SOFTWARE IS PROVIDED “AS IS.” TO THE FULLEST EXTENT
+PERMITTED BY LAW, MikeNakis HEREBY DISCLAIMS ALL WARRANTIES OF ANY KIND
+(EXPRESS, IMPLIED OR OTHERWISE) REGARDING THE SOFTWARE, INCLUDING BUT NOT
+LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, DESIGN, FITNESS FOR A
+PARTICULAR PURPOSE, SATISFACTORY QUALITY, OWNERSHIP, AND NON-INFRINGEMENT.
+MikeNakis MAKES NO WARRANTY ABOUT THE ACCURACY, RELIABILITY, COMPLETENESS,
+TIMELINESS, SUFFICIENCY OR QUALITY OF THE SOFTWARE. MikeNakis DOES NOT WARRANT
+THAT THE SOFTWARE WILL OPERATE WITHOUT ERROR OR INTERRUPTION, OR THAT THE
+SOFTWARE IS FREE OF COMPUTER VIRUSES OR OTHER HARMFUL COMPUTER CODE.
 
-8. LIMITATION OF LIABILITY. IN NO EVENT SHALL MikeNakis BE LIABLE TO DEVELOPER FOR MORE THAN THE TOTAL LICENSE FEE PAID BY DEVELOPER TO MikeNakis. NOTWITHSTANDING THE FOREGOING, IN NO EVENT SHALL MikeNakis BE LIABLE TO DEVELOPER IN CONTRACT, TORT OR OTHERWISE, FOR ANY INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE OR OTHER DAMAGES OF ANY KIND WHATSOEVER ARISING OUT OF OR IN CONNECTION WITH THE SOFTWARE, OR USE OF THE SOFTWARE, EVEN IF MikeNakis IS NEGLIGENT OR OTHERWISE AT FAULT, AND REGARDLESS OF WHETHER MikeNakis IS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+8. LIMITATION OF LIABILITY. IN NO EVENT SHALL MikeNakis BE LIABLE TO DEVELOPER
+FOR MORE THAN THE TOTAL LICENSE FEE PAID BY DEVELOPER TO MikeNakis.
+NOTWITHSTANDING THE FOREGOING, IN NO EVENT SHALL MikeNakis BE LIABLE TO
+DEVELOPER IN CONTRACT, TORT OR OTHERWISE, FOR ANY INDIRECT, SPECIAL,
+INCIDENTAL, CONSEQUENTIAL, PUNITIVE OR OTHER DAMAGES OF ANY KIND WHATSOEVER
+ARISING OUT OF OR IN CONNECTION WITH THE SOFTWARE, OR USE OF THE SOFTWARE,
+EVEN IF MikeNakis IS NEGLIGENT OR OTHERWISE AT FAULT, AND REGARDLESS OF
+WHETHER MikeNakis IS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
 
-9. INDEMNIFICATION; INSURANCE. To the fullest extent permitted by law, Developer shall indemnify, defend and hold harmless MikeNakis against any liability, damage, loss or expense (including reasonable attorney’s fees and expenses of litigation) incurred by or imposed upon MikeNakis in connection with any third party claims, suits, actions, demands or judgments arising from Developer’s and Developer’s Affiliates’ access to, use of, and/or distribution of the Software, except to the extent directly caused by the gross negligence or willful misconduct of MikeNakis.
+9. INDEMNIFICATION; INSURANCE. To the fullest extent permitted by law,
+Developer shall indemnify, defend and hold harmless MikeNakis against any
+liability, damage, loss or expense (including reasonable attorney’s fees and
+expenses of litigation) incurred by or imposed upon MikeNakis in connection
+with any third party claims, suits, actions, demands or judgments arising from
+Developer’s and Developer’s Affiliates’ access to, use of, and/or distribution
+of the Software, except to the extent directly caused by the gross negligence
+or willful misconduct of MikeNakis.
 
-Developer will obtain and carry general commercial liability insurance and umbrella insurance (or maintain a program of self-insurance) sufficient to cover its business and any and all activities and obligations under this Agreement, including with respect to MikeNakis.
+Developer will obtain and carry general commercial liability insurance and
+umbrella insurance (or maintain a program of self-insurance) sufficient to
+cover its business and any and all activities and obligations under this
+Agreement, including with respect to MikeNakis.
 
-10. GOVERNING LAW. This Agreement and any disputes arising hereunder shall be construed and governed by the laws of the Kingdom of The Netherlands regardless of otherwise applicable choice of law rules.
+10. GOVERNING LAW. This Agreement and any disputes arising hereunder shall be
+construed and governed by the laws of the Kingdom of The Netherlands
+regardless of otherwise applicable choice of law rules.
 
-11. NON-USE OF NAME. Nothing in this Agreement shall be construed as granting Developer any rights or licenses to use any trademarks, service marks or logos displayed on the Software. Developer shall not otherwise use or allow the use of the names "Michael Belivanakis", "MikeNakis", "michael.gr", or any variation, adaptation, or abbreviation thereof, or any trademark owned by MikeNakis, or any terms of this Agreement in any public announcement or disclosure without the prior written consent of MikeNakis, which consent MikeNakis may withhold in his sole discretion.
+11. NON-USE OF NAME. Nothing in this Agreement shall be construed as granting
+Developer any rights or licenses to use any trademarks, service marks or logos
+displayed on the Software. Developer shall not otherwise use or allow the use
+of the names "Michael Belivanakis", "MikeNakis", "michael.gr", or any
+variation, adaptation, or abbreviation thereof, or any trademark owned by
+MikeNakis, or any terms of this Agreement in any public announcement or
+disclosure without the prior written consent of MikeNakis, which consent
+MikeNakis may withhold in his sole discretion.
 
-12. TERMINATION. This Agreement shall terminate automatically, without notice by MikeNakis, if Developer fails to comply with any term(s) set forth in this Agreement. Upon termination of this Agreement, the rights granted hereunder will automatically terminate and Developer agrees to immediately cease all use of the Software.
+12. TERMINATION. This Agreement shall terminate automatically, without notice
+by MikeNakis, if Developer fails to comply with any term(s) set forth in this
+Agreement. Upon termination of this Agreement, the rights granted hereunder
+will automatically terminate and Developer agrees to immediately cease all use
+of the Software.
 
-13. MISCELLANEOUS. This Agreement represents the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior negotiations or discussions, whether written or oral. Developer shall comply with all laws and regulations applicable to the exercise of its rights under this Agreement. These terms may be modified or amended only in writing signed by authorized representatives of MikeNakis and Developer. This Agreement may not be assigned without MikeNakis’s prior written consent.
+13. MISCELLANEOUS. This Agreement represents the entire agreement between the
+parties with respect to the subject matter hereof and supersedes all prior
+negotiations or discussions, whether written or oral. Developer shall comply
+with all laws and regulations applicable to the exercise of its rights under
+this Agreement. These terms may be modified or amended only in writing signed
+by authorized representatives of MikeNakis and Developer. This Agreement may
+not be assigned without MikeNakis’s prior written consent.
 
-The failure of MikeNakis to enforce at any time any of the provisions of the Agreement will in no way be construed to be a present or future waiver of such provisions, nor in any way affect the ability to enforce each and every such provision thereafter. The provisions that by their nature are intended to survive termination of this Agreement shall survive termination of this Agreement, including but not limited to: Sections "NO WARRANTIES", "LIMITATION OF LIABILITY", "INDEMNIFICATION; INSURANCE", "GOVERNING LAW", "NON-USE OF NAME", "TERMINATION" and "MISCELLANEOUS".
+The failure of MikeNakis to enforce at any time any of the provisions of the
+Agreement will in no way be construed to be a present or future waiver of such
+provisions, nor in any way affect the ability to enforce each and every such
+provision thereafter. The provisions that by their nature are intended to
+survive termination of this Agreement shall survive termination of this
+Agreement, including but not limited to: Sections "NO WARRANTIES", "LIMITATION
+OF LIABILITY", "INDEMNIFICATION; INSURANCE", "GOVERNING LAW", "NON-USE OF
+NAME", "TERMINATION" and "MISCELLANEOUS".
+
+This license was adapted from the commercial license of the FFTW library, by
+the MIT Technology Licensing Office. Please do not sue me.

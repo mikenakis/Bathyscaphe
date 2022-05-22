@@ -2,7 +2,7 @@
 
 ## Copyright
 
-All modules that comprise Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
+All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 ## Disclaimer
 
@@ -11,7 +11,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ## Licensing of the bathyscaphe-claims module
 
-The bathyscaphe-claims module of Bathyscaphe is published under the Apache License v2.0. 
+The bathyscaphe-claims module is published under the Apache License v2.0. 
 
 A copy of the APACHE-2.0 license is included with Bathyscaphe. The original can be found on the Apache website, for example here: https://www.apache.org/licenses/LICENSE-2.0
                                 
@@ -26,6 +26,7 @@ All other modules of Bathyscaphe are published under a dual-license scheme. You 
 
 
 ####  - The Bathyscaphe Alternative Terms Commercial License (BATCL) v.1
+
   - Non-free versions of Bathyscaphe are available under terms different from those of the GNU AGPL, in that they do not require you to publish the source code of software that makes use of Bathyscaphe. For these alternative terms you must purchase a commercial license from the author.
   - A copy of BATCL v.1 is included with Bathyscaphe, and it can also be found here: https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE-BATCL-1.0.txt
 
