@@ -188,10 +188,10 @@ All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. Mi
 
 Bathyscaphe involves three licenses:
 
-- The **_bathyscaphe-claims_** module is available under the **_MIT License_**, so that Bathyscaphe annotations can be freely used with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License) but most importantly read the LICENSE.md file.
+- The **_bathyscaphe-claims_** module is available under the **_MIT License_**, which is a very permissive license, allowing Bathyscaphe annotations to be freely used in any kind of code with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License) but most importantly read the LICENSE.md file.
 - **_All other modules_** that comprise Bathyscaphe are available under a dual-license scheme.
   - By default, the license that applies is the **_GNU Affero General Public License_** (GNUAGPL), which is a _viral_, _strong copyleft_ license with an additional provision for _server-side software_. In a nutshell, this means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) but most importantly read the LICENSE.md file. 
-  - Developers who do not wish to be bound by the limitations of GNUAGPL because they do not want to publish their source code can purchase from the author a **_Bathyscaphe Alternative Terms Commercial License_** (BATCL) for a small fee. Payment is done simply and quickly, via PayPal. Please see the LICENSE.md file.
+  - Developers who do not wish to be bound by the GNUAGPL because they do not want to publish their source code can purchase from the author a **_Bathyscaphe Alternative Terms Commercial License_** (BATCL) for a small fee. Payment is done simply and quickly, via PayPal. Please see the LICENSE.md file.
 
 ### Instructions for purchasing a BATCL license
 
@@ -199,12 +199,14 @@ Bathyscaphe involves three licenses:
   - Recipient's e-mail address: paypal@michael.gr
   - Amount: 128.00
   - Currency: EUR
-  - Payment reference ("What's this payment for?"): please enter the following information:
-    - your e-mail address (otherwise we cannot contact you!)
-    - the name of the software you are purchasing a license for, i.e. "Bathyscaphe"
-    - the version number that you want to license, as it appears in the maven coordinates.
+  - Payment reference ("What's this payment for?"): please enter the following information separated by spaces:
+    - Your e-mail address
+    - The name of the software you are purchasing a license for, i.e. "Bathyscaphe"
+    - The version number that you want to license, as it appears in the maven coordinates.
   - Your shipping address: make sure your legal address is selected.
-- As soon as we receive the fee, you are licensed.
+- As soon as we receive the fee, we will send you an acknowledgement.
+- As soon as you receive the acknowledgement, you are licensed.
+- If you fail to properly fill in the Payment reference field, if the amount is incorrect, if the currency is incorrect, etc. you will not be licensed, and any funds received will be considered sponsorship.  
 
 ## Contacting the author
 
