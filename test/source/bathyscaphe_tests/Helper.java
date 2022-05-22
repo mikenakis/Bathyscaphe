@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package bathyscaphe_tests;
 
 import io.github.mikenakis.bathyscaphe.Bathyscaphe;
@@ -15,6 +22,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
+/**
+ * Various static helper methods.
+ *
+ * @author michael.gr
+ */
 final class Helper
 {
 	private Helper()

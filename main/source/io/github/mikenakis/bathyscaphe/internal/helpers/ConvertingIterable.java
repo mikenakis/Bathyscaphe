@@ -1,8 +1,23 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.helpers;
 
 import java.util.Iterator;
 import java.util.function.Function;
 
+/**
+ * A decorator of {@link Iterable} which uses a converter to convert elements from one type to another.
+ *
+ * @param <T>
+ * @param <F>
+ *
+ * @author michael.gr
+ */
 public class ConvertingIterable<T, F> implements Iterable<T>
 {
 	public final Iterable<F> sourceIterable;

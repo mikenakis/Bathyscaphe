@@ -1,9 +1,15 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package bathyscaphe_tests;
 
 import io.github.mikenakis.bathyscaphe.Bathyscaphe;
 import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
-import io.github.mikenakis.debug.Debug;
 import org.junit.Test;
 
 import javax.swing.KeyStroke;
@@ -54,6 +60,8 @@ import java.util.regex.Pattern;
 
 /**
  * Test.
+ *
+ * @author michael.gr
  */
 public class T20_FamousObjects
 {

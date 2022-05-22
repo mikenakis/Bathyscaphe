@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory;
 
 import io.github.mikenakis.bathyscaphe.internal.type.Decomposer;
@@ -13,6 +20,8 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
  * <p>
  * If the mode is {@link TypeAssessment.Mode#Preassessed} then this assessment overrules an assessment that would normally come out as mutable, and promises
  * that this class will behave as immutable, with the caveat that it is iterable.
+ *
+ * @author michael.gr
  */
 public final class CompositeProvisoryTypeAssessment<T, E> extends ProvisoryTypeAssessment
 {

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.type;
 
 import java.util.Map;
@@ -13,6 +20,8 @@ import java.util.Map;
  *
  * @param <T> The type of the composite object.
  * @param <E> The type of the constituent components of the composite object.
+ *
+ * @author michael.gr
  */
 public interface Decomposer<T, E>
 {

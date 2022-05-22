@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.mykit.annotations;
 
 import java.lang.annotation.ElementType;
@@ -16,6 +23,8 @@ import java.lang.annotation.Target;
  * so as to trigger exclusion without suggesting that the method is generated.
  * <p>
  * Original idea from here: <a href="https://stackoverflow.com/a/66918619/773113">Stackoverflow: annotation to exclude a method from jacoco report?</a>
+ *
+ * @author michael.gr
  */
 @Retention( RetentionPolicy.RUNTIME )
 @Target( { ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR } )

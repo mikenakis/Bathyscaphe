@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.type.field;
 
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
@@ -32,6 +39,8 @@ import java.lang.reflect.Modifier;
  * For now, fields can be of mutable, immutable, or provisory nature.
  * <p>
  * Provisory means that the field cannot be assessed as mutable or immutable by just looking at the field, so the value of the field will need to be assessed.
+ *
+ * @author michael.gr
  */
 public class FieldAssessor
 {

@@ -11,6 +11,11 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Utility class for generating nice looking trees.
+ *
+ * @author michael.gr
+ */
 public final class TextTree
 {
 	private TextTree() { }

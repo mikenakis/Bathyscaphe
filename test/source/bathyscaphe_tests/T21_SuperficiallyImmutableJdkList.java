@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package bathyscaphe_tests;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
@@ -13,6 +20,8 @@ import java.util.List;
 
 /**
  * Test.
+ *
+ * @author michael.gr
  */
 @SuppressWarnings( { "FieldMayBeFinal", "InstanceVariableMayNotBeInitialized" } )
 public class T21_SuperficiallyImmutableJdkList

@@ -1,9 +1,24 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.mykit.collections;
 
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
+/**
+ * Implements a {@link Set} using a {@link Map}.
+ *
+ * @param <T> the type of elements in the set.
+ *
+ * @author michael.gr
+ */
 public class SetOnMap<T> extends AbstractSet<T>
 {
 	private final Map<T,T> map;

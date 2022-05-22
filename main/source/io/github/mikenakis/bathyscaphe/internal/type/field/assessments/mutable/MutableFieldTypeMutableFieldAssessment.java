@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
@@ -8,6 +15,8 @@ import java.util.List;
 
 /**
  * Signifies that a field is mutable because even though it is invariable, it is of a mutable type.
+ *
+ * @author michael.gr
  */
 public final class MutableFieldTypeMutableFieldAssessment extends MutableFieldAssessment
 {

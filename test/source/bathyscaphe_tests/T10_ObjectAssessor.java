@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package bathyscaphe_tests;
 
 import io.github.mikenakis.bathyscaphe.Bathyscaphe;
@@ -35,6 +42,8 @@ import java.util.List;
  * Test.
  * <p>
  * NOTE: the {@code new Runnable().run()} business is a trick for creating multiple local namespaces within a single java source file.
+ *
+ * @author michael.gr
  */
 @SuppressWarnings( { "FieldMayBeFinal", "InstanceVariableMayNotBeInitialized" } )
 public class T10_ObjectAssessor

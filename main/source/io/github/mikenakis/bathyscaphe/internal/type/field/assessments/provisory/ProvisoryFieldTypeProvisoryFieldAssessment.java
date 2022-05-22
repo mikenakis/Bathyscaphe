@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
@@ -9,6 +16,8 @@ import java.util.List;
 
 /**
  * Signifies that a field is provisory because it is of a field type which is provisory.
+ *
+ * @author michael.gr
  */
 public final class ProvisoryFieldTypeProvisoryFieldAssessment extends NonImmutableFieldAssessment
 {

@@ -1,3 +1,8 @@
+To generate a word-wrapped version of this document:
+ - Open in Notepad++
+ - Adjust the width of the Notepad++ window so that the term "a.k.a." below wraps to the next line.
+ - Execute Edit -> Line Operations -> Split Lines (Ctrl+I)
+
 Bathyscaphe Alternative Terms Commercial License Agreement 1.0
 
 The Bathyscaphe Library ("Software") was developed by Michael Belivanakis, a.k.a. MikeNakis, michael.gr

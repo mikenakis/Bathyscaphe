@@ -7,33 +7,33 @@
 <p align="center">
 <img title="mikenakis:bathyscaphe logo" src="mikenakis-bathyscaphe-logo.svg" width="256"/><br/>
 The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
-by Mike Nakis, based on a drawing found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
+by Mike Nakis, based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 
 ## Description
 
 Bathyscaphe is a java library that can inspect objects at runtime and assert that they are immutable.
 
-For an explanation of what problem it solves, why it is even a problem, why it works where alternatives do not work, etc. see the post on my blog which introduces Bathyscaphe and explains what it is: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
+For an explanation of what problem it solves, why it is even a problem, why it works where alternatives fail, etc. see the post on my blog which introduces Bathyscaphe and explains what it is: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 Bathyscaphe consists of 4 modules:
 
 1. **bathyscaphe-claims** contains annotations that you can add to your classes to aid immutability assessment. For example, if you have a lazily initialized field, and you want to promise that it will behave as if it was `final` even though you cannot declare it as `final`, you can annotate that field as `@Invariable.` Thus, if your class meets all other requirements for immutability, it will be assessed as immutable despite containing a non-final field. Most client code is expected to make use of only this module of bathyscaphe. The jar file is microscopic, since it contains no code, only a few definitions.
-1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might contain one call to bathyscaphe, to ascertain that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
+1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might contain a call to bathyscaphe, to ascertain that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
 1. **bathyscaphe-print** provides a single method that generates a detailed human-readable diagnostic text explaining precisely why a particular assessment was issued. It is useful when an object which was intended to be immutable turns out to be mutable, and we would like to know exactly why this happened.
 1. **bathyscaphe-test** is, of course, the tests, which are extensive and achieve close to 100% coverage.
 
 ## How it works
 
-When assessing whether an object is immutable or not, Bathyscaphe begins by looking at the class of the object, just as a static analysis tool would do. However, for any given class Bathyscaphe can issue not just two, but three possible assessments:
+When assessing whether an object is immutable or not, Bathyscaphe begins by looking at the class of the object, just as a static analysis tool would do. However, for any given class Bathyscaphe can issue not just two, but _three_ possible assessments:
 
 1. Mutable
 1. Immutable
 1. Provisory
 
-The first two are straightforward: if a class can be conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done. However, if a class is assessed as provisory, this means that instances of that class _may and may not_ be immutable, we do not know by just looking at the class, so Bathyscaphe will need to examine each instance before it can issue a final assessment.
+The first two are straightforward: if a class can be conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done. However, if a class is assessed as provisory, this means that instances of that class _may and may not_ be immutable, we do not know by just looking at the class, so Bathyscaphe will need to further examine each instance of that class before it can issue a final assessment.
 
-For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will issue a provisory assessment for that class, the provision being that on instances of that class, the actual value of the field will need to be assessed and found to be immutable. 
+For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will issue a provisory assessment for that class, the provision being that on instances of that class, the actual value of that field will need to be assessed, and found to be immutable. 
 
 Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, they have no option but to err to the side of safety and assess the containing class as mutable. 
 
@@ -54,14 +54,14 @@ Note that I have placed as many classes as possible in an "internal" package; it
 
 ## Copyright, License, and legal stuff
 
-All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
+This is only a summary of the topic. As a summary, it may be incomplete and inaccurate, to the point of being false; so, for the real thing, please see the LICENSE.md file.
 
-This is only a summary of the options available for licensing Bathyscaphe. As a summary, it may be incomplete and inaccurate, to the point of being false; so, for the real thing, please see the LICENSE.md file.
+All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 Bathyscaphe involves three licenses:
 
-- The bathyscaphe-claims module is available under the Apache License, so that Bathyscaphe annotations can be freely used on any code with minimal licensing concerns.
-- The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which in a nutshell means that any software making use of Bathyscaphe must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software.
+- The bathyscaphe-claims module is available under the Apache License, so that Bathyscaphe annotations can be freely used on any code with minimal licensing concerns. See [Wikipedia: Apache License](https://en.wikipedia.org/wiki/Apache_License)
+- The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which in a nutshell means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) 
 - Developers who do not wish to be bound by the limitations of GNUAGPL can purchase from the author a Bathyscaphe Alternative Terms Commercial License (BATCL) for a small fee. Payment is done simply and quickly, via paypal. Please look at the end of LICENSE.md for instructions.
 
 ## How to use
@@ -88,31 +88,33 @@ The `addImmutablePreassessment()` method should be used only on classes that we 
 
 ### Annotating
 
-The `@Invariable` annotation can be used like this:
+The `@Invariable` annotation can be used as follows:
 
     @Invariable private int myLazilyInitializedHashCode;
 
-In this example, we have a non-final `int` field in an otherwise immutable object, which would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@Invariable` annotation we are promising that this particular field will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, then Bathyscaphe will assess the class as immutable.
+In this example, we have a non-final `int` field in an otherwise immutable class. The presence of this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@Invariable` annotation we are promising that this particular field will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, then Bathyscaphe will assess the class as immutable.
 
-Similarly, we may want to promise that an array field is immutable:
+Similarly, the `@InvariableArray` annotation can be used as follows:
 
     @InvariableArray private final byte[] mySha256Hash;
 
-Even though the field is final, the field is of array type, and arrays are by definition mutable in Java, so we need to promise that this array will behave in an immutable fashion.
+In this example, we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@InvariableArray` annotation we are promising that this particular array will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, then Bathyscaphe will assess the class as immutable.
 
 Note that `@Invariable` and `@InvariableArray` can be combined.
 
 Also note that it is illegal to use either of these annotations on non-private fields, because a class cannot give any promises about the immutability of fields that may be mutated by other classes.
 
-Also note that with these annotations we are only promising shallow immutability; Bathyscaphe will still perform all the checks necessary in order to guarantee deep immutability. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `int`, then Bathyscaphe would assess the immutability of `Foo` as part of assessing the immutability of the field.
+Also note that with these annotations we are only promising shallow immutability; Bathyscaphe will still perform all the checks necessary in order to guarantee deep immutability. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `int`, then Bathyscaphe would recursively assess the immutability of `Foo` as part of assessing the immutability of the field.
                                            
 ### Self-assessment
 
-Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are **_freezable_**, meaning that they begin their life as mutable, and at some moment they are **_frozen_**, thus becoming immutable from that moment on. In order to cover these cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not.
+Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are **_freezable_**, meaning that they begin their life as mutable, so that they can undergo complex initialization, and at some later moment they are instructed to **_freeze_** in-place, thus becoming immutable from that moment on. 
+
+In order to cover such cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not.
 
 ### Obtaining diagnostics
 
-Quite often it happens that even though we intended a certain object to be immutable, Bathyscaphe will discover that it is in fact mutable. In these cases, it would be nice to have an explanation as to exactly why this assessment was issued, so that we can find where the problem is, and fix it. For this reason, there is a separate module called `bathyscaphe-print` which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
+It may happen that even though we intended a certain object to be immutable, Bathyscaphe discovers that it is in fact mutable. In these cases, it would be nice to have an explanation as to exactly why this assessment was issued, so that we can find where the problem is, and fix it. For this reason, there is a separate module called `bathyscaphe-print` which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
 
 bathyscaphe-print can be used as follows:
 
@@ -176,7 +178,7 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Invariable Field_** - a field that cannot be mutated. Corresponds to the presence of the language keyword `final` in the field definition. Note that invariability here refers only to the field itself, and is entirely without regards to whether the object referenced by the field is immutable or not. Also see opposite: **_Variable Field_**.
 
 
-- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why a particular assessment was issued. Also see **_Assessment_**, **_Type Assessment_**.
+- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why an object was assessed as mutable. Also see **_Assessment_**, **_Type Assessment_**.
 
 
 - **_Shallow Immutability_** - see **_Superficial Immutability_**
@@ -185,7 +187,7 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely inconsequential. Also see opposite: **_Deep Immutability_**.
 
 
-- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and a hierarchy of so-called "provisory" assessments to represent all the different ways in which a type eludes assessment, necessitating the assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
+- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and another hierarchy of so-called "provisory" assessments to represent all the different ways in which a type eludes assessment, necessitating the further assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
 
 
 - **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
@@ -226,6 +228,6 @@ TODO: the @InvariableArray annotation might benefit from an integer parameter in
 
 <strike>TODO:</strike> add a quick check for records -- No, actually, this will not buy us anything, because a record may contain mutable members. Come to think of it, if records allow mutable members, then what is the point in records?
 
-<strike>TODO:</strike> use bytecode analysis to determine whether a class mutates a field or an array outside its constructor. This may alleviate the need for invariability annotations in some cases. -- No, actually, this will gain us very little, because fields that are only mutated within constructors are usually declared as final anyway; it is bad practice to not declare them as final. Fields that are not declared final are typically so because they are in fact mutated outside the constructor. (For example, the cached hashcode in `java.lang.String`.) The only thing that this would buy us is detection of invariable array fields without the need to annotate them with `@InvariableArray`, but this is a marginal benefit. (Who uses arrays anyway?)
+<strike>TODO:</strike> use bytecode analysis to determine whether a class mutates a field outside its constructor. This may alleviate the need for invariability annotations in some cases. -- No, actually, this will gain us very little, because fields that are only mutated within constructors are usually declared as final anyway; it is bad practice to not declare them as final. Fields that are not declared final are typically so because they are in fact mutated outside the constructor. (For example, the cached hashcode in `java.lang.String`.) The only thing that this would buy us is detection of invariable array fields without the need to annotate them with `@InvariableArray`, but this is a marginal benefit. (Who uses arrays anyway?)
 
-<strike>TODO:</strike> add @Pure method annotation for mutable classes and use bytecode analysis to make sure it is truthful. Then, assess interfaces as immutable if they consist of nothing but pure methods. -- No, actually, this will buy us nothing, because purity essentially is unmodifiability, not immutability. Furthermore, purity does not even imply thread-safety: a pure function may attempt to read memory that is concurrently written by another function, with disastrous consequences. What might buy us something is asserting a combination of purity and co-coherence, but I still need to think about that, and in any case, it should probably be the subject of some other module.
+<strike>TODO:</strike> add @Pure method annotation and use bytecode analysis to make sure it is truthful. Then, assess interfaces as immutable if they consist of nothing but pure methods. -- No, actually, this will buy us nothing, because purity essentially is unmodifiability, not immutability. Furthermore, purity does not even imply thread-safety: a pure function may attempt to read memory that is concurrently written by another function, with disastrous consequences. What might buy us something is asserting a combination of purity and co-coherence, but I still need to think about that, and in any case, it should probably be the subject of some other module.

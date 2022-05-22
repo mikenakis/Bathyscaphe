@@ -35,7 +35,6 @@ import java.lang.annotation.Target;
  * <p>
  * Also see jdk.internal.vm.annotation.Stable which gives a similar promise but for slightly different purposes. (Strangely enough, in {@link java.lang.String}
  * even though the character array is marked with jdk.internal.vm.annotation.Stable, the cached hashcode is not; I do not know why.)
- * <p>
  *
  * @author michael.gr
  */

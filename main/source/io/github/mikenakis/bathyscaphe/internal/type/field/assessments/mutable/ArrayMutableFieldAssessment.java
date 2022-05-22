@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+ *
+ * Licensed under a dual-license scheme; see LICENSE.md for details.
+ * You may not use this file except in compliance with one of the licenses.
+ */
+
 package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable;
 
 import io.github.mikenakis.bathyscaphe.internal.type.field.FieldAssessor;
@@ -12,6 +19,8 @@ import java.lang.reflect.Field;
  * Note: we could turn this into a provisory assessment because the array may still turn out to be immutable if it is of zero length, (if the array has no
  * elements, then there are no elements to vary,) but this would complicate things, and it would not help much, because it would not save us from having to
  * perform runtime checks, because we would still have to discover that the array has zero elements.
+ *
+ * @author michael.gr
  */
 public final class ArrayMutableFieldAssessment extends MutableFieldAssessment
 {

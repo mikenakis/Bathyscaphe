@@ -1,3 +1,10 @@
+<!--
+  ~ Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
+  ~
+  ~ Licensed under a dual-license scheme; see LICENSE.md for details.
+  ~ You may not use this file except in compliance with one of the licenses.
+  -->
+
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Bathyscaphe-tests" type="JUnit" factoryName="JUnit">
     <module name="bathyscaphe-test" />
