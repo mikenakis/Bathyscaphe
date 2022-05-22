@@ -37,36 +37,9 @@ For example, if a class looks immutable in all aspects except that it declares a
 
 Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, they have no option but to err to the side of safety and assess the containing class as mutable. 
 
-## Status of the project
-
-The "Technology Readiness Level" (TRL) so-to-speak of the project is "5: Technology validated in lab".
-
-The library works, it appears to be problem-free, and it produces very good results; furthermore, the library has extensive tests that achieve full coverage, and they all pass; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use. Bathyscaphe will need to receive some extensive beta testing in at least one commercial-scale environment before it can be considered as ready for general availability.
-
-In the meantime, Bathyscaphe is likely to undergo refactoring, but I do not yet intend to hinder the evolution of Bathyscaphe in the name of maintaining backwards compatibility; therefore, at this early stage, there is a conundrum associated with integrating Bathyscaphe into a project:
-
-- Either you pick a version and you stick to it, in which case you will not be receiving improvements as Bathyscaphe evolves,
-- Or you keep upgrading to the latest version of Bathyscaphe, but with every upgrade your code might not compile anymore, and may need modifications to make it compile again.
-
-So, if you decide to try Bathyscaphe in its current state, choose wisely, and use at your own risk.
-
-Note that I have placed as many classes as possible in an "internal" package; it goes without saying that you should never make explicit use of any classes in packages that contain the word "internal" in their name.
-
-## Copyright, License, and legal stuff
-
-This is only a summary of the topic. As a summary, it may be incomplete and inaccurate, to the point of being false; so, for the real thing, please see the LICENSE.md file.
-
-All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
-
-Bathyscaphe involves three licenses:
-
-- The bathyscaphe-claims module is available under the MIT License, so that Bathyscaphe annotations can be freely used with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License)
-- The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which in a nutshell means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) 
-- Developers who do not wish to be bound by the limitations of GNUAGPL can purchase from the author a Bathyscaphe Alternative Terms Commercial License (BATCL) for a small fee. Payment is done simply and quickly, via paypal. Please look at the end of LICENSE.md for instructions.
-
 ## How to use
     
-### Asserting immutability
+### Asserting the immutability of objects
 
 The main thing you are likely to do with Bathyscaphe is this:
 
@@ -76,7 +49,7 @@ If `myObject` is immutable, this will succeed; otherwise, an `ObjectMustBeImmuta
 
 Note that the exception thrown will **_not_** be `AssertionError`, because `objectMustBeImmutableAssertion()` never returns `false`; It either returns `true`, or it throws `ObjectMustBeImmutableException`. The benefit of using the `assert` keyword is that the method will not be invoked unless assertions are enabled, which is how Bathyscaphe can boast zero performance overhead on production.
 
-### Adding pre-assessments
+### Adding pre-assessments to your classes
 
 Another thing you are likely to do with Bathyscaphe is this:
 
@@ -86,7 +59,7 @@ In this example, we have a class which is _effectively immutable_, meaning that 
 
 The `addImmutablePreassessment()` method should be used only on classes that we cannot modify, such as classes found in third-party libraries. For classes that we can modify, we should use one or more of the annotations found in the `bathyscaphe-claims` module.
 
-### Annotating
+### Annotating your classes
 
 The `@Invariable` annotation can be used as follows:
 
@@ -110,11 +83,11 @@ Also note that with these annotations we are only promising shallow immutability
 
 Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are **_freezable_**, meaning that they begin their life as mutable, so that they can undergo complex initialization, and at some later moment they are instructed to **_freeze_** in-place, thus becoming immutable from that moment on. 
 
-In order to cover such cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not.
+In order to accommodate such cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not.
 
 ### Obtaining diagnostics
 
-It may happen that even though we intended a certain object to be immutable, Bathyscaphe discovers that it is in fact mutable. In these cases, it would be nice to have an explanation as to exactly why this assessment was issued, so that we can find where the problem is, and fix it. For this reason, there is a separate module called `bathyscaphe-print` which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
+It may happen that we intend a certain object to be immutable, but Bathyscaphe determines that it is in fact mutable. In these cases, it would be nice to have an explanation as to exactly why Bathyscaphe issued this assessment, so that we can find where the problem is, and fix it. For this reason, there is a separate module called `bathyscaphe-print` which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
 
 bathyscaphe-print can be used as follows:
 
@@ -144,11 +117,26 @@ The above code will emit the following text to the standard output:<br/>
 
 ### Other things worth noting
 
-If you decide to incorporate Bathyscaphe in a project, the first thing you are likely to do is what I did: introduce your own HashMap class which asserts that every key added to it is immutable. In doing so you might discover some bugs in your code, but you will also notice something strange: Bathyscaphe is preventing you from using reference types as keys, which kind of makes sense because they are in fact mutable, but you have never had any issues with that before, so why is it becoming a problem now?
+If you decide to incorporate Bathyscaphe in a project, the first thing you are likely to do is what I did: introduce your own HashMap class which asserts that every key added to it is immutable. In doing so you might discover some bugs in your code, but you will also notice something seemingly strange: Bathyscaphe is preventing you from using reference types as keys, which kind of makes sense because they are in fact mutable, but you have never had any issues with that before, so why is it becoming a problem now?
 
 What is happening is that your reference types do not override `hashCode()`, so they inherit the identity hash-code from `Object`, which remains constant throughout the lifetime of your object, despite the mutations that your object undergoes during its lifetime. So, it has been working, but it has only been working by accident. 
 
 Bathyscaphe is meant to be used precisely in order to avoid accidents, so you cannot keep doing this anymore. From now on, you will have to be using `IdentityHashMap` for reference types, and `HashMap` for value types. 
+
+## Status of the project
+
+The "Technology Readiness Level" (TRL) so-to-speak of the project is "5: Technology validated in lab".
+
+The library works, it appears to be problem-free, and it produces very good results; furthermore, the library has extensive tests that achieve full coverage, and they all pass; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use. Bathyscaphe will need to receive some extensive beta testing in at least one commercial-scale environment before it can be considered as ready for general availability.
+
+In the meantime, Bathyscaphe is likely to undergo refactoring, and I do not yet intend to hinder its evolution in the name of maintaining backwards compatibility; therefore, at this early stage, there is a conundrum associated with integrating Bathyscaphe into a project:
+
+- Either you pick a version and you stick to it, in which case you will not be receiving improvements as Bathyscaphe evolves,
+- Or you keep upgrading to the latest version of Bathyscaphe, but with every upgrade your code might not compile anymore, and may need modifications to make it compile again.
+
+So, if you decide to try Bathyscaphe in its current state, choose wisely, and use at your own risk.
+
+Note that I have placed as many classes as possible in an "internal" package; it goes without saying that you should never make explicit use of any classes in packages that contain the word "internal" in their name.
 
 ## Glossary
 
@@ -192,6 +180,32 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 
 - **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
 
+## Copyright, License, and legal stuff
+
+This is only a summary of the topic. As a summary, it may be incomplete and inaccurate, to the point of being false; so, for the real thing, please see the LICENSE.md file.
+
+All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
+
+Bathyscaphe involves three licenses:
+
+- The **_bathyscaphe-claims_** module is available under the **_MIT License_**, so that Bathyscaphe annotations can be freely used with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License) but most importantly read the LICENSE.md file.
+- **_All other modules_** that comprise Bathyscaphe are available under a dual-license scheme.
+  - By default, the license that applies is the **_GNU Affero General Public License_** (GNUAGPL), which is a _viral_, _strong copyleft_ license with an additional provision for _server-side software_. In a nutshell, this means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) but most importantly read the LICENSE.md file. 
+  - Developers who do not wish to be bound by the limitations of GNUAGPL because they do not want to publish their source code can purchase from the author a **_Bathyscaphe Alternative Terms Commercial License_** (BATCL) for a small fee. Payment is done simply and quickly, via PayPal. Please see the LICENSE.md file.
+
+### Instructions for purchasing a BATCL license
+
+- Send money via PayPal
+  - Recipient's e-mail address: paypal@michael.gr
+  - Amount: 128.00
+  - Currency: EUR
+  - Payment reference ("What's this payment for?"): please enter the following information:
+    - your e-mail address (otherwise we cannot contact you!)
+    - the name of the software you are purchasing a license for, i.e. "Bathyscaphe"
+    - the version number that you want to license, as it appears in the maven coordinates.
+  - Your shipping address: make sure your legal address is selected.
+- As soon as we receive the fee, you are licensed.
+
 ## Contacting the author
 
 The author's e-mail address can be found on the sidebar of his blog: https://blog.michael.gr.
@@ -202,6 +216,21 @@ When I write code as part of a team of developers, I use the teams' coding style
 But when I write code for myself, I use _**my very own™**_ coding style.
 
 More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04/on-coding-style.html)
+
+## Contributions
+
+### Merge Requests:
+- If you would like to contribute to Bathyscaphe by means of a Merge Request, please contact me first, because I will need to ask you to assign the copyright of your contribution to me, or to grant me a permissive license on your contribution. Things would otherwise become terribly complicated due to the dual-license scheme of Bathyscaphe. This means that I will ask you to agree to a **_Contributor License Agreement_** (CLA) which will probably be something like the [MongoDB Contributor Agreement](https://www.mongodb.com/legal/contributor-agreement), but I have yet to draft that document.
+
+### Legal:
+- Legal help would be greatly appreciated, since all this licensing business is terribly complicated to me.
+
+### Open-source advice:
+- If you are an experienced open-source contributor, your advice and mentorship would be greatly appreciated.
+
+### Sponsorship:
+- If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a .Net version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that's always appreciated.
+
 
 ## Poor man's issue and TODO tracking
 
