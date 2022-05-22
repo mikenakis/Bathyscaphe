@@ -18,9 +18,9 @@ For an explanation of what problem it solves, why it is even a problem, why it w
 
 Bathyscaphe consists of 4 modules:
 
-1. **bathyscaphe-claims** contains annotations that you can add to your classes to aid immutability assessment. For example, when a field is not declared as final, but you want to promise that it will behave as if it was final, you can annotate the field with `@Invariable.` Most client code is expected to make use of only this module of bathyscaphe. The jar file is microscopic, since it contains no code, only a few definitions.
-1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might invoke bathyscaphe to ascertain that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
-1. **bathyscaphe-print** provides a method that generates detailed human-readable text explaining precisely why a particular assessment was issued. Useful when an object which was intended to be immutable turns out to be mutable, and we would like to know exactly why this happened.
+1. **bathyscaphe-claims** contains annotations that you can add to your classes to aid immutability assessment. For example, if you have a lazily initialized field, and you want to promise that it will behave as if it was `final` even though you cannot declare it as `final`, you can annotate that field as `@Invariable.` Thus, if your class meets all other requirements for immutability, it will be assessed as immutable despite containing a non-final field. Most client code is expected to make use of only this module of bathyscaphe. The jar file is microscopic, since it contains no code, only a few definitions.
+1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might contain one call to bathyscaphe, to ascertain that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
+1. **bathyscaphe-print** provides a single method that generates a detailed human-readable diagnostic text explaining precisely why a particular assessment was issued. It is useful when an object which was intended to be immutable turns out to be mutable, and we would like to know exactly why this happened.
 1. **bathyscaphe-test** is, of course, the tests, which are extensive and achieve close to 100% coverage.
 
 ## How it works
@@ -33,19 +33,17 @@ When assessing whether an object is immutable or not, Bathyscaphe begins by look
 
 The first two are straightforward: if a class can be conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done. However, if a class is assessed as provisory, this means that instances of that class _may and may not_ be immutable, we do not know by just looking at the class, so Bathyscaphe will need to examine each instance before it can issue a final assessment.
 
-For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will assess that class as provisory, the provision being that on an instance of the class, that particular field will need to contain a value which is immutable.
+For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will issue a provisory assessment for that class, the provision being that on instances of that class, the actual value of the field will need to be assessed and found to be immutable. 
 
-Bathyscaphe then performs these additional examinations, and issues final assessments for objects as either mutable or immutable.
+Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, they have no option but to err to the side of safety and assess the containing class as mutable. 
 
 ## Status of the project
 
 The "Technology Readiness Level" (TRL) so-to-speak of the project is "5: Technology validated in lab".
 
-The library works, it appears to be problem-free, and it produces very good results; furthermore, the library has extensive tests that achieve full coverage, and they all pass; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use. 
+The library works, it appears to be problem-free, and it produces very good results; furthermore, the library has extensive tests that achieve full coverage, and they all pass; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use. Bathyscaphe will need to receive some extensive beta testing in at least one commercial-scale environment before it can be considered as ready for general availability.
 
-Bathyscaphe will need to receive some extensive beta testing in at least one commercial-scale environment before it can be considered as ready for general availability.
-
-In the meantime, Bathyscaphe is likely to undergo refactoring, and I do not yet intend to hinder the evolution of Bathyscaphe in the name of maintaining backwards compatibility; therefore, at this early stage, there is a conundrum associated with integrating Bathyscaphe into a project:
+In the meantime, Bathyscaphe is likely to undergo refactoring, but I do not yet intend to hinder the evolution of Bathyscaphe in the name of maintaining backwards compatibility; therefore, at this early stage, there is a conundrum associated with integrating Bathyscaphe into a project:
 
 - Either you pick a version and you stick to it, in which case you will not be receiving improvements as Bathyscaphe evolves,
 - Or you keep upgrading to the latest version of Bathyscaphe, but with every upgrade your code might not compile anymore, and may need modifications to make it compile again.
@@ -110,7 +108,7 @@ Also note that with these annotations we are only promising shallow immutability
                                            
 ### Self-assessment
 
-Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are 'freezable', meaning that they begin their life as mutable, and at some moment they are 'frozen', thus becoming immutable from that moment on. In order to cover these cases, Bathyscaphe defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not.
+Sometimes the question of whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. For example, sometimes we write classes that are **_freezable_**, meaning that they begin their life as mutable, and at some moment they are **_frozen_**, thus becoming immutable from that moment on. In order to cover these cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not.
 
 ### Obtaining diagnostics
 
@@ -154,7 +152,7 @@ Bathyscaphe is meant to be used precisely in order to avoid accidents, so you ca
 
 Note: some of the glossary terms (i.e. variable / invariable, extensible / inextensible) are introduced in order to mitigate the ambiguities caused by Java's unfortunate decision to reuse certain language keywords (i.e. `final`) to mean entirely different things in different situations. (i.e. a `final` class vs. a `final` field.)
 
-- **_Assessment_** - the result of examining an object or a class to determine whether it is immutable or not. Bathyscaphe contains a hierarchy of assessments, which is divided into a few distinct sub-hierarchies: one for type assessments, one for object assessments, one for field assessments, and one for field value assessments. These hierarchies all share a common ancestor for the sole purpose of being able to construct assessment trees, where the children of an assessment are the reasons due to which the assessment was issued. Also see **_Type assessment_**, **_Object assessment_**.
+- **_Assessment_** - the result of examining an object or a class to determine whether it is immutable or not. Bathyscaphe contains a hierarchy of assessments, which is divided into a few distinct sub-hierarchies: one for type assessments, one for object assessments, one for field assessments, and one for field value assessments. These hierarchies all share a common ancestor for the sole purpose of constructing assessment trees, where the children of an assessment are the reasons due to which the assessment was issued. Also see **_Type assessment_**, **_Object assessment_**.
 
 
 - **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
@@ -163,10 +161,10 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
 
 
-- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays, which are by definition mutable. The most famous example of such a class is `java.lang.String`.
+- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays. (Arrays in Java are mutable by nature.) The most famous example of such a class is `java.lang.String`. Note that this definition differs from the one given in "Java Concurrency In Practice" section 3.5.4 "Effectively Immutable Objects", which is not really about objects, but rather about the **_treatment_** of objects: the book talks about situations where very mutable objects (for example `java.util.Date`) are being passed around between threads, but the threads refrain from mutating them, so all is good. This sounds like catastrophe waiting to happen, and Bathyscaphe exists precisely in order to prevent programmers from doing things like that.    
 
 
-- **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` it the class definition. Also see opposite: **_Inextensible Class_**.
+- **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` in the class definition. Also see opposite: **_Inextensible Class_**.
 
 
 - **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
@@ -178,7 +176,7 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Invariable Field_** - a field that cannot be mutated. Corresponds to the presence of the language keyword `final` in the field definition. Note that invariability here refers only to the field itself, and is entirely without regards to whether the object referenced by the field is immutable or not. Also see opposite: **_Variable Field_**.
 
 
-- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. Bathyscaphe has one object assessment to express that an object is immutable, but an entire hierarchy of object assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why a particular assessment was issued. Also see **_Assessment_**, **_Type Assessment_**.
+- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why a particular assessment was issued. Also see **_Assessment_**, **_Type Assessment_**.
 
 
 - **_Shallow Immutability_** - see **_Superficial Immutability_**
@@ -187,7 +185,7 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 - **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely inconsequential. Also see opposite: **_Deep Immutability_**.
 
 
-- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. Bathyscaphe has a single assessment to represent class immutability, but an entire hierarchy of assessments to represent all the different ways in which a class may fall short of being immutable. The information contained in a type assessment provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used later by Bathyscaphe in order to assess the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
+- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and a hierarchy of so-called "provisory" assessments to represent all the different ways in which a type eludes assessment, necessitating the assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
 
 
 - **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
