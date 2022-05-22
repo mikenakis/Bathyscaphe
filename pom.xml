@@ -31,7 +31,9 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+
 	<inceptionYear>2022</inceptionYear>
+
 	<developers>
 		<developer>
 			<name>Mike Nakis</name>
@@ -44,6 +46,7 @@
 			</roles>
 		</developer>
 	</developers>
+
 	<organization>
 		<name>michael.gr</name>
 	</organization>

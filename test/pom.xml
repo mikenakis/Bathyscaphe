@@ -20,6 +20,15 @@
 
 	<name>mikenakis:bathyscaphe-test</name>
 	<description>Automated software tests for mikenakis:bathyscaphe.</description>
+	<url>https://github.com/mikenakis/Bathyscaphe</url>
+
+	<licenses>
+		<license>
+			<name>Dual license (See LICENSE.md)</name>
+			<url>https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<build>
 		<testSourceDirectory>source</testSourceDirectory>

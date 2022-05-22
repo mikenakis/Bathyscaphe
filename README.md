@@ -60,7 +60,7 @@ All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. Mi
 
 Bathyscaphe involves three licenses:
 
-- The bathyscaphe-claims module is available under the Apache License, so that Bathyscaphe annotations can be freely used on any code with minimal licensing concerns. See [Wikipedia: Apache License](https://en.wikipedia.org/wiki/Apache_License)
+- The bathyscaphe-claims module is available under the MIT License, so that Bathyscaphe annotations can be freely used with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License)
 - The rest of the modules that comprise Bathyscaphe are available by default under the GNU Affero General Public License (GNUAGPL), which in a nutshell means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) 
 - Developers who do not wish to be bound by the limitations of GNUAGPL can purchase from the author a Bathyscaphe Alternative Terms Commercial License (BATCL) for a small fee. Payment is done simply and quickly, via paypal. Please look at the end of LICENSE.md for instructions.
 

@@ -20,18 +20,25 @@
 
 	<name>mikenakis:bathyscaphe</name>
 	<description>Deep immutability assessment for java objects.</description>
+	<url>https://github.com/mikenakis/Bathyscaphe</url>
+
+	<licenses>
+		<license>
+			<name>Dual license (See LICENSE.md)</name>
+			<url>https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<build>
 		<sourceDirectory>source</sourceDirectory>
 	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>mikenakis</groupId>
 			<artifactId>bathyscaphe-claims</artifactId>
 			<version>1.4-SNAPSHOT</version>
 		</dependency>
-
 	</dependencies>
 </project>

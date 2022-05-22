@@ -20,18 +20,25 @@
 
 	<name>mikenakis:bathyscaphe-print</name>
 	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
+	<url>https://github.com/mikenakis/Bathyscaphe</url>
+
+	<licenses>
+		<license>
+			<name>Dual license (See LICENSE.md)</name>
+			<url>https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<build>
 		<sourceDirectory>source</sourceDirectory>
 	</build>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>mikenakis</groupId>
 			<artifactId>bathyscaphe</artifactId>
 			<version>1.4-SNAPSHOT</version>
 		</dependency>
-
 	</dependencies>
 </project>
