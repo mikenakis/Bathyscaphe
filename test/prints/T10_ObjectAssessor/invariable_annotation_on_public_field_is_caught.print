@@ -1,0 +1,2 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$15$ClassWithPublicFieldAnnotatedInvariable':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMustBePrivateException : field=public java.lang.Integer io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$15$ClassWithPublicFieldAnnotatedInvariable.publicFieldAnnotatedInvariable

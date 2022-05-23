@@ -22,11 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Deeply assesses the nature of types. DO NOT USE; FOR INTERNAL USE ONLY.
- * <p>
- * For now, types can be of mutable, immutable, or provisory nature.
- * <p>
- * Provisory means that the type cannot be assessed as mutable or immutable by just looking at the type, so instances of the type will need to be assessed.
+ * Deeply assesses the immutability of types. DO NOT USE; FOR INTERNAL USE ONLY.
  *
  * @author michael.gr
  */

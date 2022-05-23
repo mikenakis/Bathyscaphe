@@ -8,7 +8,7 @@
 package io.github.mikenakis.bathyscaphe.internal.type;
 
 import io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry;
-import io.github.mikenakis.bathyscaphe.internal.helpers.ConvertingIterable;
+import io.github.mikenakis.bathyscaphe.internal.mykit.collections.ConvertingIterable;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
@@ -126,15 +126,27 @@ final class DefaultPreassessments
 		{
 			/**
 			 * PEARL: the decomposer for the superficially-immutable jdk map cannot just return {@link Map#entrySet()} because the entry-set is a nested class,
-			 * so it has a 'this$0' field, which points back to the map, which is mutable, and therefore makes the entry-set mutable!
+			 * so it has a 'this$0' field, which points back to the map, which is mutable, thus making the entry-set mutable!
 			 * So, the decomposer has to iterate the entry-set and yield each element in it.
 			 * PEARL: the decomposer cannot just yield each element yielded by the entry-set, because these are instances of {@link java.util.KeyValueHolder}
 			 * which cannot be reflected because it is inaccessible! Therefore, the decomposer has to convert each element to a proximal key-value class which
 			 * is accessible.
 			 */
 			Iterable<Map.Entry<K,V>> entrySet = map.entrySet();
+			if( MyKit.areAssertionsEnabled() )
+				entrySet = MyKit.streamFromIterable( entrySet ).sorted( DefaultPreassessments::compareMapEntries ).toList();
 			return new ConvertingIterable<>( entrySet, DefaultPreassessments::mapEntryConverter );
 		}
+	}
+
+	@SuppressWarnings( { "unchecked", "rawtypes" } )
+	private static <K, V> int compareMapEntries( Map.Entry<K,V> entry1, Map.Entry<K,V> entry2 )
+	{
+		K key1 = entry1.getKey();
+		K key2 = entry2.getKey();
+		if( key1 instanceof Comparable && key2 instanceof Comparable )
+			return ((Comparable)key1).compareTo( key2 );
+		return 0;
 	}
 
 	private static final SuperficiallyImmutableJdkMapDecomposer<Object,Object> superficiallyImmutableJdkMapDeconstructorInstance = new SuperficiallyImmutableJdkMapDecomposer<>();

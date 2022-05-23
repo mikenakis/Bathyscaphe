@@ -1,0 +1,13 @@
+assessment for instance of 'java.util.ImmutableCollections.ListN':
+    ■ instance of 'java.util.ImmutableCollections.ListN' is mutable because index 2 contains mutable instance of 'java.util.ArrayList'. (MutableComponentMutableObjectAssessment)
+    ├─■ type 'java.util.ImmutableCollections.ListN' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
+    └─■ instance of 'java.util.ArrayList' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+      └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+        ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)
+        │ └─■ class 'java.util.AbstractList' is mutable because field 'modCount' is mutable. (MutableFieldMutableTypeAssessment)
+        │   └─■ field 'modCount' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+        ├─■ class 'java.util.ArrayList' is mutable because field 'elementData' is mutable. (MutableFieldMutableTypeAssessment)
+        │ └─■ field 'elementData' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+        └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
+          └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)

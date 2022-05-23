@@ -20,6 +20,7 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.NonEmptyArra
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.SelfAssessedMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.helpers.IterableOnArrayObject;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
+import io.github.mikenakis.bathyscaphe.internal.mykit.collections.IdentityLinkedHashSet;
 import io.github.mikenakis.bathyscaphe.internal.type.TypeAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
@@ -39,7 +40,7 @@ import java.lang.reflect.Array;
 import java.util.Set;
 
 /**
- * Deeply assesses the nature of objects. DO NOT USE; FOR INTERNAL USE ONLY.
+ * Deeply assesses the immutability of objects. DO NOT USE; FOR INTERNAL USE ONLY.
  *
  * @author michael.gr
  */
@@ -58,7 +59,13 @@ public final class ObjectAssessor
 		typeAssessor.addImmutablePreassessment( jvmClass );
 	}
 
-	public <T> ObjectAssessment assessRecursively( T object, Set<Object> visitedObjects )
+	public ObjectAssessment assess( Object object )
+	{
+		Set<Object> visitedValues = new IdentityLinkedHashSet<>();
+		return assessRecursively( object, visitedValues );
+	}
+
+	private <T> ObjectAssessment assessRecursively( T object, Set<Object> visitedObjects )
 	{
 		if( object == null )
 			return ImmutableObjectAssessment.instance;
@@ -155,7 +162,7 @@ public final class ObjectAssessor
 		Object fieldValue = MyKit.getFieldValue( object, provisoryFieldAssessment.field );
 		ObjectAssessment fieldValueAssessment = switch( provisoryFieldAssessment.fieldTypeAssessment )
 		{
-			case ArrayOfProvisoryElementTypeProvisoryTypeAssessment assessment -> assessInvariableArrayField( fieldValue, assessment, visitedValues );
+			case ArrayOfProvisoryElementTypeProvisoryTypeAssessment assessment -> assessInvariableArray( fieldValue, assessment, visitedValues );
 			default -> assessRecursively( fieldValue, visitedValues );
 		};
 		if( fieldValueAssessment instanceof MutableObjectAssessment mutableFieldValueAssessment )
@@ -164,7 +171,7 @@ public final class ObjectAssessor
 		return ImmutableObjectAssessment.instance;
 	}
 
-	private ObjectAssessment assessInvariableArrayField( Object array, ProvisoryTypeAssessment arrayTypeAssessment, Set<Object> visitedValues )
+	private ObjectAssessment assessInvariableArray( Object array, ProvisoryTypeAssessment arrayTypeAssessment, Set<Object> visitedValues )
 	{
 		int index = 0;
 		for( Object element : new IterableOnArrayObject( array ) )

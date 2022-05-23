@@ -11,9 +11,6 @@ import io.github.mikenakis.bathyscaphe.internal.ObjectAssessor;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.mykit.collections.IdentityLinkedHashSet;
-
-import java.util.Set;
 
 /**
  * Deep immutability assessment for Java objects.
@@ -31,8 +28,7 @@ public final class Bathyscaphe
 	 */
 	public static boolean objectMustBeImmutableAssertion( Object object )
 	{
-		Set<Object> visitedValues = new IdentityLinkedHashSet<>();
-		ObjectAssessment assessment = ObjectAssessor.instance.assessRecursively( object, visitedValues );
+		ObjectAssessment assessment = ObjectAssessor.instance.assess( object );
 		if( assessment instanceof MutableObjectAssessment mutableObjectAssessment )
 			throw new ObjectMustBeImmutableException( mutableObjectAssessment );
 		assert assessment instanceof ImmutableObjectAssessment;

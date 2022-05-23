@@ -12,10 +12,9 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessm
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
-import org.junit.After;
 import org.junit.Test;
 
-import java.io.PrintStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,35 +26,14 @@ import java.util.List;
 @SuppressWarnings( { "FieldMayBeFinal", "InstanceVariableMayNotBeInitialized" } )
 public class T21_SuperficiallyImmutableJdkList
 {
-	private static final Class<?> thisClass = T21_SuperficiallyImmutableJdkList.class;
-
-	static
-	{
-		Helper.createEmptyPrint( thisClass );
-	}
-
-	private final PrintStream printStream = Helper.getPrintStream( thisClass );
-
 	public T21_SuperficiallyImmutableJdkList()
 	{
 		if( !MyKit.areAssertionsEnabled() )
 			throw new AssertionError();
 	}
 
-	@After
-	public void close()
-	{
-		printStream.close();
-	}
-
-	private ObjectAssessment assess( Object object )
-	{
-		return Helper.assess( object, printStream );
-	}
-
 	/**
-	 * This checks to make sure that the JDK is using the same jdk-internal superficially-immutable list class for any number of elements above 3,
-	 * so that we know for sure that we do not need to test for more than 3 elements.
+	 * Make sure that the JDK is using the same jdk-internal superficially-immutable list class for any number of elements above 3.
 	 */
 	@Test public void superficially_immutable_jdk_list_class_for_3_elements_is_same_as_for_N_elements()
 	{
@@ -64,53 +42,60 @@ public class T21_SuperficiallyImmutableJdkList
 
 	@Test public void superficially_immutable_jdk_list_of_size_0_is_actually_immutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		List<?> object = List.of();
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		assert assessment instanceof ImmutableObjectAssessment;
 	}
 
 	@Test public void superficially_immutable_jdk_list_of_size_1_with_immutable_elements_is_actually_immutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		List<?> object = List.of( 1 );
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		assert assessment instanceof ImmutableObjectAssessment;
 	}
 
 	@Test public void superficially_immutable_jdk_list_of_size_2_with_immutable_elements_is_actually_immutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		List<?> object = List.of( 1, 2 );
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		assert assessment instanceof ImmutableObjectAssessment;
 	}
 
 	@Test public void superficially_immutable_jdk_list_of_size_3_with_immutable_elements_is_actually_immutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		List<?> object = List.of( 1, 2, 3 );
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		assert assessment instanceof ImmutableObjectAssessment;
 	}
 
 	@Test public void superficially_immutable_jdk_list_of_size_1_with_a_mutable_element_is_actually_mutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		Object mutableElement = new StringBuilder();
 		List<?> object = List.of( mutableElement );
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		checkMutableAssessmentOfSuperficiallyImmutableJdkList( mutableElement, object, assessment, 1 );
 	}
 
 	@Test public void superficially_immutable_jdk_list_of_size_2_with_a_mutable_element_is_actually_mutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		Object mutableElement = new ArrayList<>();
 		List<?> object = List.of( 1, mutableElement );
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		checkMutableAssessmentOfSuperficiallyImmutableJdkList( mutableElement, object, assessment, 2 );
 	}
 
 	@Test public void superficially_immutable_jdk_list_of_size_3_with_a_mutable_element_is_actually_mutable()
 	{
+		Method method = Helper.getCurrentMethod();
 		Object mutableElement = new ArrayList<>();
 		List<?> object = List.of( 1, 2, mutableElement );
-		ObjectAssessment assessment = assess( object );
+		ObjectAssessment assessment = Helper.assess( method, object );
 		checkMutableAssessmentOfSuperficiallyImmutableJdkList( mutableElement, object, assessment, 3 );
 	}
 

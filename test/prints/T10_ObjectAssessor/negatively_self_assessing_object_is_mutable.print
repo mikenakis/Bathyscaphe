@@ -1,0 +1,3 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$9$ProvisorySelfAssessableClassWhichSelfAssessesNegatively':
+    ■ instance of 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$9$ProvisorySelfAssessableClassWhichSelfAssessesNegatively' is mutable because it assessed itself as mutable. (SelfAssessedMutableObjectAssessment)
+    └─■ type 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$9$ProvisorySelfAssessableClassWhichSelfAssessesNegatively' is provisory because instances of this type are self-assessable. (SelfAssessableProvisoryTypeAssessment)

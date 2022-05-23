@@ -5,13 +5,13 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package io.github.mikenakis.bathyscaphe.internal.helpers;
+package io.github.mikenakis.bathyscaphe.internal.mykit.collections;
 
 import java.util.Iterator;
 import java.util.function.Function;
 
 /**
- * A decorator of {@link Iterable} which uses a converter to convert elements from one type to another.
+ * A decorator of {@link Iterable} which uses a converter function to convert elements from one type to another.
  *
  * @param <T>
  * @param <F>
@@ -20,8 +20,8 @@ import java.util.function.Function;
  */
 public class ConvertingIterable<T, F> implements Iterable<T>
 {
-	public final Iterable<F> sourceIterable;
-	public final Function<F,T> converter;
+	private final Iterable<F> sourceIterable;
+	private final Function<F,T> converter;
 
 	public ConvertingIterable( Iterable<F> sourceIterable, Function<F,T> converter )
 	{

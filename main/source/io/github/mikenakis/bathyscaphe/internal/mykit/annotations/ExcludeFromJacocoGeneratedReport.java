@@ -15,14 +15,20 @@ import java.lang.annotation.Target;
 /**
  * This annotation can be used to exclude certain methods from coverage report.
  * <p>
- * The "Intellij IDEA" coverage runner does not support this annotation, but IntellijIdea also supports the "Jacoco" coverage runner, and this runner does
- * support this annotation.
+ * Unfortunately, the coverage runner built into IntellijIdea does not support this annotation.  Feature requests asking for this date since 2014, and I have
+ * even submitted one here: <a href="https://youtrack.jetbrains.com/issue/IDEA-292401">https://youtrack.jetbrains.com/issue/IDEA-292401</a>.
  * <p>
- * The cumbersome name of this annotation is due to the fact that Jacoco excludes methods from coverage if they have an annotation that contains the word
- * "generated" in its name, but we do not want to mark methods as "generated", because they are not.  So, the name "ExcludeFromJacocoGeneratedReport" was chosen
- * so as to trigger exclusion without suggesting that the method is generated.
+ * Luckily, IntellijIdea also comes with the Jacoco coverage runner, which does support such an annotation.
  * <p>
- * Original idea from here: <a href="https://stackoverflow.com/a/66918619/773113">Stackoverflow: annotation to exclude a method from jacoco report?</a>
+ * Unfortunately, the Jacoco coverage runner operates under the stupendously narrow-minded assumption that the methods that I should want excluded from coverage
+ * must be methods that have somehow been generated, and somehow been marked with an annotation that contains the word "Generated" in its name.  (This is an
+ * instance of an X-Y solution: there is a problem X, a completely arbitrary and unfounded assumption is made that X must always be due to Y, so a solution is
+ * provided for Y.)
+ * <p>
+ * So, someone here: <a href="https://stackoverflow.com/a/66918619/773113">Stackoverflow: annotation to exclude a method from jacoco report?</a> came up with
+ * the idea of creating an annotation called "ExcludeFromJacocoGeneratedReport" which contains the word "Generated" in its name, thus causing Jacoco to honor
+ * it, while at the same time conveying the intention of the programmer: "I want this method excluded from code coverage, and it is none of the stupid tool's
+ * business to know why I want it excluded".
  *
  * @author michael.gr
  */

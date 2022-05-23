@@ -7,20 +7,19 @@
 
 package io.github.mikenakis.bathyscaphe.test;
 
-import io.github.mikenakis.bathyscaphe.Bathyscaphe;
-import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
-import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.ObjectAssessor;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.print.AssessmentPrinter;
+import io.github.mikenakis.debug.Debug;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 /**
  * Various static helper methods.
@@ -33,18 +32,21 @@ final class Helper
 	{
 	}
 
-	static ObjectAssessment assess( Object object, PrintStream printStream )
+	static ObjectAssessment assess( Method method, Object object )
+	{
+		try( PrintStream printStream = getPrintStream( method ) )
+		{
+			return assess( object, printStream );
+		}
+	}
+
+	private static ObjectAssessment assess( Object object, PrintStream printStream )
 	{
 		printStream.print( "assessment for " + AssessmentPrinter.objectName( object ) + ":\n" );
 		ObjectAssessment assessment;
 		try
 		{
-			assert Bathyscaphe.objectMustBeImmutableAssertion( object );
-			assessment = ImmutableObjectAssessment.instance;
-		}
-		catch( ObjectMustBeImmutableException exception )
-		{
-			assessment = exception.mutableObjectAssessment;
+			assessment = Debug.boundary( () -> ObjectAssessor.instance.assess( object ) );
 		}
 		catch( Throwable throwable )
 		{
@@ -55,40 +57,50 @@ final class Helper
 		return assessment;
 	}
 
-	static void createEmptyPrint( Class<?> testClass )
+	private static PrintStream getPrintStream( Path path )
 	{
-		Path path = getPrintPath( testClass );
-		try
-		{
-			Files.writeString( path, "" );
-		}
-		catch( IOException e )
-		{
-			throw new RuntimeException( e );
-		}
-	}
-
-	private static Path getPrintPath( Class<?> testClass )
-	{
-		var workingDirectory = MyTestKit.getWorkingDirectory();
-		Path printsPath = workingDirectory.resolve( "prints" );
-		return printsPath.resolve( testClass.getSimpleName() + ".txt" );
-	}
-
-	static PrintStream getPrintStream( Class<?> testClass )
-	{
-		Path path = getPrintPath( testClass );
 		OutputStream outputStream;
 		try
 		{
-			outputStream = Files.newOutputStream( path, StandardOpenOption.APPEND );
+			outputStream = Files.newOutputStream( path );
 		}
 		catch( IOException e )
 		{
 			throw new RuntimeException( e );
 		}
-		outputStream = new BufferedOutputStream( outputStream, 1024 * 1024 );
+		outputStream = new BufferedOutputStream( outputStream, 8192 );
 		outputStream = new MultiplyingOutputStream( outputStream, new NonClosingOutputStream( System.out ) );
 		return new PrintStream( outputStream, true, StandardCharsets.UTF_8 );
+	}
+
+	private static PrintStream getPrintStream( Method method )
+	{
+		Path printsPath = MyTestKit.getWorkingDirectory().resolve( "prints" );
+		assert printsPath.toFile().isDirectory();
+		Path pathForTestClass = printsPath.resolve( method.getDeclaringClass().getSimpleName() );
+		//noinspection ResultOfMethodCallIgnored
+		pathForTestClass.toFile().mkdir();
+		Path pathForTestMethod = pathForTestClass.resolve( method.getName() + ".print" );
+		return getPrintStream( pathForTestMethod );
+	}
+
+	static Method getCurrentMethod()
+	{
+		return getCurrentMethod( 1 );
+	}
+
+	static Method getCurrentMethod( int numberOfFramesToSkip )
+	{
+		//also see MethodHandles.lookup().lookupClass().getEnclosingMethod()
+		StackWalker.StackFrame x = StackWalker.getInstance( StackWalker.Option.RETAIN_CLASS_REFERENCE ).walk( s -> s.skip( 1 + numberOfFramesToSkip ).findFirst() ).orElseThrow();
+		Class<?> jvmClass = x.getDeclaringClass();
+		try
+		{
+			return jvmClass.getDeclaredMethod( x.getMethodName(), x.getMethodType().parameterArray() );
+		}
+		catch( NoSuchMethodException e )
+		{
+			throw new RuntimeException( e );
+		}
 	}
 }

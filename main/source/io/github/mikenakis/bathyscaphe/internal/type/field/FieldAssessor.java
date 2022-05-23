@@ -35,14 +35,9 @@ import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 
 /**
- * Deeply assesses the nature of files. DO NOT USE; FOR INTERNAL USE ONLY.
- * <p>
- * For now, fields can be of mutable, immutable, or provisory nature.
- * <p>
- * Provisory means that the field cannot be assessed as mutable or immutable by just looking at the field, so the value of the field will need to be assessed.
+ * Deeply assesses the immutability of fields. DO NOT USE; FOR INTERNAL USE ONLY.
  *
  * @author michael.gr
  */

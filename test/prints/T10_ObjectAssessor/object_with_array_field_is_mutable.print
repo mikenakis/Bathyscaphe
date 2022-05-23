@@ -1,0 +1,4 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$10$ClassWithArrayField':
+    ■ instance of 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$10$ClassWithArrayField' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$10$ClassWithArrayField' is mutable because field 'array' is mutable. (MutableFieldMutableTypeAssessment)
+      └─■ field 'array' is mutable because is an array, and it has not been annotated with @InvariableArray. (ArrayMutableFieldAssessment)

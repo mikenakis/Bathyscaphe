@@ -8,6 +8,8 @@
 package io.github.mikenakis.bathyscaphe.internal.mykit;
 
 import java.lang.reflect.Field;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * Useful static utility methods.
@@ -141,5 +143,15 @@ public final class MyKit
 		StringBuilder stringBuilder = new StringBuilder();
 		append( stringBuilder, object );
 		return stringBuilder.toString();
+	}
+
+	/***
+	 * Obtains a {@link Stream} from an {@link Iterable}.
+	 * Because Java makes it awfully difficult, whereas it should have been so easy as to not even require a cast. (Ideally, Stream would extend
+	 * Iterable. I know, it can't. But ideally, it would.)
+	 */
+	public static <T> Stream<T> streamFromIterable( Iterable<T> iterable )
+	{
+		return StreamSupport.stream( iterable.spliterator(), false );
 	}
 }

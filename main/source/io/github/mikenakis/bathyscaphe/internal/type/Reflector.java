@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Deeply assesses the nature of types using reflection. DO NOT USE. FOR INTERNAL USE ONLY.
+ * Deeply assesses the immutability of types using reflection. DO NOT USE. FOR INTERNAL USE ONLY.
  *
  * @author michael.gr
  */
