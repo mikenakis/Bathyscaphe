@@ -39,7 +39,7 @@ Note that this yields consistently accurate assessments in cases where static an
 
 ## How to use
     
-### Asserting the immutability of objects
+### Asserting immutability
 
 The main thing you are likely to do with Bathyscaphe is this:
 
@@ -49,13 +49,13 @@ If `myObject` is immutable, this will succeed; otherwise, an `ObjectMustBeImmuta
 
 Note that the exception thrown will **_not_** be `AssertionError`, because `objectMustBeImmutableAssertion()` never returns `false`; It either returns `true`, or it throws `ObjectMustBeImmutableException`. The benefit of using the `assert` keyword is that the method will not be invoked unless assertions are enabled, which is how Bathyscaphe can boast zero performance overhead on production.
 
-### Adding pre-assessments to your classes
+### Adding pre-assessments
 
 Another thing you are likely to do with Bathyscaphe is this:
 
 	Bathyscaphe.addImmutablePreassessment( EffectivelyImmutableClass.class );
 
-In this example, we have a class which is _effectively immutable_, meaning that it behaves immutably, but strictly speaking it is mutable under the hood, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are by nature mutable.) One famous class that works exactly like that is `java.lang.String`. So, since we know that the class behaves immutably, we are instructing Bathyscaphe to treat the class as immutable, even though Bathyscaphe would have classified the class as mutable if it was to assess it. 
+In this example, we have a class which is _effectively immutable_, meaning that it behaves immutably, but strictly speaking it is mutable under the hood, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are by nature mutable.) One famous class that works exactly like that is `java.lang.String`. So, since we know that the class behaves immutably, we are instructing Bathyscaphe to consider the class as immutable, even though Bathyscaphe would have classified the class as mutable if it was to assess it.  This is called a "pre-assessment" or an "assessment override". 
 
 The `addImmutablePreassessment()` method should be used only on classes that we cannot modify, such as classes found in third-party libraries. For classes that we can modify, we should use one or more of the annotations found in the `bathyscaphe-claims` module.
 
@@ -87,7 +87,7 @@ In order to accommodate such cases, the bathyscaphe-claims module defines the `I
 
 ### Obtaining diagnostics
 
-It may happen that we intend a certain object to be immutable, but Bathyscaphe determines that it is in fact mutable. In these cases, it would be nice to have an explanation as to exactly why Bathyscaphe issued this assessment, so that we can find where the problem is, and fix it. For this reason, there is a separate module called `bathyscaphe-print` which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
+It may happen that we intended a certain object to be immutable, but Bathyscaphe determined that it is in fact mutable. In these cases, it would be nice to have an explanation as to exactly why Bathyscaphe issued that assessment, so that we can find where the problem is, and fix it. For this reason, there is a separate module called `bathyscaphe-print` which can create detailed human-readable diagnostics from an `ObjectMustBeImmutableException`.
 
 bathyscaphe-print can be used as follows:
 
@@ -206,7 +206,7 @@ Bathyscaphe involves three licenses:
   - Your shipping address: make sure your legal address is selected.
 - As soon as we receive the fee, we will send you an acknowledgement.
 - As soon as you receive the acknowledgement, you are licensed.
-- If you fail to properly fill in the Payment reference field, if the amount is incorrect, if the currency is incorrect, etc. you will not be licensed, and any funds received will be considered sponsorship.  
+- If you fail to properly fill in the Payment reference field, if the amount is incorrect, if the currency is incorrect, etc. you will not be licensed, and any funds received will be considered a donation.  
 
 ## Contacting the author
 
@@ -234,13 +234,15 @@ If you would like to contribute to Bathyscaphe, you are more than welcome to do 
 - ### Artwork
   - Are your inkscape skills better than mine? Can you improve my SVG drawing of Trieste or come up with an entirely different one which is better? Be my guest!
 - ### Configuration
-  - There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer, so help in that area would be appreciated. For example: 
+  - There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer<sup>*1</sup>,  so help in that area would be appreciated. For example: 
     - Improving the release process on GitHub
       - My `.github/workflows/release.yml` is in serious need of improvement. I have already posted on GitHub Community / GitHub Help (See https://github.community/t/maven-release-in-java-project/252138) explaining what the problem is and asking for help.
     - Publishing to Maven Central
       - I have already reserved `io.github.mikenakis` on Maven Central, and now I need to deploy there; however, they have a comprehensive set of requirements which includes things that I have never done before, i.e. signing code with GPG, producing jar files with source code and javadoc, etc. I am slowly learning how to do each step, but someone who has done it before could greatly help in this area.  
 - ### Sponsorship
   - If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a DotNet version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that always helps.
+
+<sup>*1</sup> and don't get me started on the so-called "devops" hoax!
 
 ## Poor man's issue and TODO tracking
                       
@@ -281,6 +283,9 @@ TODO: publish to maven central. (s01.oss.sonatype.org)
 
 TODO: Enable Sonatype Lift on github. 
  - See https://links.sonatype.com/products/lift/github-integration
+
+TODO: perhaps merge bathyscaphe and bathyscaphe-print
+ - The Bathyscaphe jar file will then exceed 100 kilobytes in size, which is undesirable, but the disadvantage of a larger jar file might be offset by the benefit of dealing with just one instead of two jar files.
 
 <strike>TODO:</strike> add a quick check for records -- No, actually, this will not buy us anything, because a record may contain mutable members. Come to think of it, if records allow mutable members, then what is the point in records?
 
