@@ -14,6 +14,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAs
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.CompositeProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ExtensibleProvisoryTypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -82,7 +83,8 @@ final class DefaultPreassessments
 	{
 		assert !(new TypeAssessor().assess( jvmClass ) instanceof CompositeProvisoryTypeAssessment);
 		Decomposer<T,E> decomposer = getIterableDecomposer();
-		CompositeProvisoryTypeAssessment<? extends Iterable<E>,E> assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, jvmClass, decomposer );
+		ProvisoryTypeAssessment objectAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
+		CompositeProvisoryTypeAssessment<? extends Iterable<E>,E> assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, jvmClass, objectAssessment, decomposer );
 		assessor.addDefaultPreassessment( jvmClass, assessment );
 	}
 
@@ -102,7 +104,8 @@ final class DefaultPreassessments
 
 	private static <T, E> void addDefaultCompositePreassessment( TypeAssessor assessor, Class<T> compositeType, Decomposer<T,E> decomposer )
 	{
-		CompositeProvisoryTypeAssessment<T,E> assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, compositeType, decomposer );
+		ProvisoryTypeAssessment objectAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
+		CompositeProvisoryTypeAssessment<T,E> assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, compositeType, objectAssessment, decomposer );
 		assessor.addDefaultPreassessment( compositeType, assessment );
 	}
 

@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package bathyscaphe_tests;
+package io.github.mikenakis.bathyscaphe.test;
 
 import io.github.mikenakis.debug.Debug;
 

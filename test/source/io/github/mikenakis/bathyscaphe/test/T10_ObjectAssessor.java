@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package bathyscaphe_tests;
+package io.github.mikenakis.bathyscaphe.test;
 
 import io.github.mikenakis.bathyscaphe.Bathyscaphe;
 import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
@@ -32,6 +32,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClass
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedTypeMustBeClassException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.SelfAssessableClassMustNotBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedInvariableArrayException;
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -61,6 +62,12 @@ public class T10_ObjectAssessor
 	{
 		if( !MyKit.areAssertionsEnabled() )
 			throw new AssertionError();
+	}
+
+	@After
+	public void close()
+	{
+		printStream.close();
 	}
 
 	private ObjectAssessment assess( Object object )

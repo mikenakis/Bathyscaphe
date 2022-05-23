@@ -1,3 +1,6 @@
+This license applies only to the bathyscaphe-claims module of Bathyscaphe.
+For other modules, please see the LICENSE.md document of Bathyscaphe.
+
 MIT License
 
 Copyright (c) 2022 Michael Belivanakis, a.k.a. MikeNakis, michael.gr

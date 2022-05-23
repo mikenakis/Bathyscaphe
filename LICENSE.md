@@ -13,8 +13,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 The bathyscaphe-claims module is published under the MIT License.
 
-  - A copy of the MIT license is included with bathyscaphe-claims (See LICENSE.txt)
-  - This copy can also be accessed here: https://github.com/mikenakis/Bathyscaphe/blob/master/claims/LICENSE.txt
+  - A copy of the MIT license is included with bathyscaphe-claims.
+    - See [LICENSE.txt](claims/LICENSE.txt)
+    - Or https://github.com/mikenakis/Bathyscaphe/blob/master/claims/LICENSE.txt
 
 ## Licensing of all other modules
 
@@ -22,13 +23,15 @@ All other modules of Bathyscaphe are published under a dual-license scheme. You 
 
 ####  - The GNU Affero General Public License (GNU AGPL) v.3
 
-  - A copy of the GNU AGPL v.3 license is included with Bathyscaphe (See LICENSE-GNU-AGPL-3.0.txt)
-  - This copy can also be accessed here: https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE-GNU-AGPL-3.0.txt  
+  - A copy of the GNU AGPL v.3 license is included with Bathyscaphe.
+    - See [LICENSE-GNU-AGPL-3.0.txt](LICENSE-GNU-AGPL-3.0.txt)
+    - Or https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE-GNU-AGPL-3.0.txt
 
 ####  - The Bathyscaphe Alternative Terms Commercial License (BATCL) v.1
 
-  - A copy of the BATCL v.1 license is included with Bathyscaphe (See LICENSE-BATCL-1.0.txt)
-  - This copy can also be accessed here: https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE-BATCL-1.0.txt
+  - A copy of the BATCL v.1 license is included with Bathyscaphe
+    - (See [LICENSE-BATCL-1.0.txt](LICENSE-BATCL-1.0.txt))
+    - Or https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE-BATCL-1.0.txt
 
 If you use the software without taking any action regarding licensing, then the license which applies by default is the GNU AGPL v.3 licence.
 

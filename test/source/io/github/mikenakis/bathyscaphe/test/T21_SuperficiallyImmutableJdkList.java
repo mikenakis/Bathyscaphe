@@ -5,13 +5,14 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package bathyscaphe_tests;
+package io.github.mikenakis.bathyscaphe.test;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.PrintStream;
@@ -39,6 +40,12 @@ public class T21_SuperficiallyImmutableJdkList
 	{
 		if( !MyKit.areAssertionsEnabled() )
 			throw new AssertionError();
+	}
+
+	@After
+	public void close()
+	{
+		printStream.close();
 	}
 
 	private ObjectAssessment assess( Object object )

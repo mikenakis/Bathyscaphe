@@ -6,7 +6,8 @@ assessment for instance of 'java.util.ImmutableCollections.MapN':
     ■ immutable. (ImmutableObjectAssessment)
 assessment for instance of 'java.util.ImmutableCollections.Map1':
     ■ instance of 'java.util.ImmutableCollections.Map1' is mutable because index 0 contains mutable instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.Map1' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ├─■ type 'java.util.ImmutableCollections.Map1' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is mutable because field 'key' contains mutable instance of 'java.util.ArrayList'. (MutableFieldValueMutableObjectAssessment)
       ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory due to multiple reasons. (MultiReasonProvisoryTypeAssessment)
       │ ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory because field 'key' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
@@ -25,8 +26,9 @@ assessment for instance of 'java.util.ImmutableCollections.Map1':
           └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
             └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 assessment for instance of 'java.util.ImmutableCollections.MapN':
-    ■ instance of 'java.util.ImmutableCollections.MapN' is mutable because index 0 contains mutable instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.MapN' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ■ instance of 'java.util.ImmutableCollections.MapN' is mutable because index 1 contains mutable instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry'. (MutableComponentMutableObjectAssessment)
+    ├─■ type 'java.util.ImmutableCollections.MapN' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is mutable because field 'key' contains mutable instance of 'java.util.ArrayList'. (MutableFieldValueMutableObjectAssessment)
       ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory due to multiple reasons. (MultiReasonProvisoryTypeAssessment)
       │ ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory because field 'key' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
@@ -46,7 +48,8 @@ assessment for instance of 'java.util.ImmutableCollections.MapN':
             └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 assessment for instance of 'java.util.ImmutableCollections.Map1':
     ■ instance of 'java.util.ImmutableCollections.Map1' is mutable because index 0 contains mutable instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.Map1' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ├─■ type 'java.util.ImmutableCollections.Map1' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is mutable because field 'value' contains mutable instance of 'java.util.ArrayList'. (MutableFieldValueMutableObjectAssessment)
       ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory due to multiple reasons. (MultiReasonProvisoryTypeAssessment)
       │ ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory because field 'key' is provisory. (ProvisoryFieldProvisoryTypeAssessment)
@@ -65,8 +68,9 @@ assessment for instance of 'java.util.ImmutableCollections.Map1':
           └─■ class 'java.util.ArrayList' is mutable because field 'size' is mutable. (MutableFieldMutableTypeAssessment)
             └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 assessment for instance of 'java.util.ImmutableCollections.MapN':
-    ■ instance of 'java.util.ImmutableCollections.MapN' is mutable because index 0 contains mutable instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.MapN' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ■ instance of 'java.util.ImmutableCollections.MapN' is mutable because index 1 contains mutable instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry'. (MutableComponentMutableObjectAssessment)
+    ├─■ type 'java.util.ImmutableCollections.MapN' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is mutable because field 'value' contains mutable instance of 'java.util.ArrayList'. (MutableFieldValueMutableObjectAssessment)
       ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory due to multiple reasons. (MultiReasonProvisoryTypeAssessment)
       │ ├─■ type 'io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry' is provisory because field 'key' is provisory. (ProvisoryFieldProvisoryTypeAssessment)

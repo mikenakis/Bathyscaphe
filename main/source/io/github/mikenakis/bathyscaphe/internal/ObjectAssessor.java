@@ -58,16 +58,16 @@ public final class ObjectAssessor
 		typeAssessor.addImmutablePreassessment( jvmClass );
 	}
 
-	public <T> ObjectAssessment assessRecursively( T object, Set<Object> visitedValues )
+	public <T> ObjectAssessment assessRecursively( T object, Set<Object> visitedObjects )
 	{
 		if( object == null )
 			return ImmutableObjectAssessment.instance;
-		if( visitedValues.contains( object ) )
+		if( visitedObjects.contains( object ) )
 			return ImmutableObjectAssessment.instance;
-		visitedValues.add( object );
-		Class<T> declaredClass = MyKit.getClass( object );
-		TypeAssessment typeAssessment = typeAssessor.assess( declaredClass );
-		return assessRecursively( object, typeAssessment, visitedValues );
+		visitedObjects.add( object );
+		Class<T> objectClass = MyKit.getClass( object );
+		TypeAssessment typeAssessment = typeAssessor.assess( objectClass );
+		return assessRecursively( object, typeAssessment, visitedObjects );
 	}
 
 	private <T> ObjectAssessment assessRecursively( T object, TypeAssessment typeAssessment, Set<Object> visitedValues )

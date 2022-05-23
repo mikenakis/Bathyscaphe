@@ -8,7 +8,8 @@ assessment for instance of 'java.util.ImmutableCollections.ListN':
     ■ immutable. (ImmutableObjectAssessment)
 assessment for instance of 'java.util.ImmutableCollections.List12':
     ■ instance of 'java.util.ImmutableCollections.List12' is mutable because index 0 contains mutable instance of 'java.lang.StringBuilder'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'java.lang.StringBuilder' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
       └─■ class 'java.lang.StringBuilder' is mutable because it extends mutable class 'java.lang.AbstractStringBuilder'. (MutableSuperclassMutableTypeAssessment)
         └─■ class 'java.lang.AbstractStringBuilder' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
@@ -20,7 +21,8 @@ assessment for instance of 'java.util.ImmutableCollections.List12':
             └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 assessment for instance of 'java.util.ImmutableCollections.List12':
     ■ instance of 'java.util.ImmutableCollections.List12' is mutable because index 1 contains mutable instance of 'java.util.ArrayList'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'java.util.ArrayList' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
       └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
         ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)
@@ -32,7 +34,8 @@ assessment for instance of 'java.util.ImmutableCollections.List12':
           └─■ field 'size' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 assessment for instance of 'java.util.ImmutableCollections.ListN':
     ■ instance of 'java.util.ImmutableCollections.ListN' is mutable because index 2 contains mutable instance of 'java.util.ArrayList'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.ListN' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+    ├─■ type 'java.util.ImmutableCollections.ListN' is provisory because it is preassessed by default as a composite of type 'java.lang.Object'. (CompositeProvisoryTypeAssessment)
+    │ └─■ type 'java.lang.Object' is provisory because it is an extensible class. (ExtensibleProvisoryTypeAssessment)
     └─■ instance of 'java.util.ArrayList' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
       └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
         ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)

@@ -11,7 +11,7 @@
 	<!-- IMPORTANT: SEE THE PARENT POM for project url, licensing information, developers, scm, etc. -->
 
 	<parent>
-		<groupId>mikenakis</groupId>
+		<groupId>io.github.mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
 		<version>1.4-SNAPSHOT</version>
 	</parent>
@@ -43,13 +43,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mikenakis</groupId>
+			<groupId>io.github.mikenakis</groupId>
 			<artifactId>bathyscaphe</artifactId>
 			<version>1.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
-			<groupId>mikenakis</groupId>
+			<groupId>io.github.mikenakis</groupId>
 			<artifactId>bathyscaphe-print</artifactId>
 			<version>1.4-SNAPSHOT</version>
 		</dependency>

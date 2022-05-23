@@ -155,7 +155,7 @@ public final class AssessmentPrinter
 		append( typeName( provisoryTypeAssessment.type ) + " is provisory" );
 		switch( provisoryTypeAssessment )
 		{
-			case CompositeProvisoryTypeAssessment<?,?> assessment -> append( " because it " + modeName( assessment.mode ) + " a composite class" );
+			case CompositeProvisoryTypeAssessment<?,?> assessment -> append( " because it " + modeName( assessment.mode ) + " a composite of " + typeName( assessment.componentTypeAssessment.type ) );
 			case ExtensibleProvisoryTypeAssessment assessment -> append( " because it " + modeName( assessment.mode ) + " an extensible class" );
 			case InterfaceProvisoryTypeAssessment ignore -> append( " because it is an interface" );
 			case MultiReasonProvisoryTypeAssessment ignore -> append( " due to multiple reasons" );

@@ -12,14 +12,14 @@ by Mike Nakis, based on art found at <a href="https://bertrandpiccard.com/3-gene
 
 ## Description
 
-Bathyscaphe is a java library that can inspect objects at runtime and assert that they are immutable.
+Bathyscaphe is a java library that you can use to inspect objects and assert that they are immutable.
 
-For an explanation of what problem it solves, why it is even a problem, why it works where alternatives fail, etc. see the post on my blog which introduces Bathyscaphe and explains what it is: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
+For an article explaining what problem it solves, why it is even a problem, why it works where alternatives fail, etc. see the post on my blog which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 Bathyscaphe consists of 4 modules:
 
 1. **bathyscaphe-claims** contains annotations that you can add to your classes to aid immutability assessment. For example, if you have a lazily initialized field, and you want to promise that it will behave as if it was `final` even though you cannot declare it as `final`, you can annotate that field as `@Invariable.` Thus, if your class meets all other requirements for immutability, it will be assessed as immutable despite containing a non-final field. Most client code is expected to make use of only this module of bathyscaphe. The jar file is microscopic, since it contains no code, only a few definitions.
-1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might contain a call to bathyscaphe, to ascertain that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
+1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only in a few places where immutability needs to be ascertained. For example, a custom `HashMap` class might contain a call to bathyscaphe, to assert that keys added to it are immutable. The jar file is very small, of the order of 100 kilobytes.
 1. **bathyscaphe-print** provides a single method that generates a detailed human-readable diagnostic text explaining precisely why a particular assessment was issued. It is useful when an object which was intended to be immutable turns out to be mutable, and we would like to know exactly why this happened.
 1. **bathyscaphe-test** is, of course, the tests, which are extensive and achieve close to 100% coverage.
 
@@ -31,9 +31,9 @@ When assessing whether an object is immutable or not, Bathyscaphe begins by look
 1. Immutable
 1. Provisory
 
-The first two are straightforward: if a class can be conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done. However, if a class is assessed as provisory, this means that instances of that class _may and may not_ be immutable, we do not know by just looking at the class, so Bathyscaphe will need to further examine each instance of that class before it can issue a final assessment.
+The first two are straightforward: if a class can be conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done. However, if a class is assessed as provisory, this means that instances of that class _may and may not_ be immutable, we do not know by just looking at the class, so Bathyscaphe will need to further examine each instance.
 
-For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will issue a provisory assessment for that class, the provision being that on instances of that class, the actual value of that field will need to be assessed, and found to be immutable. 
+For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will issue a provisory assessment for that class, the provision being that on instances of that class, the actual value of that field will need to be immutable. 
 
 Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, they have no option but to err to the side of safety and assess the containing class as mutable. 
 
@@ -47,7 +47,7 @@ The main thing you are likely to do with Bathyscaphe is this:
 
 If `myObject` is immutable, this will succeed; otherwise, an `ObjectMustBeImmutableException` will be thrown.
 
-Note that the exception thrown will **_not_** be `AssertionError`, because `objectMustBeImmutableAssertion()` never returns `false`; It either returns `true`, or it throws `ObjectMustBeImmutableException`. The benefit of using the `assert` keyword is that the method will not be invoked unless assertions are enabled, which is how Bathyscaphe can boast zero performance overhead on production.
+Note that the exception thrown will **_not_** be `AssertionError`, because `objectMustBeImmutableAssertion()` never returns `false`; It either returns `true`, or it throws `ObjectMustBeImmutableException`. The benefit of using the `assert` keyword in the above statement is that the method will not be invoked unless assertions are enabled, which is how Bathyscaphe can boast zero performance overhead on production.
 
 ### Adding pre-assessments
 
@@ -55,9 +55,9 @@ Another thing you are likely to do with Bathyscaphe is this:
 
 	Bathyscaphe.addImmutablePreassessment( EffectivelyImmutableClass.class );
 
-In this example, we have a class which is _effectively immutable_, meaning that it behaves immutably, but strictly speaking it is mutable under the hood, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are by nature mutable.) One famous class that works exactly like that is `java.lang.String`. So, since we know that the class behaves immutably, we are instructing Bathyscaphe to consider the class as immutable, even though Bathyscaphe would have classified the class as mutable if it was to assess it.  This is called a "pre-assessment" or an "assessment override". 
+In this example, we have a class which is _effectively immutable_, meaning that it behaves immutably, but strictly speaking it is mutable under the hood, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are mutable by nature.) One famous class that works exactly like that is `java.lang.String`. So, since we know that the class behaves immutably, we are instructing Bathyscaphe to consider the class as immutable, even though Bathyscaphe would have classified the class as mutable if it was to assess it. This is called a "pre-assessment" or an "assessment override". 
 
-The `addImmutablePreassessment()` method should be used only on classes that we cannot modify, such as classes found in third-party libraries. For classes that we can modify, we should use one or more of the annotations found in the `bathyscaphe-claims` module.
+The `addImmutablePreassessment()` method should be used only on classes whose source code we have no control over, such as classes found in third-party libraries. For classes that we can modify, we should use one or more of the annotations found in the `bathyscaphe-claims` module.
 
 ### Annotating your classes
 
@@ -71,11 +71,11 @@ Similarly, the `@InvariableArray` annotation can be used as follows:
 
     @InvariableArray private final byte[] mySha256Hash;
 
-In this example, we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@InvariableArray` annotation we are promising that this particular array will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, then Bathyscaphe will assess the class as immutable.
+In this example, we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@InvariableArray` annotation we are promising that this particular array will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, Bathyscaphe will assess it as immutable.
 
 Note that `@Invariable` and `@InvariableArray` can be combined.
 
-Also note that it is illegal to use either of these annotations on non-private fields, because a class cannot give any promises about the immutability of fields that may be mutated by other classes.
+Also note that it is illegal to use either of these annotations on non-private fields, because a class cannot give any promises about fields that may be mutated by other classes.
 
 Also note that with these annotations we are only promising shallow immutability; Bathyscaphe will still perform all the checks necessary in order to guarantee deep immutability. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `int`, then Bathyscaphe would recursively assess the immutability of `Foo` as part of assessing the immutability of the field.
                                            
@@ -182,16 +182,16 @@ Note: some of the glossary terms (i.e. variable / invariable, extensible / inext
 
 ## Copyright, License, and legal stuff
 
-This is only a summary of the topic. As a summary, it may be incomplete and inaccurate, to the point of being false; so, for the real thing, please see the LICENSE.md file.
+This is only a summary of the topic. As a summary, it may be incomplete and inaccurate, to the point of being false; so, for the real thing, please see the [LICENSE.md](LICENSE.md) file.
 
 All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 Bathyscaphe involves three licenses:
 
-- The **_bathyscaphe-claims_** module is available under the **_MIT License_**, which is a very permissive license, allowing Bathyscaphe annotations to be freely used in any kind of code with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License) but most importantly read the LICENSE.md file.
+- The **_bathyscaphe-claims_** module is available under the **_MIT License_**, which is a very permissive license, allowing Bathyscaphe annotations to be freely used in any kind of code with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License) but most importantly read the [LICENSE.md](LICENSE.md) file.
 - **_All other modules_** that comprise Bathyscaphe are available under a dual-license scheme.
-  - By default, the license that applies is the **_GNU Affero General Public License_** (GNUAGPL), which is a _viral_, _strong copyleft_ license with an additional provision for _server-side software_. In a nutshell, this means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) but most importantly read the LICENSE.md file. 
-  - Developers who do not wish to be bound by the GNUAGPL because they do not want to publish their source code can purchase from the author a **_Bathyscaphe Alternative Terms Commercial License_** (BATCL) for a small fee. Payment is done simply and quickly, via PayPal. Please see the LICENSE.md file.
+  - By default, the license that applies is the **_GNU Affero General Public License_** (GNUAGPL), which is a _viral_, _strong copyleft_ license with an additional provision for _server-side software_. In a nutshell, this means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** the software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) but most importantly read the [LICENSE.md](LICENSE.md) file. 
+  - Developers who do not wish to be bound by the GNUAGPL because they do not want to publish their source code can purchase from the author a **_Bathyscaphe Alternative Terms Commercial License_** (BATCL) for a small fee. Payment is done simply and quickly, via PayPal. Please see the [LICENSE.md](LICENSE.md) file.
 
 ### Instructions for purchasing a BATCL license
 
@@ -206,7 +206,7 @@ Bathyscaphe involves three licenses:
   - Your shipping address: make sure your legal address is selected.
 - As soon as we receive the fee, we will send you an acknowledgement.
 - As soon as you receive the acknowledgement, you are licensed.
-- If you fail to properly fill in the Payment reference field, if the amount is incorrect, if the currency is incorrect, etc. you will not be licensed, and any funds received will be considered a donation.  
+- If you fail to include your e-mail address, and if anything else goes wrong, such as incorrect product name or version number, incorrect amount, incorrect currency, etc. we will not be able to contact you, so you will not be licensed, and any funds received will be considered a donation.  
 
 ## Contacting the author
 
@@ -228,9 +228,9 @@ If you would like to contribute to Bathyscaphe, you are more than welcome to do 
 - ### Open Sourcing Advice
   - Starting an actual open-source project like Bathyscaphe is uncharted territory to me, so if you are an experienced open-source contributor, your advice and mentorship would be greatly appreciated.
 - ### Technical Advice
-  - If you have given the subject of immutability some thought, then chances are you can discuss Bathyscaphe with me at a technical level. Perhaps you have some suggestion to make, or point out a mistake in my approach. I would be more than happy to discuss over e-mails or via video. 
+  - If you have given the subject of immutability some thought, then chances are you can discuss Bathyscaphe with me at a technical level. Perhaps you have some suggestion to make, or point out a mistake in my approach. I would be more than happy to discuss via e-mail or video. 
 - ### Merge Requests
-  - Please contact me first, (before starting to work on it, not right before submitting it,) to discuss what you want to do, why you want to do it, whether it needs to be done, how to do it, etc.
+  - Please contact me first, (before starting to work on it, not right before submitting it,) to discuss what you want to do, why you want to do it, whether it needs to be done, how it should be done, etc.
 - ### Artwork
   - Are your inkscape skills better than mine? Can you improve my SVG drawing of Trieste or come up with an entirely different one which is better? Be my guest!
 - ### Configuration
@@ -258,6 +258,8 @@ TODO: possibly introduce an `@Immutable` annotation.
  - Be sure to include big disclaimers that the use of the `@Immutable` annotation bypasses Bathyscaphe, so it should only be used if the developer already has other means of statically ascertaining immutability.
 
 TODO: possibly rename 'claims' to 'promises'?
+
+TODO: possibly make the bathyscaphe-claims module completely separate from bathyscaphe so as to reduce confusion with respect to licensing?
 
 TODO: reduce the size of the assessment hierarchy 
  - Replace some leaf classes with parameters to their common base class.

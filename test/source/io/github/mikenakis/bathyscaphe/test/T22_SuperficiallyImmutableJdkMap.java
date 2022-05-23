@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package bathyscaphe_tests;
+package io.github.mikenakis.bathyscaphe.test;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
@@ -46,8 +46,7 @@ public class T22_SuperficiallyImmutableJdkMap
 	@After
 	public void close()
 	{
-		if( printStream != System.out )
-			printStream.close();
+		printStream.close();
 	}
 
 	private ObjectAssessment assess( Object object )

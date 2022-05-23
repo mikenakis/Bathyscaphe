@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package bathyscaphe_tests;
+package io.github.mikenakis.bathyscaphe.test;
 
 import io.github.mikenakis.bathyscaphe.Bathyscaphe;
 import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
@@ -88,6 +88,7 @@ final class Helper
 			throw new RuntimeException( e );
 		}
 		outputStream = new BufferedOutputStream( outputStream, 1024 * 1024 );
+		outputStream = new MultiplyingOutputStream( outputStream, new NonClosingOutputStream( System.out ) );
 		return new PrintStream( outputStream, true, StandardCharsets.UTF_8 );
 	}
 }
