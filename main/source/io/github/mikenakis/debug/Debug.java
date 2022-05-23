@@ -4,7 +4,6 @@
  * Licensed under a dual-license scheme; see LICENSE.md for details.
  * You may not use this file except in compliance with one of the licenses.
  */
-
 package io.github.mikenakis.debug;
 
 import java.util.function.Supplier;

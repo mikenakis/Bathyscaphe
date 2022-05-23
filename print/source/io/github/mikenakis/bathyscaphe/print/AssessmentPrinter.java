@@ -14,7 +14,7 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperclassMutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperObjectMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableArrayElementMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableFieldValueMutableObjectAssessment;
@@ -184,7 +184,7 @@ public final class AssessmentPrinter
 		append( objectName( mutableObjectAssessment.object() ) + " is mutable" );
 		switch( mutableObjectAssessment )
 		{
-			case MutableSuperclassMutableObjectAssessment ignore -> append( " because its superclass is mutable" );
+			case MutableSuperObjectMutableObjectAssessment ignore -> append( " because its superclass is mutable" );
 			case MutableArrayElementMutableObjectAssessment assessment -> append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
 			case MutableComponentMutableObjectAssessment<?,?> assessment -> append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
 			case MutableFieldValueMutableObjectAssessment assessment -> append( " because " + fieldName( assessment.provisoryFieldAssessment.field ) + " contains mutable " + objectName( assessment.fieldValueAssessment.object() ) );

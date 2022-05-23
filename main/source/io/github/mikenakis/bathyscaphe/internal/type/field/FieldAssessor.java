@@ -10,6 +10,7 @@ package io.github.mikenakis.bathyscaphe.internal.type.field;
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
+import io.github.mikenakis.bathyscaphe.internal.type.Decomposer;
 import io.github.mikenakis.bathyscaphe.internal.type.TypeAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
@@ -17,6 +18,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.UnderAssessment
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.ArrayOfMutableElementTypeMutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ArrayOfProvisoryElementTypeProvisoryTypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.CompositeProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMayNotAlreadyBeInvariableException;
@@ -33,6 +35,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 /**
  * Deeply assesses the nature of files. DO NOT USE; FOR INTERNAL USE ONLY.
@@ -79,8 +82,7 @@ public class FieldAssessor
 			return switch( arrayElementTypeAssessment )
 				{
 					case UnderAssessmentTypeAssessment ignore -> UnderAssessmentFieldAssessment.instance;
-					case ProvisoryTypeAssessment provisoryTypeAssessment ->
-						newProvisoryArrayFieldAssessment( field, MyKit.uncheckedClassCast( fieldType ), provisoryTypeAssessment );
+					case ProvisoryTypeAssessment provisoryTypeAssessment ->	newProvisoryArrayFieldAssessment( field, MyKit.uncheckedClassCast( fieldType ), provisoryTypeAssessment );
 					case ImmutableTypeAssessment ignore -> ImmutableFieldAssessment.instance;
 					case MutableTypeAssessment mutableTypeAssessment -> newMutableArrayFieldAssessment( field, fieldType, mutableTypeAssessment );
 					//DoNotCover
@@ -99,7 +101,7 @@ public class FieldAssessor
 			};
 	}
 
-//	private static final Decomposer<Object[],Object> arrayDecomposer = Arrays::asList;
+	//private static final Decomposer<Object[],Object> arrayDecomposer = Arrays::asList;
 
 	private static FieldAssessment newProvisoryArrayFieldAssessment( Field field, Class<Object[]> fieldType, ProvisoryTypeAssessment elementTypeAssessment )
 	{

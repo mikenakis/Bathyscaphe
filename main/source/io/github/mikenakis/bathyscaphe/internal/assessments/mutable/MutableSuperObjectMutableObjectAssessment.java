@@ -20,13 +20,13 @@ import java.util.List;
  *
  * @author michael.gr
  */
-public final class MutableSuperclassMutableObjectAssessment extends MutableObjectAssessment
+public final class MutableSuperObjectMutableObjectAssessment extends MutableObjectAssessment
 {
 	public final Object object;
 	public final ProvisoryTypeAssessment typeAssessment;
 	public final MutableObjectAssessment mutableSuperObjectAssessment;
 
-	public MutableSuperclassMutableObjectAssessment( Object object, ProvisoryTypeAssessment typeAssessment, MutableObjectAssessment mutableSuperObjectAssessment )
+	public MutableSuperObjectMutableObjectAssessment( Object object, ProvisoryTypeAssessment typeAssessment, MutableObjectAssessment mutableSuperObjectAssessment )
 	{
 		assert typeAssessment.type == object.getClass();
 		assert typeAssessment instanceof ProvisorySuperclassProvisoryTypeAssessment;

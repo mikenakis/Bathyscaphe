@@ -15,7 +15,7 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableArray
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableFieldValueMutableObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperclassMutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperObjectMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.NonEmptyArrayMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.SelfAssessedMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.helpers.IterableOnArrayObject;
@@ -83,7 +83,7 @@ public final class ObjectAssessor
 					assessSelfAssessable( selfAssessableAssessment, (ImmutabilitySelfAssessable)object );
 				case MultiReasonProvisoryTypeAssessment multiReasonAssessment -> assessMultiReason( object, multiReasonAssessment, visitedValues );
 				case ProvisorySuperclassProvisoryTypeAssessment provisorySuperclassAssessment ->
-					assessSuperclass( object, provisorySuperclassAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
+					assessSuperObject( object, provisorySuperclassAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
 				case ProvisoryFieldProvisoryTypeAssessment provisoryFieldAssessment ->
 					assessField( object, provisoryFieldAssessment, provisoryFieldAssessment.fieldAssessment, visitedValues );
 				case ArrayMutableTypeAssessment arrayAssessment -> assessArray( object, arrayAssessment );
@@ -129,7 +129,7 @@ public final class ObjectAssessor
 			ObjectAssessment objectAssessment = switch( provisoryReason )
 				{
 					case ProvisorySuperclassProvisoryTypeAssessment provisorySuperclassAssessment ->
-						assessSuperclass( object, multiReasonProvisoryTypeAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
+						assessSuperObject( object, multiReasonProvisoryTypeAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
 					case ProvisoryFieldProvisoryTypeAssessment provisoryFieldAssessment ->
 						assessField( object, multiReasonProvisoryTypeAssessment, provisoryFieldAssessment.fieldAssessment, visitedValues );
 					default -> throw new AssertionError( provisoryReason );
@@ -140,11 +140,11 @@ public final class ObjectAssessor
 		return ImmutableObjectAssessment.instance;
 	}
 
-	private ObjectAssessment assessSuperclass( Object object, ProvisoryTypeAssessment provisoryTypeAssessment, ProvisoryTypeAssessment superTypeAssessment, Set<Object> visitedValues )
+	private ObjectAssessment assessSuperObject( Object object, ProvisoryTypeAssessment provisoryTypeAssessment, ProvisoryTypeAssessment superTypeAssessment, Set<Object> visitedValues )
 	{
 		ObjectAssessment superObjectAssessment = assessRecursively( object, superTypeAssessment, visitedValues );
 		if( superObjectAssessment instanceof MutableObjectAssessment mutableSuperObjectAssessment )
-			return new MutableSuperclassMutableObjectAssessment( object, provisoryTypeAssessment, mutableSuperObjectAssessment );
+			return new MutableSuperObjectMutableObjectAssessment( object, provisoryTypeAssessment, mutableSuperObjectAssessment );
 		assert superObjectAssessment instanceof ImmutableObjectAssessment;
 		return superObjectAssessment;
 	}

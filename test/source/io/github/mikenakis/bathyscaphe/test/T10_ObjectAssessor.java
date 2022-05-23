@@ -16,7 +16,7 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessm
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableFieldValueMutableObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperclassMutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperObjectMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.SelfAssessedMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableFieldMutableTypeAssessment;
@@ -119,6 +119,33 @@ public class T10_ObjectAssessor
 		}.run();
 	}
 
+	@Test public void mutable_object_is_mutable()
+	{
+		var object = new StringBuilder();
+		ObjectAssessment assessment = assess( object );
+		var mutableObjectAssessment = (MutableObjectAssessment)assessment;
+		assert mutableObjectAssessment.object() == object;
+	}
+
+	@Test public void object_with_mutable_field_is_mutable()
+	{
+		new Runnable()
+		{
+			static class ObjectWithMutableField
+			{
+				@SuppressWarnings( "unused" ) final Object provisoryFieldWithMutableValue = new StringBuilder();
+			}
+
+			@Override public void run()
+			{
+				var object = new ObjectWithMutableField();
+				ObjectAssessment assessment = assess( object );
+				var mutableObjectAssessment = (MutableObjectAssessment)assessment;
+				assert mutableObjectAssessment.object() == object;
+			}
+		}.run();
+	}
+
 	@Test public void immutable_object_with_mutable_super_is_mutable()
 	{
 		new Runnable()
@@ -138,7 +165,7 @@ public class T10_ObjectAssessor
 				var mutableObjectAssessment = (MutableObjectAssessment)assessment;
 				assert mutableObjectAssessment.object() == object;
 				assert mutableObjectAssessment.typeAssessment() instanceof ProvisorySuperclassProvisoryTypeAssessment;
-				var mutableSuperclassMutableObjectAssessment = (MutableSuperclassMutableObjectAssessment)mutableObjectAssessment;
+				var mutableSuperclassMutableObjectAssessment = (MutableSuperObjectMutableObjectAssessment)mutableObjectAssessment;
 				assert mutableSuperclassMutableObjectAssessment.mutableSuperObjectAssessment.object() == object;
 				assert mutableSuperclassMutableObjectAssessment.mutableSuperObjectAssessment.typeAssessment() instanceof ProvisoryFieldProvisoryTypeAssessment;
 				var mutableFieldValueMutableObjectAssessment = (MutableFieldValueMutableObjectAssessment)mutableSuperclassMutableObjectAssessment.mutableSuperObjectAssessment;
