@@ -221,41 +221,66 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 
 ## Contributions
 
-### Merge Requests:
-- If you would like to contribute to Bathyscaphe by means of a Merge Request, please contact me first, because I will need to ask you to assign the copyright of your contribution to me, or to grant me a permissive license on your contribution. Things would otherwise become terribly complicated due to the dual-license scheme of Bathyscaphe. This means that I will ask you to agree to a **_Contributor License Agreement_** (CLA) which will probably be something like the [MongoDB Contributor Agreement](https://www.mongodb.com/legal/contributor-agreement), but I have yet to draft that document.
-
-### Legal:
-- Legal help would be greatly appreciated, since all this licensing business is terribly complicated to me.
-
-### Open-source advice:
-- If you are an experienced open-source contributor, your advice and mentorship would be greatly appreciated.
-
-### Sponsorship:
-- If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a .Net version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that's always appreciated.
-
+If you would like to contribute to Bathyscaphe, you are more than welcome to do so, but keep in mind that I will need to ask you to either assign the copyright of your contribution to me, or grant me a permissive license on your contribution. Things would otherwise become terribly complicated due to the dual-license scheme of Bathyscaphe. This means that I am going to have to ask you to agree to a **_Contributor License Agreement_** (CLA) which will probably be something like the [MongoDB Contributor Agreement](https://www.mongodb.com/legal/contributor-agreement), but I have yet to draft such a document.
+ 
+- ### Legal
+  - Legal help would be greatly appreciated, since all this licensing business is terribly complicated to me.
+- ### Open Sourcing Advice
+  - Starting an actual open-source project like Bathyscaphe is uncharted territory to me, so if you are an experienced open-source contributor, your advice and mentorship would be greatly appreciated.
+- ### Technical Advice
+  - If you have given the subject of immutability some thought, then chances are you can discuss Bathyscaphe with me at a technical level. Perhaps you have some suggestion to make, or point out a mistake in my approach. I would be more than happy to discuss over e-mails or via video. 
+- ### Merge Requests
+  - Please contact me first, (before starting to work on it, not right before submitting it,) to discuss what you want to do, why you want to do it, whether it needs to be done, how to do it, etc.
+- ### Artwork
+  - Are your inkscape skills better than mine? Can you improve my SVG drawing of Trieste or come up with an entirely different one which is better? Be my guest!
+- ### Configuration
+  - There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer, so help in that area would be appreciated. For example: 
+    - Improving the release process on GitHub
+      - My `.github/workflows/release.yml` is in serious need of improvement. I have already posted on GitHub Community / GitHub Help (See https://github.community/t/maven-release-in-java-project/252138) explaining what the problem is and asking for help.
+    - Publishing to Maven Central
+      - I have already reserved `io.github.mikenakis` on Maven Central, and now I need to deploy there; however, they have a comprehensive set of requirements which includes things that I have never done before, i.e. signing code with GPG, producing jar files with source code and javadoc, etc. I am slowly learning how to do each step, but someone who has done it before could greatly help in this area.  
+- ### Sponsorship
+  - If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a DotNet version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that always helps.
 
 ## Poor man's issue and TODO tracking
-
+                      
 TODO: add thread-safety assessment. A class is thread-safe if:
 
 - It has been annotated with @ThreadSafe.
 - It consists of fields that are either immutable, or invariable and in turn of a thread-safe class, or annotated as @ThreadSafe.
 
-TODO: possibly introduce an `@Immutable` annotation (looking for it by simple name, thus honoring it regardless of package,) and treat any class annotated as such as immutable without analyzing it. The idea behind this is that if the developer already has a static analysis tool, then that tool can make sure that classes marked as `@Immutable` are in fact immutable, so that Bathyscaphe does not have to repeat the checks. Be sure to include big disclaimers that the use of the `@Immutable` annotation bypasses Bathyscaphe, so it should only be used if the developer already has other means of statically ascertaining immutability.
+TODO: possibly introduce an `@Immutable` annotation.
+
+ - Look for it by simple name, thus honoring it regardless of package.
+ - Treat any class annotated as such as immutable without analyzing it. The idea behind this is that if the developer already has a static analysis tool, then that tool can make sure that classes marked as `@Immutable` are in fact immutable, so that Bathyscaphe does not have to repeat the checks. 
+ - Be sure to include big disclaimers that the use of the `@Immutable` annotation bypasses Bathyscaphe, so it should only be used if the developer already has other means of statically ascertaining immutability.
 
 TODO: possibly rename 'claims' to 'promises'?
 
-TODO: reduce the size of the assessment hierarchy by replacing some leaf classes with parameters to their common base class.
+TODO: reduce the size of the assessment hierarchy 
+ - Replace some leaf classes with parameters to their common base class.
 
 TODO: fix some TODOs in the code.
 
-TODO: Add sealed class analysis -- This may allow an otherwise provisory field to be assessed as immutable, if it is of extensible type when that extensible type belongs to a sealed group of which all member-classes have been determined to be immutable.
+TODO: Add sealed class analysis
 
-TODO: the actual types of generic arguments of fields can be discovered using reflection; therefore, it might be possible in some cases to conclusively assess a collection field as immutable if the field is invariable, the collection is unchangeable, and the element type of the collection is immutable.
+ - This may allow an otherwise provisory field to be assessed as immutable, if it is of extensible type when that extensible type belongs to a sealed group of which all member-classes have been determined to be immutable.
+
+TODO: Look into generic field arguments
+
+ - The actual types of generic arguments of fields can be discovered using reflection; therefore, it might be possible in some cases to conclusively assess a collection field as immutable if the field is invariable, the collection is unchangeable, and the element type of the collection is immutable.
 
 TODO: possible bug: how will assessment go if an object has provisory fields and is also iterable?
 
-TODO: the @InvariableArray annotation might benefit from an integer parameter indicating the number of dimensions for which invariability is promised, so that we can declare an invariable array of invariable arrays, etc.
+TODO: handle multi-dimensional invariable arrays.
+
+ - the @InvariableArray annotation might benefit from an integer parameter indicating the number of dimensions for which invariability is promised, so that we can declare an invariable array of invariable arrays, etc.
+
+TODO: publish to maven central. (s01.oss.sonatype.org)
+ - For deployment instructions, see https://central.sonatype.org/publish/publish-guide/#deployment
+
+TODO: Enable Sonatype Lift on github. 
+ - See https://links.sonatype.com/products/lift/github-integration
 
 <strike>TODO:</strike> add a quick check for records -- No, actually, this will not buy us anything, because a record may contain mutable members. Come to think of it, if records allow mutable members, then what is the point in records?
 
