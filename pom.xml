@@ -202,13 +202,15 @@
 	<repositories>
 		<repository>
 			<id>repsy-mikenakis-public</id>
+			<name>Repsy MikeNakis Public</name>
 			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
 		</repository>
 	</repositories>
 
 	<distributionManagement>
 		<repository>
-			<id>github-mikenakis-public</id>
+			<id>github</id>
+			<name>GitHub MikeNakis Public</name>
 			<url>https://maven.pkg.github.com/mikenakis/public</url>
 		</repository>
 		<snapshotRepository>
