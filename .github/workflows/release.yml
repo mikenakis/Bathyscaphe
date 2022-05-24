@@ -38,7 +38,10 @@ jobs:
           git config user.name "GitHub Actions"
 
       - name: Make-Release-Step
-        run: mvn --batch-mode release:prepare release:perform --settings .github/mvn-settings.xml | grep -v 'Download.* http'
+        run: |
+          # this magical incantation is supposed to make the script fail if mvn fails; otherwise, the script will not fail unless grep fails.
+          set -o pipefail
+          mvn --batch-mode release:prepare release:perform --settings .github/mvn-settings.xml | grep -v 'Download.* http'
         env:
           #          CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
           #          CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}
