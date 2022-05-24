@@ -139,14 +139,11 @@ final class DefaultPreassessments
 		}
 	}
 
-	@SuppressWarnings( { "unchecked", "rawtypes" } )
-	private static <K, V> int compareMapEntries( Map.Entry<K,V> entry1, Map.Entry<K,V> entry2 )
+	private static int compareMapEntries( Map.Entry<?,?> entry1, Map.Entry<?,?> entry2 )
 	{
-		K key1 = entry1.getKey();
-		K key2 = entry2.getKey();
-		if( key1 instanceof Comparable && key2 instanceof Comparable )
-			return ((Comparable)key1).compareTo( key2 );
-		return 0;
+		String a1 = entry1.getKey().toString();
+		String a2 = entry2.getKey().toString();
+		return a1.compareTo( a2 );
 	}
 
 	private static final SuperficiallyImmutableJdkMapDecomposer<Object,Object> superficiallyImmutableJdkMapDeconstructorInstance = new SuperficiallyImmutableJdkMapDecomposer<>();
