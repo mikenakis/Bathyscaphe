@@ -13,10 +13,10 @@
 	<parent>
 		<groupId>io.github.mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.5</version>
+		<version>1.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>bathyscaphe-claims</artifactId>
-	<version>1.5</version>
+	<version>1.6-SNAPSHOT</version>
 
 	<name>mikenakis:bathyscaphe-claims</name>
 	<description>Annotations and interfaces to use in your code for interoperability with mikenakis:bathyscaphe</description>
