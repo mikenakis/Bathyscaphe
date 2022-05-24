@@ -46,4 +46,5 @@ jobs:
 
 
       - name: Build-Step
-        run: mvn -B clean install --file pom.xml
+        run: mvn --batch-mode clean install | grep -v 'Download.* http'
+        # --file pom.xml
