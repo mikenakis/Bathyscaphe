@@ -210,8 +210,8 @@
 	<distributionManagement>
 		<repository>
 			<id>github</id>
-			<name>GitHub MikeNakis Public</name>
-			<url>https://maven.pkg.github.com/mikenakis/public</url>
+			<name>GitHub MikeNakis Bathyscaphe</name>
+			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>
 		</repository>
 		<snapshotRepository>
 			<id>repsy-mikenakis-public</id>
