@@ -13,10 +13,10 @@
 	<parent>
 		<groupId>io.github.mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.8-SNAPSHOT</version>
+		<version>1.8</version>
 	</parent>
 	<artifactId>bathyscaphe-print</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<version>1.8</version>
 
 	<name>mikenakis:bathyscaphe-print</name>
 	<description>Generation of diagnostic messages explaining why a certain assessment was given.</description>
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>io.github.mikenakis</groupId>
 			<artifactId>bathyscaphe</artifactId>
-			<version>1.8-SNAPSHOT</version>
+			<version>1.8</version>
 		</dependency>
 	</dependencies>
 </project>
