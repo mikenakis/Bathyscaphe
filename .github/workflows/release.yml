@@ -6,14 +6,6 @@ on:
         description: "The branch to checkout when making the release."
         required: true
         default: "master"
-#      releaseVersion:
-#        description: "Default version to use when preparing a release."
-#        required: true
-#        default: "X.Y.Z"
-#      developmentVersion:
-#        description: "Default version to use for new local working copy."
-#        required: true
-#        default: "X.Y.Z-SNAPSHOT"
 
 jobs:
   release:
@@ -46,8 +38,7 @@ jobs:
           git config user.name "GitHub Actions"
 
       - name: Make-Release-Step
-        run: mvn --batch-mode clean install release:prepare release:perform --settings .github/mvn-settings.xml | grep -v 'Download.* http'
-        # -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
+        run: mvn --batch-mode release:prepare release:perform --settings .github/mvn-settings.xml | grep -v 'Download.* http'
         env:
           #          CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
           #          CI_DEPLOY_PASSWORD: ${{ secrets.CI_DEPLOY_PASSWORD }}

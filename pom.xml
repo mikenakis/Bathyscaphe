@@ -97,11 +97,8 @@
 						<!-- magical incantations from https://github.com/gh-a-sample/github-actions-maven-release-sample -->
 						<scmCommentPrefix>[ci skip]</scmCommentPrefix>
 						<tagNameFormat>@{project.version}</tagNameFormat>
-						<!-- PEARL: When we do `mvn release:prepare release:perform` maven will run our tests twice, once for each goal, and it is surprisingly difficult to
-						            convince it to run the tests only once. Luckily, someone figured out that we can do the following:
-						                1. add `clean install` to have maven run the tests once.
-						                2. instruct the release plugin to not run any tests.
-						            See https://stackoverflow.com/a/66801361/773113 -->
+						<!-- do not run any tests when releasing. Normal build should have taken care of that. (Besides, due to randomness introduced by hashing, the tests
+						     may make slight modifications to the prints, so the release will fail due to local modifications.) -->
 						<arguments>-Dmaven.test.skip</arguments>
 					</configuration>
 				</plugin>
