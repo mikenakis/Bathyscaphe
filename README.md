@@ -234,15 +234,11 @@ If you would like to contribute to Bathyscaphe, you are more than welcome to do 
 - ### Artwork
   - Are your inkscape skills better than mine? Can you improve my SVG drawing of Trieste or come up with an entirely different one which is better? Be my guest!
 - ### Configuration
-  - There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer<sup>*1</sup>,  so help in that area would be appreciated. For example: 
-    - Improving the release process on GitHub
-      - My `.github/workflows/release.yml` is in serious need of improvement. I have already posted on GitHub Community / GitHub Help (See https://github.community/t/maven-release-in-java-project/252138) explaining what the problem is and asking for help.
+  - There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer, (and don't even get me started on the "devops" hoax!) so help in that area would be appreciated. For example: 
     - Publishing to Maven Central
-      - I have already reserved `io.github.mikenakis` on Maven Central, and now I need to deploy there; however, they have a comprehensive set of requirements which includes things that I have never done before, i.e. signing code with GPG, producing jar files with source code and javadoc, etc. I am slowly learning how to do each step, but someone who has done it before could greatly help in this area.  
+      - I have already reserved `io.github.mikenakis` on Maven Central, and now I need to deploy there; however, they have a comprehensive set of requirements which includes things that I have never done before, for example, signing code with GPG. I am slowly learning how to do each step, but someone who has done it before could greatly help in this area.  
 - ### Sponsorship
   - If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a DotNet version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that always helps.
-
-<sup>*1</sup> and don't get me started on the so-called "devops" hoax!
 
 ## Poor man's issue and TODO tracking
                       
