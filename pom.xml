@@ -97,6 +97,12 @@
 						<!-- magical incantations from https://github.com/gh-a-sample/github-actions-maven-release-sample -->
 						<scmCommentPrefix>[ci skip]</scmCommentPrefix>
 						<tagNameFormat>@{project.version}</tagNameFormat>
+						<!-- PEARL: When we do `mvn release:prepare release:perform` maven will run our tests twice, once for each goal, and it is surprisingly difficult to
+						            convince it to run the tests only once. Luckily, someone figured out that we can do the following:
+						                1. add `clean install` to have maven run the tests once.
+						                2. instruct the release plugin to not run any tests.
+						            See https://stackoverflow.com/a/66801361/773113 -->
+						<arguments>-Dmaven.test.skip</arguments>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -199,12 +205,12 @@
 		</plugins>
 	</build>
 
-<!--	<repositories>-->
-<!--		<repository>-->
-<!--			<id>repsy-mikenakis-public</id>-->
-<!--			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>-->
-<!--		</repository>-->
-<!--	</repositories>-->
+	<!--	<repositories>-->
+	<!--		<repository>-->
+	<!--			<id>repsy-mikenakis-public</id>-->
+	<!--			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>-->
+	<!--		</repository>-->
+	<!--	</repositories>-->
 
 	<distributionManagement>
 		<repository>

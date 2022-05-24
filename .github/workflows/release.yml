@@ -46,7 +46,7 @@ jobs:
           git config user.name "GitHub Actions"
 
       - name: Make-Release-Step
-        run: mvn --batch-mode release:prepare release:perform --settings .github/mvn-settings.xml | grep -v 'Download.* http'
+        run: mvn --batch-mode clean install release:prepare release:perform --settings .github/mvn-settings.xml | grep -v 'Download.* http'
         # -DreleaseVersion=${{ github.event.inputs.releaseVersion }} -DdevelopmentVersion=${{ github.event.inputs.developmentVersion }}
         env:
           #          CI_DEPLOY_USERNAME: ${{ secrets.CI_DEPLOY_USERNAME }}
