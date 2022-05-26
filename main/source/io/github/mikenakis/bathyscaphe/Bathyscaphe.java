@@ -11,6 +11,9 @@ import io.github.mikenakis.bathyscaphe.internal.ObjectAssessor;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.diagnostic.AssessmentPrinter;
+
+import java.util.List;
 
 /**
  * Deep immutability assessment for Java objects.
@@ -24,7 +27,8 @@ public final class Bathyscaphe
 	 *
 	 * @param object the object whose immutability is to be assessed.
 	 *
-	 * @return always true. (Will throw {@link ObjectMustBeImmutableException} if the object is found to be mutable.)
+	 * @return always true.
+	 * @throws  ObjectMustBeImmutableException if the object is mutable.
 	 */
 	public static boolean objectMustBeImmutableAssertion( Object object )
 	{
@@ -43,5 +47,15 @@ public final class Bathyscaphe
 	public static void addImmutablePreassessment( Class<?> jvmClass )
 	{
 		ObjectAssessor.instance.addImmutablePreassessment( jvmClass );
+	}
+
+	/**
+	 * Obtains a detailed human-readable diagnostic text explaining why an assessment was issued.
+	 *
+	 * @param objectMustBeImmutableException the {@link ObjectMustBeImmutableException} to explain.
+	 */
+	public static List<String> explain( ObjectMustBeImmutableException objectMustBeImmutableException )
+	{
+		return AssessmentPrinter.getText( objectMustBeImmutableException );
 	}
 }

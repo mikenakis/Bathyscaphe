@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package io.github.mikenakis.bathyscaphe.print;
+package io.github.mikenakis.bathyscaphe.internal.diagnostic;
 
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
@@ -50,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Generates human-readable text for assessments.
+ * Generates human-readable text for assessments. DO NOT USE; FOR INTERNAL USE ONLY.
  *
  * @author michael.gr
  */

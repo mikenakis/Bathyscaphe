@@ -9,7 +9,7 @@ package io.github.mikenakis.bathyscaphe.test;
 
 import io.github.mikenakis.bathyscaphe.internal.ObjectAssessor;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
-import io.github.mikenakis.bathyscaphe.print.AssessmentPrinter;
+import io.github.mikenakis.bathyscaphe.internal.diagnostic.AssessmentPrinter;
 import io.github.mikenakis.debug.Debug;
 
 import java.io.BufferedOutputStream;

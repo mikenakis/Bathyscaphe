@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with one of the licenses.
  */
 
-package io.github.mikenakis.bathyscaphe.print;
+package io.github.mikenakis.bathyscaphe.internal.diagnostic;
 
 import java.util.Iterator;
 import java.util.function.Consumer;

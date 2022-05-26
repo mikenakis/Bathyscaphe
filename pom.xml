@@ -16,7 +16,6 @@
 	<modules>
 		<module>claims</module>
 		<module>main</module>
-		<module>print</module>
 		<module>test</module>
 	</modules>
 
