@@ -16,18 +16,24 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 - [Status (Maturity) of the project](#maturity)
 - [How it works](#how-it-works)
 - [How to use](#usage)
-	- [Asserting immutability](#usage-asserting-immutability)
-	- [Adding pre-assessments](#usage-adding-pre-assessments)
-	- [Annotating your fields](#usage-annotating-your-fields)
-	- [Self-assessment](#usage-self-assessment       )
-	- [Obtaining diagnostics](#usage-obtaining-diagnostics )
+    - [Asserting immutability](#usage-asserting-immutability)
+      - [The objectMustBeImmutableAssertion() method](#usage-asserting-immutability-method)
+    - [Adding pre-assessments](#usage-adding-pre-assessments)
+      - [The addImmutablePreassessment() method](#usage-adding-pre-assessments-method) 
+    - [Annotating fields](#usage-annotating-fields)
+        - [The @Invariable annotation](#usage-annotating-fields-invariable)
+        - [The @InvariableArray annotation](#usage-annotating-fields-invariable-array)
+    - [Self-assessment](#usage-self-assessment)
+      - [The ImmutabilitySelfAssessable interface](#usage-self-assessment-interface)
+    - [Obtaining diagnostics](#usage-obtaining-diagnostics)
+      - [The explain() method](#usage-obtaining-diagnostics-method)
 - [Copyright](#copyright)
 - [License](#license)
-	- [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
-	- [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
-		- [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
-		- [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
-			- [Instructions for purchasing a commercial License](#license-bathyscaphe-commercial-purchasing)
+    - [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
+    - [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
+        - [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
+        - [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
+            - [Instructions for purchasing a commercial License](#license-bathyscaphe-commercial-purchasing)
 - [Contacting the author](#contact)
 - [Glossary](#glossary)
 - [Contributing](#contributing)
@@ -39,7 +45,7 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 
 Bathyscaphe is an open-source java library that you can use to inspect objects at runtime and assert that they are immutable.
 
-This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has it, and why other tools fail to solve it. If not, please start by reading the post on my blog which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
+This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has the problem, why it really needs fixing, and why other tools fail to fix it. If not, please start by reading the post on my blog which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 ## <a name="maturity">&ZeroWidthSpace;</a>Status (maturity) of the project
 
@@ -78,39 +84,47 @@ Note that this yields consistently accurate assessments in cases where static an
 
 ### <a name="usage-asserting-immutability">&ZeroWidthSpace;</a>Asserting immutability
 
-The main thing you are likely to do with Bathyscaphe is this:
+- #### <a name="usage-asserting-immutability-method">&ZeroWidthSpace;</a>The `objectMustBeImmutableAssertion()` method
 
-	assert Bathyscaphe.objectMustBeImmutableAssertion( myObject );  
+  The main thing you are likely to do with Bathyscaphe is this:
 
-If `myObject` is immutable, this will succeed; otherwise, an `ObjectMustBeImmutableException` will be thrown.
+      assert Bathyscaphe.objectMustBeImmutableAssertion( myObject );  
 
-Note that the assertion statement itself will never fail, because `objectMustBeImmutableAssertion()` never returns `false`; It either returns `true`, or it throws `ObjectMustBeImmutableException`. The benefit of using the `assert` keyword is that the method will not be invoked unless assertions are enabled, which is how Bathyscaphe can boast zero performance overhead on production.
+  If `myObject` is immutable, this will succeed; otherwise, an `ObjectMustBeImmutableException` will be thrown.
+
+  Note that the assertion statement itself will never fail, because `objectMustBeImmutableAssertion()` never returns `false`; It either returns `true`, or it throws `ObjectMustBeImmutableException`. The benefit of using the `assert` keyword is that the method will not be invoked unless assertions are enabled, which is how Bathyscaphe can boast zero performance overhead on production.
 
 ### <a name="usage-adding-pre-assessments">&ZeroWidthSpace;</a>Adding pre-assessments
 
-Another thing you are likely to do with Bathyscaphe is this:
+- #### <a name="usage-adding-pre-assessments-method">&ZeroWidthSpace;</a>The `addImmutablePreassessment()` method
 
-	Bathyscaphe.addImmutablePreassessment( EffectivelyImmutableClass.class );
+  Suppose that we have a class which is _effectively immutable_, meaning that it behaves immutably, but under the hood it is strictly speaking mutable, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are mutable by nature.) If Bathyscaphe was to assess the immutability of this class, it would find it to be mutable; however, we know that the class behaves immutably, so we want to instruct Bathyscaphe to skip assessment and consider it as immutable. This is accomplished by adding what is known as a This "pre-assessment" or an "assessment override", as follows:
 
-In this example, we have a class which is _effectively immutable_, meaning that it behaves immutably, but under the hood it is strictly speaking mutable, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are mutable by nature.) So, since we know that the class behaves immutably, we are instructing Bathyscaphe to consider the class as immutable, even though the class would have been classified as mutable if it was to be assessed by Bathyscaphe. This is called a "pre-assessment" or an "assessment override". One famous effectively immutable class is `java.lang.String`, containing an array of characters and a lazily initialized hash-code field. Bathyscaphe has a built-in pre-assessment for `java.lang.String` and a few other well-known effectively immutable classes of the JDK.
+      Bathyscaphe.addImmutablePreassessment( EffectivelyImmutableClass.class );
+
+  One famous effectively immutable class is `java.lang.String`, which contains both an array of characters and a lazily initialized hash-code field. Bathyscaphe has a built-in pre-assessment for `java.lang.String` and a few other well-known effectively immutable classes of the JDK.
 
 Pre-assessment should be used only on classes whose source code we have no control over, such as classes found in the JDK or in third-party libraries. For classes that we write and can thus modify, see next section.
 
-### <a name="usage-annotating-your-fields">&ZeroWidthSpace;</a>Annotating your fields
+### <a name="usage-annotating-fields">&ZeroWidthSpace;</a>Annotating fields
 
-If you write an effectively immutable class, you should use the annotations found in the `bathyscaphe-claims` module to annotate the effectively immutable fields, thus allowing Bathyscaphe to assess the immutability of the remaining fields and issue an assessment for your class as a whole.
+If you write an effectively immutable class, you should use the annotations found in the `bathyscaphe-claims` module to annotate each effectively immutable field of that class, thus allowing Bathyscaphe to assess the immutability of the remaining fields and issue an assessment for your class as a whole.
 
-The `@Invariable` annotation can be used as follows:
+- #### <a name="usage-annotating-fields-invariable">&ZeroWidthSpace;</a>The `@Invariable` annotation
 
-    @Invariable private int myLazilyInitializedHashCode;
+  Suppose that we have a non-final field in an otherwise immutable class. The presence of such a field would normally cause Bathyscaphe to assess the declaring class as mutable; however, we know that this particular field will behave as if it was immutable, so we would like to tell Bathyscaphe to refrain from assessing that field, and consider it as immutable. This is accomplished as follows:
 
-In this example, we have a non-final field in an otherwise immutable class. The presence of this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@Invariable` annotation we are promising that this particular field will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, then Bathyscaphe will assess the class as immutable.
+      @Invariable private int myLazilyInitializedHashCode;
 
-Similarly, the `@InvariableArray` annotation can be used as follows:
+  Thus, if the class meets all other requirements for immutability, Bathyscaphe will assess the class as immutable.
 
-    @InvariableArray private final byte[] mySha256Hash;
+- #### <a name="usage-annotating-fields-invariable-array">&ZeroWidthSpace;</a>The `@InvariableArray` annotation
 
-In this example, we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so the presence of this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, with the `@InvariableArray` annotation we are promising that this particular array will behave as if it was immutable. Therefore, if the class meets all other requirements for immutability, Bathyscaphe will assess it as immutable.
+  Suppose that we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so the presence of this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, we know that this particular field will behave as if it was immutable, so we would like to tell Bathyscaphe to refrain from assessing that field, and consider it as immutable. This is accomplished as follows: 
+
+      @InvariableArray private final byte[] mySha256Hash;
+
+  Thus, if the class meets all other requirements for immutability, Bathyscaphe will assess the class as immutable.
 
 Note that `@Invariable` and `@InvariableArray` can be combined.
 
@@ -119,45 +133,48 @@ Also note that it is illegal to use either of these annotations on non-private f
 Also note that with these annotations we are only promising shallow immutability; Bathyscaphe will still perform all the checks necessary in order to guarantee deep immutability. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `byte`, then Bathyscaphe would recursively assess the immutability of `Foo` as part of assessing the immutability of the field.
 
 ### <a name="usage-self-assessment">&ZeroWidthSpace;</a>Self-assessment
+                                             
+- #### <a name="usage-self-assessment-interface">&ZeroWidthSpace;</a>The `ImmutabilitySelfAssessable` interface
+ 
+  Sometimes, the question whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. (For an example, see **_freezable class_** in the glossary.) In order to accommodate such cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not. Here is an example:
 
-Sometimes, the question whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. (For an example, see **_freezable class_** in the glossary.) In order to accommodate such cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not. Here is an example:
-
-    public class MyFreezableClass implements ImmutabilitySelfAssessable
-    {
-        private int mutable; private boolean frozen;
-        public void mutate() { assert !frozen; mutable++; }
-        public void freeze() { frozen = true; }
-        @Override public boolean isImmutable() { return frozen; }
-    }
+      public class MyFreezableClass implements ImmutabilitySelfAssessable
+      {
+          private int mutable; private boolean frozen;
+          public void mutate() { assert !frozen; mutable++; }
+          public void freeze() { frozen = true; }
+          @Override public boolean isImmutable() { return frozen; }
+      }
 
 ### <a name="usage-obtaining-diagnostics">&ZeroWidthSpace;</a>Obtaining diagnostics
 
-Here is how you can obtain a detailed human-readable diagnostic message explaining exactly why a certain object of yours, which you intended to be immutable, was assessed by Bathyscaphe as mutable:
+- #### <a name="usage-obtaining-diagnostics-method">&ZeroWidthSpace;</a>The `explain()` method
 
-    Object myObject = List.of( new StringBuilder() );
-    try
-    {
-        assert Bathyscaphe.objectMustBeImmutableAssertion( myObject ); 
-    }
-    catch( ObjectMustBeImmutableException e ) 
-    {
-        Bathyscaphe.explain( e ).forEach( System.out::println );
-	}
+  Suppose that there is a certain object which we intended to be immutable, but Bathyscaphe finds it to be mutable. We would like to know exactly why Bathyscaphe issues this assessment, so that we can locate the problem and fix it. Here is how:
 
-The above code will emit the following text to the standard output:<br/>
-(Note: the exact text is subject to change.)
+      Object myObject = List.of( new StringBuilder() );
+      try
+      {
+          assert Bathyscaphe.objectMustBeImmutableAssertion( myObject ); 
+      }
+      catch( ObjectMustBeImmutableException e ) 
+      {
+          Bathyscaphe.explain( e ).forEach( System.out::println );
+      }
+               
+  The above code will emit to the standard output a detailed human-readable diagnostic message explaining exactly why the assessment was issued. The text will look something like this: (Note: the exact text is subject to change.)
 
-    ■ instance of 'java.util.ImmutableCollections.List12' is mutable because index 0 contains mutable instance of 'java.lang.StringBuilder'. (MutableComponentMutableObjectAssessment)
-    ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
-    └─■ instance of 'java.lang.StringBuilder' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
-      └─■ class 'java.lang.StringBuilder' is mutable because it extends mutable class 'java.lang.AbstractStringBuilder'. (MutableSuperclassMutableTypeAssessment)
-        └─■ class 'java.lang.AbstractStringBuilder' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
-          ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'value' is mutable. (MutableFieldMutableTypeAssessment)
-          │ └─■ field 'value' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
-          ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'coder' is mutable. (MutableFieldMutableTypeAssessment)
-          │ └─■ field 'coder' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
-          └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
-            └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+      ■ instance of 'java.util.ImmutableCollections.List12' is mutable because index 0 contains mutable instance of 'java.lang.StringBuilder'. (MutableComponentMutableObjectAssessment)
+      ├─■ type 'java.util.ImmutableCollections.List12' is provisory because it is preassessed by default as a composite class. (CompositeProvisoryTypeAssessment)
+      └─■ instance of 'java.lang.StringBuilder' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+        └─■ class 'java.lang.StringBuilder' is mutable because it extends mutable class 'java.lang.AbstractStringBuilder'. (MutableSuperclassMutableTypeAssessment)
+          └─■ class 'java.lang.AbstractStringBuilder' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'value' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'value' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'coder' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'coder' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
+              └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 
 ## <a name="copyright">&ZeroWidthSpace;</a>Copyright
 
@@ -280,40 +297,49 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
 
 - #### Why are the tests in a separate module?
-	- Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
-	- If you would like to work with Bathyscaphe and you think that this complicates things, ask me, I can explain how multiple modules in a single project is trivially accomplishable and represents no complication.
+    - Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
+    - If you would like to work with Bathyscaphe and you think that this complicates things, ask me, I can explain how multiple modules in a single project is trivially accomplishable and represents no complication.
 
 - #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
-	- Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it either returns `true`, or throws an exception.
+    - Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it either returns `true`, or throws an exception.
 
 - #### Why throw an exception instead of returning `false` ?
-	- Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it.
-	- The alternative would be to have the method somehow emit diagnostic text right before returning `false`, which then raises other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
+    - Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it.
+    - The alternative would be to have the method somehow emit diagnostic text right before returning `false`, which then raises other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would be a breaking change to code that makes use of Bathyscaphe.
+    - Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would be a breaking change to code that makes use of Bathyscaphe.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
-	- The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
+    - The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `mustBeImmutableAssertion()`?
-	- Because this is an _assertion method_, (see glossary,) whose name must match the name of the exception that it throws, and the exception name could not begin with `MustBe`, it has to begin with `ObjectMustBe`, so the method is named accordingly.
+    - Because this is an _assertion method_, (see glossary,) whose name must match the name of the exception that it throws, and the exception name could not begin with `MustBe`, it has to begin with `ObjectMustBe`, so the method is named accordingly.
 
 - #### Why is the exception called `ObjectMustBeImmutableException` instead of simply `ObjectIsMutableException`?
-	- Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
+    - Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
 
 - #### Can I use `objectMustBeImmutableAssertion()` without the `assert` keyword?
-	- Yes, you can. However, I think it would be stupid.
+    - Yes, you can, but I think that doing so would be stupid.
 
 - #### But I do not like assertions!
-	- Learn to love assertions.
+    - Learn to love assertions.
 
 - #### How fast is Bathyscaphe?
-    - Bathyscaphe is faster than lightning: **_BATHYSCAPHE INCURS ZERO PERFORMANCE OVERHEAD._**  
-      - That is because performance is only relevant on production environments, but bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to  actually do any work on production. 
-      - On development environments, the speed of Bathyscaphe will depend on what you are assessing:
-        - In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
-        - In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
+    - Bathyscaphe is faster than lightning: **_BATHYSCAPHE INCURS ZERO PERFORMANCE OVERHEAD._**
+        - That is because performance is only relevant on production environments, but bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
+        - On development environments, the speed of Bathyscaphe will depend on what you are assessing:
+            - In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
+            - In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
+
+- #### What are the dependencies of Bathyscaphe?
+    - The `bathyscaphe-test` module necessarily depends on JUnit.
+    - The `bathyscaphe` and `bathyscaphe-claims` modules do not have any dependencies outside the Java Runtime Environment.
+      - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. This means that when you include the Bathyscaphe JARs in a project, you are including those JARs and nothing else. 
+
+- #### How large are the Bathyscaphe JARs?
+    - The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
+    - The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
 
 ## Poor man's issue and TODO tracking
 
