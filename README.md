@@ -1,4 +1,11 @@
-[![CI-Workflow](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml) [![Release-Workflow](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+![](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg)
+![](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg)
+
+![](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)
+![](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)
+<!--- ![](https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github) --->
+<!--- ![](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?event=push&label=CI&logo=github) --->
+
 
 # Bathyscaphe
 
@@ -27,13 +34,14 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
       - [The ImmutabilitySelfAssessable interface](#usage-self-assessment-interface)
     - [Obtaining diagnostics](#usage-obtaining-diagnostics)
       - [The explain() method](#usage-obtaining-diagnostics-method)
+- [Installation](#installation)
 - [Copyright](#copyright)
 - [License](#license)
     - [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
     - [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
         - [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
         - [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
-            - [Instructions for purchasing a commercial License](#license-bathyscaphe-commercial-purchasing)
+            - [Instructions for purchasing the Commercial License](#license-bathyscaphe-commercial-purchasing)
 - [Contacting the author](#contact)
 - [Glossary](#glossary)
 - [Contributing](#contributing)
@@ -176,6 +184,13 @@ Also note that with these annotations we are only promising shallow immutability
             └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
               └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 
+## <a name="installation">&ZeroWidthSpace;</a>Installation
+
+- In the near future, Bathyscaphe artifacts will be released to maven central, so you will not have to specify an artifact repository; however, for the time being, Bathyscaphe artifacts are not being released to maven central, and the following is happening:
+  - Although the artifacts are being built on GitHub, and GitHub does store the artifacts, GitHub makes it difficult to use it as a maven artifact repository, or in any case I do not know how to do that.
+  - There appears to be a solution involving some jitpack.io, but I could not get it to work.
+  - So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project, so your project has access to the artifacts.
+
 ## <a name="copyright">&ZeroWidthSpace;</a>Copyright
 
 All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
@@ -198,7 +213,7 @@ All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. Mi
 
 	  The BATCL is a commercial license available for developers who want to use the `bathyscaphe` module and/or the `bathyscaphe-test` module without being bound by the GNUAGPL, because they do not want to have to publish their source code. Please see the [LICENSE.md](LICENSE.md) file. The BATCL can be purchased from the author for a small fee. Payment is done simply and quickly, via PayPal.
 
-		- #### <a name="license-bathyscaphe-commercial-purchasing">&ZeroWidthSpace;</a>Instructions for purchasing a Commercial License
+		- #### <a name="license-bathyscaphe-commercial-purchasing">&ZeroWidthSpace;</a>Instructions for purchasing the Commercial License
 			- Send money via PayPal
 				- Recipient's e-mail address: paypal@michael.gr
 				- Amount: 128.00
@@ -306,8 +321,8 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
     - The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
 
 - #### What is the performance overhead of using Bathyscaphe?
-    - Bathyscaphe is faster than lightning: the performance overhead of using Bathyscaphe is zero.
-        - That is because performance is only relevant on production environments, but bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
+    - Bathyscaphe is _faster than lightning_: the performance overhead of using Bathyscaphe is **_zero_**.
+        - That is because performance is only relevant on production environments; bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
         - On development environments, the speed of Bathyscaphe will depend on what you are assessing:
             - In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
             - In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
@@ -317,14 +332,14 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
     - If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure. with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
 
 - #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
-    - Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it either returns `true`, or throws an exception.
+    - Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it never returns `false`; it either returns `true`, or throws an exception.
 
-- #### Why throw an exception instead of returning `false` ?
-    - Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it.
-    - The alternative would be to have the method somehow emit diagnostic text right before returning `false`, which then raises other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
+- #### Why does `objectMustBeImmutableAssertion()` throw an exception instead of returning `false` ?
+    - Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it. An exception is something from which you can obtain diagnostics.
+    - The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-    - Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would be a breaking change to code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, when Bathyscaphe becomes a very mature project.
+    - Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, when Bathyscaphe becomes a very mature project.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
     - The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
@@ -335,11 +350,13 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 - #### Why is the exception called `ObjectMustBeImmutableException` instead of simply `ObjectIsMutableException`?
     - Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
 
+- #### Is it possible to use Bathyscaphe without assertions?
+    - Of course, it is possible. You know what else is possible? using bubble-sort instead of quick-sort. The question is not whether it is possible, the question is whether it is intelligent.
+
 ## Poor man's issue and TODO tracking
 
 TODO: promote Bathyscaphe
 
-- Add installation instructions (from github for now, from maven central later on)
 - Make more extensive use of GitHub Pages. See https://github.com/showcases/github-pages-examples
 - Add a "Who What Where When Why How"
 - Create a very short "what is bathyscaphe" video
@@ -396,13 +413,15 @@ TODO: handle multi-dimensional invariable arrays.
 
 - the @InvariableArray annotation might benefit from an integer parameter indicating the number of dimensions for which invariability is promised, so that we can declare an invariable array of invariable arrays, etc.
 
+TODO: Enable Sonatype Lift on GitHub.
+
+- See https://links.sonatype.com/products/lift/github-integration
+
 TODO: publish to maven central. (s01.oss.sonatype.org)
 
 - For deployment instructions, see https://central.sonatype.org/publish/publish-guide/#deployment
 
-TODO: Enable Sonatype Lift on GitHub.
-
-- See https://links.sonatype.com/products/lift/github-integration
+TODO: Finalize the "installation" section of this README.md.
 
 <strike>TODOL</strike> DONE: add a table of contents to README.md
 
