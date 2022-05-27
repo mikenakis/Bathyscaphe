@@ -44,8 +44,6 @@
 
 <!--- TODO: for complicated stuff, see this post on how to generate README.md from a template: https://stackoverflow.com/a/69750410/773113 --->
 
-SPDX-License-Identifier: AGPL-3.0-only OR Proprietary
-
 [![GitHub license badge](https://img.shields.io/github/license/mikenakis/Bathyscaphe)]()
 
 # Bathyscaphe
