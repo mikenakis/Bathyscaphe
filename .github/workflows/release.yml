@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-          distribution: 'zulu'
+          # distribution: 'zulu'
 
       - name: Cache-local-Maven-repository-Step
         uses: actions/cache@v2
