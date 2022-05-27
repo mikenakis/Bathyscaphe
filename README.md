@@ -9,6 +9,8 @@
 
 # Bathyscaphe
 
+[![Join the chat at https://gitter.im/mikenakis-Bathyscaphe/community](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 #### Deep immutability (and coming soon: thread-safety) assessment for Java objects
 
 <p align="center">
