@@ -37,7 +37,7 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
 
-      - name: Make-Release-Step
+      - name: Release-Step
         run: |
           # this magical incantation is supposed to make the script fail if mvn fails; otherwise, the script will not fail unless grep fails.
           set -o pipefail

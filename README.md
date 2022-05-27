@@ -1,11 +1,27 @@
-![](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg)
-![](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg)
+<!--- These work, but they do not look as good as the next ones. --->
+<!--- <img src="https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg" /> --->
+<!--- <img src="https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg" /> --->
 
-![](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)
-![](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)
-<!--- ![](https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github) --->
-<!--- ![](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?event=push&label=CI&logo=github) --->
+<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github" height="22" />
+<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github" height="22" />
 
+<!--- I am not sure what these are supposed to do --->
+<!--- <img src="https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github" /> --->
+<!--- <img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?event=push&label=CI&logo=github" /> --->
+
+<!--- TODO: display jar file size --->
+<!--- <img src="https://img.badgesize.io/mikenakis/Bathyscaphe/:filepath[?compression=gzip|brotli][&label=string][&max=string][&softmax=string]" /> --->
+<br/>
+<img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Source Files&logo=files&logoColor=yellow" Height="22" />
+<img src="https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages" Height="22" />
+<img src="https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe" Height="22" />
+                                                                                             
+<!--- TODO: none of these work, and the documentation is absolutely horrid. --->
+<!--- ![Stack Exchange questions badge](https://img.shields.io/stackexchange/stackoverflow/t/java)
+![Stack Exchange monthly questions badge](https://img.shields.io/stackexchange/stackoverflow/qm/java)
+![Stack Exchange reputation badge](https://img.shields.io/stackexchange/stackoverflow/r/773113?order=desc&sort=reputation&site=stackoverflow&?cacheSeconds=1) --->
+
+<!--- TODO: for complicated stuff, see this post on how to generate README.md from a template: https://stackoverflow.com/a/69750410/773113 --->
 
 # Bathyscaphe
 
@@ -23,25 +39,25 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 - [Status (Maturity) of the project](#maturity)
 - [How it works](#how-it-works)
 - [How to use](#usage)
-    - [Asserting immutability](#usage-asserting-immutability)
-      - [The objectMustBeImmutableAssertion() method](#usage-asserting-immutability-method)
-    - [Adding pre-assessments](#usage-adding-pre-assessments)
-      - [The addImmutablePreassessment() method](#usage-adding-pre-assessments-method) 
-    - [Annotating fields](#usage-annotating-fields)
-        - [The @Invariable annotation](#usage-annotating-fields-invariable)
-        - [The @InvariableArray annotation](#usage-annotating-fields-invariable-array)
-    - [Self-assessment](#usage-self-assessment)
-      - [The ImmutabilitySelfAssessable interface](#usage-self-assessment-interface)
-    - [Obtaining diagnostics](#usage-obtaining-diagnostics)
-      - [The explain() method](#usage-obtaining-diagnostics-method)
+	- [Asserting immutability](#usage-asserting-immutability)
+		- [The objectMustBeImmutableAssertion() method](#usage-asserting-immutability-method)
+	- [Adding pre-assessments](#usage-adding-pre-assessments)
+		- [The addImmutablePreassessment() method](#usage-adding-pre-assessments-method)
+	- [Annotating fields](#usage-annotating-fields)
+		- [The @Invariable annotation](#usage-annotating-fields-invariable)
+		- [The @InvariableArray annotation](#usage-annotating-fields-invariable-array)
+	- [Self-assessment](#usage-self-assessment)
+		- [The ImmutabilitySelfAssessable interface](#usage-self-assessment-interface)
+	- [Obtaining diagnostics](#usage-obtaining-diagnostics)
+		- [The explain() method](#usage-obtaining-diagnostics-method)
 - [Installation](#installation)
 - [Copyright](#copyright)
 - [License](#license)
-    - [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
-    - [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
-        - [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
-        - [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
-            - [Instructions for purchasing the Commercial License](#license-bathyscaphe-commercial-purchasing)
+	- [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
+	- [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
+		- [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
+		- [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
+			- [Instructions for purchasing the Commercial License](#license-bathyscaphe-commercial-purchasing)
 - [Contacting the author](#contact)
 - [Glossary](#glossary)
 - [Contributing](#contributing)
@@ -128,7 +144,7 @@ If you write an effectively immutable class, you should use the annotations foun
 
 - #### <a name="usage-annotating-fields-invariable-array">&ZeroWidthSpace;</a>The `@InvariableArray` annotation
 
-  Suppose that we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so the presence of this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, we know that this particular field will behave as if it was immutable, so we would like to tell Bathyscaphe to refrain from assessing that field, and consider it as immutable. This is accomplished as follows: 
+  Suppose that we have a field which is final, but it is of array type. Arrays are by definition mutable in Java, so the presence of this field would normally cause Bathyscaphe to assess the declaring class as mutable; however, we know that this particular field will behave as if it was immutable, so we would like to tell Bathyscaphe to refrain from assessing that field, and consider it as immutable. This is accomplished as follows:
 
       @InvariableArray private final byte[] mySha256Hash;
 
@@ -141,9 +157,9 @@ Also note that it is illegal to use either of these annotations on non-private f
 Also note that with these annotations we are only promising shallow immutability; Bathyscaphe will still perform all the checks necessary in order to guarantee deep immutability. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `byte`, then Bathyscaphe would recursively assess the immutability of `Foo` as part of assessing the immutability of the field.
 
 ### <a name="usage-self-assessment">&ZeroWidthSpace;</a>Self-assessment
-                                             
+
 - #### <a name="usage-self-assessment-interface">&ZeroWidthSpace;</a>The `ImmutabilitySelfAssessable` interface
- 
+
   Sometimes, the question whether an object is mutable or immutable can be so complicated, that only the object itself can answer the question for sure. (For an example, see **_freezable class_** in the glossary.) In order to accommodate such cases, the bathyscaphe-claims module defines the `ImmutabilitySelfAssessable` interface. If your class implements this interface, bathyscaphe will be invoking instances of your class, asking them whether they are immutable or not. Here is an example:
 
       public class MyFreezableClass implements ImmutabilitySelfAssessable
@@ -169,7 +185,7 @@ Also note that with these annotations we are only promising shallow immutability
       {
           Bathyscaphe.explain( e ).forEach( System.out::println );
       }
-               
+
   The above code will emit to the standard output a detailed human-readable diagnostic message explaining exactly why the assessment was issued. The text will look something like this: (Note: the exact text is subject to change.)
 
       ■ instance of 'java.util.ImmutableCollections.List12' is mutable because index 0 contains mutable instance of 'java.lang.StringBuilder'. (MutableComponentMutableObjectAssessment)
@@ -187,9 +203,9 @@ Also note that with these annotations we are only promising shallow immutability
 ## <a name="installation">&ZeroWidthSpace;</a>Installation
 
 - In the near future, Bathyscaphe artifacts will be released to maven central, so you will not have to specify an artifact repository; however, for the time being, Bathyscaphe artifacts are not being released to maven central, and the following is happening:
-  - Although the artifacts are being built on GitHub, and GitHub does store the artifacts, GitHub makes it difficult to use it as a maven artifact repository, or in any case I do not know how to do that.
-  - There appears to be a solution involving some jitpack.io, but I could not get it to work.
-  - So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project, so your project has access to the artifacts.
+	- Although the artifacts are being built on GitHub, and GitHub does store the artifacts, GitHub makes it difficult to use it as a maven artifact repository, or in any case I do not know how to do that.
+	- There appears to be a solution involving some jitpack.io, but I could not get it to work.
+	- So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project, so your project has access to the artifacts.
 
 ## <a name="copyright">&ZeroWidthSpace;</a>Copyright
 
@@ -297,8 +313,13 @@ If you would like to contribute to Bathyscaphe, you are more than welcome to do 
 	- Are your inkscape skills better than mine? Can you improve my SVG drawing of Trieste or come up with an entirely different one which is better? Be my guest!
 - #### Configuration
 	- There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer, (and don't even get me started on the "devops" hoax!) so help in that area would be appreciated. For example:
+		- Automatically generating a GitHub release from a GitHub tag.
+			- Currently, nothing new appears in mikenakis/Bathyscaphe/releases when I execute the Release-Workflow; instead, a new entry appears in mikenakis/Bathyscaphe/releases/tag. I can manually create a release from a tag, but I would rather not. It is unclear to me how to automate this.
+		- Including binaries in a GitHub release.
+			- Currently, a release on GitHub (which I can only manually create at the moment) only contains source code in zip and tar.gz format. In addition to being automatically generated, a release should also contain the jar files.
 		- Publishing to Maven Central
 			- I have already reserved `io.github.mikenakis` on Maven Central, and now I need to deploy there; however, they have a comprehensive set of requirements which includes things that I have never done before, for example, signing code with GPG. I am slowly learning how to do each step, but someone who has done it before could greatly help in this area.
+	- The TODO list contains more things that need to be done.
 - #### Sponsorship
 	- If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a DotNet version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that always helps.
 
@@ -312,46 +333,46 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
 
 - #### What are the dependencies of Bathyscaphe?
-    - The `bathyscaphe-test` module necessarily depends on JUnit.
-    - The `bathyscaphe` and `bathyscaphe-claims` modules do not depend on anything outside the Java Runtime Environment.
-      - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include Bathyscaphe JARs in a project, you are including those JARs and nothing else. 
+	- The `bathyscaphe-test` module necessarily depends on JUnit.
+	- The `bathyscaphe` and `bathyscaphe-claims` modules do not depend on anything outside the Java Runtime Environment.
+		- Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include Bathyscaphe JARs in a project, you are including those JARs and nothing else.
 
 - #### How large are the Bathyscaphe JARs?
-    - The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
-    - The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
+	- The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
+	- The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
 
 - #### What is the performance overhead of using Bathyscaphe?
-    - Bathyscaphe is _faster than lightning_: the performance overhead of using Bathyscaphe is **_zero_**.
-        - That is because performance is only relevant on production environments; bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
-        - On development environments, the speed of Bathyscaphe will depend on what you are assessing:
-            - In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
-            - In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
+	- Bathyscaphe is _faster than lightning_: the performance overhead of using Bathyscaphe is **_zero_**.
+		- That is because performance is only relevant on production environments; bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
+		- On development environments, the speed of Bathyscaphe will depend on what you are assessing:
+			- In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
+			- In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
 
 - #### Why are the tests in a separate module?
-    - Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
-    - If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure. with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
+	- Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
+	- If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure. with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
 
 - #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
-    - Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it never returns `false`; it either returns `true`, or throws an exception.
+	- Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it never returns `false`; it either returns `true`, or throws an exception.
 
 - #### Why does `objectMustBeImmutableAssertion()` throw an exception instead of returning `false` ?
-    - Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it. An exception is something from which you can obtain diagnostics.
-    - The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
+	- Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it. An exception is something from which you can obtain diagnostics.
+	- The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-    - Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, when Bathyscaphe becomes a very mature project.
+	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, when Bathyscaphe becomes a very mature project.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
-    - The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
+	- The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `mustBeImmutableAssertion()`?
-    - Because this is an _assertion method_, (see glossary,) whose name must match the name of the exception that it throws, and the exception name could not begin with `MustBe`, it has to begin with `ObjectMustBe`, so the method is named accordingly.
+	- Because this is an _assertion method_, (see glossary,) whose name must match the name of the exception that it throws, and the exception name could not begin with `MustBe`, it has to begin with `ObjectMustBe`, so the method is named accordingly.
 
 - #### Why is the exception called `ObjectMustBeImmutableException` instead of simply `ObjectIsMutableException`?
-    - Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
+	- Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
 
 - #### Is it possible to use Bathyscaphe without assertions?
-    - Of course, it is possible. You know what else is possible? using bubble-sort instead of quick-sort. The question is not whether it is possible, the question is whether it is intelligent.
+	- Of course, it is possible. You know what else is possible? using bubble-sort instead of quick-sort. The question is not whether it is possible, the question is whether it is intelligent.
 
 ## Poor man's issue and TODO tracking
 
@@ -378,6 +399,11 @@ TODO: promote Bathyscaphe
 - See what other features of GitHub might be useful. Wiki? Discussions?
 - Look for people to take over the project from me as soon as I start feeling that I would like to move on to continue work on my other stuff.
 
+TODO: check out opencollective.
+
+- See opencollective.com
+- For example: https://opencollective.com/shields
+
 TODO: add thread-safety assessment. A class is thread-safe if:
 
 - It has been annotated with @ThreadSafe.
@@ -388,8 +414,6 @@ TODO: possibly introduce an `@Immutable` annotation.
 - Look for it by simple name, thus honoring it regardless of package.
 - Treat any class annotated as such as immutable without analyzing it. The idea behind this is that if the developer already has a static analysis tool, then that tool can make sure that classes marked as `@Immutable` are in fact immutable, so that Bathyscaphe does not have to repeat the checks.
 - Be sure to include big disclaimers that the use of the `@Immutable` annotation bypasses Bathyscaphe, so it should only be used if the developer already has other means of statically ascertaining immutability.
-
-TODO: possibly rename 'claims' to 'promises'?
 
 TODO: possibly make the bathyscaphe-claims module completely separate from bathyscaphe so as to reduce confusion with respect to licensing?
 
@@ -413,21 +437,36 @@ TODO: handle multi-dimensional invariable arrays.
 
 - the @InvariableArray annotation might benefit from an integer parameter indicating the number of dimensions for which invariability is promised, so that we can declare an invariable array of invariable arrays, etc.
 
-TODO: Enable Sonatype Lift on GitHub.
+TODO: Enable "Sonatype Lift" on GitHub.
 
 - See https://links.sonatype.com/products/lift/github-integration
+
+TODO: prevent the creation of package `bathyscaphe-parent`
+
+- Currently, `bathyscaphe-parent` is included in the list of packages on GitHub, but it is unnecessary and it represents noise.
 
 TODO: publish to maven central. (s01.oss.sonatype.org)
 
 - For deployment instructions, see https://central.sonatype.org/publish/publish-guide/#deployment
+- Also see:
+	- https://zteater.medium.com/automate-releases-to-maven-central-using-github-actions-a2bf1748b103
 
 TODO: Finalize the "installation" section of this README.md.
+
+TODO: add a README.md badge with JAR file sizes
+
+- use `badgesize.io`
+	- For the how-to, see https://github.com/ngryman/badge-size
+	- For an example README.md, see https://github.com/twbs/bootstrap/edit/main/README.md
+
+TODO: add a README.md badge with stats about the tests.
+
+- Unfortunately, by looking at this page: https://shields.io/category/test-results this is not possible.
+- However, shields.io supports creating a shield from a custom json endpoint, and a custom json endpoint can be just a static json file created by the build process, so if the build process could somehow generate a json file with stats about the tests, we should be able to generate a badge.
 
 <strike>TODOL</strike> DONE: add a table of contents to README.md
 
 <strike>TODO:</strike> DONE: merge bathyscaphe and bathyscaphe-print
-
-- The Bathyscaphe jar file will then exceed 100 kilobytes in size, which is undesirable, but the disadvantage of a larger jar file is offset by the benefit of dealing with just one instead of two jar files.
 
 <strike>TODO:</strike> DONE: add a google alert for bathyscaphe.
 

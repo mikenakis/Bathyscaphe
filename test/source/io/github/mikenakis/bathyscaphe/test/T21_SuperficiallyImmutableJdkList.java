@@ -58,7 +58,6 @@ public class T21_SuperficiallyImmutableJdkList
 
 	@Test public void superficially_immutable_jdk_list_of_size_2_with_immutable_elements_is_actually_immutable()
 	{
-		assert false;
 		Method method = Helper.getCurrentMethod();
 		List<?> object = List.of( 1, 2 );
 		ObjectAssessment assessment = Helper.assess( method, object );
