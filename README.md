@@ -221,10 +221,10 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 <sup>Note: some of the glossary terms (i.e. **_variable_** / **_invariable_**, **_extensible_** / **_inextensible_**) are introduced in order to mitigate the ambiguities caused by Java's unfortunate decision to reuse certain language keywords (i.e. `final`) to mean entirely different things in different situations. (i.e. a `final` class vs. a `final` field.)</sup>
 
 - **_Assertion Method_** - a pattern of my own devise, for writing comprehensive assertions.
-	- An assertion method is only meant to be invoked from within an `assert` statement.
 	- An assertion method is identified by the suffix `Assertion` in its name.
+	- An assertion method is only meant to be invoked from within an `assert` statement.
 	- To prevent misuse, an assertion method should generally avoid returning `false` to indicate failure; instead, an assertion method should either return `true`, or throw an exception.
-	- If an assertion method checks one thing and throws one exception, then the exception should have the same name as the assertion method, only suffixed with `Exception` instead of `Assertion`.
+	- For clarity, if an assertion method checks one thing and throws one exception, then the exception should have the same name as the assertion method, only suffixed with `Exception` instead of `Assertion`.
 		- From this it follows that exceptions should have assertive names, describing what is expected, such as `PointerMustBeNonNullException`, instead of declarative names, describing postmortem findings, such as `NullPointerException`. One day I will write an article explaining this in greater detail.
 
 
@@ -296,9 +296,25 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
 
+- #### What are the dependencies of Bathyscaphe?
+    - The `bathyscaphe-test` module necessarily depends on JUnit.
+    - The `bathyscaphe` and `bathyscaphe-claims` modules do not depend on anything outside the Java Runtime Environment.
+      - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include Bathyscaphe JARs in a project, you are including those JARs and nothing else. 
+
+- #### How large are the Bathyscaphe JARs?
+    - The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
+    - The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
+
+- #### What is the performance overhead of using Bathyscaphe?
+    - Bathyscaphe is faster than lightning: the performance overhead of using Bathyscaphe is zero.
+        - That is because performance is only relevant on production environments, but bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
+        - On development environments, the speed of Bathyscaphe will depend on what you are assessing:
+            - In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
+            - In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
+
 - #### Why are the tests in a separate module?
     - Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
-    - If you would like to work with Bathyscaphe and you think that this complicates things, ask me, I can explain how multiple modules in a single project is trivially accomplishable and represents no complication.
+    - If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure. with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
 
 - #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
     - Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it either returns `true`, or throws an exception.
@@ -308,7 +324,7 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
     - The alternative would be to have the method somehow emit diagnostic text right before returning `false`, which then raises other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-    - Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would be a breaking change to code that makes use of Bathyscaphe.
+    - Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would be a breaking change to code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, when Bathyscaphe becomes a very mature project.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
     - The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
@@ -318,28 +334,6 @@ More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04
 
 - #### Why is the exception called `ObjectMustBeImmutableException` instead of simply `ObjectIsMutableException`?
     - Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
-
-- #### Can I use `objectMustBeImmutableAssertion()` without the `assert` keyword?
-    - Yes, you can, but I think that doing so would be stupid.
-
-- #### But I do not like assertions!
-    - Learn to love assertions.
-
-- #### How fast is Bathyscaphe?
-    - Bathyscaphe is faster than lightning: **_BATHYSCAPHE INCURS ZERO PERFORMANCE OVERHEAD._**
-        - That is because performance is only relevant on production environments, but bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
-        - On development environments, the speed of Bathyscaphe will depend on what you are assessing:
-            - In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
-            - In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
-
-- #### What are the dependencies of Bathyscaphe?
-    - The `bathyscaphe-test` module necessarily depends on JUnit.
-    - The `bathyscaphe` and `bathyscaphe-claims` modules do not have any dependencies outside the Java Runtime Environment.
-      - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. This means that when you include the Bathyscaphe JARs in a project, you are including those JARs and nothing else. 
-
-- #### How large are the Bathyscaphe JARs?
-    - The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
-    - The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
 
 ## Poor man's issue and TODO tracking
 
