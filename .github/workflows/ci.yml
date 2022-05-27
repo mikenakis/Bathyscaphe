@@ -46,5 +46,8 @@ jobs:
 
 
       - name: Build-Step
-        run: mvn --batch-mode clean install | grep -v 'Download.* http'
+        run: |
+          # this magical incantation is supposed to make the script fail if mvn fails; otherwise, the script will not fail unless grep fails.
+          set -o pipefail
+          mvn --batch-mode clean install | grep -v 'Download.* http'
         # --file pom.xml
