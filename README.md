@@ -220,7 +220,7 @@ Also note that with these annotations we are only promising shallow immutability
 
 ## <a name="copyright">&ZeroWidthSpace;</a>Copyright
 
-All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
+Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 ## <a name="license">&ZeroWidthSpace;</a>License
 
