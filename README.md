@@ -12,15 +12,19 @@
 <!--- TODO: display jar file size --->
 <!--- <img src="https://img.badgesize.io/mikenakis/Bathyscaphe/:filepath[?compression=gzip|brotli][&label=string][&max=string][&softmax=string]" /> --->
 <br/>
-<img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Source Files&logo=files&logoColor=yellow" Height="22" />
+<a href="#">
+<img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Source Files&logo=files&logoColor=yellow" Height="22" /></a>
 &nbsp;
-<img src="https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages" Height="22" />
+<a href="#">
+<img src="https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages" Height="22" /></a>
 &nbsp;
-<img src="https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe" Height="22" />
+<a href="#">
+<img src="https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe" Height="22" /></a>
 
-[![Join the chat at https://gitter.im/mikenakis-Bathyscaphe/community](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-<a href="https://gitter.im/mikenakis-Bathyscaphe/community"><img src="https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg" /></a>
+[![Join the chat at https://gitter.im/mikenakis-Bathyscaphe/community](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
+&nbsp;
+<a href="https://gitter.im/mikenakis-Bathyscaphe/community">
+<img src="https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg" /></a>
                                                                                              
 <!--- TODO: none of these work, and the documentation is absolutely horrid. --->
 <!--- ![Stack Exchange questions badge](https://img.shields.io/stackexchange/stackoverflow/t/java)
