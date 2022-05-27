@@ -13,7 +13,7 @@
 <!--- <img src="https://img.badgesize.io/mikenakis/Bathyscaphe/:filepath[?compression=gzip|brotli][&label=string][&max=string][&softmax=string]" /> --->
 <br/>
 <a href="#">
-<img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Source Files&logo=files&logoColor=yellow" Height="22" /></a>
+<img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Files&logo=files&logoColor=yellow" Height="22" /></a>
 &nbsp;
 <a href="#">
 <img src="https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages" Height="22" /></a>
@@ -21,17 +21,32 @@
 <a href="#">
 <img src="https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe" Height="22" /></a>
 
-[![Join the chat at https://gitter.im/mikenakis-Bathyscaphe/community](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
-&nbsp;
-<a href="https://gitter.im/mikenakis-Bathyscaphe/community">
-<img src="https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg" /></a>
-                                                                                             
+[![GitHub code size in bytes badge](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)]()
+[![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)]()
+[![GitHub file size in bytes badge](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)]()
+
+[![Gitter chat badge](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
+                                                                  
+<!--- TODO: enable these when they become non-zero -->
+<!--- 
+[![GitHub issues badge       ](https://img.shields.io/github/issues/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
+[![GitHub issues badge       ](https://img.shields.io/github/issues-raw/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
+[![GitHub closed issues badge](https://img.shields.io/github/issues-closed/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
+[![GitHub closed issues badge](https://img.shields.io/github/issues-closed-raw/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues) --->
+                                                                                                              
+<!--- TODO: enable this when it becomes non-zero --->
+<!--- [![GitHub all releases badge](https://img.shields.io/github/downloads/mikenakis/Bathyscaphe/total)]() --->
+
 <!--- TODO: none of these work, and the documentation is absolutely horrid. --->
 <!--- ![Stack Exchange questions badge](https://img.shields.io/stackexchange/stackoverflow/t/java)
 ![Stack Exchange monthly questions badge](https://img.shields.io/stackexchange/stackoverflow/qm/java)
 ![Stack Exchange reputation badge](https://img.shields.io/stackexchange/stackoverflow/r/773113?order=desc&sort=reputation&site=stackoverflow&?cacheSeconds=1) --->
 
 <!--- TODO: for complicated stuff, see this post on how to generate README.md from a template: https://stackoverflow.com/a/69750410/773113 --->
+
+SPDX-License-Identifier: AGPL-3.0-only OR Proprietary
+
+[![GitHub license badge](https://img.shields.io/github/license/mikenakis/Bathyscaphe)]()
 
 # Bathyscaphe
 
