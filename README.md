@@ -1,32 +1,13 @@
-<!--- These work, but they do not look as good as the next ones. --->
-<!--- <img src="https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg" /> --->
-<!--- <img src="https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg" /> --->
-<a href="https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml">
-<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github" height="22" /></a>
-&nbsp;
-<a href="https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml">
-<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github" height="22" /></a>
-<!--- I am not sure what these are supposed to do --->
-<!--- <img src="https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github" /> --->
-<!--- <img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?event=push&label=CI&logo=github" /> --->
-<!--- TODO: display jar file size --->
-<!--- <img src="https://img.badgesize.io/mikenakis/Bathyscaphe/:filepath[?compression=gzip|brotli][&label=string][&max=string][&softmax=string]" /> --->
-<br/>
-<a href="#">
-<img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Files&logo=files&logoColor=yellow" Height="22" /></a>
-&nbsp;
-<a href="#">
-<img src="https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages" Height="22" /></a>
-&nbsp;
-<a href="#">
-<img src="https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe" Height="22" /></a>
-
-[![GitHub code size in bytes badge](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)]()
-[![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)]()
-[![GitHub file size in bytes badge](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)]()
-
+[![CI-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
+[![Release-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+![Number of files badge](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Files&logo=files&logoColor=yellow)
+![Repository Size badge](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages)
+![Language badge](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)
+![GitHub code size in bytes badge](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)
+![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)
+![GitHub file size in bytes badge](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)
 [![Gitter chat badge](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
-                                                                  
+ 
 <!--- TODO: enable these when they become non-zero -->
 <!--- 
 [![GitHub issues badge       ](https://img.shields.io/github/issues/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
@@ -37,6 +18,12 @@
 <!--- TODO: enable this when it becomes non-zero --->
 <!--- [![GitHub all releases badge](https://img.shields.io/github/downloads/mikenakis/Bathyscaphe/total)]() --->
 
+<!--- I am not sure what these are supposed to do --->
+<!--- <img src="https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github" /> --->
+<!--- <img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?event=push&label=CI&logo=github" /> --->
+<!--- TODO: display jar file size --->
+<!--- <img src="https://img.badgesize.io/mikenakis/Bathyscaphe/:filepath[?compression=gzip|brotli][&label=string][&max=string][&softmax=string]" /> --->
+
 <!--- TODO: none of these work, and the documentation is absolutely horrid. --->
 <!--- ![Stack Exchange questions badge](https://img.shields.io/stackexchange/stackoverflow/t/java)
 ![Stack Exchange monthly questions badge](https://img.shields.io/stackexchange/stackoverflow/qm/java)
@@ -44,9 +31,8 @@
 
 <!--- TODO: for complicated stuff, see this post on how to generate README.md from a template: https://stackoverflow.com/a/69750410/773113 --->
 
-`SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
-
-[![GitHub license badge](https://img.shields.io/github/license/mikenakis/Bathyscaphe)]()
+<!--- GitHub fails to detect the license, so it always shows "not identifiable by github" ---> 
+<!--- [![GitHub license badge](https://img.shields.io/github/license/mikenakis/Bathyscaphe)]() --->
 
 # Bathyscaphe
 
@@ -244,7 +230,7 @@ All modules of Bathyscaphe are Copyright © 2022, Michael Belivanakis, a.k.a. Mi
 
 - ### <a name="license-bathyscaphe">&ZeroWidthSpace;</a>Modules `bathyscaphe` and `bathyscaphe-test`: Dual license
 
-  The `bathyscaphe` and `bathyscaphe-test` modules of Bathyscaphe are available under a dual-license scheme. You can choose either the GNUAGPL v.3 license, or the BATCL v.1 license. If you take no action regarding licensing, the license that applies by default is the GNUAGPL.
+  The `bathyscaphe` and `bathyscaphe-test` modules of Bathyscaphe are available under a dual-license scheme. You can choose either the GNUAGPL v.3 license, or the BATCL v.1 license. If you take no action regarding licensing, the license that applies by default is the GNUAGPL.  `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
 
     - #### <a name="license-bathyscaphe-agpl">&ZeroWidthSpace;</a>GNU Affero General Public License (GNUAGPL) v.3
 
