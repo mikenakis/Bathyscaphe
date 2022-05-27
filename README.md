@@ -1,20 +1,26 @@
 <!--- These work, but they do not look as good as the next ones. --->
 <!--- <img src="https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml/badge.svg" /> --->
 <!--- <img src="https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml/badge.svg" /> --->
-
-<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github" height="22" />
-<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github" height="22" />
-
+<a href="https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml">
+<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github" height="22" /></a>
+&nbsp;
+<a href="https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml">
+<img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github" height="22" /></a>
 <!--- I am not sure what these are supposed to do --->
 <!--- <img src="https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github" /> --->
 <!--- <img src="https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?event=push&label=CI&logo=github" /> --->
-
 <!--- TODO: display jar file size --->
 <!--- <img src="https://img.badgesize.io/mikenakis/Bathyscaphe/:filepath[?compression=gzip|brotli][&label=string][&max=string][&softmax=string]" /> --->
 <br/>
 <img src="https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Source Files&logo=files&logoColor=yellow" Height="22" />
+&nbsp;
 <img src="https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages" Height="22" />
+&nbsp;
 <img src="https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe" Height="22" />
+
+[![Join the chat at https://gitter.im/mikenakis-Bathyscaphe/community](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+<a href="https://gitter.im/mikenakis-Bathyscaphe/community"><img src="https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg" /></a>
                                                                                              
 <!--- TODO: none of these work, and the documentation is absolutely horrid. --->
 <!--- ![Stack Exchange questions badge](https://img.shields.io/stackexchange/stackoverflow/t/java)
@@ -24,8 +30,6 @@
 <!--- TODO: for complicated stuff, see this post on how to generate README.md from a template: https://stackoverflow.com/a/69750410/773113 --->
 
 # Bathyscaphe
-
-[![Join the chat at https://gitter.im/mikenakis-Bathyscaphe/community](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 #### Deep immutability (and coming soon: thread-safety) assessment for Java objects
 
