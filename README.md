@@ -16,19 +16,21 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 ![GitHub code size badge         ](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)
 ![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)
 ![GitHub file size badge         ](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)
+[![Gitter chat badge             ](https://img.shields.io/badge/chat-on_github-4fb999?logo=googlechat)](https://github.com/mikenakis/Bathyscaphe/discussions)
 [![Gitter chat badge             ](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
-![GitHub latest release badge    ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?display_name=tag&include_prereleases&sort=semver)
+![GitHub latest release badge    ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?label=latest+release&include_prereleases&sort=semver)
 [![Website badge                 ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr)
-[![GitHub contributors badge      ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
-[![GitHub commit activity badge   ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
+[![GitHub contributors badge     ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
+[![GitHub commit activity badge  ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
 ![GitHub last commit badge       ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe)
 ![GitHub Release Date badge      ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=last+release)
 ![GitHub (Pre-)Release Date badge](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=last+pre-release) 
-[![GitHub pulse badge            ](https://shields.api-test.nl/badge/-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
-[![GitHub dependencies badge     ](https://shields.api-test.nl/badge/-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
-[![GitHub traffic badge          ](https://shields.api-test.nl/badge/-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
+[![GitHub pulse badge            ](https://img.shields.io/badge/%E2%80%8B-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
+[![GitHub dependencies badge     ](https://img.shields.io/badge/%E2%80%8B-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
+[![GitHub traffic badge          ](https://img.shields.io/badge/%E2%80%8B-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
 
-`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr` 
+`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`
+
 `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
 
 <!--- TODO: enable this when on maven central: 
@@ -80,14 +82,10 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
     - [Obtaining diagnostics](#usage-obtaining-diagnostics)
         - [The explain() method](#usage-obtaining-diagnostics-method)
 - [Status (Maturity) of the project](#maturity)
+- [Dependencies](#dependencies)
+- [Requirements](#requirements)
 - [Installation](#installation)
-- [Copyright](#copyright)
-- [License](#license)
-    - [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
-    - [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
-        - [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
-        - [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
-            - [Instructions for purchasing the Commercial License](#license-bathyscaphe-commercial-purchasing)
+- [Copyright & License](#license)
 - [Contacting the author](#contact)
 - [Glossary](#glossary)
 - [Contributing](#contributing)
@@ -95,6 +93,7 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 - [Sponsoring](#sponsoring)
 - [Coding style](#coding-style)
 - [Frequently Asked Questions](#faq)
+- [Feedback](#feedback)
 - [Poor man's issue and TODO tracking](#issues)
 
 ## <a name="description">&ZeroWidthSpace;</a>Description
@@ -226,6 +225,27 @@ The "Technology Readiness Level" (TRL) so-to-speak of Bathyscaphe currently is "
 - There is at least one major (but optional) feature pending to be implemented: thread-safety assessment.
 - There is at least one major task pending to be done: publish on maven-central.  
 - Since the project is still young, new releases are likely to contain breaking changes. (The major version number will always be incremented to indicate so.) 
+             
+## <a name="dependencies">&ZeroWidthSpace;</a>Dependencies
+                                                          
+- The `bathyscaphe-test` module necessarily depends on JUnit.
+
+- The `bathyscaphe` and `bathyscaphe-claims` modules do not depend on anything outside the Java Runtime Environment.
+  - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include Bathyscaphe the JARs in a project, you are including those JARs and nothing else.
+
+## <a name="requirements">&ZeroWidthSpace;</a>Requirements
+
+- Module `bathyscaphe-claims`:
+  - Requires java 8 to compile. 
+  - It could probably compile on older java versions, but I have not tried it.
+  - It will almost certainly run on even older JREs, but I have not tried it.
+- Module `bathyscape`:
+  - Requires java 17 to compile, and it actually makes use of java 17 features.
+  - I will be upgrading to java 18 as soon as I find the chance. 
+  - I do not care if that is too avant-garde for some people. By the time Bathyscaphe becomes widely adopted, Java 18 will be old.
+  - It might run on older JREs, but I have not tried it.
+  - It will almost certainly run on older JREs if I specify an older \<target\> to the java-compiler-plugin, but I have not tried that either.
+  - I have not tried these things because this kind of experimentation has very low priority at the moment.  
 
 ## <a name="installation">&ZeroWidthSpace;</a>Installation
 
@@ -234,54 +254,13 @@ The "Technology Readiness Level" (TRL) so-to-speak of Bathyscaphe currently is "
 	- There appears to be a solution involving some jitpack.io, but I could not get it to work.
 	- So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project, so your project has access to the artifacts.
 
-## <a name="copyright">&ZeroWidthSpace;</a>Copyright
+## <a name="license">&ZeroWidthSpace;</a>Copyright & License
+ 
+Bathyscaphe is copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
-Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
+You may not use this library except in compliance with the license.
 
-## <a name="license">&ZeroWidthSpace;</a>License
-  
-- ### <a name="license-bathyscaphe-claims">&ZeroWidthSpace;</a>Module `bathyscaphe-claims`: MIT license
-
-    - The `bathyscaphe-claims` module is available under the **_MIT License_**, which is a very permissive open source license, allowing Bathyscaphe annotations to be freely used in any kind of code with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License).
-
-- ### <a name="license-bathyscaphe">&ZeroWidthSpace;</a>Modules `bathyscaphe` and `bathyscaphe-test`: Dual license
-
-  The `bathyscaphe` and `bathyscaphe-test` modules of Bathyscaphe are available under a dual-license scheme. You can choose either the GNUAGPL v.3 license, or the BATCL v.1 license. If you take no action regarding licensing, the license that applies by default is the GNUAGPL.
-
-    - #### <a name="license-bathyscaphe-agpl">&ZeroWidthSpace;</a>GNU Affero General Public License (GNUAGPL) v.3
-
-      The GNUAGPL is a _viral_, _strong copyleft_ open-source license with an additional provision for _server-side software_. This means that any software making use of these modules must in turn be open-sourced under the same license, **_even if_** that software would not normally be distributed, as the case is, for example, with server-side software. See [Wikipedia: GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License).
-
-    - #### <a name="license-bathyscaphe-commercial">&ZeroWidthSpace;</a>Bathyscaphe Alternative Terms Commercial license (BATCL) v.1
-
-      The BATCL is a commercial license available for developers who want to use the `bathyscaphe` module and/or the `bathyscaphe-test` module without being bound by the GNUAGPL, because they do not want to have to publish their source code. The BATCL can be purchased from the author for a small fee. Payment is done simply and quickly, via PayPal.
-
-        - #### <a name="license-bathyscaphe-commercial-purchasing">&ZeroWidthSpace;</a>Instructions for purchasing the Commercial License
-            - Send money via PayPal
-                - Recipient's e-mail address: paypal@michael.gr
-                - Amount: 128.00
-                - Currency: EUR
-                - Payment reference ("What's this payment for?"): please enter the following information separated by spaces:
-                    - Your e-mail address
-                    - The name of the product you are purchasing a license for, i.e. "Bathyscaphe"
-                    - The version number that you want to license, as it appears in the maven coordinates.
-                - Your shipping address: make sure your legal address is selected.
-            - As soon as we receive the fee, we will send you an acknowledgement.
-            - As soon as you receive the acknowledgement, you are licensed.
-            - If you fail to include your e-mail address, and something goes wrong with your request, we will not be able to contact you, so you will not be licensed, and any funds received will be considered donation.
-
-- ### Disclaimer
-
-  This software is distributed WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-
-- ### Governing Law
-
-  These licenses and any disputes arising hereunder shall be construed and governed by the laws of the Kingdom of The Netherlands regardless of otherwise applicable choice of law rules.
-
-- ### Violations    
-
-  If you have good reasons to believe that an organization or individual is using this software in ways which are not compliant with the GNU AGPL v.3, while at the same time they have not purchased a commercial license for the particular version of the software that they are using, please contact the author.
+For information regarding licensing Bathyscaphe, please see [LICENSE.md](LICENSE.md)
 
 ## <a name="contact">&ZeroWidthSpace;</a>Contacting the author
 
@@ -361,11 +340,6 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
 
-- #### What are the dependencies of Bathyscaphe?
-	- The `bathyscaphe-test` module necessarily depends on JUnit.
-	- The `bathyscaphe` and `bathyscaphe-claims` modules do not depend on anything outside the Java Runtime Environment.
-		- Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include Bathyscaphe JARs in a project, you are including those JARs and nothing else.
-
 - #### How large are the Bathyscaphe JARs?
 	- The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
 	- The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
@@ -379,17 +353,17 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 
 - #### Why are the tests in a separate module?
 	- Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
-	- If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure. with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
+	- If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure, with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
 
 - #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
 	- Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it never returns `false`; it either returns `true`, or throws an exception.
 
 - #### Why does `objectMustBeImmutableAssertion()` throw an exception instead of returning `false` ?
-	- Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it. An exception is something from which you can obtain diagnostics.
+	- Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it. An exception is something substantial, from which you can obtain diagnostics.
 	- The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, when Bathyscaphe becomes a very mature project.
+	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, once Bathyscaphe becomes a very mature project.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
 	- The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
@@ -403,7 +377,11 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 - #### Is it possible to use Bathyscaphe without assertions?
 	- Of course, it is possible. You know what else is possible? using bubble-sort instead of quick-sort. The question is not whether it is possible, the question is whether it is intelligent.
 
-## Poor man's issue and TODO tracking
+## <a name="feedback">&ZeroWidthSpace;</a>Feedback
+
+Please come to our [discussions area](https://github.com/mikenakis/Bathyscaphe/discussions) to leave feedback, criticism, praise, feature requests, bug reports, haikus, whatever.  
+
+## <a name="issues">&ZeroWidthSpace;</a>Poor man's issue and TODO tracking
 
 TODO: promote Bathyscaphe
 
@@ -412,21 +390,16 @@ TODO: promote Bathyscaphe
 - Create a very short "what is bathyscaphe" video
 - Create a very short "how to use bathyscaphe" video
 - Create a short animated gif
-- Add some means of in-taking feedback.
-- Make Bathyscaphe the only pinned project on github account
 - Promote on Stack Overflow, Reddit, Hacker News, Quora, Twitter, DZone, Lobste.rs. Search for questions that are asking for a tool that does what Bathyscaphe does, or post such a question and perhaps then answer it.
 - Promote to the local JUG. (Contact Freek about this)
 - Emphasize the possibility of collaboration between Bathyscaphe for dynamic analysis and MutabilityDetector for static analysis.
-- Add an explicit "dependencies" section stating that there are no dependencies.
-- Add a "requirements" section (minimum JRE needed to run)
 - Start maintaining a change log. Add an entry to the log each time:
 	- a bug is fixed.
 	- a feature is added.
 	- a breaking API change is made.
 - Research whether there should be a tag for each release, or whether maven's snapshot scheme renders tags unnecessary. If there should be tags, then add their creation to the release workflow.
-- Enable issue tracking on GitHub NOW.
-- See what other features of GitHub might be useful. Wiki? Discussions?
-- Look for people to take over the project from me as soon as I start feeling that I would like to move on to continue work on my other stuff.
+- Enable issue tracking on GitHub.
+- Look for people to take over the project from me as soon as I start feeling that I would like to move on with my other stuff.
 
 TODO: check out opencollective.
 

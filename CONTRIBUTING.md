@@ -2,16 +2,17 @@
 
 If you would like to contribute to Bathyscaphe, you are more than welcome to do so, but keep in mind that I will need to ask you to either assign the copyright of your contribution to me, or grant me a permissive license on your contribution. Things would otherwise become terribly complicated due to the dual-license scheme of Bathyscaphe. This means that I am going to have to ask you to agree to a **_Contributor License Agreement_** (CLA) which will probably be something like the [MongoDB Contributor Agreement](https://www.mongodb.com/legal/contributor-agreement), but I have yet to draft such a document.
 
+- #### Merge requests
+    - Before you start working on something, please come to our [discussions area](https://github.com/mikenakis/Bathyscaphe/discussions) and let us know what you are thinking of doing, so that we can discuss whether it needs to be done, how it should be done, whether someone else is already doing it, etc. 
+    - If you do work on something, please be sure to read the author's post [on coding style](https://blog.michael.gr/2018/04/on-coding-style.html).
 - #### Legal advice
 	- Advice on legal issues would be greatly appreciated, since all this licensing business is terribly complicated to me.
 - #### Open-sourcing advice
 	- Starting an actual open-source project like Bathyscaphe is uncharted territory to me, so if you are an experienced open-source contributor, your advice and mentorship would be greatly appreciated.
 - #### Technical advice
 	- If you have given the subject of immutability some thought, then chances are you can discuss Bathyscaphe with me at a technical level. Perhaps you have some suggestion to make, or point out a mistake in my approach. I would be more than happy to discuss via e-mail or video.
-- #### Merge requests
-	- Please contact me first, (before starting to work on it, not right before submitting it,) to discuss what you want to do, why you want to do it, whether it needs to be done, how it should be done, etc.
 - #### Artwork
-	- Are your inkscape skills better than mine? Can you improve my SVG drawing of Bathyscaphe Trieste or come up with an entirely different one which is better? Be my guest!
+	- Are your inkscape skills better than mine? Can you improve my SVG drawing of Bathyscaphe Trieste or come up with something different and better? Be my guest!
 - #### Configuration
 	- There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer, (and don't even get me started on the "devops" hoax!) so help in that area would be appreciated. For example:
 		- Automatically generating a GitHub release from a GitHub tag.
