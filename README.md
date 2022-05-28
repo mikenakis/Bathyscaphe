@@ -1,22 +1,35 @@
-[![CI-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
-[![Release-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
-![Number of files badge](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Files&logo=files&logoColor=yellow)
-![Repository Size badge](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages)
-![Language badge](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)
-![GitHub code size in bytes badge](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)
+[![CI-Workflow status badge      ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
+[![Release-Workflow status badge ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+![Number of files badge          ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Files&logo=files&logoColor=yellow)
+![Repository Size badge          ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages)
+![Language badge                 ](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)
+![GitHub code size badge         ](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)
 ![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)
-![GitHub file size in bytes badge](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)
-[![Gitter chat badge](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
- 
+![GitHub file size badge         ](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)
+[![Gitter chat badge             ](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
+![GitHub latest release badge    ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?display_name=tag&include_prereleases&sort=semver)
+[![Website badge                 ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr)
+![GitHub contributors badge      ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)
+![GitHub commit activity badge   ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe?label=Commit+activity)
+![GitHub last commit badge       ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe?label=Last+commit)
+![GitHub Release Date badge      ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=Last+release)
+![GitHub (Pre-)Release Date badge](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=Last+pre-release)
+                           
+`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`
+
+`SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
+
+<!--- TODO: enable this when on maven central: 
+      Maven Central badge /maven-central/v/:groupId/:artifactId?versionPrefix=29&versionSuffix=-android --->
+
 <!--- TODO: enable these when they become non-zero -->
 <!--- 
 [![GitHub issues badge       ](https://img.shields.io/github/issues/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
 [![GitHub issues badge       ](https://img.shields.io/github/issues-raw/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
 [![GitHub closed issues badge](https://img.shields.io/github/issues-closed/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues)
-[![GitHub closed issues badge](https://img.shields.io/github/issues-closed-raw/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues) --->
-                                                                                                              
-<!--- TODO: enable this when it becomes non-zero --->
-<!--- [![GitHub all releases badge](https://img.shields.io/github/downloads/mikenakis/Bathyscaphe/total)]() --->
+[![GitHub closed issues badge](https://img.shields.io/github/issues-closed-raw/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/issues) 
+[![GitHub all releases badge](https://img.shields.io/github/downloads/mikenakis/Bathyscaphe/total)]() 
+![GitHub Discussions badge](https://img.shields.io/github/discussions/mikenakis/Bathyscaphe) --->
 
 <!--- I am not sure what these are supposed to do --->
 <!--- <img src="https://img.shields.io/github/checks-status/mikenakis/Bathyscaphe/master?label=master&logo=github" /> --->
@@ -33,6 +46,10 @@
 
 <!--- GitHub fails to detect the license, so it always shows "not identifiable by github" ---> 
 <!--- [![GitHub license badge](https://img.shields.io/github/license/mikenakis/Bathyscaphe)]() --->
+
+<!--- Another example repository with dual license: https://github.com/evencart/evencart/blob/dev/LICENSE.txt --->
+<!--- A repository with a couple of commercial license examples: https://github.com/evencart/evencart/blob/dev/LICENSE.txt
+      (also with an example github yml that converts docx to pdf and commits back to the repository) --->
 
 # Bathyscaphe
 
@@ -223,14 +240,14 @@ Also note that with these annotations we are only promising shallow immutability
 Copyright © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr
 
 ## <a name="license">&ZeroWidthSpace;</a>License
-
+  
 - ### <a name="license-bathyscaphe-claims">&ZeroWidthSpace;</a>Module `bathyscaphe-claims`: MIT license
 
     - The `bathyscaphe-claims` module is available under the **_MIT License_**, which is a very permissive open source license, allowing Bathyscaphe annotations to be freely used in any kind of code with minimal licensing concerns. See [Wikipedia: MIT License](https://en.wikipedia.org/wiki/MIT_License).
 
 - ### <a name="license-bathyscaphe">&ZeroWidthSpace;</a>Modules `bathyscaphe` and `bathyscaphe-test`: Dual license
 
-  The `bathyscaphe` and `bathyscaphe-test` modules of Bathyscaphe are available under a dual-license scheme. You can choose either the GNUAGPL v.3 license, or the BATCL v.1 license. If you take no action regarding licensing, the license that applies by default is the GNUAGPL.  `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
+  The `bathyscaphe` and `bathyscaphe-test` modules of Bathyscaphe are available under a dual-license scheme. You can choose either the GNUAGPL v.3 license, or the BATCL v.1 license. If you take no action regarding licensing, the license that applies by default is the GNUAGPL.
 
     - #### <a name="license-bathyscaphe-agpl">&ZeroWidthSpace;</a>GNU Affero General Public License (GNUAGPL) v.3
 
