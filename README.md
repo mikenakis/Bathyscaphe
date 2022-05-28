@@ -1,7 +1,17 @@
+# Bathyscaphe
+
+#### Deep immutability and thread-safety assessment for Java objects
+
+<p align="center">
+<img title="Bathyscaphe Logo" src="bathyscaphe-logo.svg" width="256"/><br/>
+The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
+based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
+</p>
+
 [![CI-Workflow status badge      ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
 [![Release-Workflow status badge ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
-![Number of files badge          ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=Files&logo=files&logoColor=yellow)
-![Repository Size badge          ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe?label=Languages)
+![Number of files badge          ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=files&logo=files&logoColor=yellow)
+![Repository Size badge          ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe)
 ![Language badge                 ](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)
 ![GitHub code size badge         ](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)
 ![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)
@@ -9,14 +19,16 @@
 [![Gitter chat badge             ](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
 ![GitHub latest release badge    ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?display_name=tag&include_prereleases&sort=semver)
 [![Website badge                 ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr)
-![GitHub contributors badge      ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)
-![GitHub commit activity badge   ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe?label=Commit+activity)
-![GitHub last commit badge       ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe?label=Last+commit)
-![GitHub Release Date badge      ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=Last+release)
-![GitHub (Pre-)Release Date badge](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=Last+pre-release)
-                           
-`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`
+[![GitHub contributors badge      ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
+[![GitHub commit activity badge   ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
+![GitHub last commit badge       ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe)
+![GitHub Release Date badge      ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=last+release)
+![GitHub (Pre-)Release Date badge](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=last+pre-release) 
+[![GitHub pulse badge            ](https://shields.api-test.nl/badge/-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
+[![GitHub dependencies badge     ](https://shields.api-test.nl/badge/-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
+[![GitHub traffic badge          ](https://shields.api-test.nl/badge/-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
 
+`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr` 
 `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
 
 <!--- TODO: enable this when on maven central: 
@@ -51,44 +63,36 @@
 <!--- A repository with a couple of commercial license examples: https://github.com/evencart/evencart/blob/dev/LICENSE.txt
       (also with an example github yml that converts docx to pdf and commits back to the repository) --->
 
-# Bathyscaphe
-
-#### Deep immutability (and coming soon: thread-safety) assessment for Java objects
-
-<p align="center">
-<img title="Bathyscaphe Logo" src="bathyscaphe-logo.svg" width="256"/><br/>
-The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
-based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
-</p>
-
 ## Table of contents
 
 - [Description](#description)
-- [Status (Maturity) of the project](#maturity)
 - [How it works](#how-it-works)
 - [How to use](#usage)
-	- [Asserting immutability](#usage-asserting-immutability)
-		- [The objectMustBeImmutableAssertion() method](#usage-asserting-immutability-method)
-	- [Adding pre-assessments](#usage-adding-pre-assessments)
-		- [The addImmutablePreassessment() method](#usage-adding-pre-assessments-method)
-	- [Annotating fields](#usage-annotating-fields)
-		- [The @Invariable annotation](#usage-annotating-fields-invariable)
-		- [The @InvariableArray annotation](#usage-annotating-fields-invariable-array)
-	- [Self-assessment](#usage-self-assessment)
-		- [The ImmutabilitySelfAssessable interface](#usage-self-assessment-interface)
-	- [Obtaining diagnostics](#usage-obtaining-diagnostics)
-		- [The explain() method](#usage-obtaining-diagnostics-method)
+    - [Asserting immutability](#usage-asserting-immutability)
+        - [The objectMustBeImmutableAssertion() method](#usage-asserting-immutability-method)
+    - [Adding pre-assessments](#usage-adding-pre-assessments)
+        - [The addImmutablePreassessment() method](#usage-adding-pre-assessments-method)
+    - [Annotating fields](#usage-annotating-fields)
+        - [The @Invariable annotation](#usage-annotating-fields-invariable)
+        - [The @InvariableArray annotation](#usage-annotating-fields-invariable-array)
+    - [Self-assessment](#usage-self-assessment)
+        - [The ImmutabilitySelfAssessable interface](#usage-self-assessment-interface)
+    - [Obtaining diagnostics](#usage-obtaining-diagnostics)
+        - [The explain() method](#usage-obtaining-diagnostics-method)
+- [Status (Maturity) of the project](#maturity)
 - [Installation](#installation)
 - [Copyright](#copyright)
 - [License](#license)
-	- [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
-	- [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
-		- [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
-		- [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
-			- [Instructions for purchasing the Commercial License](#license-bathyscaphe-commercial-purchasing)
+    - [Module bathyscaphe-claims: MIT license](#license-bathyscaphe-claims)
+    - [Modules bathyscaphe and bathyscaphe-test: Dual license](#license-bathyscaphe)
+        - [GNU Affero General Public License (GNUAGPL)](#license-bathyscaphe-agpl)
+        - [Bathyscaphe Alternative Terms Commercial license (BATCL)](#license-bathyscaphe-commercial)
+            - [Instructions for purchasing the Commercial License](#license-bathyscaphe-commercial-purchasing)
 - [Contacting the author](#contact)
 - [Glossary](#glossary)
 - [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Sponsoring](#sponsoring)
 - [Coding style](#coding-style)
 - [Frequently Asked Questions](#faq)
 - [Poor man's issue and TODO tracking](#issues)
@@ -97,20 +101,7 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 
 Bathyscaphe is an open-source java library that you can use to inspect objects at runtime and assert that they are immutable.
 
-This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has the problem, why it really needs fixing, and why other tools fail to fix it. If not, please start by reading the post on my blog which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
-
-## <a name="maturity">&ZeroWidthSpace;</a>Status (maturity) of the project
-
-The "Technology Readiness Level" (TRL) so-to-speak of Bathyscaphe currently is "5: Technology validated in lab".
-
-The library works, it appears to be problem-free, and it produces very good results; furthermore, the library has extensive tests that achieve full coverage, and they all pass; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use. Bathyscaphe will need to receive some extensive beta testing in at least a few environments out there before it can be considered as ready for general availability.
-
-In the meantime, Bathyscaphe is likely to undergo refactoring. Luckily, Bathyscaphe has a very small interface, which means that most refactorings are likely to be internal. I have placed as many classes as possible in an "internal" package, so if you refrain from using anything in that package, you should be safe. However, there is always the chance that a certain refactoring will affect the interface of Bathyscaphe, and at this early stage I do not yet intend to hinder the evolution of Bathyscaphe in the name of maintaining backwards compatibility; therefore, if you decide to start using Bathyscaphe right now, you have to:
-
-- Either pick a version and stick to it, in which case you will not be receiving improvements as Bathyscaphe evolves,
-- Or keep upgrading to the latest version of Bathyscaphe, but with every upgrade there is a chance that your code will need modifications before it compiles again.
-
-A few versions down the road I will of course start putting the extra effort necessary to maximize backwards compatibility, and to increment the major version number if there are breaking changes.
+This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has that problem, why it needs fixing, and why other tools fail to fix it. If not, please start by reading this article which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 ## <a name="how-it-works">&ZeroWidthSpace;</a>How it works
 
@@ -228,10 +219,18 @@ Also note that with these annotations we are only promising shallow immutability
             └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
               └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
 
+## <a name="maturity">&ZeroWidthSpace;</a>Status (maturity) of the project
+
+The "Technology Readiness Level" (TRL) so-to-speak of Bathyscaphe currently is "5: Technology validated in lab".
+- The library works, it appears to be problem-free, and it produces very good results; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use.
+- There is at least one major (but optional) feature pending to be implemented: thread-safety assessment.
+- There is at least one major task pending to be done: publish on maven-central.  
+- Since the project is still young, new releases are likely to contain breaking changes. (The major version number will always be incremented to indicate so.) 
+
 ## <a name="installation">&ZeroWidthSpace;</a>Installation
 
-- In the near future, Bathyscaphe artifacts will be released to maven central, so you will not have to specify an artifact repository; however, for the time being, Bathyscaphe artifacts are not being released to maven central, and the following is happening:
-	- Although the artifacts are being built on GitHub, and GitHub does store the artifacts, GitHub makes it difficult to use it as a maven artifact repository, or in any case I do not know how to do that.
+- In the near future, Bathyscaphe artifacts will be released to maven central, so you will not have to specify an artifact repository; however, for the time being, Bathyscaphe artifacts are not being released to maven central, and the situation is as follows:
+	- Although the artifacts are being built on GitHub, and GitHub does store the artifacts, GitHub makes it difficult to use it as a maven artifact repository, or in any case I do not yet understand how to do that.
 	- There appears to be a solution involving some jitpack.io, but I could not get it to work.
 	- So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project, so your project has access to the artifacts.
 
@@ -339,37 +338,26 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 - **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
 
 ## <a name="contributing">&ZeroWidthSpace;</a>Contributing
+                        
+Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
-If you would like to contribute to Bathyscaphe, you are more than welcome to do so, but keep in mind that I will need to ask you to either assign the copyright of your contribution to me, or grant me a permissive license on your contribution. Things would otherwise become terribly complicated due to the dual-license scheme of Bathyscaphe. This means that I am going to have to ask you to agree to a **_Contributor License Agreement_** (CLA) which will probably be something like the [MongoDB Contributor Agreement](https://www.mongodb.com/legal/contributor-agreement), but I have yet to draft such a document.
+## <a name="code-of-conduct">&ZeroWidthSpace;</a>Code of Conduct
+                        
+Please see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
-- #### Legal advice
-	- Advice on legal issues would be greatly appreciated, since all this licensing business is terribly complicated to me.
-- #### Open-sourcing advice
-	- Starting an actual open-source project like Bathyscaphe is uncharted territory to me, so if you are an experienced open-source contributor, your advice and mentorship would be greatly appreciated.
-- #### Technical advice
-	- If you have given the subject of immutability some thought, then chances are you can discuss Bathyscaphe with me at a technical level. Perhaps you have some suggestion to make, or point out a mistake in my approach. I would be more than happy to discuss via e-mail or video.
-- #### Merge requests
-	- Please contact me first, (before starting to work on it, not right before submitting it,) to discuss what you want to do, why you want to do it, whether it needs to be done, how it should be done, etc.
-- #### Artwork
-	- Are your inkscape skills better than mine? Can you improve my SVG drawing of Trieste or come up with an entirely different one which is better? Be my guest!
-- #### Configuration
-	- There is still a lot of configuration/administrative work do be done on Bathyscaphe, but I am a software engineer, not an operations engineer, (and don't even get me started on the "devops" hoax!) so help in that area would be appreciated. For example:
-		- Automatically generating a GitHub release from a GitHub tag.
-			- Currently, nothing new appears in mikenakis/Bathyscaphe/releases when I execute the Release-Workflow; instead, a new entry appears in mikenakis/Bathyscaphe/releases/tag. I can manually create a release from a tag, but I would rather not. It is unclear to me how to automate this.
-		- Including binaries in a GitHub release.
-			- Currently, a release on GitHub (which I can only manually create at the moment) only contains source code in zip and tar.gz format. In addition to being automatically generated, a release should also contain the jar files.
-		- Publishing to Maven Central
-			- I have already reserved `io.github.mikenakis` on Maven Central, and now I need to deploy there; however, they have a comprehensive set of requirements which includes things that I have never done before, for example, signing code with GPG. I am slowly learning how to do each step, but someone who has done it before could greatly help in this area.
-	- The TODO list contains more things that need to be done.
-- #### Sponsorship
-	- If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a DotNet version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that always helps.
+## <a name="sponsoring">&ZeroWidthSpace;</a>Sponsoring
+
+- If you would like to fund me to continue developing Bathyscaphe, or if you would like to see a DotNet version of Bathyscaphe sooner rather than later, you can bestow me with large sums of money; that always helps.
+
+- Sponsoring link: https://paypal.me/mikenakis
 
 ## <a name="coding-style">&ZeroWidthSpace;</a>Coding style
 
 When I write code as part of a team of developers, I use the teams' coding style.  
 But when I write code for myself, I use _**my very own™**_ coding style.
+As a result, Bathyscaphe uses My Very Own™ Coding Style. 
 
-More information: [michael.gr - On Coding Style](https://blog.michael.gr/2018/04/on-coding-style.html)
+More information: [michael.gr - My Very Own™ Coding Style](https://blog.michael.gr/2018/04/on-coding-style.html)
 
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
 
@@ -504,6 +492,9 @@ TODO: add a README.md badge with stats about the tests.
 
 - Unfortunately, by looking at this page: https://shields.io/category/test-results this is not possible.
 - However, shields.io supports creating a shield from a custom json endpoint, and a custom json endpoint can be just a static json file created by the build process, so if the build process could somehow generate a json file with stats about the tests, we should be able to generate a badge.
+
+TODO: drop gitter in favor of github discussions
+- See https://docs.github.com/en/discussions/quickstart
 
 <strike>TODOL</strike> DONE: add a table of contents to README.md
 
