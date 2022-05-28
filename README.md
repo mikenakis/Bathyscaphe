@@ -295,6 +295,9 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 - **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 
+- **_Inconclusive assessment_** - See **_Provisory assessment_**.
+             
+
 - **_Inextensible Class_** - a class that may not be sub-classed (extended.) Corresponds to the presence of the language keyword `final` in the class definition. Also see opposite: **_Extensible Class_**.
 
 
@@ -304,10 +307,13 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 - **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why an object was assessed as mutable. Also see **_Assessment_**, **_Type Assessment_**.
 
 
+- **_Provisory Assessment_** - a type assessment which did not result in a conclusive "mutable" or "immutable" result. This means that each instance of that type _may and may not_ be immutable; each instance will have to be individually examined in order to reach a conclusive assessment. Most provisory type assessments contain extra information about precisely which members of each instance will require further examination.    
+  
+
 - **_Shallow Immutability_** - see **_Superficial Immutability_**
 
 
-- **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely inconsequential. Also see opposite: **_Deep Immutability_**.
+- **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely irrelevant. Also see opposite: **_Deep Immutability_**.
 
 
 - **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and another hierarchy of so-called "provisory" assessments to represent all the different ways in which a type eludes assessment, necessitating the further assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
@@ -347,8 +353,8 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 	- Bathyscaphe is _faster than lightning_: the performance overhead of using Bathyscaphe is **_zero_**.
 		- That is because performance is only relevant on production environments; bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
 		- On development environments, the speed of Bathyscaphe will depend on what you are assessing:
-			- In the best case, when assessing an object of conclusively assessable class, Bathyscaphe will do a synchronized map lookup before it determines it is immutable.
-			- In the worst case, when assessing an object of provisory class, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
+			- In the best case, when assessing an instance of a class which can be conclusively assessed, Bathyscaphe will do a synchronized map lookup before it determines that the instance is immutable. (How long it will take to determine that the instance is mutable is irrelevant, because if that happens, you are terminating anyway.)
+			- In the worst case, when assessing an instance of a class which has been assessed as provisory, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
 
 - #### Why are the tests in a separate module?
 	- Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
@@ -362,7 +368,7 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 	- The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break code that makes use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, once Bathyscaphe becomes a very mature project.
+	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break existing code that is making use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, once Bathyscaphe reaches a certain level of maturity.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
 	- The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
