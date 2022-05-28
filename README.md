@@ -8,31 +8,34 @@ The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
 based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 
-[![CI-Workflow status badge      ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
-[![Release-Workflow status badge ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+[![CI-Workflow status badge       ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
+[![Release-Workflow status badge  ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
 [![Number of files badge          ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=files&logo=files&logoColor=yellow)](#)
 [![Repository Size badge          ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe)](#)
 [![Language badge                 ](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)](#)
 [![GitHub code size badge         ](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)](#)
 [![GitHub repo size badge         ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)](#)
 [![GitHub file size badge         ](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)](#)
-[![Gitter chat badge             ](https://img.shields.io/badge/chat-on_github-4fb999?logo=googlechat)](https://github.com/mikenakis/Bathyscaphe/discussions)
-[![Gitter chat badge             ](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
+[![Gitter chat badge              ](https://img.shields.io/badge/chat-on_github-4fb999?logo=googlechat)](https://github.com/mikenakis/Bathyscaphe/discussions)
+[![Gitter chat badge              ](https://badges.gitter.im/mikenakis-Bathyscaphe/community.svg)](https://gitter.im/mikenakis-Bathyscaphe/community)
 [![GitHub latest release badge    ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?label=latest+release&include_prereleases&sort=semver)](#)
-[![Website badge                 ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr)
-[![GitHub contributors badge     ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
-[![GitHub commit activity badge  ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
+[![Website badge                  ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr)
+[![GitHub contributors badge      ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
+[![GitHub commit activity badge   ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
 [![GitHub last commit badge       ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe)](#)
 [![GitHub Release Date badge      ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=last+release)](#)
 [![GitHub (Pre-)Release Date badge](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=last+pre-release)](#) 
-[![GitHub pulse badge            ](https://img.shields.io/badge/%E2%80%8B-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
-[![GitHub dependencies badge     ](https://img.shields.io/badge/%E2%80%8B-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
-[![GitHub traffic badge          ](https://img.shields.io/badge/%E2%80%8B-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
+[![License badge                  ](https://img.shields.io/badge/license-dual-red?logo=)](https://github.com/mikenakis/Bathyscaphe/pulse)
+[![GitHub pulse badge             ](https://img.shields.io/badge/%E2%80%8B-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
+[![GitHub dependencies badge      ](https://img.shields.io/badge/%E2%80%8B-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
+[![GitHub traffic badge           ](https://img.shields.io/badge/%E2%80%8B-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
+[![IntelliJ IDEA badge            ](https://img.shields.io/badge/built_with-IntelliJ_IDEA-blue?logo=intellijIdea&logoColor=pink)]()
+[![License badge                  ](https://img.shields.io/badge/license-dual-red?logoColor=white&logo=data%3Aimage%2Fsvg%3Bbase64%2CPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0ibTIzLjkgOS43LTMuNTQtNy44OS0uMDA1LS4wMWEuNTQyLjU0MiAwIDAgMC0uMDQxLS4wNzZsLS4wMTQtLjAxOGEuNTMzLjUzMyAwIDAgMC0uMTIyLS4xMjJsLS4wMTUtLjAxMWEuNTI4LjUyOCAwIDAgMC0uMDgtLjA0NGwtLjAyNC0uMDA5YS41MjcuNTI3IDAgMCAwLS4wNjctLjAybC0uMDI4LS4wMDdhLjUyNC41MjQgMCAwIDAtLjA5Ni0uMDFoLTYuODVjLTEuMDItMS41Mi0xLjAyLTEuNTQtMiAwaC02Ljg2YS41NDMuNTQzIDAgMCAwLS4wOTYuMDFsLS4wMjguMDA3YS41MTYuNTE2IDAgMCAwLS4wNjcuMDJsLS4wMjQuMDFhLjUzNy41MzcgMCAwIDAtLjA4LjA0M2wtLjAxNS4wMTFhLjUxLjUxIDAgMCAwLS4wNTcuMDQ3bC0uMDIuMDJhLjU0My41NDMgMCAwIDAtLjA0NS4wNTVsLS4wMTQuMDE4YS41MjIuNTIyIDAgMCAwLS4wNDEuMDc1bC0uMDA1LjAxdi4wMDFMLjExNiA5LjcyYS41MzEuNTMxIDAgMCAwLS4wOTYuMzA0YzAgMi4yOCAxLjg2IDQuMTQgNC4xNCA0LjE0czQuMTQtMS44NiA0LjE0LTQuMTRhLjUzLjUzIDAgMCAwLS4wOTYtLjMwNGwtMy4yNS02LjM3IDYuMDctLjAyM3YxOC4yYy0yLjU1LjI5NC03LjAxLjM4MS03IDIuNWgxNmMwLTIuMDMtNC40OC0yLjI3LTctMi41di0xOC4xbDUuNjktLjAyLTIuOTIgNi40OWMwIC4wMDIgMCAuMDAzLS4wMDIuMDA1bC0uMDA2LjAxOGEuNTQ1LjU0NSAwIDAgMC0uMDIzLjA3NWwtLjAwNS4wMmEuNTI0LjUyNCAwIDAgMC0uMDEuMDkydi4wMDhjMCAyLjI4IDEuODYgNC4xNCA0LjE0IDQuMTQgMi4yOCAwIDQuMTQtMS44NiA0LjE0LTQuMTRhLjUyOC41MjggMCAwIDAtLjEyLS4zMzJ6Ij48L3BhdGg%2BIDwvc3ZnPg%3D%3D)]()
 
 `SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`<br/>
 `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
 
-<!--- TODO: enable this when on maven central: 
+<!--- TODO: enable this once we have releases on maven central: 
       Maven Central badge /maven-central/v/:groupId/:artifactId?versionPrefix=29&versionSuffix=-android --->
 
 <!--- TODO: enable these when they become non-zero -->
@@ -139,7 +142,7 @@ Note that this yields consistently accurate assessments in cases where static an
 
 - #### <a name="usage-adding-pre-assessments-method">&ZeroWidthSpace;</a>The `addImmutablePreassessment()` method
 
-  Suppose that we have a class which is _effectively immutable_, meaning that it behaves immutably, but under the hood it is strictly speaking mutable, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are mutable by nature.) If Bathyscaphe was to assess the immutability of this class, it would find it to be mutable; however, we know that the class behaves immutably, so we want to instruct Bathyscaphe to skip assessment and consider it as immutable. This is accomplished by adding what is known as a This "pre-assessment" or an "assessment override", as follows:
+  Suppose that we have a class which is _effectively immutable_, meaning that it behaves immutably, but under the hood it is strictly speaking mutable, either because it is making use of lazy initialization, or simply because it contains an array. (Arrays in Java are mutable by nature.) If Bathyscaphe was to assess the immutability of this class, it would find it to be mutable; however, we know that the class behaves immutably, so we want to instruct Bathyscaphe to skip assessment and consider it as immutable. This is accomplished by adding what is known as a _pre-assessment_ or _assessment override_, as follows:
 
       Bathyscaphe.addImmutablePreassessment( EffectivelyImmutableClass.class );
 
@@ -219,7 +222,7 @@ Also note that with these annotations we are only promising shallow immutability
 
 ## <a name="maturity">&ZeroWidthSpace;</a>Status (maturity) of the project
 
-The "Technology Readiness Level" (TRL) so-to-speak of Bathyscaphe currently is "5: Technology validated in lab".
+The _**Technology Readiness Level**_ (TRL) so-to-speak of Bathyscaphe currently is **_5: Technology validated in lab_**.
 - The library works, it appears to be problem-free, and it produces very good results; however, the only environment in which it is currently being put into use is the author's hobby projects, which is about as good as laboratory use.
 - There is at least one major (but optional) feature pending to be implemented: thread-safety assessment.
 - There is at least one major task pending to be done: publish on maven-central.  
@@ -286,7 +289,7 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 - **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
 
 
-- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays. (Arrays in Java are mutable by nature.) The most famous example of such a class is `java.lang.String`. Note that this definition differs from the one given in "Java Concurrency In Practice" section 3.5.4 "Effectively Immutable Objects", which is not really about objects, but rather about the **_treatment_** of objects: the book talks about situations where very mutable objects (for example `java.util.Date`) are being passed around between threads, but the threads refrain from mutating them, so all is good. This sounds like catastrophe waiting to happen, and Bathyscaphe exists precisely in order to prevent programmers from doing things like that.
+- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays. (Arrays in Java are mutable by nature.) The most famous example of such a class is `java.lang.String`. Note that this definition differs from the one given in the book _Java Concurrency In Practice_, section 3.5.4 _Effectively Immutable Objects_, which is not really about objects, but rather about **_treatment_** of objects: the book talks about situations where mutable objects (for example `java.util.Date`) are being passed around between threads, but the threads refrain from mutating them, so all is good. This sounds like catastrophe waiting to happen, and Bathyscaphe exists precisely in order to prevent programmers from doing things like that.
 
 
 - **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` in the class definition. Also see opposite: **_Inextensible Class_**.
@@ -307,7 +310,7 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 - **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why an object was assessed as mutable. Also see **_Assessment_**, **_Type Assessment_**.
 
 
-- **_Provisory Assessment_** - a type assessment which did not result in a conclusive "mutable" or "immutable" result. This means that each instance of that type _may and may not_ be immutable; each instance will have to be individually examined in order to reach a conclusive assessment. Most provisory type assessments contain extra information about precisely which members of each instance will require further examination.    
+- **_Provisory Assessment_** - a type assessment which did not result in a conclusive **_mutable_** or **_immutable_** result. This means that each instance of that type _may and may not_ be immutable; each instance will have to be individually examined in order to reach a conclusive assessment. Most provisory type assessments contain extra information about precisely which members of each instance will require further examination.    
   
 
 - **_Shallow Immutability_** - see **_Superficial Immutability_**
@@ -316,7 +319,7 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 - **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely irrelevant. Also see opposite: **_Deep Immutability_**.
 
 
-- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and another hierarchy of so-called "provisory" assessments to represent all the different ways in which a type eludes assessment, necessitating the further assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
+- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and another hierarchy of so-called **_provisory_** assessments to represent all the different ways in which a type eludes assessment, necessitating the further assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
 
 
 - **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
@@ -358,7 +361,7 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 
 - #### Why are the tests in a separate module?
 	- Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
-	- If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a "monorepo" which contains all modules in one directory structure, with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
+	- If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a _monorepo_ which contains all modules in one directory structure, with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
 
 - #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
 	- Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it never returns `false`; it either returns `true`, or throws an exception.
@@ -368,7 +371,7 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 	- The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
 
 - #### Why throw an exception containing an assessment instead of returning the assessment?
-	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the "internal" package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break existing code that is making use of Bathyscaphe. The assessment hierarchy might be moved out of the "internal" package a few years down the road, once Bathyscaphe reaches a certain level of maturity.
+	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the `internal` package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break existing code that is making use of Bathyscaphe. The assessment hierarchy might be moved out of the `internal` package a few years down the road, once Bathyscaphe reaches a certain level of maturity.
 
 - #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
 	- The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
@@ -384,7 +387,7 @@ More information: [michael.gr - My Very Own™ Coding Style](https://blog.michae
 
 ## <a name="feedback">&ZeroWidthSpace;</a>Feedback
 
-Please come to our [discussions area](https://github.com/mikenakis/Bathyscaphe/discussions) to leave feedback, criticism, praise, feature requests, bug reports, haikus, whatever.  
+Please visit our [discussions area](https://github.com/mikenakis/Bathyscaphe/discussions) to leave feedback, criticism, praise, feature requests, bug reports, haikus, whatever.  
 
 ## <a name="issues">&ZeroWidthSpace;</a>Poor man's issue and TODO tracking
 

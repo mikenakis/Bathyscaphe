@@ -44,3 +44,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 - ### Violations    
 
   If you have good reasons to believe that an organization or individual is using this software in ways which are not compliant with the GNU AGPL v.3, while at the same time they have not purchased a commercial license for the particular version of the software that they are using, please contact the author.
+
+`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`<br/>
+`SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
