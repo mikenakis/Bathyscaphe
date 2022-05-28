@@ -29,8 +29,7 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 [![GitHub dependencies badge     ](https://img.shields.io/badge/%E2%80%8B-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
 [![GitHub traffic badge          ](https://img.shields.io/badge/%E2%80%8B-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
 
-`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`
-
+`SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`<br/>
 `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
 
 <!--- TODO: enable this when on maven central: 
