@@ -18,7 +18,8 @@
 	<artifactId>bathyscaphe-claims</artifactId>
 	<version>1.12-SNAPSHOT</version>
 
-	<name>mikenakis:bathyscaphe-claims</name>
+
+	<name>BathyscapheClaims</name>
 	<description>Annotations and interfaces to use in your code for interoperability with mikenakis:bathyscaphe</description>
 	<url>https://github.com/mikenakis/Bathyscaphe</url>
 
