@@ -270,7 +270,7 @@ The _**Technology Readiness Level**_ (TRL) so-to-speak of Bathyscaphe currently 
 - In the near future, Bathyscaphe artifacts will be released to maven central, so you will not have to specify an artifact repository; however, for the time being, Bathyscaphe artifacts are not being released to maven central, and the situation is as follows:
 	- Although the artifacts are being built on GitHub, and GitHub does store the artifacts, GitHub makes it difficult to use it as a maven artifact repository, or in any case I do not yet understand how to do that.
 	- There appears to be a solution involving some jitpack.io, but I could not get it to work.
-	- So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project, so your project has access to the artifacts.
+	- So, while I am figuring all this out, you can simply clone Bathyscaphe into your project, so that it builds along with your project.
 
 ## <a name="license">&ZeroWidthSpace;</a>Copyright & License
  
@@ -285,60 +285,8 @@ For information regarding licensing Bathyscaphe, please see [LICENSE.md](LICENSE
 The author's e-mail address can be found on the sidebar of his blog: https://blog.michael.gr.
 
 ## <a name="glossary">&ZeroWidthSpace;</a>Glossary
-
-<sup>Note: some of the glossary terms (i.e. **_variable_** / **_invariable_**, **_extensible_** / **_inextensible_**) are introduced in order to mitigate the ambiguities caused by Java's unfortunate decision to reuse certain language keywords (i.e. `final`) to mean entirely different things in different situations. (i.e. a `final` class vs. a `final` field.)</sup>
-
-- **_Assertion Method_** - a pattern of my own devise, for writing comprehensive assertions.
-	- An assertion method is identified by the suffix `Assertion` in its name.
-	- An assertion method is only meant to be invoked from within an `assert` statement.
-	- To prevent misuse, an assertion method should generally avoid returning `false` to indicate failure; instead, an assertion method should either return `true`, or throw an exception.
-	- For clarity, if an assertion method checks one thing and throws one exception, then the exception should have the same name as the assertion method, only suffixed with `Exception` instead of `Assertion`.
-		- From this it follows that exceptions should have assertive names, describing what is expected, such as `PointerMustBeNonNullException`, instead of declarative names, describing postmortem findings, such as `NullPointerException`. One day I will write an article explaining this in greater detail.
-
-
-- **_Assessment_** - the result of examining an object or a class to determine whether it is immutable or not. Bathyscaphe contains a hierarchy of assessments, which is divided into a few distinct sub-hierarchies: one for type assessments, one for object assessments, one for field assessments, and one for field value assessments. These hierarchies all share a common ancestor for the sole purpose of constructing assessment trees, where the children of an assessment are the reasons due to which the assessment was issued. Also see **_Type assessment_**, **_Object assessment_**.
-
-
-- **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
-
-
-- **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
-
-
-- **_Effectively Immutable_** - classes that behave in an immutable fashion, but under the hood are strictly speaking mutable, due to various reasons, for example because they perform lazy initialization, or because they contain arrays. (Arrays in Java are mutable by nature.) The most famous example of such a class is `java.lang.String`. Note that this definition differs from the one given in the book _Java Concurrency In Practice_, section 3.5.4 _Effectively Immutable Objects_, which is not really about objects, but rather about **_treatment_** of objects: the book talks about situations where mutable objects (for example `java.util.Date`) are being passed around between threads, but the threads refrain from mutating them, so all is good. This sounds like catastrophe waiting to happen, and Bathyscaphe exists precisely in order to prevent programmers from doing things like that.
-
-
-- **_Extensible class_** - a class that may be sub-classed (extended.) Corresponds to the absence of the language keyword `final` in the class definition. Also see opposite: **_Inextensible Class_**.
-
-
-- **_Freezable class_** - a class which begins its life as mutable, so that it can undergo complex initialization, and is at some moment instructed to freeze in-place, thus becoming immutable from that moment on. For more information see the relevant appendix in the introductory blog post: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
-
-
-- **_Inconclusive assessment_** - See **_Provisory assessment_**.
-             
-
-- **_Inextensible Class_** - a class that may not be sub-classed (extended.) Corresponds to the presence of the language keyword `final` in the class definition. Also see opposite: **_Extensible Class_**.
-
-
-- **_Invariable Field_** - a field that cannot be mutated. Corresponds to the presence of the language keyword `final` in the field definition. Note that invariability here refers only to the field itself, and is entirely without regards to whether the object referenced by the field is immutable or not. Also see opposite: **_Variable Field_**.
-
-
-- **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why an object was assessed as mutable. Also see **_Assessment_**, **_Type Assessment_**.
-
-
-- **_Provisory Assessment_** - a type assessment which did not result in a conclusive **_mutable_** or **_immutable_** result. This means that each instance of that type _may and may not_ be immutable; each instance will have to be individually examined in order to reach a conclusive assessment. Most provisory type assessments contain extra information about precisely which members of each instance will require further examination.    
-  
-
-- **_Shallow Immutability_** - see **_Superficial Immutability_**
-
-
-- **_Superficial Immutability_** - refers to the immutability of a single object, without regards to the immutability of objects that it references. It is among the fundamental premises of Bathyscaphe that this type of immutability is largely irrelevant. Also see opposite: **_Deep Immutability_**.
-
-
-- **_Type Assessment_** - represents the result of examining a class to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that type assessment is quite often inconclusive, in which case we must go one step further and assess the immutability of instances of that class. (Objects.) Bathyscaphe has a single assessment to express that a class is immutable, a hierarchy of assessments to represent all the different ways in which a class may be mutable, and another hierarchy of so-called **_provisory_** assessments to represent all the different ways in which a type eludes assessment, necessitating the further assessment of instances of that type. The information contained in type assessments provides explanations as to why that particular assessment was issued. Furthermore, the information contained in provisory assessments is used by Bathyscaphe as a guide in assessing the immutability of instances. Also see **_Assessment_**, **_Object Assessment_**.
-
-
-- **_Variable Field_** - a field that is free to mutate. Corresponds to the absence of the language keyword `final` in the field definition. Also see opposite: **_Invariable Field_**.
+                       
+See [GLOSSARY.md](GLOSSARY.md)
 
 ## <a name="contributing">&ZeroWidthSpace;</a>Contributing
                         
@@ -363,43 +311,8 @@ As a result, Bathyscaphe uses My Very Own™ Coding Style.
 More information: [michael.gr - My Very Own™ Coding Style](https://blog.michael.gr/2018/04/on-coding-style.html)
 
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
-
-- #### How large are the Bathyscaphe JARs?
-	- The `bathyscaphe-claims` module is microscopic, since it contains no code, only a few definitions.
-	- The `bathyscaphe` module qualifies as very small, as its JAR file is of the order of 100 kilobytes.
-
-- #### What is the performance overhead of using Bathyscaphe?
-	- Bathyscaphe is _faster than lightning_: the performance overhead of using Bathyscaphe is **_zero_**.
-		- That is because performance is only relevant on production environments; bathyscaphe is meant to be used via assertions, which are meant to be disabled on production, therefore Bathyscaphe is not meant to actually do any work on production.
-		- On development environments, the speed of Bathyscaphe will depend on what you are assessing:
-			- In the best case, when assessing an instance of a class which can be conclusively assessed, Bathyscaphe will do a synchronized map lookup before it determines that the instance is immutable. (How long it will take to determine that the instance is mutable is irrelevant, because if that happens, you are terminating anyway.)
-			- In the worst case, when assessing an instance of a class which has been assessed as provisory, Bathyscaphe will use reflection to traverse the entire object graph reachable via provisory fields, while keeping a lock on a synchronized map. The map lock could of course be optimized, but there is no need, because performance is largely irrelevant on development.
-
-- #### Why are the tests in a separate module?
-	- Because I have the habit of always placing the tests in a separate module. That's what I do. It's my thing. One day I will write an article explaining why I do this.
-	- If you would like to work with Bathyscaphe, do not obtain the sources from maven, because this will give you the sources of each module separately; instead, clone the bathyscaphe repository from GitHub. This is a _monorepo_ which contains all modules in one directory structure, with a parent pom.xml at the root. All you need to do then is point your IDE to the parent pom, and you will have all modules in your IDE.
-
-- #### Why `assert objectMustBeImmutableAssertion( o )` instead of simply `assert !isMutable( o )`?
-	- Because `isMutable()` would imply that the method returns either `true` or `false`, while this method works very differently: it never returns `false`; it either returns `true`, or throws an exception.
-
-- #### Why does `objectMustBeImmutableAssertion()` throw an exception instead of returning `false` ?
-	- Because the method must produce something more substantial than a boolean, so that you can obtain diagnostics from it. An exception is something substantial, from which you can obtain diagnostics.
-	- The alternative would be to have the method somehow produce diagnostic text right before returning `false`, which would then raise other questions, like where to emit that text to. Needless to say, I would have found such behavior mighty annoying.
-
-- #### Why throw an exception containing an assessment instead of returning the assessment?
-	- Because if I was to return the assessment then I would have to make the entire assessment hierarchy public, (i.e. move it out of the `internal` package,) and that would severely impede the evolution of Bathyscaphe, since any change to the assessments would break existing code that is making use of Bathyscaphe. The assessment hierarchy might be moved out of the `internal` package a few years down the road, once Bathyscaphe reaches a certain level of maturity.
-
-- #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `objectMustBeImmutable()`?
-	- The suffix `Assertion` indicates that this is an **_assertion method_**. (See glossary.)
-
-- #### Why is the method called `objectMustBeImmutableAssertion()` instead of simply `mustBeImmutableAssertion()`?
-	- Because this is an _assertion method_, (see glossary,) whose name must match the name of the exception that it throws, and the exception name could not begin with `MustBe`, it has to begin with `ObjectMustBe`, so the method is named accordingly.
-
-- #### Why is the exception called `ObjectMustBeImmutableException` instead of simply `ObjectIsMutableException`?
-	- Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
-
-- #### Is it possible to use Bathyscaphe without assertions?
-	- Of course, it is possible. You know what else is possible? using bubble-sort instead of quick-sort. The question is not whether it is possible, the question is whether it is intelligent.
+              
+See [FAQ.md](FAQ.md)
 
 ## <a name="feedback">&ZeroWidthSpace;</a>Feedback
 
