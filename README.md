@@ -10,7 +10,7 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 
 [![CI-Workflow status badge       ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
 [![Release-Workflow status badge  ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
-[![IntelliJ IDEA badge            ](https://img.shields.io/badge/built_with-IntelliJ_IDEA-blue?logo=intellijIdea&logoColor=pink)](#;)
+[![IntelliJ IDEA badge            ](https://img.shields.io/badge/built_with-IntelliJ_IDEA-blue?logo=intellijIdea&logoColor=pink&color=pink)](#;)
 [![Number of files badge          ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=files&logo=files&logoColor=yellow)](#;)
 [![Repository Size badge          ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe)](#;)
 [![Language badge                 ](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)](#;)
@@ -100,16 +100,23 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 
 Bathyscaphe is an open-source java library that you can use to inspect objects at runtime and assert that they are immutable.
 
-This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has that problem, why it needs fixing, and why other tools fail to fix it. If not, please start by reading this article which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
+This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has this problem, why it needs fixing, and why other tools fail to fix it. If not, please start by reading this article which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
 ## <a name="how-it-works">&ZeroWidthSpace;</a>How it works
 
-Bathyscaphe consists of the following modules:
+Bathyscaphe consists of two parts: 
 
-1. **bathyscaphe-claims** contains annotations that you can add to your classes to guide assessment. Most client code is expected to make use of only this module of bathyscaphe.
-1. **bathyscaphe** is the core immutability assessment library. A software system is likely to invoke this library only from a few places where immutability needs to be ascertained. For example, a custom `HashMap` class might contain a call to bathyscaphe, to assert that keys added to it are immutable.
-1. **bathyscaphe-test** is, of course, the tests.
-
+1. **Bathyscaphe**
+   - Repository: https://github.com/mikenakis/Bathyscaphe
+   - Contains the immutability assessment library.
+   - Few software systems are likely to invoke this library, and then only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might contain a call to bathyscaphe, to assert that keys added to it are immutable.
+   - This module is licensed under a dual-license scheme, allowing you to choose either a free-of-charge copyleft license, or a proprietary license for a small fee.
+2. **BathyscapheClaims**
+   - Repository: https://github.com/mikenakis/BathyscapheClaims
+   - Contains annotations, interfaces, etc. that you can add to your classes to guide assessment. 
+   - Most client code is expected to make use of only this module of Bathyscaphe.
+   - This module is licensed under the MIT license, to allow widespread use with minimal licensing concerns and free-of-charge.
+	
 When assessing whether an object is immutable or not, Bathyscaphe begins by looking at the class of the object, and issues one of the following assessments:
 
 1. Mutable
@@ -118,7 +125,7 @@ When assessing whether an object is immutable or not, Bathyscaphe begins by look
 
 The first two are straightforward: if a class is conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done; however, if the class receives a provisory assessment, then Bathyscaphe proceeds to examine the content of the object.
 
-For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will recursively assess the actual value of that field.
+For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will recursively assess the immutability of the actual value of that field.
 
 Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, they have no option but to err on the side of caution and assess the containing class as mutable.
 
@@ -154,7 +161,7 @@ If you write an effectively immutable class, you should use the annotations foun
 
 - #### <a name="usage-annotating-fields-invariable">&ZeroWidthSpace;</a>The `@Invariable` annotation
 
-  Suppose that we have a non-final field in an otherwise immutable class. The presence of such a field would normally cause Bathyscaphe to assess the declaring class as mutable; however, we know that this particular field will behave as if it was immutable, so we would like to tell Bathyscaphe to refrain from assessing that field, and consider it as immutable. This is accomplished as follows:
+  Suppose that we have a non-final field in an otherwise immutable class. The presence of such a field would normally cause Bathyscaphe to assess the declaring class as mutable; however, we know that this particular field will behave as if it was final, so we would like to tell Bathyscaphe to consider it as final. This is accomplished as follows:
 
       @Invariable private int myLazilyInitializedHashCode;
 
@@ -172,7 +179,7 @@ Note that `@Invariable` and `@InvariableArray` can be combined.
 
 Also note that it is illegal to use either of these annotations on non-private fields, because a class cannot give any promises about fields that may be mutated by other classes.
 
-Also note that with these annotations we are only promising shallow immutability; Bathyscaphe will still perform all the checks necessary in order to guarantee deep immutability. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `byte`, then Bathyscaphe would recursively assess the immutability of `Foo` as part of assessing the immutability of the field.
+Also note that with these annotations we are only promising **_shallow immutability_**; Bathyscaphe will still perform all the checks necessary in order to ascertain **_deep immutability_**. So, for example, if the field was of type `Foo` instead of `int`, or if the array field was an array of `Foo` instead of an array of `byte`, then Bathyscaphe would recursively assess the immutability of `Foo` as part of assessing the immutability of the field.
 
 ### <a name="usage-self-assessment">&ZeroWidthSpace;</a>Self-assessment
 
@@ -182,9 +189,10 @@ Also note that with these annotations we are only promising shallow immutability
 
       public class MyFreezableClass implements ImmutabilitySelfAssessable
       {
-          private int mutable; private boolean frozen;
+          private int mutable; 
+          private boolean frozen;
           public void mutate() { assert !frozen; mutable++; }
-          public void freeze() { frozen = true; }
+          public void freeze() { assert !frozen; frozen = true; }
           @Override public boolean isImmutable() { return frozen; }
       }
 
@@ -242,7 +250,7 @@ The _**Technology Readiness Level**_ (TRL) so-to-speak of Bathyscaphe currently 
 - Module `bathyscape`:
   - Requires java 17 to compile, and it actually makes use of java 17 features.
   - I will be upgrading to java 18 as soon as I find the chance. 
-  - I do not care if that is too avant-garde for some people. By the time Bathyscaphe becomes widely adopted, Java 18 will be old.
+  - I do not care if that is too avant-garde for some people; by the time Bathyscaphe becomes widely adopted, Java 18 will be old.
   - It might run on older JREs, but I have not tried it.
   - It will almost certainly run on older JREs if I specify an older \<target\> to the java-compiler-plugin, but I have not tried that either.
   - I have not tried these things because this kind of experimentation has very low priority at the moment.  
