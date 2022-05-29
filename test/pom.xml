@@ -13,10 +13,10 @@
 	<parent>
 		<groupId>io.github.mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.11</version>
+		<version>1.12-SNAPSHOT</version>
 	</parent>
 	<artifactId>bathyscaphe-test</artifactId>
-	<version>1.11</version>
+	<version>1.12-SNAPSHOT</version>
 
 	<name>mikenakis:bathyscaphe-test</name>
 	<description>Automated software tests for mikenakis:bathyscaphe.</description>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>io.github.mikenakis</groupId>
 			<artifactId>bathyscaphe</artifactId>
-			<version>1.11</version>
+			<version>1.12-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
