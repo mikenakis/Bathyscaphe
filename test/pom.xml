@@ -1,8 +1,8 @@
 <!--
   ~ Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
   ~
-  ~ Licensed under a dual-license scheme; see LICENSE.md for details.
-  ~ You may not use this file except in compliance with one of the licenses.
+  ~ For licensing information, please see LICENSE.md.
+  ~ You may not use this file except in compliance with the license.
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -18,7 +18,7 @@
 	<artifactId>bathyscaphe-test</artifactId>
 	<version>1.12-SNAPSHOT</version>
 
-	<name>mikenakis:bathyscaphe-test</name>
+	<name>BathyscapheTest</name>
 	<description>Automated software tests for mikenakis:bathyscaphe.</description>
 	<url>https://github.com/mikenakis/Bathyscaphe</url>
 

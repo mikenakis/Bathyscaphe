@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
  *
- * Licensed under a dual-license scheme; see LICENSE.md for details.
- * You may not use this file except in compliance with one of the licenses.
+ * For licensing information, please see LICENSE.md.
+ * You may not use this file except in compliance with the license.
  */
 
 package io.github.mikenakis.bathyscaphe.internal.type.field;
@@ -10,7 +10,6 @@ package io.github.mikenakis.bathyscaphe.internal.type.field;
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
-import io.github.mikenakis.bathyscaphe.internal.type.Decomposer;
 import io.github.mikenakis.bathyscaphe.internal.type.TypeAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
@@ -18,7 +17,6 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.UnderAssessment
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.ArrayOfMutableElementTypeMutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ArrayOfProvisoryElementTypeProvisoryTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.CompositeProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMayNotAlreadyBeInvariableException;

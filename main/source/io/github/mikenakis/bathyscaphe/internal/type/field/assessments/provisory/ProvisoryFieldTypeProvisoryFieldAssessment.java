@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
  *
- * Licensed under a dual-license scheme; see LICENSE.md for details.
- * You may not use this file except in compliance with one of the licenses.
+ * For licensing information, please see LICENSE.md.
+ * You may not use this file except in compliance with the license.
  */
 
 package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory;

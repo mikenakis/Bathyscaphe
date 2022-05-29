@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2022 Michael Belivanakis a.k.a. MikeNakis, michael.gr
  *
- * Licensed under a dual-license scheme; see LICENSE.md for details.
- * You may not use this file except in compliance with one of the licenses.
+ * For licensing information, please see LICENSE.md.
+ * You may not use this file except in compliance with the license.
  */
 package io.github.mikenakis.debug;
 
@@ -48,9 +48,8 @@ public final class Debug
 	}
 
 	/**
-	 * Invokes the given {@link Runnable}, allowing the debugger to break on any exceptions that may be thrown within the {@link Runnable} and go uncaught by
-	 * the {@link Runnable}. If the debugger is properly configured, (see class comment,) the debugger will break on any throwing statement within the call tree
-	 * of the {@link Supplier} even if there exists a catch-all clause in the call tree above the call to this {@link #boundary(Runnable)}.
+	 * Invokes the given {@link Runnable}, allowing the debugger to break on the throwing statement of any exception that is thrown by the {@link Runnable} and
+	 * goes uncaught by the {@link Runnable}, even if there exists a catch-all clause in the call tree above the call to this method.
 	 *
 	 * @param procedure0 the {@link Runnable} to invoke.
 	 */
@@ -73,10 +72,8 @@ public final class Debug
 	}
 
 	/**
-	 * Invokes a given {@link Supplier} and returns the result, allowing the debugger to break on any exceptions that may be thrown within the {@link Supplier}
-	 * and go uncaught by the {@link Supplier}. If the debugger is properly configured, (see class comment,) the debugger will break on any throwing statement
-	 * within the call tree of the {@link Supplier} even if there exists a catch-all clause in the call tree above the call to this {@link #boundary(Supplier)}
-	 * method.
+	 * Invokes a given {@link Supplier} and returns the result, allowing the debugger to break on the throwing statement of any exception that is thrown by the
+	 * {@link Supplier} and goes uncaught by the {@link Supplier}, even if there exists a catch-all clause in the call tree above the call to this method.
 	 *
 	 * @param function0 the {@link Supplier} to invoke.
 	 * @param <T>       the type of the result returned by the {@link Supplier}.
