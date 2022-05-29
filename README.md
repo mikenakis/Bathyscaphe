@@ -68,6 +68,7 @@ based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques
 ## Table of contents
 
 - [Description](#description)
+- [Highlights](#highlights)
 - [How it works](#how-it-works)
 - [How to use](#usage)
     - [Asserting immutability](#usage-asserting-immutability)
@@ -102,6 +103,17 @@ Bathyscaphe is an open-source java library that you can use to inspect objects a
 
 This document contains reference material about Bathyscaphe, assuming that you already understand what problem it solves, why it is a problem, why everyone has this problem, why it needs fixing, and why other tools fail to fix it. If not, please start by reading this article which introduces Bathyscaphe: [michael.gr - Bathyscaphe](https://blog.michael.gr/2022/05/bathyscaphe.html)
 
+## <a name="highlights">&ZeroWidthSpace;</a>Highlights
+
+- It works, as opposed to static analysis tools, which do not work. For example, it will assess `List.of( new StringBuilder() )` as mutable, but `List.of( 1 )` as immutable.
+- It is lightning fast: the `assert` keyword ensures **_zero performance penalty on production_**.
+- It is very small: The `Bathyscaphe` JAR is about 100 kilobytes. The `BathyscapheClaims` JAR is a couple of kilobytes.
+- It has no dependencies outside of the core Java Runtime Environment.
+- It is easy to use: Just `assert Bathyscaphe.objectMustBeImmutableAssertion( myObject );` and if it fails, it yields extensive diagnostics in human-readable form explaining precisely why this happened. 
+- It is easy to integrate: Just add a maven-central dependency. (Coming soon.)
+- The annotations module, which will be used by most code out there, comes with a free-of-charge and very permissive license (MIT).
+- The actual assessment module comes with a choice of either a free-of-charge copyleft license (AGPL), or an inexpensive commercial license. 
+
 ## <a name="how-it-works">&ZeroWidthSpace;</a>How it works
 
 Bathyscaphe consists of two parts: 
@@ -110,12 +122,10 @@ Bathyscaphe consists of two parts:
    - Repository: https://github.com/mikenakis/Bathyscaphe
    - Contains the immutability assessment library.
    - Few software systems are likely to invoke this library, and then only from a few places, where immutability needs to be ascertained. For example, a custom `HashMap` class might contain a call to bathyscaphe, to assert that keys added to it are immutable.
-   - This module is licensed under a dual-license scheme, allowing you to choose either a free-of-charge copyleft license, or a proprietary license for a small fee.
 2. **BathyscapheClaims**
    - Repository: https://github.com/mikenakis/BathyscapheClaims
    - Contains annotations, interfaces, etc. that you can add to your classes to guide assessment. 
    - Most client code is expected to make use of only this module of Bathyscaphe.
-   - This module is licensed under the MIT license, to allow widespread use with minimal licensing concerns and free-of-charge.
 	
 When assessing whether an object is immutable or not, Bathyscaphe begins by looking at the class of the object, and issues one of the following assessments:
 
@@ -127,7 +137,7 @@ The first two are straightforward: if a class is conclusively assessed as mutabl
 
 For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will recursively assess the immutability of the actual value of that field.
 
-Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, they have no option but to err on the side of caution and assess the containing class as mutable.
+Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, (such as an interface, or any non-final type,) they have no option but to err on the side of caution and assess the containing class as mutable.
 
 ## <a name="usage">&ZeroWidthSpace;</a>How to use
 
@@ -189,7 +199,7 @@ Also note that with these annotations we are only promising **_shallow immutabil
 
       public class MyFreezableClass implements ImmutabilitySelfAssessable
       {
-          private int mutable; 
+          private int counter; //obviously mutable 
           private boolean frozen;
           public void mutate() { assert !frozen; mutable++; }
           public void freeze() { assert !frozen; frozen = true; }
