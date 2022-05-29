@@ -16,6 +16,9 @@
 - **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
 
 
+- **_Conclusive Assessment_** - an assessment which classified a type as definitely mutable or definitely immutable. This means that instances of this type can receive the same assessment without any further inspection of their contents. Also see opposite: **_Inconclusive assessment_**. 
+
+
 - **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.
 
 
@@ -40,7 +43,7 @@
 - **_Object Assessment_** - represents the result of examining an instance of a class (an object) to determine whether it is immutable or not. One of the fundamental premises of Bathyscaphe is that we must assess objects for immutability because quite often the assessment of types is inconclusive. Bathyscaphe has one assessment to express that an object is immutable, but an entire hierarchy of assessments for all the different ways in which an object can be mutable, so that it can provide diagnostics as to precisely why an object was assessed as mutable. Also see **_Assessment_**, **_Type Assessment_**.
 
 
-- **_Provisory Assessment_** - a type assessment which did not result in a conclusive **_mutable_** or **_immutable_** result. This means that each instance of that type _may and may not_ be immutable; each instance will have to be individually examined in order to reach a conclusive assessment. Most provisory type assessments contain extra information about precisely which members of each instance will require further examination.    
+- **_Provisory Assessment_** - a type assessment which did not result in a conclusive **_mutable_** or **_immutable_** result. This means that each instance of that type _may and may not_ be immutable; each instance will have to be individually examined in order to issue a final assessment for that instance. Most provisory type assessments contain extra information about precisely which members of each instance will require further examination.    
   
 
 - **_Shallow Immutability_** - see **_Superficial Immutability_**
