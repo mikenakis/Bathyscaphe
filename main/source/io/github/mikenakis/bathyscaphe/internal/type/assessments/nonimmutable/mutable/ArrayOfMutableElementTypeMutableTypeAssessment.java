@@ -20,9 +20,9 @@ public class ArrayOfMutableElementTypeMutableTypeAssessment extends MutableTypeA
 {
 	public final MutableTypeAssessment elementTypeAssessment;
 
-	public ArrayOfMutableElementTypeMutableTypeAssessment( Class<?> jvmClass, MutableTypeAssessment elementTypeAssessment )
+	public ArrayOfMutableElementTypeMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe, MutableTypeAssessment elementTypeAssessment )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert jvmClass.isArray();
 		assert jvmClass.getComponentType() == elementTypeAssessment.type;
 		this.elementTypeAssessment = elementTypeAssessment;

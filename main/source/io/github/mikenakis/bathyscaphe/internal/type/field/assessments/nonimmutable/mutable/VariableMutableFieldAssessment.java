@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with the license.
  */
 
-package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable;
+package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable;
 
 import io.github.mikenakis.bathyscaphe.internal.type.field.FieldAssessor;
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
@@ -20,9 +20,9 @@ import java.lang.reflect.Field;
  */
 public final class VariableMutableFieldAssessment extends MutableFieldAssessment
 {
-	public VariableMutableFieldAssessment( Field field )
+	public VariableMutableFieldAssessment( Field field, boolean threadSafe )
 	{
-		super( field );
-		assert !FieldAssessor.isInvariableField( field );
+		super( field, threadSafe );
+		assert !FieldAssessor.isInvariable( field );
 	}
 }

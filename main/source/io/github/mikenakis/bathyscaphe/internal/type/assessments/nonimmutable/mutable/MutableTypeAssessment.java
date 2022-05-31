@@ -16,5 +16,5 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.No
  */
 public abstract class MutableTypeAssessment extends NonImmutableTypeAssessment
 {
-	protected MutableTypeAssessment( Class<?> type ) { super( type ); }
+	protected MutableTypeAssessment( Class<?> type, boolean threadSafe ) { super( type, threadSafe ); }
 }

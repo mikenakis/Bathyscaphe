@@ -11,6 +11,7 @@ import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.UnderAssessmentTypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.NonImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.ArrayMutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MultiReasonMutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableFieldMutableTypeAssessment;
@@ -29,10 +30,11 @@ import io.github.mikenakis.bathyscaphe.internal.type.field.FieldAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.FieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.ImmutableFieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.UnderAssessmentFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.MutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.MutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -61,17 +63,36 @@ final class Reflector
 		{
 			assert Helpers.isClass( type ) : new SelfAssessableAnnotationIsOnlyApplicableToClassException( type );
 			assert !(assessment instanceof ImmutableTypeAssessment) : new SelfAssessableClassMustNotBeImmutableException( type );
-			return new SelfAssessableProvisoryTypeAssessment( type );
+			NonImmutableTypeAssessment nonImmutableTypeAssessment = (NonImmutableTypeAssessment)assessment;
+			return new SelfAssessableProvisoryTypeAssessment( type, nonImmutableTypeAssessment.threadSafe );
 		}
 		return assessment;
 	}
 
+	private static boolean isAnnotatedThreadSafe( Class<?> type )
+	{
+		for( ;; )
+		{
+			for( Annotation annotation : type.getAnnotations() )
+				if( annotation.getClass().getSimpleName().equals( "ThreadSafe" ) )
+					return true;
+			for( Class<?> interfaceClass : type.getInterfaces() )
+				if( isAnnotatedThreadSafe( interfaceClass ) )
+					return true;
+			type = type.getSuperclass();
+			if( type == null )
+				break;
+		}
+		return false;
+	}
+
 	private TypeAssessment assess0( Class<?> type )
 	{
+		boolean threadSafe = isAnnotatedThreadSafe( type );
 		if( type.isArray() )
-			return new ArrayMutableTypeAssessment( type );
+			return new ArrayMutableTypeAssessment( type, threadSafe );
 		if( type.isInterface() )
-			return new InterfaceProvisoryTypeAssessment( type );
+			return new InterfaceProvisoryTypeAssessment( type, threadSafe );
 
 		List<ProvisoryTypeAssessment> provisoryReasons = new ArrayList<>();
 		List<MutableTypeAssessment> mutableReasons = new ArrayList<>();
@@ -82,10 +103,10 @@ final class Reflector
 			switch( superclassAssessment )
 			{
 				case MutableTypeAssessment mutableTypeAssessment:
-					mutableReasons.add( new MutableSuperclassMutableTypeAssessment( type, mutableTypeAssessment ) );
+					mutableReasons.add( new MutableSuperclassMutableTypeAssessment( type, threadSafe, mutableTypeAssessment ) );
 					break;
 				case ProvisoryTypeAssessment provisoryTypeAssessment:
-					provisoryReasons.add( new ProvisorySuperclassProvisoryTypeAssessment( type, provisoryTypeAssessment ) );
+					provisoryReasons.add( new ProvisorySuperclassProvisoryTypeAssessment( type, threadSafe, provisoryTypeAssessment ) );
 					break;
 				default:
 					assert superclassAssessment instanceof ImmutableTypeAssessment || superclassAssessment instanceof UnderAssessmentTypeAssessment;
@@ -100,10 +121,10 @@ final class Reflector
 			switch( fieldAssessment )
 			{
 				case ProvisoryFieldTypeProvisoryFieldAssessment provisoryFieldAssessment:
-					provisoryReasons.add( new ProvisoryFieldProvisoryTypeAssessment( type, provisoryFieldAssessment ) );
+					provisoryReasons.add( new ProvisoryFieldProvisoryTypeAssessment( type, threadSafe, provisoryFieldAssessment ) );
 					break;
 				case MutableFieldAssessment mutableFieldAssessment:
-					mutableReasons.add( new MutableFieldMutableTypeAssessment( type, mutableFieldAssessment ) );
+					mutableReasons.add( new MutableFieldMutableTypeAssessment( type, threadSafe, mutableFieldAssessment ) );
 					break;
 				default:
 					assert fieldAssessment instanceof ImmutableFieldAssessment || fieldAssessment instanceof UnderAssessmentFieldAssessment;
@@ -111,10 +132,10 @@ final class Reflector
 		}
 
 		if( !mutableReasons.isEmpty() )
-			return mutableReasons.size() == 1 ? mutableReasons.get( 0 ) : new MultiReasonMutableTypeAssessment( type, mutableReasons );
+			return mutableReasons.size() == 1 ? mutableReasons.get( 0 ) : new MultiReasonMutableTypeAssessment( type, threadSafe, mutableReasons );
 
 		if( !provisoryReasons.isEmpty() )
-			return provisoryReasons.size() == 1 ? provisoryReasons.get( 0 ) : new MultiReasonProvisoryTypeAssessment( type, provisoryReasons );
+			return provisoryReasons.size() == 1 ? provisoryReasons.get( 0 ) : new MultiReasonProvisoryTypeAssessment( type, threadSafe, provisoryReasons );
 
 		if( Helpers.isExtensible( type ) )
 			return new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.Assessed, type );

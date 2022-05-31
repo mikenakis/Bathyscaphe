@@ -23,7 +23,7 @@ public final class ExtensibleProvisoryTypeAssessment extends ProvisoryTypeAssess
 
 	public ExtensibleProvisoryTypeAssessment( Mode mode, Class<?> jvmClass )
 	{
-		super( jvmClass );
+		super( jvmClass, true );
 		assert Helpers.isClass( jvmClass );
 		assert Helpers.isExtensible( jvmClass );
 		this.mode = mode;

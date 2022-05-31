@@ -21,9 +21,9 @@ public final class MultiReasonProvisoryTypeAssessment extends ProvisoryTypeAsses
 {
 	public final List<ProvisoryTypeAssessment> provisoryReasons;
 
-	public MultiReasonProvisoryTypeAssessment( Class<?> jvmClass, List<ProvisoryTypeAssessment> provisoryReasons )
+	public MultiReasonProvisoryTypeAssessment( Class<?> jvmClass, boolean threadSafe, List<ProvisoryTypeAssessment> provisoryReasons )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert Helpers.isClass( jvmClass );
 		this.provisoryReasons = provisoryReasons;
 	}

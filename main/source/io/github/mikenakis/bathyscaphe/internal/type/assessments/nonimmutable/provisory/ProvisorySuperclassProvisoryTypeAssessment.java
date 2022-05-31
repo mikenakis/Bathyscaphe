@@ -20,9 +20,9 @@ public final class ProvisorySuperclassProvisoryTypeAssessment extends ProvisoryT
 {
 	public final ProvisoryTypeAssessment superclassAssessment;
 
-	public ProvisorySuperclassProvisoryTypeAssessment( Class<?> jvmClass, ProvisoryTypeAssessment superclassAssessment )
+	public ProvisorySuperclassProvisoryTypeAssessment( Class<?> jvmClass, boolean threadSafe, ProvisoryTypeAssessment superclassAssessment )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert jvmClass.getSuperclass() == superclassAssessment.type;
 		this.superclassAssessment = superclassAssessment;
 	}

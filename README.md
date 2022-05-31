@@ -8,27 +8,27 @@ The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
 based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 
-[![CI-Workflow status badge       ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
-[![Release-Workflow status badge  ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
-[![IntelliJ IDEA badge            ](https://img.shields.io/badge/built_with-IntelliJ_IDEA-blue?logo=intellijIdea&logoColor=pink&color=pink)](#;)
-[![Number of files badge          ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=files&logo=files&logoColor=yellow)](#;)
-[![Repository Size badge          ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe)](#;)
-[![Language badge                 ](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)](#;)
-[![Code size badge                ](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)](#;)
-[![Repo size badge                ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)](#;)
-[![File size badge                ](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)](#;)
-[![GitHub discussions badge       ](https://img.shields.io/badge/chat-on_github-4fb999?logo=googlechat)](https://github.com/mikenakis/Bathyscaphe/discussions)
-[![Latest release badge           ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?label=latest+release&include_prereleases&sort=semver)](#;)
-[![Website badge                  ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr/2022/05/bathyscaphe.html)
-[![Contributors badge             ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
-[![Commit activity badge          ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
-[![Last commit badge              ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe)](#;)
-[![Last Release Date badge        ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=last+release)](#;)
-[![Last Pre-Release Date badge    ](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=last+pre-release)](#;) 
-[![License badge                  ](https://img.shields.io/badge/license-dual-red?logo=)](https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md)
-[![GitHub pulse badge             ](https://img.shields.io/badge/%E2%80%8B-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
-[![GitHub dependencies badge      ](https://img.shields.io/badge/%E2%80%8B-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
-[![GitHub traffic badge           ](https://img.shields.io/badge/%E2%80%8B-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
+[![CI-Workflow status badge     ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
+[![Release-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+[![IntelliJ IDEA badge          ](https://img.shields.io/badge/built_with-IntelliJ_IDEA-blue?logo=intellijIdea&logoColor=pink&color=pink)](#;)
+[![Number of files badge        ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=files&logo=files&logoColor=yellow)](#;)
+[![Repository Size badge        ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe)](#;)
+[![Language badge               ](https://img.shields.io/github/languages/top/mikenakis/Bathyscaphe)](#;)
+[![Code size badge              ](https://img.shields.io/github/languages/code-size/mikenakis/Bathyscaphe)](#;)
+[![Repo size badge              ](https://img.shields.io/github/repo-size/mikenakis/Bathyscaphe)](#;)
+[![File size badge              ](https://img.shields.io/github/size/mikenakis/Bathyscaphe/README.md?label=size+of+this+README.md)](#;)
+[![GitHub discussions badge     ](https://img.shields.io/badge/chat-on_github-4fb999?logo=googlechat)](https://github.com/mikenakis/Bathyscaphe/discussions)
+[![Latest release badge         ](https://img.shields.io/github/v/release/mikenakis/Bathyscaphe?label=latest+release&include_prereleases&sort=semver)](#;)
+[![Website badge                ](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=limegreen&up_message=online&url=https%3A%2F%2Fblog.michael.gr)](https://blog.michael.gr/2022/05/bathyscaphe.html)
+[![Contributors badge           ](https://img.shields.io/github/contributors/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/contributors)
+[![Commit activity badge        ](https://img.shields.io/github/commit-activity/y/mikenakis/Bathyscaphe)](https://github.com/mikenakis/Bathyscaphe/graphs/commit-activity)
+[![Last commit badge            ](https://img.shields.io/github/last-commit/mikenakis/Bathyscaphe)](#;)
+[![Last Release Date badge      ](https://img.shields.io/github/release-date/mikenakis/Bathyscaphe?label=last+release)](#;)
+[![Last Pre-Release Date badge  ](https://img.shields.io/github/release-date-pre/mikenakis/Bathyscaphe?label=last+pre-release)](#;) 
+[![License badge                ](https://img.shields.io/badge/license-dual-red?logo=)](https://github.com/mikenakis/Bathyscaphe/blob/master/LICENSE.md)
+[![GitHub pulse badge           ](https://img.shields.io/badge/%E2%80%8B-pulse-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/pulse)
+[![GitHub dependencies badge    ](https://img.shields.io/badge/%E2%80%8B-dependencies-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/network/dependencies)
+[![GitHub traffic badge         ](https://img.shields.io/badge/%E2%80%8B-traffic-blue?logo=github)](https://github.com/mikenakis/Bathyscaphe/graphs/traffic)
 
 `SPDX-FileCopyrightText: © 2022, Michael Belivanakis, a.k.a. MikeNakis, michael.gr`<br/>
 `SPDX-License-Identifier: AGPL-3.0-only OR BATCL-1.0`
@@ -129,13 +129,13 @@ Bathyscaphe consists of two parts:
 	
 When assessing whether an object is immutable or not, Bathyscaphe begins by looking at the class of the object, and issues one of the following assessments:
 
-1. Mutable
-1. Immutable
-1. Provisory
+1. Mutable (Conclusive)
+1. Immutable (Conclusive)
+1. Provisory (Inconclusive)
 
-The first two are straightforward: if a class is conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done; however, if the class receives a provisory assessment, then Bathyscaphe proceeds to examine the content of the object.
+The first two are straightforward: if a class is conclusively assessed as mutable or immutable, then each instance of that class receives the same assessment, and we are done; however, if the class receives a provisory assessment, then Bathyscaphe proceeds to examine the contents of the object.
 
-For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will recursively assess the immutability of the actual value of that field.
+For example, if a class looks immutable in all aspects except that it declares a final field of interface type, Bathyscaphe will recursively assess the immutability of the object referenced by that field.
 
 Note that this yields consistently accurate assessments in cases where static analysis tools fail, because they only examine classes, so when a class contains a field which _might_ be mutable, (such as an interface, or any non-final type,) they have no option but to err on the side of caution and assess the containing class as mutable.
 
@@ -249,7 +249,7 @@ The _**Technology Readiness Level**_ (TRL) so-to-speak of Bathyscaphe currently 
 - The `bathyscaphe-test` module necessarily depends on JUnit.
 
 - The `bathyscaphe` and `bathyscaphe-claims` modules do not depend on anything outside the Java Runtime Environment.
-  - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include Bathyscaphe the JARs in a project, you are including those JARs and nothing else.
+  - Let me repeat this: Bathyscaphe. Has. No. Dependencies. It depends on nothing. When you include the Bathyscaphe JARs in a project, you are including those JARs and nothing else.
 
 ## <a name="requirements">&ZeroWidthSpace;</a>Requirements
 
@@ -286,15 +286,15 @@ The author's e-mail address can be found on the sidebar of his blog: https://blo
 
 ## <a name="glossary">&ZeroWidthSpace;</a>Glossary
                        
-See [GLOSSARY.md](GLOSSARY.md)
+- See [GLOSSARY.md](GLOSSARY.md)
 
 ## <a name="contributing">&ZeroWidthSpace;</a>Contributing
                         
-Please see [CONTRIBUTING.md](CONTRIBUTING.md)
+- See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## <a name="code-of-conduct">&ZeroWidthSpace;</a>Code of Conduct
                         
-Please see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## <a name="sponsoring">&ZeroWidthSpace;</a>Sponsoring
 
@@ -304,19 +304,17 @@ Please see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
 ## <a name="coding-style">&ZeroWidthSpace;</a>Coding style
 
-When I write code as part of a team of developers, I use the teams' coding style.  
-But when I write code for myself, I use _**my very own™**_ coding style.
-As a result, Bathyscaphe uses My Very Own™ Coding Style. 
-
-More information: [michael.gr - My Very Own™ Coding Style](https://blog.michael.gr/2018/04/on-coding-style.html)
+- When I write code as part of a team of developers, I use the teams' coding style, but when I write code for myself, I use _**My Very Own™**_ coding style.
+- As a result, Bathyscaphe uses My Very Own™ Coding Style.
+- More information: [michael.gr - My Very Own™ Coding Style](https://blog.michael.gr/2018/04/on-coding-style.html)
 
 ## <a name="faq">&ZeroWidthSpace;</a>Frequently Asked Questions (F.A.Q., FAQ)
               
-See [FAQ.md](FAQ.md)
+- See [FAQ.md](FAQ.md)
 
 ## <a name="feedback">&ZeroWidthSpace;</a>Feedback
 
-Please visit our [discussions area](https://github.com/mikenakis/Bathyscaphe/discussions) to leave feedback, criticism, praise, feature requests, bug reports, haikus, whatever.  
+- Please visit our [discussions area](https://github.com/mikenakis/Bathyscaphe/discussions) to leave feedback, criticism, praise, feature requests, bug reports, haikus, whatever.  
 
 ## <a name="issues">&ZeroWidthSpace;</a>Poor man's issue and TODO tracking
 
@@ -353,8 +351,6 @@ TODO: possibly introduce an `@Immutable` annotation.
 - Look for it by simple name, thus honoring it regardless of package.
 - Treat any class annotated as such as immutable without analyzing it. The idea behind this is that if the developer already has a static analysis tool, then that tool can make sure that classes marked as `@Immutable` are in fact immutable, so that Bathyscaphe does not have to repeat the checks.
 - Be sure to include big disclaimers that the use of the `@Immutable` annotation bypasses Bathyscaphe, so it should only be used if the developer already has other means of statically ascertaining immutability.
-
-TODO: possibly make the bathyscaphe-claims module completely separate from bathyscaphe so as to reduce confusion with respect to licensing?
 
 TODO: reduce the size of the assessment hierarchy
 
@@ -403,8 +399,9 @@ TODO: add a README.md badge with stats about the tests.
 - Unfortunately, by looking at this page: https://shields.io/category/test-results this is not possible.
 - However, shields.io supports creating a shield from a custom json endpoint, and a custom json endpoint can be just a static json file created by the build process, so if the build process could somehow generate a json file with stats about the tests, we should be able to generate a badge.
 
-TODO: drop gitter in favor of github discussions
-- See https://docs.github.com/en/discussions/quickstart
+<strike>TODO:</strike> DONE: drop gitter in favor of github discussions; See https://docs.github.com/en/discussions/quickstart
+
+<strike>TODO:</strike> DONE: Make the bathyscaphe-claims module completely separate from bathyscaphe so as to reduce confusion with respect to licensing?
 
 <strike>TODOL</strike> DONE: add a table of contents to README.md
 

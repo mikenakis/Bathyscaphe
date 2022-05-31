@@ -20,9 +20,9 @@ public class MutableSuperclassMutableTypeAssessment extends MutableTypeAssessmen
 {
 	public final MutableTypeAssessment superclassAssessment;
 
-	public MutableSuperclassMutableTypeAssessment( Class<?> jvmClass, MutableTypeAssessment superclassAssessment )
+	public MutableSuperclassMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe, MutableTypeAssessment superclassAssessment )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert jvmClass.getSuperclass() == superclassAssessment.type;
 		this.superclassAssessment = superclassAssessment;
 	}

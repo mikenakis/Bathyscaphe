@@ -5,11 +5,11 @@
  * You may not use this file except in compliance with the license.
  */
 
-package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory;
+package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.NonImmutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.NonImmutableFieldAssessment;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -23,9 +23,9 @@ public final class ProvisoryFieldTypeProvisoryFieldAssessment extends NonImmutab
 {
 	public final ProvisoryTypeAssessment fieldTypeAssessment;
 
-	public ProvisoryFieldTypeProvisoryFieldAssessment( Field field, ProvisoryTypeAssessment fieldTypeAssessment )
+	public ProvisoryFieldTypeProvisoryFieldAssessment( Field field, boolean threadSafe, ProvisoryTypeAssessment fieldTypeAssessment )
 	{
-		super( field );
+		super( field, threadSafe );
 		assert fieldTypeAssessment.type == field.getType();
 		this.fieldTypeAssessment = fieldTypeAssessment;
 	}

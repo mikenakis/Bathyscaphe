@@ -20,9 +20,9 @@ public class MultiReasonMutableTypeAssessment extends MutableTypeAssessment
 {
 	public final List<MutableTypeAssessment> mutableTypeAssessments;
 
-	public MultiReasonMutableTypeAssessment( Class<?> jvmClass, List<MutableTypeAssessment> mutableTypeAssessments )
+	public MultiReasonMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe, List<MutableTypeAssessment> mutableTypeAssessments )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		this.mutableTypeAssessments = mutableTypeAssessments;
 	}
 

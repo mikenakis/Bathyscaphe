@@ -12,7 +12,7 @@ import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessm
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.NonImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 
 import java.util.List;
 

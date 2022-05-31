@@ -14,9 +14,9 @@ package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.p
  */
 public final class InterfaceProvisoryTypeAssessment extends ProvisoryTypeAssessment
 {
-	public InterfaceProvisoryTypeAssessment( Class<?> type )
+	public InterfaceProvisoryTypeAssessment( Class<?> type, boolean threadSafe )
 	{
-		super( type );
+		super( type, threadSafe );
 		assert type.isInterface();
 	}
 }

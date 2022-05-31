@@ -34,5 +34,13 @@
 - #### Why is the exception called `ObjectMustBeImmutableException` instead of simply `ObjectIsMutableException`?
 	- Because this exception is thrown by the `objectMustBeImmutableAssertion()` method, which is an **_assertion method_**, (see glossary,) and therefore the name of the exception must match the name of the assertion method.
 
-- #### Is it possible to use Bathyscaphe without assertions?
-	- Of course, it is possible. You know what else is possible? using bubble-sort instead of quick-sort. The question is not whether it is possible, the question is whether it is intelligent.
+- #### Would it be possible to use Bathyscaphe without assertions?
+	- Of course, it would be possible. You know what else would be possible? to use bubble-sort instead of quick-sort. The question is not whether it would be possible, the question is whether it would be intelligent.
+
+- #### What is the `//DoNotCover` comment in certain places in the source code?
+	- It signifies that the following line of code is never expected to be reached, and therefore should not be considered by code coverage analysis.
+	- It expresses my wish for some means of telling code coverage analysis tools to disregard individual lines of code. See [IntelliJ IDEA issue tracker - Exclude specific methods from coverage](https://youtrack.jetbrains.com/issue/IDEA-292401/Exclude-specific-methods-from-coverage)
+
+- #### Why call it "Bathyscaphe"?
+    - Because a bathyscaphe dives very deep, and this library performs _deep_ immutability assessment.
+    - There is another GitHub project which goes by the same name: [creekorful/bathyscaphe](https://github.com/creekorful/bathyscaphe). It is a dark web crawler. It used to be called Trandoshan.   

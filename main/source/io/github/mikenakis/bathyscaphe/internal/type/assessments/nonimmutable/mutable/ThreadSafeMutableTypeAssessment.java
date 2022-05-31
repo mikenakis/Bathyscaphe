@@ -8,15 +8,14 @@
 package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable;
 
 /**
- * Signifies that a type is mutable because it is an array.
+ * Signifies that a type is thread-safe.
  *
  * @author michael.gr
  */
-public final class ArrayMutableTypeAssessment extends MutableTypeAssessment
+public final class ThreadSafeMutableTypeAssessment extends MutableTypeAssessment
 {
-	public ArrayMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe )
+	public ThreadSafeMutableTypeAssessment( Class<?> jvmClass )
 	{
-		super( jvmClass, threadSafe );
-		assert jvmClass.isArray();
+		super( jvmClass, true );
 	}
 }

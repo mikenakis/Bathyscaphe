@@ -34,7 +34,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.pr
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisorySuperclassProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.SelfAssessableProvisoryTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 
 import java.lang.reflect.Array;
 import java.util.Set;
@@ -57,6 +57,11 @@ public final class ObjectAssessor
 	public void addImmutablePreassessment( Class<?> jvmClass )
 	{
 		typeAssessor.addImmutablePreassessment( jvmClass );
+	}
+
+	public void addThreadSafePreassessment( Class<?> jvmClass )
+	{
+		typeAssessor.addThreadSafePreassessment( jvmClass );
 	}
 
 	public ObjectAssessment assess( Object object )

@@ -5,7 +5,9 @@
  * You may not use this file except in compliance with the license.
  */
 
-package io.github.mikenakis.bathyscaphe.internal.type.field.assessments;
+package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable;
+
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.FieldAssessment;
 
 import java.lang.reflect.Field;
 
@@ -17,6 +19,11 @@ import java.lang.reflect.Field;
 public abstract class NonImmutableFieldAssessment extends FieldAssessment
 {
 	public final Field field;
+	public final boolean threadSafe;
 
-	protected NonImmutableFieldAssessment( Field field ) { this.field = field; }
+	protected NonImmutableFieldAssessment( Field field, boolean threadSafe )
+	{
+		this.field = field;
+		this.threadSafe = threadSafe;
+	}
 }

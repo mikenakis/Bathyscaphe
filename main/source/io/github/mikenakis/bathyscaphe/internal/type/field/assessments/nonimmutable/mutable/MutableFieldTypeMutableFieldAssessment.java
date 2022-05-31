@@ -5,7 +5,7 @@
  * You may not use this file except in compliance with the license.
  */
 
-package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable;
+package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableTypeAssessment;
@@ -22,9 +22,9 @@ public final class MutableFieldTypeMutableFieldAssessment extends MutableFieldAs
 {
 	public final MutableTypeAssessment fieldTypeAssessment;
 
-	public MutableFieldTypeMutableFieldAssessment( Field field, MutableTypeAssessment fieldTypeAssessment )
+	public MutableFieldTypeMutableFieldAssessment( Field field, boolean threadSafe, MutableTypeAssessment fieldTypeAssessment )
 	{
-		super( field );
+		super( field, threadSafe );
 		assert field.getType() == fieldTypeAssessment.type;
 		this.fieldTypeAssessment = fieldTypeAssessment;
 	}

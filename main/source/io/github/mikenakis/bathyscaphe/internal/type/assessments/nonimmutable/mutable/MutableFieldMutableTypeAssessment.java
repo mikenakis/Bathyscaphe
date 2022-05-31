@@ -8,7 +8,7 @@
 package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.MutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.MutableFieldAssessment;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class MutableFieldMutableTypeAssessment extends MutableTypeAssessment
 {
 	public final MutableFieldAssessment fieldAssessment;
 
-	public MutableFieldMutableTypeAssessment( Class<?> jvmClass, MutableFieldAssessment fieldAssessment )
+	public MutableFieldMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe, MutableFieldAssessment fieldAssessment )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert fieldAssessment.field.getDeclaringClass() == jvmClass;
 		this.fieldAssessment = fieldAssessment;
 	}

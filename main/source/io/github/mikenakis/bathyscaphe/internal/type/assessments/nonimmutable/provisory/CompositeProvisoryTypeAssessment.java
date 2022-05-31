@@ -34,7 +34,7 @@ public final class CompositeProvisoryTypeAssessment<T, E> extends ProvisoryTypeA
 
 	public CompositeProvisoryTypeAssessment( Mode mode, Class<T> type, ProvisoryTypeAssessment componentTypeAssessment, Decomposer<T,E> decomposer )
 	{
-		super( type );
+		super( type, true );
 		this.mode = mode;
 		this.componentTypeAssessment = componentTypeAssessment;
 		this.decomposer = decomposer;

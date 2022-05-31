@@ -39,11 +39,11 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.pr
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.SelfAssessableProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.FieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.ArrayMutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.MutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.MutableFieldTypeMutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.VariableMutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.ArrayMutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.MutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.MutableFieldTypeMutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.VariableMutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

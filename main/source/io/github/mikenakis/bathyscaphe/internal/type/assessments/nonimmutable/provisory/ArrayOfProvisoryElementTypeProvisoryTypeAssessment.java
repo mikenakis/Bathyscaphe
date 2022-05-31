@@ -20,9 +20,9 @@ public class ArrayOfProvisoryElementTypeProvisoryTypeAssessment extends Provisor
 {
 	public final ProvisoryTypeAssessment elementTypeAssessment;
 
-	public ArrayOfProvisoryElementTypeProvisoryTypeAssessment( Class<?> jvmClass, ProvisoryTypeAssessment elementTypeAssessment )
+	public ArrayOfProvisoryElementTypeProvisoryTypeAssessment( Class<?> jvmClass, boolean threadSafe, ProvisoryTypeAssessment elementTypeAssessment )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert jvmClass.isArray();
 		assert jvmClass.getComponentType() == elementTypeAssessment.type;
 		this.elementTypeAssessment = elementTypeAssessment;

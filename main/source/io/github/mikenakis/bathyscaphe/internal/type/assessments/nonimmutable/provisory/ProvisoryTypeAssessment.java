@@ -16,5 +16,5 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.No
  */
 public abstract class ProvisoryTypeAssessment extends NonImmutableTypeAssessment
 {
-	protected ProvisoryTypeAssessment( Class<?> type ) { super( type ); }
+	protected ProvisoryTypeAssessment( Class<?> type, boolean threadSafe ) { super( type, threadSafe ); }
 }

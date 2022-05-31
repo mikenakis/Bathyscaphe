@@ -16,7 +16,7 @@
 - **_Bathyscaphe_** - (/ˈbæθɪskeɪf/ or /ˈbæθɪskæf/) (noun) a free-diving, self-propelled, deep-sea submersible with a crew cabin. Being yellow is not a strict requirement. See [Wikipedia - Bathyscaphe](https://en.wikipedia.org/wiki/Bathyscaphe)
 
 
-- **_Conclusive Assessment_** - an assessment which classified a type as definitely mutable or definitely immutable. This means that instances of this type can receive the same assessment without any further inspection of their contents. Also see opposite: **_Inconclusive assessment_**. 
+- **_Conclusive Assessment_** - an assessment that classifies a type as definitely mutable or definitely immutable. This means that instances of this type can receive the same assessment without any further inspection of their contents. Also see opposite: **_Inconclusive assessment_**. 
 
 
 - **_Deep Immutability_** - the immutability of an entire object graph reachable from a certain object, as opposed to the immutability of only that object. It is among the fundamental premises of Bathyscaphe that this is the only type of immutability that really matters. Also see opposite: **_Superficial Immutability_**.

@@ -7,15 +7,16 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type;
 
-import io.github.mikenakis.debug.Debug;
 import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.UnderAssessmentTypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.ThreadSafeMutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotAlreadyBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotBeExtensibleException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotBePreviouslyAssessedException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedTypeMustBeClassException;
+import io.github.mikenakis.debug.Debug;
 
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
@@ -54,6 +55,18 @@ public final class TypeAssessor
 		synchronized( assessmentsByType )
 		{
 			assessmentsByType.put( jvmClass, ImmutableTypeAssessment.instance );
+		}
+	}
+
+	public void addThreadSafePreassessment( Class<?> jvmClass )
+	{
+		assert addedClassMustNotBePreviouslyAssessedAssertion( jvmClass );
+		assert addedClassMustBeClassTypeAssertion( jvmClass );
+		assert addedClassMustNotBeExtensibleClassTypeAssertion( jvmClass );
+		assert addedClassMustNotAlreadyBeImmutableAssertion( jvmClass );
+		synchronized( assessmentsByType )
+		{
+			assessmentsByType.put( jvmClass, new ThreadSafeMutableTypeAssessment( jvmClass ) );
 		}
 	}
 

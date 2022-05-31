@@ -8,7 +8,7 @@
 package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public final class ProvisoryFieldProvisoryTypeAssessment extends ProvisoryTypeAs
 {
 	public final ProvisoryFieldTypeProvisoryFieldAssessment fieldAssessment;
 
-	public ProvisoryFieldProvisoryTypeAssessment( Class<?> jvmClass, ProvisoryFieldTypeProvisoryFieldAssessment fieldAssessment )
+	public ProvisoryFieldProvisoryTypeAssessment( Class<?> jvmClass, boolean threadSafe, ProvisoryFieldTypeProvisoryFieldAssessment fieldAssessment )
 	{
-		super( jvmClass );
+		super( jvmClass, threadSafe );
 		assert fieldAssessment.field.getDeclaringClass() == jvmClass;
 		this.fieldAssessment = fieldAssessment;
 	}

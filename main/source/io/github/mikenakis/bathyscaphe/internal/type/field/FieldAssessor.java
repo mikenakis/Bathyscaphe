@@ -9,6 +9,8 @@ package io.github.mikenakis.bathyscaphe.internal.type.field;
 
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
+import io.github.mikenakis.bathyscaphe.annotations.ThreadSafe;
+import io.github.mikenakis.bathyscaphe.annotations.ThreadSafeArray;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.TypeAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
@@ -21,17 +23,21 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.pr
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMayNotAlreadyBeInvariableException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMustBePrivateException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedThreadSafeArrayFieldMustBePrivateException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedThreadSafeFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedInvariableArrayException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedThreadSafeArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedInvariableArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.FieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.ImmutableFieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.UnderAssessmentFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.ArrayMutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.MutableFieldTypeMutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.mutable.VariableMutableFieldAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.ArrayMutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.MutableFieldTypeMutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.VariableMutableFieldAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
 
 /**
@@ -54,30 +60,25 @@ public class FieldAssessor
 	public FieldAssessment assessField( Field field )
 	{
 		assert !Modifier.isStatic( field.getModifiers() );
-		boolean isInvariableField = isInvariableField( field );
 		Class<?> fieldType = field.getType();
 		boolean isArray = fieldType.isArray();
-		boolean isInvariableArray = field.isAnnotationPresent( InvariableArray.class );
-		if( !isArray && isInvariableArray )
-			throw new NonArrayFieldMayNotBeAnnotatedInvariableArrayException( field );
-		else if( !isInvariableField && isInvariableArray )
-			throw new VariableFieldMayNotBeAnnotatedInvariableArrayException( field );
-		else if( !isInvariableField )
-			return new VariableMutableFieldAssessment( field );
-		else if( isArray && !isInvariableArray )
-			return new ArrayMutableFieldAssessment( field );
-		else if( isArray )
+		boolean isInvariable = isInvariable( field );
+		boolean isInvariableArray = isInvariableArray( field );
+		boolean isThreadSafe = isThreadSafe( field );
+		boolean isThreadSafeArray = isThreadSafeArray( field );
+		if( !isInvariable )
+			return new VariableMutableFieldAssessment( field, isThreadSafe );
+		if( isArray )
 		{
-			assert isArray && isInvariableArray;
-			if( !Modifier.isPrivate( field.getModifiers() ) )
-				throw new AnnotatedInvariableArrayFieldMustBePrivateException( field );
+			if( !isInvariableArray )
+				return new ArrayMutableFieldAssessment( field, isThreadSafe && isThreadSafeArray );
 			TypeAssessment arrayElementTypeAssessment = typeAssessor.assess( fieldType.getComponentType() );
 			return switch( arrayElementTypeAssessment )
 				{
 					case UnderAssessmentTypeAssessment ignore -> UnderAssessmentFieldAssessment.instance;
-					case ProvisoryTypeAssessment provisoryTypeAssessment ->	newProvisoryArrayFieldAssessment( field, MyKit.uncheckedClassCast( fieldType ), provisoryTypeAssessment );
+					case ProvisoryTypeAssessment provisoryTypeAssessment ->	newProvisoryArrayFieldAssessment( field, isThreadSafe, isThreadSafeArray, MyKit.uncheckedClassCast( fieldType ), provisoryTypeAssessment );
 					case ImmutableTypeAssessment ignore -> ImmutableFieldAssessment.instance;
-					case MutableTypeAssessment mutableTypeAssessment -> newMutableArrayFieldAssessment( field, fieldType, mutableTypeAssessment );
+					case MutableTypeAssessment mutableTypeAssessment -> newMutableArrayFieldAssessment( field, isThreadSafe, isThreadSafeArray, MyKit.uncheckedClassCast( fieldType ), mutableTypeAssessment );
 					//DoNotCover
 					default -> throw new AssertionError( arrayElementTypeAssessment );
 				};
@@ -86,9 +87,9 @@ public class FieldAssessor
 		return switch( fieldTypeAssessment )
 			{
 				case UnderAssessmentTypeAssessment ignore -> UnderAssessmentFieldAssessment.instance;
-				case ProvisoryTypeAssessment provisoryTypeAssessment -> new ProvisoryFieldTypeProvisoryFieldAssessment( field, provisoryTypeAssessment );
+				case ProvisoryTypeAssessment provisoryTypeAssessment -> new ProvisoryFieldTypeProvisoryFieldAssessment( field, isThreadSafe, provisoryTypeAssessment );
 				case ImmutableTypeAssessment ignore -> ImmutableFieldAssessment.instance;
-				case MutableTypeAssessment mutableTypeAssessment -> new MutableFieldTypeMutableFieldAssessment( field, mutableTypeAssessment );
+				case MutableTypeAssessment mutableTypeAssessment -> new MutableFieldTypeMutableFieldAssessment( field, isThreadSafe, mutableTypeAssessment );
 				//DoNotCover
 				default -> throw new AssertionError( fieldTypeAssessment );
 			};
@@ -96,30 +97,72 @@ public class FieldAssessor
 
 	//private static final Decomposer<Object[],Object> arrayDecomposer = Arrays::asList;
 
-	private static FieldAssessment newProvisoryArrayFieldAssessment( Field field, Class<Object[]> fieldType, ProvisoryTypeAssessment elementTypeAssessment )
+	private static FieldAssessment newProvisoryArrayFieldAssessment( Field field, boolean threadSafe, boolean threadSafeArray, Class<Object[]> fieldType, ProvisoryTypeAssessment elementTypeAssessment )
 	{
-		ProvisoryTypeAssessment fieldTypeAssessment = new ArrayOfProvisoryElementTypeProvisoryTypeAssessment( fieldType, elementTypeAssessment );
+		ProvisoryTypeAssessment fieldTypeAssessment = new ArrayOfProvisoryElementTypeProvisoryTypeAssessment( fieldType, threadSafeArray, elementTypeAssessment );
 		//ProvisoryTypeAssessment fieldTypeAssessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.Assessed, fieldType, elementTypeAssessment, arrayDecomposer );
-		return new ProvisoryFieldTypeProvisoryFieldAssessment( field, fieldTypeAssessment );
+		return new ProvisoryFieldTypeProvisoryFieldAssessment( field, threadSafe, fieldTypeAssessment );
 	}
 
-	private static FieldAssessment newMutableArrayFieldAssessment( Field field, Class<?> fieldType, MutableTypeAssessment elementTypeAssessment )
+	private static FieldAssessment newMutableArrayFieldAssessment( Field field, boolean threadSafe, boolean threadSafeArray, Class<Object[]> fieldType, MutableTypeAssessment elementTypeAssessment )
 	{
-		MutableTypeAssessment fieldTypeAssessment = new ArrayOfMutableElementTypeMutableTypeAssessment( fieldType, elementTypeAssessment );
-		return new MutableFieldTypeMutableFieldAssessment( field, fieldTypeAssessment );
+		MutableTypeAssessment fieldTypeAssessment = new ArrayOfMutableElementTypeMutableTypeAssessment( fieldType, threadSafeArray, elementTypeAssessment );
+		return new MutableFieldTypeMutableFieldAssessment( field, threadSafe, fieldTypeAssessment );
 	}
 
-	public static boolean isInvariableField( Field field )
+	public static boolean isInvariable( Field field )
+	{
+		if( !field.isAnnotationPresent( Invariable.class ) )
+			return isFinal( field );
+		if( !isPrivate( field ) )
+			throw new AnnotatedInvariableFieldMustBePrivateException( field );
+		if( isFinal( field ) )
+			throw new AnnotatedInvariableFieldMayNotAlreadyBeInvariableException( field );
+		return true;
+	}
+
+	private static boolean isInvariableArray( Field field )
+	{
+		if( !field.isAnnotationPresent( InvariableArray.class ) )
+			return false;
+		if( !field.getType().isArray() )
+			throw new NonArrayFieldMayNotBeAnnotatedInvariableArrayException( field );
+		if( !isPrivate( field ) )
+			throw new AnnotatedInvariableArrayFieldMustBePrivateException( field );
+		if( !isInvariable( field ) )
+			throw new VariableFieldMayNotBeAnnotatedInvariableArrayException( field );
+		return true;
+	}
+
+	private static boolean isThreadSafe( Field field )
+	{
+		if( !field.isAnnotationPresent( ThreadSafe.class ) )
+			return false;
+		if( !isPrivate( field ) )
+			throw new AnnotatedThreadSafeFieldMustBePrivateException( field );
+		return true;
+	}
+
+	private static boolean isThreadSafeArray( Field field )
+	{
+		if( !field.isAnnotationPresent( ThreadSafeArray.class ) )
+			return false;
+		if( !field.getType().isArray() )
+			throw new NonArrayFieldMayNotBeAnnotatedThreadSafeArrayException( field );
+		if( !isPrivate( field ) )
+			throw new AnnotatedThreadSafeArrayFieldMustBePrivateException( field );
+		return true;
+	}
+
+	private static boolean isFinal( Member field )
 	{
 		int fieldModifiers = field.getModifiers();
-		assert !Modifier.isStatic( fieldModifiers );
-		boolean isAnnotatedInvariable = field.isAnnotationPresent( Invariable.class );
-		boolean isPrivate = Modifier.isPrivate( fieldModifiers );
-		if( isAnnotatedInvariable && !isPrivate )
-			throw new AnnotatedInvariableFieldMustBePrivateException( field );
-		boolean isDeclaredInvariable = Modifier.isFinal( fieldModifiers );
-		if( isDeclaredInvariable && isAnnotatedInvariable )
-			throw new AnnotatedInvariableFieldMayNotAlreadyBeInvariableException( field );
-		return isDeclaredInvariable || isAnnotatedInvariable;
+		return Modifier.isFinal( fieldModifiers );
+	}
+
+	private static boolean isPrivate( Member field )
+	{
+		int fieldModifiers = field.getModifiers();
+		return Modifier.isPrivate( fieldModifiers );
 	}
 }

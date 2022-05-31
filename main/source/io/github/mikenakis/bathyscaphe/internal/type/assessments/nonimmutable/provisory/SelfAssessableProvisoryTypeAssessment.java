@@ -16,9 +16,9 @@ import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
  */
 public final class SelfAssessableProvisoryTypeAssessment extends ProvisoryTypeAssessment
 {
-	public SelfAssessableProvisoryTypeAssessment( Class<?> type )
+	public SelfAssessableProvisoryTypeAssessment( Class<?> type, boolean threadSafe )
 	{
-		super( type );
+		super( type, threadSafe );
 		assert ImmutabilitySelfAssessable.class.isAssignableFrom( type );
 	}
 }
