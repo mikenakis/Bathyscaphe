@@ -22,4 +22,5 @@ public abstract class MutableObjectAssessment extends ObjectAssessment
 
 	public abstract Object object();
 	public abstract NonImmutableTypeAssessment typeAssessment();
+	@Override public final boolean isThreadSafe() { return typeAssessment().threadSafe; }
 }

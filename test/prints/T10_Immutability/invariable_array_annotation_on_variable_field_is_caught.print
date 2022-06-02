@@ -1,0 +1,2 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$25$ClassWithVariableFieldAnnotatedAsArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedInvariableArrayException : field=private java.lang.Object[] io.github.mikenakis.bathyscaphe.test.T10_Immutability$25$ClassWithVariableFieldAnnotatedAsArray.variableField

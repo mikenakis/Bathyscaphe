@@ -17,4 +17,6 @@ public abstract class ObjectAssessment extends Assessment
 	protected ObjectAssessment()
 	{
 	}
+
+	public abstract boolean isThreadSafe();
 }

@@ -19,4 +19,6 @@ public final class ImmutableObjectAssessment extends ObjectAssessment
 	private ImmutableObjectAssessment()
 	{
 	}
+
+	@Override public boolean isThreadSafe() { return true; }
 }

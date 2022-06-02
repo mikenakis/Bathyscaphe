@@ -13,7 +13,6 @@ import io.github.mikenakis.bathyscaphe.internal.diagnostic.AssessmentPrinter;
 import io.github.mikenakis.debug.Debug;
 
 import java.io.BufferedOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
@@ -26,48 +25,35 @@ import java.nio.file.Path;
  *
  * @author michael.gr
  */
-final class Helper
+public final class Helper
 {
 	private Helper()
 	{
 	}
 
-	static ObjectAssessment assess( Method method, Object object )
+	public static ObjectAssessment assess( Method method, Object object )
 	{
 		try( PrintStream printStream = getPrintStream( method ) )
 		{
-			return assess( object, printStream );
+			printStream.print( "assessment for " + AssessmentPrinter.objectName( object ) + ":\n" );
+			ObjectAssessment assessment;
+			try
+			{
+				assessment = Debug.boundary( () -> ObjectAssessor.instance.assess( object ) );
+			}
+			catch( Throwable throwable )
+			{
+				printStream.print( "    " + throwable.getClass().getName() + " : " + throwable.getMessage() + "\n" );
+				throw throwable;
+			}
+			AssessmentPrinter.getText( assessment ).forEach( s -> printStream.print( "    " + s + "\n" ) );
+			return assessment;
 		}
-	}
-
-	private static ObjectAssessment assess( Object object, PrintStream printStream )
-	{
-		printStream.print( "assessment for " + AssessmentPrinter.objectName( object ) + ":\n" );
-		ObjectAssessment assessment;
-		try
-		{
-			assessment = Debug.boundary( () -> ObjectAssessor.instance.assess( object ) );
-		}
-		catch( Throwable throwable )
-		{
-			printStream.print( "    " + throwable.getClass().getName() + " : " + throwable.getMessage() + "\n" );
-			throw throwable;
-		}
-		AssessmentPrinter.getText( assessment ).forEach( s -> printStream.print( "    " + s + "\n" ) );
-		return assessment;
 	}
 
 	private static PrintStream getPrintStream( Path path )
 	{
-		OutputStream outputStream;
-		try
-		{
-			outputStream = Files.newOutputStream( path );
-		}
-		catch( IOException e )
-		{
-			throw new RuntimeException( e );
-		}
+		OutputStream outputStream = MyTestKit.unchecked( () -> Files.newOutputStream( path ) );
 		outputStream = new BufferedOutputStream( outputStream, 8192 );
 		outputStream = new MultiplyingOutputStream( outputStream, new NonClosingOutputStream( System.out ) );
 		return new PrintStream( outputStream, true, StandardCharsets.UTF_8 );
@@ -84,23 +70,16 @@ final class Helper
 		return getPrintStream( pathForTestMethod );
 	}
 
-	static Method getCurrentMethod()
+	public static Method getCurrentMethod()
 	{
 		return getCurrentMethod( 1 );
 	}
 
-	static Method getCurrentMethod( int numberOfFramesToSkip )
+	private static Method getCurrentMethod( int numberOfFramesToSkip )
 	{
 		//also see MethodHandles.lookup().lookupClass().getEnclosingMethod()
 		StackWalker.StackFrame x = StackWalker.getInstance( StackWalker.Option.RETAIN_CLASS_REFERENCE ).walk( s -> s.skip( 1 + numberOfFramesToSkip ).findFirst() ).orElseThrow();
 		Class<?> jvmClass = x.getDeclaringClass();
-		try
-		{
-			return jvmClass.getDeclaredMethod( x.getMethodName(), x.getMethodType().parameterArray() );
-		}
-		catch( NoSuchMethodException e )
-		{
-			throw new RuntimeException( e );
-		}
+		return MyTestKit.unchecked( () -> jvmClass.getDeclaredMethod( x.getMethodName(), x.getMethodType().parameterArray() ) );
 	}
 }

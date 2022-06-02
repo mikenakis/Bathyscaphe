@@ -17,13 +17,13 @@ import java.nio.file.Paths;
  *
  * @author michael.gr
  */
-final class MyTestKit
+public final class MyTestKit
 {
 	private MyTestKit()
 	{
 	}
 
-	static <T extends Throwable> T expect( Class<T> expectedThrowableClass, Runnable procedure )
+	public static <T extends Throwable> T expect( Class<T> expectedThrowableClass, Runnable procedure )
 	{
 		Throwable caughtThrowable = invokeAndCatch( procedure );
 		assert caughtThrowable != null : expectedThrowableClass;
@@ -69,5 +69,65 @@ final class MyTestKit
 	public static Path getWorkingDirectory()
 	{
 		return Paths.get( System.getProperty( "user.dir" ) ).toAbsolutePath().normalize();
+	}
+
+	/**
+	 * A method which accepts no arguments, returns a value, and declares a checked exception.
+	 *
+	 * @param <R> the type of the return value.
+	 * @param <E> the type of the checked exception that may be thrown.
+	 *
+	 * @author Mike Nakis (michael.gr)
+	 */
+	public interface ThrowingFunction0<R, E extends Exception>
+	{
+		R invoke() throws E;
+	}
+
+	/**
+	 * <p>Invokes a given {@link ThrowingFunction0} and returns the result, converting the checked exception to unchecked.</p>
+	 * <p>The conversion occurs at compilation time, so that:
+	 * <ul>
+	 *     <li>It does not incur any runtime overhead.</li>
+	 *     <li>In the event that an exception is thrown, it does not prevent the debugger from stopping at the throwing statement.</li>
+	 * </ul></p>
+	 *
+	 * @param throwingFunction the {@link ThrowingFunction0} to invoke.
+	 * @param <E>              the type of checked exception declared by the {@link ThrowingFunction0}.
+	 * @param <R>              the type of the result.
+	 */
+	public static <R, E extends Exception> R unchecked( ThrowingFunction0<R,E> throwingFunction )
+	{
+		@SuppressWarnings( "unchecked" ) ThrowingFunction0<R,RuntimeException> f = (ThrowingFunction0<R,RuntimeException>)throwingFunction;
+		return f.invoke();
+	}
+
+	/**
+	 * A method which accepts no arguments, does not return a value, and declares a checked exception.
+	 *
+	 * @param <E> the type of the checked exception that may be thrown.
+	 *
+	 * @author Mike Nakis (michael.gr)
+	 */
+	public interface ThrowingProcedure0<E extends Throwable>
+	{
+		void invoke() throws E;
+	}
+
+	/**
+	 * <p>Invokes a given {@link ThrowingProcedure0} converting the checked exception to unchecked.</p>
+	 * <p>The conversion occurs at compilation time, so that:
+	 * <ul>
+	 *     <li>It does not incur any runtime overhead.</li>
+	 *     <li>In the event that an exception is thrown, it does not prevent the debugger from stopping at the throwing statement.</li>
+	 * </ul></p>
+	 *
+	 * @param throwingProcedure the {@link ThrowingProcedure0} to invoke.
+	 * @param <E>               the type of checked exception declared by the {@link ThrowingProcedure0}.
+	 */
+	public static <E extends Exception> void unchecked( ThrowingProcedure0<E> throwingProcedure )
+	{
+		@SuppressWarnings( "unchecked" ) ThrowingProcedure0<RuntimeException> p = (ThrowingProcedure0<RuntimeException>)throwingProcedure;
+		p.invoke();
 	}
 }

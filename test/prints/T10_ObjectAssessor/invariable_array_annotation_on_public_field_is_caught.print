@@ -1,2 +1,0 @@
-assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$21$ClassWithPublicFieldAnnotatedInvariableArray':
-    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException : field=public final int[] io.github.mikenakis.bathyscaphe.test.T10_ObjectAssessor$21$ClassWithPublicFieldAnnotatedInvariableArray.publicFieldAnnotatedInvariableArray

@@ -20,14 +20,12 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mu
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ArrayOfProvisoryElementTypeProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableArrayFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMayNotAlreadyBeInvariableException;
-import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvariableFieldMustBePrivateException;
-import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedThreadSafeArrayFieldMustBePrivateException;
-import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedThreadSafeFieldMustBePrivateException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedInvariableArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedThreadSafeArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedInvariableArrayException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedThreadSafeArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.FieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.ImmutableFieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.UnderAssessmentFieldAssessment;
@@ -115,7 +113,7 @@ public class FieldAssessor
 		if( !field.isAnnotationPresent( Invariable.class ) )
 			return isFinal( field );
 		if( !isPrivate( field ) )
-			throw new AnnotatedInvariableFieldMustBePrivateException( field );
+			throw new AnnotatedFieldMustBePrivateException( field );
 		if( isFinal( field ) )
 			throw new AnnotatedInvariableFieldMayNotAlreadyBeInvariableException( field );
 		return true;
@@ -128,7 +126,7 @@ public class FieldAssessor
 		if( !field.getType().isArray() )
 			throw new NonArrayFieldMayNotBeAnnotatedInvariableArrayException( field );
 		if( !isPrivate( field ) )
-			throw new AnnotatedInvariableArrayFieldMustBePrivateException( field );
+			throw new AnnotatedFieldMustBePrivateException( field );
 		if( !isInvariable( field ) )
 			throw new VariableFieldMayNotBeAnnotatedInvariableArrayException( field );
 		return true;
@@ -139,7 +137,7 @@ public class FieldAssessor
 		if( !field.isAnnotationPresent( ThreadSafe.class ) )
 			return false;
 		if( !isPrivate( field ) )
-			throw new AnnotatedThreadSafeFieldMustBePrivateException( field );
+			throw new AnnotatedFieldMustBePrivateException( field );
 		return true;
 	}
 
@@ -150,7 +148,9 @@ public class FieldAssessor
 		if( !field.getType().isArray() )
 			throw new NonArrayFieldMayNotBeAnnotatedThreadSafeArrayException( field );
 		if( !isPrivate( field ) )
-			throw new AnnotatedThreadSafeArrayFieldMustBePrivateException( field );
+			throw new AnnotatedFieldMustBePrivateException( field );
+		if( !isInvariable( field ) )
+			throw new VariableFieldMayNotBeAnnotatedThreadSafeArrayException( field );
 		return true;
 	}
 

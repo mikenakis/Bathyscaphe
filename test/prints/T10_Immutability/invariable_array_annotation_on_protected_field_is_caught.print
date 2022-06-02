@@ -1,0 +1,2 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$22$ClassWithProtectedAnnotatedFieldArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedFieldMustBePrivateException : field=protected final int[] io.github.mikenakis.bathyscaphe.test.T10_Immutability$22$ClassWithProtectedAnnotatedFieldArray.protectedAnnotatedFieldArray

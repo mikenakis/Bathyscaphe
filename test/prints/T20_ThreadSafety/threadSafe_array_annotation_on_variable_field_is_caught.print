@@ -1,0 +1,2 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T20_ThreadSafety$22$ClassWithVariableFieldAnnotatedAsArray':
+    io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedThreadSafeArrayException : field=private java.lang.Object[] io.github.mikenakis.bathyscaphe.test.T20_ThreadSafety$22$ClassWithVariableFieldAnnotatedAsArray.variableField

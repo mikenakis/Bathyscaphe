@@ -1,0 +1,3 @@
+assessment for instance of 'java.lang.Integer[]':
+    ■ instance of 'java.lang.Integer[]' is mutable because it is a non-empty array. (NonEmptyArrayMutableObjectAssessment)
+    └─■ class 'java.lang.Integer[]' is mutable because it is an array class. (ArrayMutableTypeAssessment)
