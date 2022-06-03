@@ -32,13 +32,14 @@ public final class CompositeProvisoryTypeAssessment<T, E> extends ProvisoryTypeA
 	public final ProvisoryTypeAssessment componentTypeAssessment;
 	public final Decomposer<T,E> decomposer;
 
-	public CompositeProvisoryTypeAssessment( Mode mode, Class<T> type, ProvisoryTypeAssessment componentTypeAssessment, Decomposer<T,E> decomposer )
+	public CompositeProvisoryTypeAssessment( Mode mode, Class<T> type, boolean threadSafe, ProvisoryTypeAssessment componentTypeAssessment, Decomposer<T,E> decomposer )
 	{
-		super( type, true );
+		super( type, threadSafe );
 		this.mode = mode;
 		this.componentTypeAssessment = componentTypeAssessment;
 		this.decomposer = decomposer;
 	}
 
 	@Override public List<Assessment> children() { return List.of( componentTypeAssessment ); }
+	@Override public boolean isThreadSafe() { return threadSafe && componentTypeAssessment.isThreadSafe();	}
 }

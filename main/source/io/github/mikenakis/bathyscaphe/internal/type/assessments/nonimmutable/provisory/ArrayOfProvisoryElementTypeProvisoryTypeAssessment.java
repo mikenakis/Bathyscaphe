@@ -29,4 +29,5 @@ public class ArrayOfProvisoryElementTypeProvisoryTypeAssessment extends Provisor
 	}
 
 	@Override public List<Assessment> children() { return List.of( elementTypeAssessment ); }
+	@Override public boolean isThreadSafe() { return threadSafe && elementTypeAssessment.isThreadSafe(); }
 }

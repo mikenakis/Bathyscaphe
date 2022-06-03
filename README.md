@@ -399,11 +399,19 @@ TODO: add a README.md badge with stats about the tests.
 - Unfortunately, by looking at this page: https://shields.io/category/test-results this is not possible.
 - However, shields.io supports creating a shield from a custom json endpoint, and a custom json endpoint can be just a static json file created by the build process, so if the build process could somehow generate a json file with stats about the tests, we should be able to generate a badge.
 
-<strike>TODO:</strike> DONE: drop gitter in favor of github discussions; See https://docs.github.com/en/discussions/quickstart
+TODO: do something about ZoneId.systemDefault(), Clock.systemUTC(), etc.
 
-<strike>TODO:</strike> DONE: Make the bathyscaphe-claims module completely separate from bathyscaphe so as to reduce confusion with respect to licensing?
+- Add pre-assessments by name?
 
-<strike>TODOL</strike> DONE: add a table of contents to README.md
+<strike>TODO:</strike> DONE: drop gitter in favor of github discussions
+
+- See https://docs.github.com/en/discussions/quickstart
+
+<strike>TODO:</strike> DONE: Make the bathyscaphe-claims module completely separate from bathyscaphe
+
+- so as to reduce confusion with respect to licensing
+
+<strike>TODO:</strike> DONE: add a table of contents to README.md
 
 <strike>TODO:</strike> DONE: merge bathyscaphe and bathyscaphe-print
 
@@ -411,8 +419,16 @@ TODO: add a README.md badge with stats about the tests.
 
 <strike>TODO:</strike> DONE: add a GitHub actions workflow for making bathyscaphe releases.
 
-<strike>TODO:</strike> WILL-NOT-DO: add a quick check for records -- No, actually, this will not buy us anything, because a record may contain mutable members. Come to think of it, if records allow mutable members, then what is the point in records?
+<strike>TODO:</strike> WILL-NOT-DO: add a quick check for records
 
-<strike>TODO:</strike> WILL-NOT-DO: use bytecode analysis to determine whether a class mutates a field outside its constructor. This may alleviate the need for invariability annotations in some cases. -- No, actually, this will gain us very little, because fields that are only mutated within constructors are usually declared as final anyway; it is bad practice to not declare them as final. Fields that are not declared final are typically so because they are in fact mutated outside the constructor. (For example, the cached hashcode in `java.lang.String`.) The only thing that this would buy us is detection of invariable array fields without the need to annotate them with `@InvariableArray`, but this is a marginal benefit. (Who uses arrays anyway?)
+-- No, actually, this will not buy us anything, because a record may contain mutable members. Come to think of it, if records allow mutable members, then what is the point in records?
 
-<strike>TODO:</strike> WILL-NOT-DO: add @Pure method annotation and use bytecode analysis to make sure it is truthful. Then, assess interfaces as immutable if they consist of nothing but pure methods. -- No, actually, this will buy us nothing, because purity essentially is unmodifiability, not immutability. Furthermore, purity does not even imply thread-safety: a pure function may attempt to read memory that is concurrently written by another function, with disastrous consequences. What might buy us something is asserting a combination of purity and co-coherence, but I still need to think about that, and in any case, it should probably be the subject of some other module.
+<strike>TODO:</strike> WILL-NOT-DO: use bytecode analysis to determine whether a class mutates a field outside its constructor. 
+
+- This may alleviate the need for invariability annotations in some cases. 
+- No, actually, this will gain us very little, because fields that are only mutated within constructors are usually declared as final anyway; it is bad practice to not declare them as final. Fields that are not declared final are typically so because they are in fact mutated outside the constructor. (For example, the cached hashcode in `java.lang.String`.) The only thing that this would buy us is detection of invariable array fields without the need to annotate them with `@InvariableArray`, but this is a marginal benefit. (Who uses arrays anyway?)
+
+<strike>TODO:</strike> WILL-NOT-DO: add @Pure method annotation
+
+- and use bytecode analysis to make sure it is truthful. Then, assess interfaces as immutable if they consist of nothing but pure methods. 
+- No, actually, this will buy us nothing, because purity essentially is unmodifiability, not immutability. Furthermore, purity does not even imply thread-safety: a pure function may attempt to read memory that is concurrently written by another function, with disastrous consequences. What might buy us something is asserting a combination of purity and co-coherence, but I still need to think about that, and in any case, it should probably be the subject of some other module.

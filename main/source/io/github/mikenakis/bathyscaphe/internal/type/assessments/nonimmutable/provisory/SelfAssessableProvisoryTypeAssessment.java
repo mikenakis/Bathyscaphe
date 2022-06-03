@@ -21,4 +21,6 @@ public final class SelfAssessableProvisoryTypeAssessment extends ProvisoryTypeAs
 		super( type, threadSafe );
 		assert ImmutabilitySelfAssessable.class.isAssignableFrom( type );
 	}
+
+	@Override public boolean isThreadSafe() { return threadSafe; }
 }

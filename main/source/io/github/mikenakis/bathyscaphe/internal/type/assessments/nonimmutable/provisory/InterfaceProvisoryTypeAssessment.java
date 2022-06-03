@@ -19,4 +19,6 @@ public final class InterfaceProvisoryTypeAssessment extends ProvisoryTypeAssessm
 		super( type, threadSafe );
 		assert type.isInterface();
 	}
+
+	@Override public boolean isThreadSafe() { return threadSafe; }
 }

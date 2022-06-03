@@ -28,4 +28,5 @@ public class MutableSuperclassMutableTypeAssessment extends MutableTypeAssessmen
 	}
 
 	@Override public List<Assessment> children() { return List.of( superclassAssessment ); }
+	@Override public boolean isThreadSafe() { return threadSafe && superclassAssessment.isThreadSafe(); }
 }

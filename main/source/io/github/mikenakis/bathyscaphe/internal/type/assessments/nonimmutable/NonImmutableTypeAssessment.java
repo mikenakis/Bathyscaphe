@@ -17,11 +17,13 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 public abstract class NonImmutableTypeAssessment extends TypeAssessment
 {
 	public final Class<?> type;
-	public final boolean threadSafe;
+	protected final boolean threadSafe;
 
 	protected NonImmutableTypeAssessment( Class<?> type, boolean threadSafe )
 	{
 		this.type = type;
 		this.threadSafe = threadSafe;
 	}
+
+	public abstract boolean isThreadSafe();
 }

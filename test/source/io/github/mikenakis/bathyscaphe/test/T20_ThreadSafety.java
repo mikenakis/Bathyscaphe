@@ -18,6 +18,7 @@ import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedThreadSafeArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotAlreadyBeImmutableException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotBeExtensibleException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotBePreviouslyAssessedException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedTypeMustBeClassException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.VariableFieldMayNotBeAnnotatedThreadSafeArrayException;
@@ -529,18 +530,34 @@ public class T20_ThreadSafety
 		}.run();
 	}
 
+	@Test public void threadSafe_preassessment_on_extensible_class_is_caught()
+	{
+		new Runnable()
+		{
+			static class ExtensibleClass
+			{ }
+
+			@Override public void run()
+			{
+				var exception = MyTestKit.expect( PreassessedClassMustNotBeExtensibleException.class, () -> //
+					Bathyscaphe.addThreadSafePreassessment( ExtensibleClass.class ) );
+				assert exception.jvmClass == ExtensibleClass.class;
+			}
+		}.run();
+	}
+
 	@Test public void threadSafe_preassessment_on_interface_is_caught()
 	{
 		new Runnable()
 		{
-			interface Interface
+			interface SomeInterface
 			{ }
 
 			@Override public void run()
 			{
 				var exception = MyTestKit.expect( PreassessedTypeMustBeClassException.class, () -> //
-					Bathyscaphe.addThreadSafePreassessment( Interface.class ) );
-				assert exception.type == Interface.class;
+					Bathyscaphe.addThreadSafePreassessment( SomeInterface.class ) );
+				assert exception.type == SomeInterface.class;
 			}
 		}.run();
 	}

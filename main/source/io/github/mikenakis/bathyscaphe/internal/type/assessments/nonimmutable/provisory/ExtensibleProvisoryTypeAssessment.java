@@ -21,11 +21,13 @@ public final class ExtensibleProvisoryTypeAssessment extends ProvisoryTypeAssess
 {
 	public final Mode mode;
 
-	public ExtensibleProvisoryTypeAssessment( Mode mode, Class<?> jvmClass )
+	public ExtensibleProvisoryTypeAssessment( Mode mode, Class<?> jvmClass, boolean threadSafe )
 	{
-		super( jvmClass, true );
+		super( jvmClass, threadSafe );
 		assert Helpers.isClass( jvmClass );
 		assert Helpers.isExtensible( jvmClass );
 		this.mode = mode;
 	}
+
+	@Override public boolean isThreadSafe() { return threadSafe; }
 }

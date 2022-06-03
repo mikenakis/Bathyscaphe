@@ -136,7 +136,7 @@ public final class ObjectAssessor
 
 	private ObjectAssessment assessMultiReason( Object object, MultiReasonProvisoryTypeAssessment multiReasonProvisoryTypeAssessment, Set<Object> visitedValues )
 	{
-		for( ProvisoryTypeAssessment provisoryReason : multiReasonProvisoryTypeAssessment.provisoryReasons )
+		for( ProvisoryTypeAssessment provisoryReason : multiReasonProvisoryTypeAssessment.reasons )
 		{
 			ObjectAssessment objectAssessment = switch( provisoryReason )
 				{

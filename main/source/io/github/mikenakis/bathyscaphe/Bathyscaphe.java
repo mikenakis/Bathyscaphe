@@ -50,9 +50,11 @@ public final class Bathyscaphe
 	public static boolean objectMustBeThreadSafeAssertion( Object object )
 	{
 		ObjectAssessment assessment = ObjectAssessor.instance.assess( object );
-		if( assessment instanceof MutableObjectAssessment mutableObjectAssessment )
-			if( !mutableObjectAssessment.typeAssessment().threadSafe )
-				throw new ObjectMustBeImmutableException( mutableObjectAssessment );
+		if( !assessment.isThreadSafe() )
+		{
+			MutableObjectAssessment mutableObjectAssessment = (MutableObjectAssessment)assessment;
+			throw new ObjectMustBeThreadSafeException( mutableObjectAssessment );
+		}
 		return true;
 	}
 

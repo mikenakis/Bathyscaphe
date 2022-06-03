@@ -10,11 +10,11 @@
     <module name="bathyscaphe-test" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="mikenakis.bathyscaphe.*" />
+        <option name="PATTERN" value="io.github.mikenakis.bathyscaphe.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="bathyscaphe_tests" />
+    <option name="PACKAGE_NAME" value="io.github.mikenakis.bathyscaphe.test" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="package" />

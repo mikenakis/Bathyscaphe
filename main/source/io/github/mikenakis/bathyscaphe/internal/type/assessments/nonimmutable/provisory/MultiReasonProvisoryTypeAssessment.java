@@ -19,14 +19,15 @@ import java.util.List;
  */
 public final class MultiReasonProvisoryTypeAssessment extends ProvisoryTypeAssessment
 {
-	public final List<ProvisoryTypeAssessment> provisoryReasons;
+	public final List<ProvisoryTypeAssessment> reasons;
 
-	public MultiReasonProvisoryTypeAssessment( Class<?> jvmClass, boolean threadSafe, List<ProvisoryTypeAssessment> provisoryReasons )
+	public MultiReasonProvisoryTypeAssessment( Class<?> jvmClass, boolean threadSafe, List<ProvisoryTypeAssessment> reasons )
 	{
 		super( jvmClass, threadSafe );
 		assert Helpers.isClass( jvmClass );
-		this.provisoryReasons = provisoryReasons;
+		this.reasons = reasons;
 	}
 
-	@Override public List<Assessment> children() { return List.copyOf( provisoryReasons ); }
+	@Override public List<Assessment> children() { return List.copyOf( reasons ); }
+	@Override public boolean isThreadSafe() { return threadSafe && reasons.stream().allMatch( reason -> reason.isThreadSafe() ); }
 }

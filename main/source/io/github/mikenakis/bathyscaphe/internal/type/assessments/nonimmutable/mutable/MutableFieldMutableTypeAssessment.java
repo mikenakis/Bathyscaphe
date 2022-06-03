@@ -29,4 +29,5 @@ public class MutableFieldMutableTypeAssessment extends MutableTypeAssessment
 	}
 
 	@Override public List<Assessment> children() { return List.of( fieldAssessment ); }
+	@Override public boolean isThreadSafe() { return threadSafe && fieldAssessment.threadSafe; }
 }

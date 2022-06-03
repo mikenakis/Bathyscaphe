@@ -26,7 +26,7 @@ public final class ObjectMustBeThreadSafeException extends UncheckedException
 	 */
 	public ObjectMustBeThreadSafeException( MutableObjectAssessment mutableObjectAssessment )
 	{
-		assert !mutableObjectAssessment.typeAssessment().threadSafe;
+		assert !mutableObjectAssessment.typeAssessment().isThreadSafe();
 		this.mutableObjectAssessment = mutableObjectAssessment;
 	}
 }

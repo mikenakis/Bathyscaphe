@@ -24,7 +24,6 @@ import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.pr
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisorySuperclassProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.SelfAssessableProvisoryTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.exceptions.SelfAssessableAnnotationIsOnlyApplicableToClassException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.SelfAssessableClassMustNotBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.type.field.FieldAssessor;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.FieldAssessment;
@@ -39,6 +38,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Deeply assesses the immutability of types using reflection. DO NOT USE. FOR INTERNAL USE ONLY.
@@ -61,10 +61,9 @@ final class Reflector
 		TypeAssessment assessment = assess0( type );
 		if( ImmutabilitySelfAssessable.class.isAssignableFrom( type ) )
 		{
-			assert Helpers.isClass( type ) : new SelfAssessableAnnotationIsOnlyApplicableToClassException( type );
 			assert !(assessment instanceof ImmutableTypeAssessment) : new SelfAssessableClassMustNotBeImmutableException( type );
 			NonImmutableTypeAssessment nonImmutableTypeAssessment = (NonImmutableTypeAssessment)assessment;
-			return new SelfAssessableProvisoryTypeAssessment( type, nonImmutableTypeAssessment.threadSafe );
+			return new SelfAssessableProvisoryTypeAssessment( type, nonImmutableTypeAssessment.isThreadSafe() );
 		}
 		return assessment;
 	}
@@ -132,13 +131,13 @@ final class Reflector
 		}
 
 		if( !mutableReasons.isEmpty() )
-			return mutableReasons.size() == 1 ? mutableReasons.get( 0 ) : new MultiReasonMutableTypeAssessment( type, threadSafe, mutableReasons );
+			return mutableReasons.size() == 1 ? mutableReasons.get( 0 ) : new MultiReasonMutableTypeAssessment( type, threadSafe, Stream.concat( mutableReasons.stream(), provisoryReasons.stream() ).toList() );
 
 		if( !provisoryReasons.isEmpty() )
 			return provisoryReasons.size() == 1 ? provisoryReasons.get( 0 ) : new MultiReasonProvisoryTypeAssessment( type, threadSafe, provisoryReasons );
 
 		if( Helpers.isExtensible( type ) )
-			return new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.Assessed, type );
+			return new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.Assessed, type, threadSafe );
 
 		return ImmutableTypeAssessment.instance;
 	}

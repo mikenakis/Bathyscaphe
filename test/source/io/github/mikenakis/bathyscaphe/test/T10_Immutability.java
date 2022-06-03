@@ -27,6 +27,7 @@ import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedInvaria
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.AnnotatedFieldMustBePrivateException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.NonArrayFieldMayNotBeAnnotatedInvariableArrayException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotAlreadyBeImmutableException;
+import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotBeExtensibleException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedClassMustNotBePreviouslyAssessedException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.PreassessedTypeMustBeClassException;
 import io.github.mikenakis.bathyscaphe.internal.type.exceptions.SelfAssessableClassMustNotBeImmutableException;
@@ -623,14 +624,30 @@ public class T10_Immutability
 	{
 		new Runnable()
 		{
-			interface Interface
+			interface SomeInterface
 			{ }
 
 			@Override public void run()
 			{
 				var exception = MyTestKit.expect( PreassessedTypeMustBeClassException.class, () -> //
-					Bathyscaphe.addImmutablePreassessment( Interface.class ) );
-				assert exception.type == Interface.class;
+					Bathyscaphe.addImmutablePreassessment( SomeInterface.class ) );
+				assert exception.type == SomeInterface.class;
+			}
+		}.run();
+	}
+
+	@Test public void immutable_preassessment_on_extensible_class_is_caught()
+	{
+		new Runnable()
+		{
+			static class ExtensibleClass
+			{ }
+
+			@Override public void run()
+			{
+				var exception = MyTestKit.expect( PreassessedClassMustNotBeExtensibleException.class, () -> //
+					Bathyscaphe.addImmutablePreassessment( ExtensibleClass.class ) );
+				assert exception.jvmClass == ExtensibleClass.class;
 			}
 		}.run();
 	}

@@ -74,7 +74,8 @@ public final class TypeAssessor
 	{
 		synchronized( assessmentsByType )
 		{
-			return Debug.boundary( () -> {
+			return Debug.boundary( () -> //
+			{
 				TypeAssessment existingAssessment = assessmentsByType.get( type );
 				if( existingAssessment != null )
 					return existingAssessment;

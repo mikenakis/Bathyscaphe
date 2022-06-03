@@ -28,4 +28,6 @@ public final class ProvisorySuperclassProvisoryTypeAssessment extends ProvisoryT
 	}
 
 	@Override public List<Assessment> children() { return List.of( superclassAssessment ); }
+
+	@Override public boolean isThreadSafe() { return threadSafe && superclassAssessment.isThreadSafe(); }
 }

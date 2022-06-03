@@ -29,4 +29,9 @@ public final class ProvisoryFieldProvisoryTypeAssessment extends ProvisoryTypeAs
 	}
 
 	@Override public List<Assessment> children() { return List.of( fieldAssessment ); }
+
+	@Override public boolean isThreadSafe()
+	{
+		return threadSafe && fieldAssessment.threadSafe;
+	}
 }

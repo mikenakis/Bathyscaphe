@@ -18,4 +18,6 @@ public final class ThreadSafeMutableTypeAssessment extends MutableTypeAssessment
 	{
 		super( jvmClass, true );
 	}
+
+	@Override public boolean isThreadSafe() { return true; }
 }

@@ -19,4 +19,6 @@ public final class ArrayMutableTypeAssessment extends MutableTypeAssessment
 		super( jvmClass, threadSafe );
 		assert jvmClass.isArray();
 	}
+
+	@Override public boolean isThreadSafe() { return threadSafe; }
 }

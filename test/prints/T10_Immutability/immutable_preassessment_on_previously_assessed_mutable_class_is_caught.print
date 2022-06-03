@@ -1,6 +1,6 @@
-assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$29$ClassWithMutableField':
-    ■ instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$29$ClassWithMutableField' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
-    └─■ class 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$29$ClassWithMutableField' is mutable because field 'mutableField' is mutable. (MutableFieldMutableTypeAssessment)
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$30$ClassWithMutableField':
+    ■ instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$30$ClassWithMutableField' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'io.github.mikenakis.bathyscaphe.test.T10_Immutability$30$ClassWithMutableField' is mutable because field 'mutableField' is mutable. (MutableFieldMutableTypeAssessment)
       └─■ field 'mutableField' is mutable because it is of mutable type 'java.util.ArrayList'. (MutableFieldTypeMutableFieldAssessment)
         └─■ class 'java.util.ArrayList' is mutable due to multiple reasons. (MultiReasonMutableTypeAssessment)
           ├─■ class 'java.util.ArrayList' is mutable because it extends mutable class 'java.util.AbstractList'. (MutableSuperclassMutableTypeAssessment)

@@ -44,32 +44,32 @@ final class DefaultPreassessments
 	{
 		addDefaultImmutablePreassessment( assessor, Class.class ); //contains caching
 		addDefaultImmutablePreassessment( assessor, String.class ); //contains caching
-		addDefaultExtensiblePreassessment( assessor, BigDecimal.class ); //is extensible, contains caching, and also a problematic 'precision' field.
+		addDefaultExtensiblePreassessment( assessor, BigDecimal.class, true ); //is extensible, contains caching, and has a problematic 'precision' field; nonetheless, people say it is immutable; who am I to disagree.
 		addDefaultImmutablePreassessment( assessor, Method.class ); //contains caching
 		addDefaultImmutablePreassessment( assessor, Constructor.class ); //contains caching
 		addDefaultImmutablePreassessment( assessor, URI.class ); //has mutable fields, although it is guaranteed to remain constant.
 		addDefaultImmutablePreassessment( assessor, URL.class ); //has mutable fields, although it is guaranteed to remain constant.
 		addDefaultImmutablePreassessment( assessor, Locale.class ); //has mutable fields, although it is guaranteed to remain constant.
-		addDefaultExtensiblePreassessment( assessor, BigInteger.class ); //is extensible, contains mutable fields.
+		addDefaultExtensiblePreassessment( assessor, BigInteger.class, true ); //is extensible, contains mutable fields.
 		addDefaultImmutablePreassessment( assessor, StackTraceElement.class );
 		addDefaultImmutablePreassessment( assessor, File.class );
-		addDefaultExtensiblePreassessment( assessor, InetAddress.class ); //is extensible, contains mutable fields.
+		addDefaultExtensiblePreassessment( assessor, InetAddress.class, true ); //is extensible, contains mutable fields.
 		addDefaultImmutablePreassessment( assessor, Inet4Address.class );
 		addDefaultImmutablePreassessment( assessor, Inet6Address.class );
 		addDefaultImmutablePreassessment( assessor, InetSocketAddress.class );
-		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of() ) );
-		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of( 1 ) ) );
-		addDefaultIterablePreassessment( assessor, MyKit.uncheckedClassCast( ConvertingIterable.class ) );
+		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of() ), true );
+		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of( 1 ) ), true );
+		//addDefaultIterablePreassessment( assessor, MyKit.uncheckedClassCast( ConvertingIterable.class ) );
 		addSupperficiallyImmutableJdkMap( assessor, Map.of() );
 		addSupperficiallyImmutableJdkMap( assessor, Map.of( "", "" ) );
-		addDefaultCompositePreassessment( assessor, MyKit.uncheckedClassCast( Optional.class ), OptionalDecomposer.instance );
+		addDefaultCompositePreassessment( assessor, MyKit.uncheckedClassCast( Optional.class ), true, OptionalDecomposer.instance );
 		addDefaultImmutablePreassessment( assessor, ZonedDateTime.class );
 	}
 
-	private static void addDefaultExtensiblePreassessment( TypeAssessor assessor, Class<?> jvmClass )
+	private static void addDefaultExtensiblePreassessment( TypeAssessor assessor, Class<?> jvmClass, boolean threadSafe )
 	{
 		assert !(new TypeAssessor().assess( jvmClass ) instanceof ExtensibleProvisoryTypeAssessment);
-		ExtensibleProvisoryTypeAssessment assessment = new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.PreassessedByDefault, jvmClass );
+		ExtensibleProvisoryTypeAssessment assessment = new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.PreassessedByDefault, jvmClass, threadSafe );
 		assessor.addDefaultPreassessment( jvmClass, assessment );
 	}
 
@@ -79,12 +79,12 @@ final class DefaultPreassessments
 		assessor.addDefaultPreassessment( jvmClass, ImmutableTypeAssessment.instance );
 	}
 
-	private static <T extends Iterable<E>,E> void addDefaultIterablePreassessment( TypeAssessor assessor, Class<T> jvmClass )
+	private static <T extends Iterable<E>,E> void addDefaultIterablePreassessment( TypeAssessor assessor, Class<T> jvmClass, boolean threadSafe )
 	{
 		assert !(new TypeAssessor().assess( jvmClass ) instanceof CompositeProvisoryTypeAssessment);
 		Decomposer<T,E> decomposer = getIterableDecomposer();
 		ProvisoryTypeAssessment objectAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
-		CompositeProvisoryTypeAssessment<? extends Iterable<E>,E> assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, jvmClass, objectAssessment, decomposer );
+		var assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, jvmClass, threadSafe, objectAssessment, decomposer );
 		assessor.addDefaultPreassessment( jvmClass, assessment );
 	}
 
@@ -102,10 +102,10 @@ final class DefaultPreassessments
 		return result;
 	}
 
-	private static <T, E> void addDefaultCompositePreassessment( TypeAssessor assessor, Class<T> compositeType, Decomposer<T,E> decomposer )
+	private static <T, E> void addDefaultCompositePreassessment( TypeAssessor assessor, Class<T> compositeType, boolean threadSafe, Decomposer<T,E> decomposer )
 	{
-		ProvisoryTypeAssessment objectAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
-		CompositeProvisoryTypeAssessment<T,E> assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, compositeType, objectAssessment, decomposer );
+		ProvisoryTypeAssessment componentTypeAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
+		var assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, compositeType, threadSafe, componentTypeAssessment, decomposer );
 		assessor.addDefaultPreassessment( compositeType, assessment );
 	}
 
@@ -117,7 +117,7 @@ final class DefaultPreassessments
 	{
 		Class<Map<K,V>> mapClass = MyKit.getClass( superficiallyImmutableJdkMap );
 		Decomposer<Map<K,V>,ConcreteMapEntry<K,V>> decomposer = getSuperficiallyImmutableJdkMapDecomposer();
-		addDefaultCompositePreassessment( assessor, mapClass, decomposer );
+		addDefaultCompositePreassessment( assessor, mapClass, true, decomposer );
 	}
 
 	private static class SuperficiallyImmutableJdkMapDecomposer<K, V> implements Decomposer<Map<K,V>,ConcreteMapEntry<K,V>>

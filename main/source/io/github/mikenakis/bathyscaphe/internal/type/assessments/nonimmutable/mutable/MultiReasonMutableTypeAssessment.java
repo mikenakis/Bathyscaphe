@@ -8,6 +8,7 @@
 package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable;
 
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.NonImmutableTypeAssessment;
 
 import java.util.List;
 
@@ -18,13 +19,14 @@ import java.util.List;
  */
 public class MultiReasonMutableTypeAssessment extends MutableTypeAssessment
 {
-	public final List<MutableTypeAssessment> mutableTypeAssessments;
+	public final List<NonImmutableTypeAssessment> reasons;
 
-	public MultiReasonMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe, List<MutableTypeAssessment> mutableTypeAssessments )
+	public MultiReasonMutableTypeAssessment( Class<?> jvmClass, boolean threadSafe, List<NonImmutableTypeAssessment> reasons )
 	{
 		super( jvmClass, threadSafe );
-		this.mutableTypeAssessments = mutableTypeAssessments;
+		this.reasons = reasons;
 	}
 
-	@Override public List<Assessment> children() { return List.copyOf( mutableTypeAssessments ); }
+	@Override public List<Assessment> children() { return List.copyOf( reasons ); }
+	@Override public boolean isThreadSafe() { return threadSafe && reasons.stream().allMatch( reason -> reason.isThreadSafe() ); }
 }
