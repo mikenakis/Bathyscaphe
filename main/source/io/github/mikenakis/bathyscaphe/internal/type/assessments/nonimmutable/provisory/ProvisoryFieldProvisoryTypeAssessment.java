@@ -32,6 +32,6 @@ public final class ProvisoryFieldProvisoryTypeAssessment extends ProvisoryTypeAs
 
 	@Override public boolean isThreadSafe()
 	{
-		return threadSafe && fieldAssessment.threadSafe;
+		return threadSafe || fieldAssessment.threadSafe;
 	}
 }

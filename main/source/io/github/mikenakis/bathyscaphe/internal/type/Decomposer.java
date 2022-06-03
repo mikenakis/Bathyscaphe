@@ -14,9 +14,6 @@ import java.util.Map;
  * <p>
  * This interface is necessary for assessing types like {@link Map}, which are not iterable. Classes derived from {@link Map} must be explicitly preassessed
  * as composite, supplying a method that will convert the map to an {@link Iterable} of entries.
- * <p>
- * PEARL: although conceptually a map is a collection of {@link Map.Entry}, it is not defined as such. Instead, the {@link Map} interface is a snowflake, and
- * one has to invoke {@link Map#entrySet()} to obtain a collection of entries.
  *
  * @param <T> The type of the composite object.
  * @param <E> The type of the constituent components of the composite object.

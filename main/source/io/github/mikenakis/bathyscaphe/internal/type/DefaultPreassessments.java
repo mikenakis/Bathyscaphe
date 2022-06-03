@@ -7,11 +7,11 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type;
 
-import io.github.mikenakis.bathyscaphe.internal.helpers.ConcreteMapEntry;
-import io.github.mikenakis.bathyscaphe.internal.mykit.collections.ConvertingIterable;
 import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.MutableTypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.mutable.ThreadSafeMutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.CompositeProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ExtensibleProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.ProvisoryTypeAssessment;
@@ -32,6 +32,24 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.DelayQueue;
+import java.util.concurrent.Exchanger;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.Phaser;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.SynchronousQueue;
 
 /**
  * Adds default preassessments to a {@link TypeAssessor}
@@ -44,32 +62,55 @@ final class DefaultPreassessments
 	{
 		addDefaultImmutablePreassessment( assessor, Class.class ); //contains caching
 		addDefaultImmutablePreassessment( assessor, String.class ); //contains caching
-		addDefaultExtensiblePreassessment( assessor, BigDecimal.class, true ); //is extensible, contains caching, and has a problematic 'precision' field; nonetheless, people say it is immutable; who am I to disagree.
+		addDefaultExtensiblePreassessment( assessor, BigDecimal.class ); //is extensible, contains caching, and has a problematic 'precision' field; nonetheless, people say it is immutable; who am I to disagree.
 		addDefaultImmutablePreassessment( assessor, Method.class ); //contains caching
 		addDefaultImmutablePreassessment( assessor, Constructor.class ); //contains caching
 		addDefaultImmutablePreassessment( assessor, URI.class ); //has mutable fields, although it is guaranteed to remain constant.
 		addDefaultImmutablePreassessment( assessor, URL.class ); //has mutable fields, although it is guaranteed to remain constant.
 		addDefaultImmutablePreassessment( assessor, Locale.class ); //has mutable fields, although it is guaranteed to remain constant.
-		addDefaultExtensiblePreassessment( assessor, BigInteger.class, true ); //is extensible, contains mutable fields.
+		addDefaultExtensiblePreassessment( assessor, BigInteger.class ); //is extensible, contains mutable fields.
 		addDefaultImmutablePreassessment( assessor, StackTraceElement.class );
 		addDefaultImmutablePreassessment( assessor, File.class );
-		addDefaultExtensiblePreassessment( assessor, InetAddress.class, true ); //is extensible, contains mutable fields.
+		addDefaultExtensiblePreassessment( assessor, InetAddress.class ); //is extensible, contains mutable fields.
 		addDefaultImmutablePreassessment( assessor, Inet4Address.class );
 		addDefaultImmutablePreassessment( assessor, Inet6Address.class );
 		addDefaultImmutablePreassessment( assessor, InetSocketAddress.class );
-		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of() ), true );
-		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of( 1 ) ), true );
+		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of() ) );
+		addDefaultIterablePreassessment( assessor, MyKit.getClass( List.of( 1 ) ) );
 		//addDefaultIterablePreassessment( assessor, MyKit.uncheckedClassCast( ConvertingIterable.class ) );
-		addSupperficiallyImmutableJdkMap( assessor, Map.of() );
-		addSupperficiallyImmutableJdkMap( assessor, Map.of( "", "" ) );
+		/**
+		 * PEARL: the default assessment of superficially-immutable jdk map is actually very mutable, because it extends {@link java.util.AbstractMap} which is
+		 *        mutable, because (get a load of this!) its 'keySet' and 'values' fields are non-final!
+		 */
+		addDefaultCompositePreassessment( assessor, MyKit.getClass( Map.of() ), true, JdkMapDecomposer.instance() );
+		addDefaultCompositePreassessment( assessor, MyKit.getClass( Map.of( "", "" ) ), true, JdkMapDecomposer.instance() );
 		addDefaultCompositePreassessment( assessor, MyKit.uncheckedClassCast( Optional.class ), true, OptionalDecomposer.instance );
 		addDefaultImmutablePreassessment( assessor, ZonedDateTime.class );
+
+		addDefaultThreadSafePreassessment( assessor, ConcurrentHashMap.class );
+		addDefaultThreadSafePreassessment( assessor, ConcurrentLinkedDeque.class );
+		addDefaultThreadSafePreassessment( assessor, ConcurrentLinkedQueue.class );
+		addDefaultThreadSafePreassessment( assessor, ConcurrentSkipListMap.class );
+		addDefaultThreadSafePreassessment( assessor, ConcurrentSkipListSet.class );
+		addDefaultThreadSafePreassessment( assessor, CopyOnWriteArrayList.class );
+		addDefaultThreadSafePreassessment( assessor, CopyOnWriteArraySet.class );
+		addDefaultThreadSafePreassessment( assessor, CountDownLatch.class );
+		addDefaultThreadSafePreassessment( assessor, CyclicBarrier.class );
+		addDefaultThreadSafePreassessment( assessor, DelayQueue.class );
+		addDefaultThreadSafePreassessment( assessor, Exchanger.class );
+		addDefaultThreadSafePreassessment( assessor, LinkedBlockingDeque.class );
+		addDefaultThreadSafePreassessment( assessor, LinkedBlockingQueue.class );
+		addDefaultThreadSafePreassessment( assessor, LinkedTransferQueue.class );
+		addDefaultThreadSafePreassessment( assessor, Phaser.class );
+		addDefaultThreadSafePreassessment( assessor, PriorityBlockingQueue.class );
+		addDefaultThreadSafePreassessment( assessor, Semaphore.class );
+		addDefaultThreadSafePreassessment( assessor, SynchronousQueue.class );
 	}
 
-	private static void addDefaultExtensiblePreassessment( TypeAssessor assessor, Class<?> jvmClass, boolean threadSafe )
+	private static void addDefaultExtensiblePreassessment( TypeAssessor assessor, Class<?> jvmClass )
 	{
 		assert !(new TypeAssessor().assess( jvmClass ) instanceof ExtensibleProvisoryTypeAssessment);
-		ExtensibleProvisoryTypeAssessment assessment = new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.PreassessedByDefault, jvmClass, threadSafe );
+		ExtensibleProvisoryTypeAssessment assessment = new ExtensibleProvisoryTypeAssessment( TypeAssessment.Mode.PreassessedByDefault, jvmClass, true );
 		assessor.addDefaultPreassessment( jvmClass, assessment );
 	}
 
@@ -79,27 +120,18 @@ final class DefaultPreassessments
 		assessor.addDefaultPreassessment( jvmClass, ImmutableTypeAssessment.instance );
 	}
 
-	private static <T extends Iterable<E>,E> void addDefaultIterablePreassessment( TypeAssessor assessor, Class<T> jvmClass, boolean threadSafe )
+	private static void addDefaultThreadSafePreassessment( TypeAssessor assessor, Class<?> jvmClass )
 	{
-		assert !(new TypeAssessor().assess( jvmClass ) instanceof CompositeProvisoryTypeAssessment);
-		Decomposer<T,E> decomposer = getIterableDecomposer();
-		ProvisoryTypeAssessment objectAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
-		var assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, jvmClass, threadSafe, objectAssessment, decomposer );
-		assessor.addDefaultPreassessment( jvmClass, assessment );
+		assert !(new TypeAssessor().assess( jvmClass ) instanceof ImmutableTypeAssessment);
+		assessor.addDefaultPreassessment( jvmClass, new ThreadSafeMutableTypeAssessment( jvmClass ) );
 	}
 
-	private static final Decomposer<? extends Iterable<Object>,Object> iterableDecomposer = new Decomposer<>()
+	private static <T extends Iterable<E>, E> void addDefaultIterablePreassessment( TypeAssessor assessor, Class<T> jvmClass )
 	{
-		@Override public Iterable<Object> decompose( Iterable<Object> object )
-		{
-			return object;
-		}
-	};
-
-	private static <T extends Iterable<E>,E> Decomposer<T,E> getIterableDecomposer()
-	{
-		@SuppressWarnings( "unchecked" ) Decomposer<T,E> result = (Decomposer<T,E>)iterableDecomposer;
-		return result;
+		assert !(new TypeAssessor().assess( jvmClass ) instanceof CompositeProvisoryTypeAssessment);
+		ProvisoryTypeAssessment objectAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
+		var assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, jvmClass, true, objectAssessment, IterableDecomposer.instance() );
+		assessor.addDefaultPreassessment( jvmClass, assessment );
 	}
 
 	private static <T, E> void addDefaultCompositePreassessment( TypeAssessor assessor, Class<T> compositeType, boolean threadSafe, Decomposer<T,E> decomposer )
@@ -107,71 +139,5 @@ final class DefaultPreassessments
 		ProvisoryTypeAssessment componentTypeAssessment = (ProvisoryTypeAssessment)assessor.assess( Object.class );
 		var assessment = new CompositeProvisoryTypeAssessment<>( TypeAssessment.Mode.PreassessedByDefault, compositeType, threadSafe, componentTypeAssessment, decomposer );
 		assessor.addDefaultPreassessment( compositeType, assessment );
-	}
-
-	/**
-	 * PEARL: by default, the assessment of superficially-immutable jdk map is actually very mutable, because it extends {@link java.util.AbstractMap} which is
-	 *        mutable, because (get a load of this!) its 'keySet' and 'values' fields are non-final!
-	 */
-	private static <K, V> void addSupperficiallyImmutableJdkMap( TypeAssessor assessor, Map<K,V> superficiallyImmutableJdkMap )
-	{
-		Class<Map<K,V>> mapClass = MyKit.getClass( superficiallyImmutableJdkMap );
-		Decomposer<Map<K,V>,ConcreteMapEntry<K,V>> decomposer = getSuperficiallyImmutableJdkMapDecomposer();
-		addDefaultCompositePreassessment( assessor, mapClass, true, decomposer );
-	}
-
-	private static class SuperficiallyImmutableJdkMapDecomposer<K, V> implements Decomposer<Map<K,V>,ConcreteMapEntry<K,V>>
-	{
-		@Override public Iterable<ConcreteMapEntry<K,V>> decompose( Map<K,V> map )
-		{
-			/**
-			 * PEARL: the decomposer for the superficially-immutable jdk map cannot just return {@link Map#entrySet()} because the entry-set is a nested class,
-			 * so it has a 'this$0' field, which points back to the map, which is mutable, thus making the entry-set mutable!
-			 * So, the decomposer has to iterate the entry-set and yield each element in it.
-			 * PEARL: the decomposer cannot just yield each element yielded by the entry-set, because these are instances of {@link java.util.KeyValueHolder}
-			 * which cannot be reflected because it is inaccessible! Therefore, the decomposer has to convert each element to a proximal key-value class which
-			 * is accessible.
-			 */
-			Iterable<Map.Entry<K,V>> entrySet = map.entrySet();
-			if( MyKit.areAssertionsEnabled() )
-				entrySet = MyKit.streamFromIterable( entrySet ).sorted( DefaultPreassessments::compareMapEntries ).toList();
-			return new ConvertingIterable<>( entrySet, DefaultPreassessments::mapEntryConverter );
-		}
-	}
-
-	private static int compareMapEntries( Map.Entry<?,?> entry1, Map.Entry<?,?> entry2 )
-	{
-		String a1 = entry1.getKey().toString();
-		String a2 = entry2.getKey().toString();
-		return a1.compareTo( a2 );
-	}
-
-	private static final SuperficiallyImmutableJdkMapDecomposer<Object,Object> superficiallyImmutableJdkMapDeconstructorInstance = new SuperficiallyImmutableJdkMapDecomposer<>();
-
-	private static <K, V> Decomposer<Map<K,V>,ConcreteMapEntry<K,V>> getSuperficiallyImmutableJdkMapDecomposer()
-	{
-		@SuppressWarnings( "unchecked" ) Decomposer<Map<K,V>,ConcreteMapEntry<K,V>> result = (SuperficiallyImmutableJdkMapDecomposer<K,V>)superficiallyImmutableJdkMapDeconstructorInstance;
-		return result;
-	}
-
-	private static <K, V> ConcreteMapEntry<K,V> mapEntryConverter( Map.Entry<K,V> mapEntry )
-	{
-		return new ConcreteMapEntry<>( mapEntry.getKey(), mapEntry.getValue() );
-	}
-
-	private static class OptionalDecomposer implements Decomposer<Optional<?>,Object>
-	{
-		public static Decomposer<Optional<?>,Object> instance = new OptionalDecomposer();
-
-		private OptionalDecomposer()
-		{
-		}
-
-		@Override public Iterable<Object> decompose( Optional<?> optional )
-		{
-			if( optional.isEmpty() )
-				return List.of();
-			return List.of( optional.get() );
-		}
 	}
 }

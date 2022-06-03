@@ -29,5 +29,5 @@ public final class MultiReasonProvisoryTypeAssessment extends ProvisoryTypeAsses
 	}
 
 	@Override public List<Assessment> children() { return List.copyOf( reasons ); }
-	@Override public boolean isThreadSafe() { return threadSafe && reasons.stream().allMatch( reason -> reason.isThreadSafe() ); }
+	@Override public boolean isThreadSafe() { return threadSafe || reasons.stream().allMatch( reason -> reason.isThreadSafe() ); }
 }

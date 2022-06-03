@@ -7,6 +7,7 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type;
 
+import io.github.mikenakis.bathyscaphe.annotations.ThreadSafe;
 import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
@@ -33,7 +34,6 @@ import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmuta
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
 import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -66,23 +66,6 @@ final class Reflector
 			return new SelfAssessableProvisoryTypeAssessment( type, nonImmutableTypeAssessment.isThreadSafe() );
 		}
 		return assessment;
-	}
-
-	private static boolean isAnnotatedThreadSafe( Class<?> type )
-	{
-		for( ;; )
-		{
-			for( Annotation annotation : type.getAnnotations() )
-				if( annotation.getClass().getSimpleName().equals( "ThreadSafe" ) )
-					return true;
-			for( Class<?> interfaceClass : type.getInterfaces() )
-				if( isAnnotatedThreadSafe( interfaceClass ) )
-					return true;
-			type = type.getSuperclass();
-			if( type == null )
-				break;
-		}
-		return false;
 	}
 
 	private TypeAssessment assess0( Class<?> type )
@@ -161,5 +144,21 @@ final class Reflector
 				//DoNotCover
 				default -> throw new AssertionError( superclassAssessment );
 			};
+	}
+
+	private static boolean isAnnotatedThreadSafe( Class<?> type )
+	{
+		for( ;; )
+		{
+			if( type.isAnnotationPresent( ThreadSafe.class ) )
+				return true;
+			for( Class<?> interfaceClass : type.getInterfaces() )
+				if( isAnnotatedThreadSafe( interfaceClass ) )
+					return true;
+			type = type.getSuperclass();
+			if( type == null )
+				break;
+		}
+		return false;
 	}
 }

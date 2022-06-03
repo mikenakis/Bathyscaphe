@@ -28,5 +28,5 @@ public class MultiReasonMutableTypeAssessment extends MutableTypeAssessment
 	}
 
 	@Override public List<Assessment> children() { return List.copyOf( reasons ); }
-	@Override public boolean isThreadSafe() { return threadSafe && reasons.stream().allMatch( reason -> reason.isThreadSafe() ); }
+	@Override public boolean isThreadSafe() { return threadSafe || reasons.stream().allMatch( reason -> reason.isThreadSafe() ); }
 }

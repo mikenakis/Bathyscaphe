@@ -365,7 +365,7 @@ public class T20_ThreadSafety
 		}.run();
 	}
 
-	@Test public void invariable_annotation_on_protected_field_is_caught()
+	@Test public void threadSafe_annotation_on_protected_field_is_caught()
 	{
 		Method method = Helper.getCurrentMethod();
 		new Runnable()
@@ -384,7 +384,7 @@ public class T20_ThreadSafety
 		}.run();
 	}
 
-	@Test public void invariable_annotation_on_package_private_field_is_caught()
+	@Test public void threadSafe_annotation_on_package_private_field_is_caught()
 	{
 		Method method = Helper.getCurrentMethod();
 		new Runnable()
@@ -422,7 +422,7 @@ public class T20_ThreadSafety
 		}.run();
 	}
 
-	@Test public void invariable_array_annotation_on_public_field_is_caught()
+	@Test public void threadSafe_array_annotation_on_public_field_is_caught()
 	{
 		Method method = Helper.getCurrentMethod();
 		new Runnable()
@@ -440,7 +440,7 @@ public class T20_ThreadSafety
 		}.run();
 	}
 
-	@Test public void invariable_array_annotation_on_protected_field_is_caught()
+	@Test public void threadSafe_array_annotation_on_protected_field_is_caught()
 	{
 		Method method = Helper.getCurrentMethod();
 		new Runnable()
@@ -458,7 +458,7 @@ public class T20_ThreadSafety
 		}.run();
 	}
 
-	@Test public void invariable_array_annotation_on_package_private_field_is_caught()
+	@Test public void threadSafe_array_annotation_on_package_private_field_is_caught()
 	{
 		Method method = Helper.getCurrentMethod();
 		new Runnable()
@@ -645,6 +645,84 @@ public class T20_ThreadSafety
 				var object = new SuperClass();
 				var assessment = Helper.assess( method, object );
 				assert assessment.isThreadSafe();
+			}
+		}.run();
+	}
+
+	@Test public void mutable_threadSafe_annotated_class_is_threadSafe()
+	{
+		Method method = Helper.getCurrentMethod();
+		new Runnable()
+		{
+			@ThreadSafe static final class MutableThreadSafeAnnotatedClass
+			{
+				@SuppressWarnings( "unused" ) int mutableField;
+			}
+
+			@Override public void run()
+			{
+				var object = new MutableThreadSafeAnnotatedClass();
+				var assessment = Helper.assess( method, object );
+				assert assessment.isThreadSafe();
+			}
+		}.run();
+	}
+
+	@Test public void class_with_mutable_threadSafe_annotated_field_is_threadSafe()
+	{
+		Method method = Helper.getCurrentMethod();
+		new Runnable()
+		{
+			static final class ClassWithMutableThreadSafeAnnotatedField
+			{
+				@SuppressWarnings( "unused" ) @ThreadSafe private int mutableThreadSafeAnnotatedField;
+			}
+
+			@Override public void run()
+			{
+				var object = new ClassWithMutableThreadSafeAnnotatedField();
+				var assessment = Helper.assess( method, object );
+				assert assessment.isThreadSafe();
+			}
+		}.run();
+	}
+
+	@Test public void mutable_class_with_two_mutable_threadSafe_annotated_fields_is_threadSafe()
+	{
+		Method method = Helper.getCurrentMethod();
+		new Runnable()
+		{
+			static final class MutableClassWithThreadSafeAnnotatedFields
+			{
+				@SuppressWarnings( "unused" ) @ThreadSafe private int threadSafeAnnotatedFieldA;
+				@SuppressWarnings( "unused" ) @ThreadSafe private int threadSafeAnnotatedFieldB;
+			}
+
+			@Override public void run()
+			{
+				var object = new MutableClassWithThreadSafeAnnotatedFields();
+				var assessment = Helper.assess( method, object );
+				assert assessment.isThreadSafe();
+			}
+		}.run();
+	}
+
+	@Test public void mutable_class_with_one_threadSafe_annotated_field_and_one_not_annotated_is_nonThreadSafe()
+	{
+		Method method = Helper.getCurrentMethod();
+		new Runnable()
+		{
+			static final class MutableClassWithThreadSafeAnnotatedFields
+			{
+				@SuppressWarnings( "unused" ) @ThreadSafe private int threadSafeAnnotatedFieldA;
+				@SuppressWarnings( "unused" ) private int threadSafeAnnotatedFieldB;
+			}
+
+			@Override public void run()
+			{
+				var object = new MutableClassWithThreadSafeAnnotatedFields();
+				var assessment = Helper.assess( method, object );
+				assert !assessment.isThreadSafe();
 			}
 		}.run();
 	}

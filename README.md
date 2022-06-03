@@ -399,7 +399,7 @@ TODO: add a README.md badge with stats about the tests.
 - Unfortunately, by looking at this page: https://shields.io/category/test-results this is not possible.
 - However, shields.io supports creating a shield from a custom json endpoint, and a custom json endpoint can be just a static json file created by the build process, so if the build process could somehow generate a json file with stats about the tests, we should be able to generate a badge.
 
-TODO: do something about ZoneId.systemDefault(), Clock.systemUTC(), etc.
+TODO: do something about ZoneId.systemDefault(), Clock.systemUTC(), java.util.KeyValueHolder, etc.
 
 - Add pre-assessments by name?
 

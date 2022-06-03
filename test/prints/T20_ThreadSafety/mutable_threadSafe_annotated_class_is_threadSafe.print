@@ -1,0 +1,4 @@
+assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T20_ThreadSafety$30$MutableThreadSafeAnnotatedClass':
+    ■ instance of 'io.github.mikenakis.bathyscaphe.test.T20_ThreadSafety$30$MutableThreadSafeAnnotatedClass' is mutable because it is of a mutable class. (MutableClassMutableObjectAssessment)
+    └─■ class 'io.github.mikenakis.bathyscaphe.test.T20_ThreadSafety$30$MutableThreadSafeAnnotatedClass' is mutable because field 'mutableField' is mutable. (MutableFieldMutableTypeAssessment)
+      └─■ field 'mutableField' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
