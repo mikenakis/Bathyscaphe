@@ -233,7 +233,7 @@
 			<id>github</id>
 			<url>https://maven.pkg.github.com/mikenakis/BathyscapheClaims</url>
 			<releases><enabled>true</enabled></releases>
-			<snapshots><enabled>false</enabled></snapshots>
+			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 	</repositories>
 
@@ -252,10 +252,10 @@
 			<!-- PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. -->
 			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>
 		</repository>
-		<snapshotRepository>
-			<id>repsy-mikenakis-public</id>
-			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
-		</snapshotRepository>
+<!--		<snapshotRepository>-->
+<!--			<id>repsy-mikenakis-public</id>-->
+<!--			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>-->
+<!--		</snapshotRepository>-->
 	</distributionManagement>
 
 </project>
