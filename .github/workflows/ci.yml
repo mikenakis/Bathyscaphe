@@ -39,7 +39,8 @@ jobs:
 
       - name: Build-Step
         run: |
-          # this magical incantation fails the script if mvn fails; otherwise, the script will not fail unless grep fails.
-          set -o pipefail
-          mvn --batch-mode clean install --settings .github/mvn-settings.xml | grep -v 'Download.* http'
-        # --file pom.xml
+          # maven
+          mvn --batch-mode clean install --settings .github/mvn-settings.xml
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
