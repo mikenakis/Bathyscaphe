@@ -172,7 +172,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.0</version>
+				<version>3.0.0-M6</version>
 				<configuration>
 					<!-- PEARL: maven-surefire-plugin stack trace trimming
 					            When an exception is thrown by the tests, the maven-surefire-plugin will only show the top frame from the exception stack trace, which is
