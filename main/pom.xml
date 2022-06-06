@@ -13,10 +13,10 @@
 	<parent>
 		<groupId>io.github.mikenakis</groupId>
 		<artifactId>bathyscaphe-parent</artifactId>
-		<version>1.12</version>
+		<version>1.13-SNAPSHOT</version>
 	</parent>
 	<artifactId>bathyscaphe</artifactId>
-	<version>1.12</version>
+	<version>1.13-SNAPSHOT</version>
 
 	<name>Bathyscaphe</name>
 	<description>Deep immutability assessment for java objects.</description>
