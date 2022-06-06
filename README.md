@@ -8,8 +8,8 @@ The Bathyscaphe logo, a line drawing of <b><i>bathyscaphe Trieste</i></b><br/>
 based on art found at <a href="https://bertrandpiccard.com/3-generations/jacques-piccard">bertrandpiccard.com</a><br/>
 </p>
 
-[![CI-Workflow status badge     ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
-[![Release-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
+[![CI-Workflow status badge     ](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/CI-Workflow?label=CI-Workflow&logo=github&cacheSeconds=0)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/ci.yml)
+[![Release-Workflow status badge](https://img.shields.io/github/workflow/status/mikenakis/Bathyscaphe/Release-Workflow?label=Release-Workflow&logo=github&cacheSeconds=0)](https://github.com/mikenakis/Bathyscaphe/actions/workflows/release.yml)
 [![IntelliJ IDEA badge          ](https://img.shields.io/badge/built_with-IntelliJ_IDEA-blue?logo=intellijIdea&logoColor=pink&color=pink)](#;)
 [![Number of files badge        ](https://img.shields.io/github/search/mikenakis/Bathyscaphe/java?label=files&logo=files&logoColor=yellow)](#;)
 [![Repository Size badge        ](https://img.shields.io/github/languages/count/mikenakis/Bathyscaphe)](#;)
