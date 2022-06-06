@@ -75,7 +75,6 @@
 					<configuration>
 						<doclint>none</doclint>
 						<source>${maven.compiler.source}</source>
-						<target>${maven.compiler.source}</target>
 						<additionalOptions>--enable-preview</additionalOptions>
 					</configuration>
 				</plugin>
@@ -92,9 +91,11 @@
 						<!-- magical incantations from https://github.com/gh-a-sample/github-actions-maven-release-sample -->
 						<scmCommentPrefix>[ci skip]</scmCommentPrefix>
 						<tagNameFormat>@{project.version}</tagNameFormat>
-						<!-- do not run any tests when releasing. Normal build should have taken care of that. (Besides, due to randomness introduced by hashing, the tests
-						     may make slight modifications to the prints, so the release will fail due to local modifications.) -->
+						<!-- do not run any tests when releasing. Normal build should have taken care of that. -->
 						<arguments>-Dmaven.test.skip</arguments>
+<!--						<checkModificationExcludes>-->
+<!--							<checkModificationExclude>**</checkModificationExclude>-->
+<!--						</checkModificationExcludes>-->
 					</configuration>
 				</plugin>
 				<plugin>
@@ -113,7 +114,6 @@
 				<configuration>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.source}</target>
-
 					<compilerArgs>
 
 						<!-- The "enable-preview" option "Enables preview features of the JVM". Since home projects of mine are all about experimentation, we want this. -->
@@ -164,8 +164,16 @@
 							 - Note that -Xlint:-processing does not help at all in suppressing this warning.
 							 - Note that contrary to what the warning message says, the -proc:none option is not ignored, because the annoying directories are not created.	-->
 						<arg>-proc:none</arg>
-
 					</compilerArgs>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<skip>true</skip>
 				</configuration>
 			</plugin>
 
@@ -213,20 +221,36 @@
 			<!--					</execution>-->
 			<!--				</executions>-->
 			<!--			</plugin>-->
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.sonatype.plugins</groupId>-->
+<!--				<artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--				<version>1.6.7</version>-->
+<!--				<extensions>true</extensions>-->
+<!--				<configuration>-->
+<!--					<serverId>ossrh</serverId>-->
+<!--					<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+<!--					<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
-
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>github-bathyscaphe</id>
+			<!-- PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. -->
+			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>
+		</repository>
+		<!--		<snapshotRepository>-->
+		<!--			<id>github-bathyscaphe</id>-->
+		<!--			&lt;!&ndash; PEARL: In the 'mikenakis/BathyscapheClaims' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. &ndash;&gt;-->
+		<!--			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>-->
+		<!--		</snapshotRepository>-->
+		<snapshotRepository>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<repositories>
 		<repository>
@@ -235,18 +259,14 @@
 			<releases>
 				<enabled>true</enabled>
 			</releases>
+		</repository>
+		<repository>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>github-bathyscaphe</id>
-			<!-- PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. -->
-			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>
-		</repository>
-	</distributionManagement>
 
 </project>

@@ -8,7 +8,7 @@ on:
       - master
 
 jobs:
-  build:
+  the_job:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
@@ -32,15 +32,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-
-
-
-
-
-      - name: Build-Step
+      - name: Configure-Git-User-Step
         run: |
-          # maven
-          mvn --batch-mode clean install --settings .github/mvn-settings.xml
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: The-Step
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
+          REPSY_USER: ${{ secrets.REPSY_USER }}
+          REPSY_PASS: ${{ secrets.REPSY_PASS }}
+        run: |
+          mvn clean deploy --batch-mode --settings .github/mvn-settings.xml

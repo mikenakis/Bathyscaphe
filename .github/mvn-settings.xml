@@ -8,9 +8,14 @@
 <settings>
 	<servers>
 		<server>
-			<id>github</id>
+			<id>github-bathyscaphe-claims</id>
 			<username>${env.GITHUB_ACTOR}</username>
 			<password>${env.GITHUB_TOKEN}</password>
+		</server>
+		<server>
+			<id>repsy-mikenakis-public</id>
+			<username>${env.REPSY_USER}</username>
+			<password>${env.REPSY_PASS}</password>
 		</server>
 	</servers>
 </settings>
