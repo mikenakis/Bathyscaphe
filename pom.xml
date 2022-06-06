@@ -55,12 +55,25 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<!--		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-<!--		<console.encoding>UTF-8</console.encoding>-->
-<!--		<file.encoding>UTF-8</file.encoding>-->
 	</properties>
+
+	<distributionManagement>
+<!--		<repository>-->
+<!--			<id>github-bathyscaphe</id>-->
+<!--			&lt;!&ndash; PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. &ndash;&gt;-->
+<!--			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>-->
+<!--		</repository>-->
+		<repository>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
+		</repository>
+		<snapshotRepository>
+			<id>repsy-mikenakis-public</id>
+			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 
@@ -96,9 +109,10 @@
 						<tagNameFormat>@{project.version}</tagNameFormat>
 						<!-- do not run any tests when releasing. Normal build should have taken care of that. -->
 						<arguments>-Dmaven.test.skip</arguments>
-						<!--						<checkModificationExcludes>-->
-						<!--							<checkModificationExclude>**</checkModificationExclude>-->
-						<!--						</checkModificationExcludes>-->
+						<!-- allow the release to proceed despite local modifications. Can be useful while troubleshooting. -->
+						<!-- <checkModificationExcludes>-->
+						<!--    <checkModificationExclude>**</checkModificationExclude>-->
+						<!-- </checkModificationExcludes>-->
 					</configuration>
 				</plugin>
 				<plugin>
@@ -246,37 +260,23 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<repository>
-			<id>github-bathyscaphe</id>
-			<!-- PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. -->
-			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>
-		</repository>
-		<!--		<snapshotRepository>-->
-		<!--			<id>github-bathyscaphe</id>-->
-		<!--			&lt;!&ndash; PEARL: In the 'mikenakis/BathyscapheClaims' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. &ndash;&gt;-->
-		<!--			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>-->
-		<!--		</snapshotRepository>-->
-		<snapshotRepository>
-			<id>repsy-mikenakis-public</id>
-			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<repositories>
-		<repository>
-			<id>github-bathyscaphe-claims</id>
-			<url>https://maven.pkg.github.com/mikenakis/BathyscapheClaims</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
+<!--		<repository>-->
+<!--			<id>github-bathyscaphe-claims</id>-->
+<!--			<url>https://maven.pkg.github.com/mikenakis/BathyscapheClaims</url>-->
+<!--			<releases>-->
+<!--				<enabled>true</enabled>-->
+<!--			</releases>-->
+<!--		</repository>-->
 		<repository>
 			<id>repsy-mikenakis-public</id>
 			<url>https://repo.repsy.io/mvn/mikenakis/mikenakis-public</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 		</repository>
 	</repositories>
 
