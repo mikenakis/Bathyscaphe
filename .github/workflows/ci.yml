@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
-          REPSY_USER: ${{ secrets.REPSY_USER }}
+          REPSY_USER: mikenakis
           REPSY_PASS: ${{ secrets.REPSY_PASS }}
         run: |
           mvn clean deploy --batch-mode --settings .github/mvn-settings.xml

@@ -55,8 +55,11 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
+<!--		<console.encoding>UTF-8</console.encoding>-->
+<!--		<file.encoding>UTF-8</file.encoding>-->
 	</properties>
 
 	<build>
@@ -93,9 +96,9 @@
 						<tagNameFormat>@{project.version}</tagNameFormat>
 						<!-- do not run any tests when releasing. Normal build should have taken care of that. -->
 						<arguments>-Dmaven.test.skip</arguments>
-<!--						<checkModificationExcludes>-->
-<!--							<checkModificationExclude>**</checkModificationExclude>-->
-<!--						</checkModificationExcludes>-->
+						<!--						<checkModificationExcludes>-->
+						<!--							<checkModificationExclude>**</checkModificationExclude>-->
+						<!--						</checkModificationExcludes>-->
 					</configuration>
 				</plugin>
 				<plugin>
@@ -182,28 +185,36 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M6</version>
 				<configuration>
-					<!-- PEARL: maven-surefire-plugin stack trace trimming
-					            When an exception is thrown by the tests, the maven-surefire-plugin will only show the top frame from the exception stack trace, which is
-					            an entirely unwarranted and completely counter-productive thing to do. The following magical incantation reverses this behavior. -->
+					<!-- PEARL: maven-surefire-plugin by default emits output to some secret file.
+					            By default, the maven-surefire-plugin emits all test output to some file instead of the console. Furthermore, one must go chasing documentation to
+					            discover what the filename might be, which essentially means that it is a secret filename.
+					            The following magical incantation fixes this. -->
+					<useFile>false</useFile>
+					<!-- PEARL: maven-surefire-plugin by default trims stack traces.
+					            When an exception is thrown by the tests, the maven-surefire-plugin will only show the top frame from the exception stack trace, which is entirely
+					            useless for all but the most trivial scenarios. As someone aptly put it on stackoverflow, "Yep. Not only does Maven print pages of pointless
+					            diarrhea, but it hides what you actually need to see."
+					            The following magical incantation reverses this behavior. (From https://stackoverflow.com/a/16941432/773113) -->
 					<trimStackTrace>false</trimStackTrace>
+					<!-- PEARL: maven-surefire-plugin by default uses unworkable (and secret) "inclusions" and "exclusions".
+						        The maven-surefire-plugin has some entirely useless concepts of "inclusions" and "exclusions", and the defaults are such that absolutely none of
+						        your tests will run unless they adhere to some convention. Furthermore, one must go chasing documentation to discover what the convention might be,
+						        which essentially means that it is a secret convention. (By the way, the secret convention is that the class name must contain the word "Test".)
+								We correct this problem here by annihilating the plugin's concept of inclusions. -->
 					<includes>
-						<!-- PEARL: maven-surefire-plugin "inclusions" and "exclusions"
-							1. The maven-surefire-plugin unnecessarily complicates things with useless "inclusions" and "exclusions".
-							   (Which I was not aware of this because IntellijIdea has no such concept: it always just runs all tests. Which was never a problem. Which proves
-							    that inclusions and exclusions are useless, and constitute over-engineering.)
-							2. The maven-surefire-plugin sabotages the developer with default inclusions that will not run tests unless their names adhere to a certain convention
-							   which is essentially secret, since you cannot possibly know what the convention is unless you go read documentation. Specifically, they require the
-							   class name to contain the word "Test".
-							   (That's what you often achieve when you unnecessarily complicate things: you sabotage people.)
-							We correct this issue here by annihilating the plugin's concept of inclusions.  -->
 						<include>**/*.java</include>
 					</includes>
-					<!-- See https://stackoverflow.com/a/17671104/773113 -->
-					<argLine>-Dfile.encoding=UTF-8</argLine>
+					<!-- PEARL: maven-surefire-plugin requires to be separately told that JDK preview features must be enabled.
+					            The following magical incantation fixes this. -->
 					<argLine>--enable-preview</argLine>
-					<!-- magical incantation needed for the enable-preview option to work, from https://stackoverflow.com/a/69754577/773113 -->
+					<!-- PEARL: additional magical incantation needed for the enable-preview option to work. (From https://stackoverflow.com/a/69754577/773113) -->
 					<reuseForks>true</reuseForks>
-					<useFile>false</useFile>
+					<!-- PEARL: maven-surefire-plugin requires to be separately told what the source file encoding is.
+								Otherwise, tests that contain unicode characters will fail, despite the fact that the project.build.sourceEncoding property has been set to UTF8.
+								The following magical incantation fixes this. (From https://stackoverflow.com/a/17671104/773113) -->
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<!-- PEARL: the test output renders unicode characters as question-marks, and I have been unable to fix this.
+					            I have tried project.reporting.outputEncoding, -Dconsole.encoding=UTF-8 -Dfile.encoding=UTF-8 etc. nothing works. -->
 				</configuration>
 			</plugin>
 
@@ -221,17 +232,17 @@
 			<!--					</execution>-->
 			<!--				</executions>-->
 			<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>org.sonatype.plugins</groupId>-->
-<!--				<artifactId>nexus-staging-maven-plugin</artifactId>-->
-<!--				<version>1.6.7</version>-->
-<!--				<extensions>true</extensions>-->
-<!--				<configuration>-->
-<!--					<serverId>ossrh</serverId>-->
-<!--					<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
-<!--					<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
+			<!--			<plugin>-->
+			<!--				<groupId>org.sonatype.plugins</groupId>-->
+			<!--				<artifactId>nexus-staging-maven-plugin</artifactId>-->
+			<!--				<version>1.6.7</version>-->
+			<!--				<extensions>true</extensions>-->
+			<!--				<configuration>-->
+			<!--					<serverId>ossrh</serverId>-->
+			<!--					<nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+			<!--					<autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+			<!--				</configuration>-->
+			<!--			</plugin>-->
 		</plugins>
 	</build>
 

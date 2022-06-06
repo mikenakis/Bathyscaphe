@@ -403,6 +403,43 @@ TODO: do something about ZoneId.systemDefault(), Clock.systemUTC(), java.util.Ke
 
 - Add pre-assessments by name?
 
+TODO: Try cloudsmith.io/cloudsmith.com
+  - 1st very annoying thing: the "sign-up" link is HIDDEN on their front page.
+  - 2nd very annoying thing: they ask for my phone number; I leave it blank and click sign-up; an error message begins to show telling me that the phone number is required; and before I have had time to fully read it, the page is immediately replaced with a welcome page.
+  - 3rd very annoying thing: I went through the process of creating what they call a repository; then they showed me the management page of that repository; then I clicked on one of the links on that page; then they took me to a page-not-found page; then the repository disappeared. The "repositories" page is empty and suggests to create a new repository. Then later I refreshed the page and the new repository appeared.
+  - Other than that, it seems like I can create a maven repository there. 
+  - Next step will be to actually make use of it if something bad happens to repsy.
+
+<strike>TODO:</strike> DONE: Try finding some other service to use as an artifact repository.
+
+- packagecloud.io
+  - Will not use, because:
+    - Although it supposedly offers a free plan, when you try to sign up it only offers an option which costs $150 per month, and has a "start trial" button. I do not want to start any kind of fucking trial, I want the fucking free plan. 
+    - It requires my phone upon signup, and offers no option to fuck-off and skip that part.
+- cloudrepo.io
+  - Will not use, because:
+    - It does not appear to have a free plan.
+- cloudsmith.io
+  - Give it a try.
+- jitpack.io
+  - Will not use, because:
+    - It does not appear to have a free plan. 
+    - Their cheapest plan is $12/month, which I will not give to a company that I never heard of before.
+- jfrog.com
+  - Will not use, because:
+    - I have tried using this in the past, and my experience with it was beyond horrible.
+
+<strike>TODO:</strike> CANNOT-DO: use "GitHub Packages" as an artifact repository.
+
+- At least for snapshots.
+- Can't do: It appears to be a deliberate decision of GitHub to prevent this from happening.
+- GitHub does not support a concept of an artifact repository; instead, it keeps the artifacts of each project completely separate from artifacts of other projects.
+  - You could try using a separate artifact repository for each project, but it would not work either, because GitHub does not allow public access to github-packages; instead, it requires authentication by access token.
+    - You could try creating an access token with read-only access to your github-packages and distribute it for public use, but GitHub searches for things that look like access tokens, and if it finds one exposed then it automagically revokes it, which means that sooner or later someone will expose that token, and GitHub will immediately revoke it.
+      - Rumor has it that the undocumented GitHub feature which automagically revokes personal access tokens goes by the name of GitGuardian, and allegedly there exists some undocumented way of disabling it, but that is just way too much hassle.  
+- The closest anyone has ever gotten to achieve this is https://github.com/TobseF/HelloMaven; note that YOUR_AUTH_TOKEN must be placed in settings.xml.
+- In this post: https://github.community/t/how-to-allow-unauthorised-read-access-to-github-packages-maven-repository/115517/3 they admit that it does not work, and they say that they plan to fix it in the future, and that was 2 years ago. 
+
 <strike>TODO:</strike> DONE: drop gitter in favor of github discussions
 
 - See https://docs.github.com/en/discussions/quickstart

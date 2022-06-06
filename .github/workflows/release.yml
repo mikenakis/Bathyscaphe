@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ github.token }}
-          REPSY_USER: ${{ secrets.REPSY_USER }}
+          REPSY_USER: mikenakis
           REPSY_PASS: ${{ secrets.REPSY_PASS }}
 #          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}

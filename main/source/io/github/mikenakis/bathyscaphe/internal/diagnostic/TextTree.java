@@ -20,10 +20,10 @@ public final class TextTree
 {
 	private TextTree() { }
 
-	private static final String midLeaf = "├─";
-	private static final String endLeaf = "└─";
-	private static final String midNode = "│ ";
-	private static final String endNode = "  ";
+	private static final String midLeaf  = "├─";
+	private static final String endLeaf  = "└─";
+	private static final String midNode  = "│ ";
+	private static final String endNode  = "  ";
 	private static final String terminal = "■ ";
 
 	public static <T> void tree( T rootNode, Function<T,Iterable<? extends T>> breeder, Function<T,String> stringizer, Consumer<String> emitter )
