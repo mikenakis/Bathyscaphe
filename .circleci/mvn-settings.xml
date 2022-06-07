@@ -10,7 +10,7 @@
 	<servers>
 		<server>
 			<id>repsy-mikenakis-public</id>
-			<username>${env.REPSY_USER}</username>
+			<username>mikenakis</username>
 			<password>${env.REPSY_PASS}</password>
 		</server>
 	</servers>
