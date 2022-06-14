@@ -1,5 +1,8 @@
-# Java target directory
-target
+# Java output directories
+**/target/
+
+# Intellij IDEA project files
+**/*.iml
 
 # Entirely useless "release.properties" file spitted out by maven each time we do a maven-release
 release.properties
