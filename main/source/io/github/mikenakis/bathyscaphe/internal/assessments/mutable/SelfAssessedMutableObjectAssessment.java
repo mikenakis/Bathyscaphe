@@ -7,11 +7,11 @@
 
 package io.github.mikenakis.bathyscaphe.internal.assessments.mutable;
 
-import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.NonImmutableTypeAssessment;
-import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.SelfAssessableProvisoryTypeAssessment;
 import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.NonImmutableTypeAssessment;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory.SelfAssessableProvisoryTypeAssessment;
 
 import java.util.List;
 

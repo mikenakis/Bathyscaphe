@@ -7,6 +7,7 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type;
 
+import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
 import io.github.mikenakis.bathyscaphe.annotations.ThreadSafe;
 import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
@@ -32,7 +33,6 @@ import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.Immutable
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.UnderAssessmentFieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable.MutableFieldAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.provisory.ProvisoryFieldTypeProvisoryFieldAssessment;
-import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

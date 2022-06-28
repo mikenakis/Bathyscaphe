@@ -7,8 +7,8 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type.exceptions;
 
-import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.ImmutabilitySelfAssessable;
+import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.internal.mykit.UncheckedException;
 
 /**

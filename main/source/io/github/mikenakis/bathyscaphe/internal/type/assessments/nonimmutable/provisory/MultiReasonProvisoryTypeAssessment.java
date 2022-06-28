@@ -7,8 +7,8 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type.assessments.nonimmutable.provisory;
 
-import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
+import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
 
 import java.util.List;
 

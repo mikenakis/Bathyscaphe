@@ -7,8 +7,8 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type.field.assessments.nonimmutable.mutable;
 
-import io.github.mikenakis.bathyscaphe.internal.type.field.FieldAssessor;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
+import io.github.mikenakis.bathyscaphe.internal.type.field.FieldAssessor;
 
 import java.lang.reflect.Field;
 

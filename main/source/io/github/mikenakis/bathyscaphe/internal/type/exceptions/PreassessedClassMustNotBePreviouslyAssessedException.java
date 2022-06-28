@@ -7,8 +7,8 @@
 
 package io.github.mikenakis.bathyscaphe.internal.type.exceptions;
 
-import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.mykit.UncheckedException;
+import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 
 /**
  * Thrown when an attempt is made to preassess a class, but there has already been a request to assess this class, and the answer that was given was that the

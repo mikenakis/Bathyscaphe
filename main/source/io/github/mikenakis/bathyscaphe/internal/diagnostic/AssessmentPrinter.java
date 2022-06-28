@@ -7,19 +7,19 @@
 
 package io.github.mikenakis.bathyscaphe.internal.diagnostic;
 
+import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.annotations.Invariable;
 import io.github.mikenakis.bathyscaphe.annotations.InvariableArray;
-import io.github.mikenakis.bathyscaphe.ObjectMustBeImmutableException;
 import io.github.mikenakis.bathyscaphe.internal.assessments.Assessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ImmutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.MutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.ObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperObjectMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableArrayElementMutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableComponentMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableFieldValueMutableObjectAssessment;
+import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableSuperObjectMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.NonEmptyArrayMutableObjectAssessment;
-import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.MutableClassMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.assessments.mutable.SelfAssessedMutableObjectAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
