@@ -15,5 +15,7 @@ assessment for instance of 'io.github.mikenakis.bathyscaphe.test.T10_Immutabilit
             │ └─■ field 'value' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
             ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'coder' is mutable. (MutableFieldMutableTypeAssessment)
             │ └─■ field 'coder' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
+            ├─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'maybeLatin1' is mutable. (MutableFieldMutableTypeAssessment)
+            │ └─■ field 'maybeLatin1' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)
             └─■ class 'java.lang.AbstractStringBuilder' is mutable because field 'count' is mutable. (MutableFieldMutableTypeAssessment)
               └─■ field 'count' is mutable because it is not final, and it has not been annotated with @Invariable. (VariableMutableFieldAssessment)

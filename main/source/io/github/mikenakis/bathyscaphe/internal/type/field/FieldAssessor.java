@@ -71,21 +71,30 @@ public class FieldAssessor
 			if( !isInvariableArray )
 				return new ArrayMutableFieldAssessment( field, isThreadSafe && isThreadSafeArray );
 			TypeAssessment arrayElementTypeAssessment = typeAssessor.assess( fieldType.getComponentType() );
+			//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+			//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+			//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 			return switch( arrayElementTypeAssessment )
 				{
 					case UnderAssessmentTypeAssessment ignore -> UnderAssessmentFieldAssessment.instance;
-					case ProvisoryTypeAssessment provisoryTypeAssessment ->	newProvisoryArrayFieldAssessment( field, isThreadSafe, isThreadSafeArray, MyKit.uncheckedClassCast( fieldType ), provisoryTypeAssessment );
+					case ProvisoryTypeAssessment provisoryTypeAssessment ->
+						newProvisoryArrayFieldAssessment( field, isThreadSafe, isThreadSafeArray, MyKit.uncheckedClassCast( fieldType ), provisoryTypeAssessment );
 					case ImmutableTypeAssessment ignore -> ImmutableFieldAssessment.instance;
-					case MutableTypeAssessment mutableTypeAssessment -> newMutableArrayFieldAssessment( field, isThreadSafe, isThreadSafeArray, MyKit.uncheckedClassCast( fieldType ), mutableTypeAssessment );
+					case MutableTypeAssessment mutableTypeAssessment ->
+						newMutableArrayFieldAssessment( field, isThreadSafe, isThreadSafeArray, MyKit.uncheckedClassCast( fieldType ), mutableTypeAssessment );
 					//DoNotCover
 					default -> throw new AssertionError( arrayElementTypeAssessment );
 				};
 		}
 		TypeAssessment fieldTypeAssessment = typeAssessor.assess( fieldType );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		return switch( fieldTypeAssessment )
 			{
 				case UnderAssessmentTypeAssessment ignore -> UnderAssessmentFieldAssessment.instance;
-				case ProvisoryTypeAssessment provisoryTypeAssessment -> new ProvisoryFieldTypeProvisoryFieldAssessment( field, isThreadSafe, provisoryTypeAssessment );
+				case ProvisoryTypeAssessment provisoryTypeAssessment ->
+					new ProvisoryFieldTypeProvisoryFieldAssessment( field, isThreadSafe, provisoryTypeAssessment );
 				case ImmutableTypeAssessment ignore -> ImmutableFieldAssessment.instance;
 				case MutableTypeAssessment mutableTypeAssessment -> new MutableFieldTypeMutableFieldAssessment( field, isThreadSafe, mutableTypeAssessment );
 				//DoNotCover

@@ -84,20 +84,19 @@ public final class ObjectAssessor
 
 	private <T> ObjectAssessment assessRecursively( T object, TypeAssessment typeAssessment, Set<Object> visitedValues )
 	{
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		return switch( typeAssessment )
 			{
 				case ImmutableTypeAssessment ignore -> ImmutableObjectAssessment.instance;
 				//Class is extensible but otherwise immutable, and object is of this exact class and not of a further derived class, so object is immutable.
 				case ExtensibleProvisoryTypeAssessment ignore -> ImmutableObjectAssessment.instance;
-				case CompositeProvisoryTypeAssessment<?,?> provisoryCompositeAssessment ->
-					assessComposite( object, provisoryCompositeAssessment, visitedValues );
-				case SelfAssessableProvisoryTypeAssessment selfAssessableAssessment ->
-					assessSelfAssessable( selfAssessableAssessment, (ImmutabilitySelfAssessable)object );
+				case CompositeProvisoryTypeAssessment<?,?> provisoryCompositeAssessment -> assessComposite( object, provisoryCompositeAssessment, visitedValues );
+				case SelfAssessableProvisoryTypeAssessment selfAssessableAssessment -> assessSelfAssessable( selfAssessableAssessment, (ImmutabilitySelfAssessable)object );
 				case MultiReasonProvisoryTypeAssessment multiReasonAssessment -> assessMultiReason( object, multiReasonAssessment, visitedValues );
-				case ProvisorySuperclassProvisoryTypeAssessment provisorySuperclassAssessment ->
-					assessSuperObject( object, provisorySuperclassAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
-				case ProvisoryFieldProvisoryTypeAssessment provisoryFieldAssessment ->
-					assessField( object, provisoryFieldAssessment, provisoryFieldAssessment.fieldAssessment, visitedValues );
+				case ProvisorySuperclassProvisoryTypeAssessment provisorySuperclassAssessment -> assessSuperObject( object, provisorySuperclassAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
+				case ProvisoryFieldProvisoryTypeAssessment provisoryFieldAssessment -> assessField( object, provisoryFieldAssessment, provisoryFieldAssessment.fieldAssessment, visitedValues );
 				case ArrayMutableTypeAssessment arrayAssessment -> assessArray( object, arrayAssessment );
 				case MutableTypeAssessment mutableTypeAssessment -> new MutableClassMutableObjectAssessment( object, mutableTypeAssessment );
 				default -> throw new AssertionError( typeAssessment );
@@ -138,12 +137,13 @@ public final class ObjectAssessor
 	{
 		for( ProvisoryTypeAssessment provisoryReason : multiReasonProvisoryTypeAssessment.reasons )
 		{
+			//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+			//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+			//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 			ObjectAssessment objectAssessment = switch( provisoryReason )
 				{
-					case ProvisorySuperclassProvisoryTypeAssessment provisorySuperclassAssessment ->
-						assessSuperObject( object, multiReasonProvisoryTypeAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
-					case ProvisoryFieldProvisoryTypeAssessment provisoryFieldAssessment ->
-						assessField( object, multiReasonProvisoryTypeAssessment, provisoryFieldAssessment.fieldAssessment, visitedValues );
+					case ProvisorySuperclassProvisoryTypeAssessment provisorySuperclassAssessment -> assessSuperObject( object, multiReasonProvisoryTypeAssessment, provisorySuperclassAssessment.superclassAssessment, visitedValues );
+					case ProvisoryFieldProvisoryTypeAssessment provisoryFieldAssessment -> assessField( object, multiReasonProvisoryTypeAssessment, provisoryFieldAssessment.fieldAssessment, visitedValues );
 					default -> throw new AssertionError( provisoryReason );
 				};
 			if( !(objectAssessment instanceof ImmutableObjectAssessment) )
@@ -165,11 +165,14 @@ public final class ObjectAssessor
 		Set<Object> visitedValues )
 	{
 		Object fieldValue = MyKit.getFieldValue( object, provisoryFieldAssessment.field );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		ObjectAssessment fieldValueAssessment = switch( provisoryFieldAssessment.fieldTypeAssessment )
-		{
-			case ArrayOfProvisoryElementTypeProvisoryTypeAssessment assessment -> assessInvariableArray( fieldValue, assessment, visitedValues );
-			default -> assessRecursively( fieldValue, visitedValues );
-		};
+			{
+				case ArrayOfProvisoryElementTypeProvisoryTypeAssessment assessment -> assessInvariableArray( fieldValue, assessment, visitedValues );
+				default -> assessRecursively( fieldValue, visitedValues );
+			};
 		if( fieldValueAssessment instanceof MutableObjectAssessment mutableFieldValueAssessment )
 			return new MutableFieldValueMutableObjectAssessment( object, provisoryTypeAssessment, provisoryFieldAssessment, mutableFieldValueAssessment );
 		assert fieldValueAssessment instanceof ImmutableObjectAssessment;

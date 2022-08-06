@@ -126,6 +126,9 @@ public final class MyKit
 	 */
 	public static void append( StringBuilder stringBuilder, Object object )
 	{
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( object )
 		{
 			case String s -> appendEscapedForJava( stringBuilder, s, '"' );

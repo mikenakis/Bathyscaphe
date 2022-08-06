@@ -82,6 +82,9 @@ final class Reflector
 		if( superclass != null )
 		{
 			TypeAssessment superclassAssessment = assessSuperclass( superclass );
+			//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+			//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+			//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 			switch( superclassAssessment )
 			{
 				case MutableTypeAssessment mutableTypeAssessment:
@@ -100,6 +103,9 @@ final class Reflector
 			if( Modifier.isStatic( field.getModifiers() ) )
 				continue;
 			FieldAssessment fieldAssessment = fieldAssessor.assessField( field );
+			//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+			//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+			//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 			switch( fieldAssessment )
 			{
 				case ProvisoryFieldTypeProvisoryFieldAssessment provisoryFieldAssessment:
@@ -128,6 +134,9 @@ final class Reflector
 	private TypeAssessment assessSuperclass( Class<?> superclass )
 	{
 		TypeAssessment superclassAssessment = typeAssessor.assess( superclass );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		return switch( superclassAssessment )
 			{
 				//Cannot happen, because the superclass has obviously been extended, so it is extensible, so it can not be immutable.
@@ -148,7 +157,7 @@ final class Reflector
 
 	private static boolean isAnnotatedThreadSafe( Class<?> type )
 	{
-		for( ;; )
+		for( ; ; )
 		{
 			if( type.isAnnotationPresent( ThreadSafe.class ) )
 				return true;

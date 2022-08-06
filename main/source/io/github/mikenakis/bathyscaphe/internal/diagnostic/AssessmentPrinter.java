@@ -71,6 +71,9 @@ public final class AssessmentPrinter
 	private static String getAssessmentText( Assessment unknownAssessment )
 	{
 		AssessmentPrinter assessmentPrinter = new AssessmentPrinter();
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to figure
+		//out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( unknownAssessment )
 		{
 			case FieldAssessment assessment -> assessmentPrinter.getFieldAssessmentText( assessment );
@@ -96,6 +99,9 @@ public final class AssessmentPrinter
 
 	private void getFieldAssessmentText( FieldAssessment fieldAssessment )
 	{
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( fieldAssessment )
 		{
 			case MutableFieldAssessment assessment -> getMutableFieldAssessmentText( assessment );
@@ -108,11 +114,16 @@ public final class AssessmentPrinter
 	private void getMutableFieldAssessmentText( MutableFieldAssessment mutableFieldAssessment )
 	{
 		append( fieldName( mutableFieldAssessment.field ) + " is mutable" );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( mutableFieldAssessment )
 		{
-			case ArrayMutableFieldAssessment ignored -> append( " because is an array, and it has not been annotated with @" + InvariableArray.class.getSimpleName() );
+			case ArrayMutableFieldAssessment ignored ->
+				append( " because is an array, and it has not been annotated with @" + InvariableArray.class.getSimpleName() );
 			case MutableFieldTypeMutableFieldAssessment assessment -> append( " because it is of mutable " + typeName( assessment.fieldTypeAssessment.type ) );
-			case VariableMutableFieldAssessment ignored -> append( " because it is not final, and it has not been annotated with @" + Invariable.class.getSimpleName() );
+			case VariableMutableFieldAssessment ignored ->
+				append( " because it is not final, and it has not been annotated with @" + Invariable.class.getSimpleName() );
 			//DoNotCover
 			default -> throw new AssertionError( mutableFieldAssessment );
 		}
@@ -125,6 +136,9 @@ public final class AssessmentPrinter
 
 	private void getTypeAssessmentText( TypeAssessment typeAssessment )
 	{
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( typeAssessment )
 		{
 			case MutableTypeAssessment assessment -> getMutableTypeAssessmentText( assessment );
@@ -138,12 +152,16 @@ public final class AssessmentPrinter
 	private void getMutableTypeAssessmentText( MutableTypeAssessment mutableTypeAssessment )
 	{
 		append( className( mutableTypeAssessment.type ) + " is mutable" );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( mutableTypeAssessment )
 		{
 			case ArrayMutableTypeAssessment ignore -> append( " because it is an array class" );
 			case MultiReasonMutableTypeAssessment ignore -> append( " due to multiple reasons" );
 			case MutableFieldMutableTypeAssessment assessment -> append( " because " + fieldName( assessment.fieldAssessment.field ) + " is mutable" );
-			case MutableSuperclassMutableTypeAssessment assessment -> append( " because it extends mutable " + className( assessment.superclassAssessment.type ) );
+			case MutableSuperclassMutableTypeAssessment assessment ->
+				append( " because it extends mutable " + className( assessment.superclassAssessment.type ) );
 			case ArrayOfMutableElementTypeMutableTypeAssessment ignore -> append( " because it is an array of mutable element type" );
 			//DoNotCover
 			default -> throw new AssertionError( mutableTypeAssessment );
@@ -153,13 +171,18 @@ public final class AssessmentPrinter
 	private void getProvisoryTypeAssessmentText( ProvisoryTypeAssessment provisoryTypeAssessment )
 	{
 		append( typeName( provisoryTypeAssessment.type ) + " is provisory" );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( provisoryTypeAssessment )
 		{
-			case CompositeProvisoryTypeAssessment<?,?> assessment -> append( " because it " + modeName( assessment.mode ) + " a composite of " + typeName( assessment.componentTypeAssessment.type ) );
+			case CompositeProvisoryTypeAssessment<?,?> assessment ->
+				append( " because it " + modeName( assessment.mode ) + " a composite of " + typeName( assessment.componentTypeAssessment.type ) );
 			case ExtensibleProvisoryTypeAssessment assessment -> append( " because it " + modeName( assessment.mode ) + " an extensible class" );
 			case InterfaceProvisoryTypeAssessment ignore -> append( " because it is an interface" );
 			case MultiReasonProvisoryTypeAssessment ignore -> append( " due to multiple reasons" );
-			case ProvisorySuperclassProvisoryTypeAssessment assessment -> append( " because it extends provisory " + className( assessment.superclassAssessment.type ) );
+			case ProvisorySuperclassProvisoryTypeAssessment assessment ->
+				append( " because it extends provisory " + className( assessment.superclassAssessment.type ) );
 			case ProvisoryFieldProvisoryTypeAssessment assessment -> append( " because " + fieldName( assessment.fieldAssessment.field ) + " is provisory" );
 			case ArrayOfProvisoryElementTypeProvisoryTypeAssessment ignore -> append( " because it is an array of provisory element type" );
 			case SelfAssessableProvisoryTypeAssessment ignore -> append( " because instances of this type are self-assessable" );
@@ -170,6 +193,9 @@ public final class AssessmentPrinter
 
 	private void getObjectAssessmentText( ObjectAssessment objectAssessment )
 	{
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( objectAssessment )
 		{
 			case MutableObjectAssessment assessment -> getMutableObjectAssessmentText( assessment );
@@ -182,12 +208,18 @@ public final class AssessmentPrinter
 	private void getMutableObjectAssessmentText( MutableObjectAssessment mutableObjectAssessment )
 	{
 		append( objectName( mutableObjectAssessment.object() ) + " is mutable" );
+		//IntellijIdea blooper: good code red: Currently, (August 2022) IntellijIdea does not know anything about JDK 19, and it is not smart enough to
+		//figure out that feature-wise it must be a superset of the last JDK that it knows, which is JDK 17.
+		//As a result, it marks the following code with "Patterns in switch are not supported at language level '19'", which is just plain wrong.
 		switch( mutableObjectAssessment )
 		{
 			case MutableSuperObjectMutableObjectAssessment ignore -> append( " because its superclass is mutable" );
-			case MutableArrayElementMutableObjectAssessment assessment -> append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
-			case MutableComponentMutableObjectAssessment<?,?> assessment -> append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
-			case MutableFieldValueMutableObjectAssessment assessment -> append( " because " + fieldName( assessment.provisoryFieldAssessment.field ) + " contains mutable " + objectName( assessment.fieldValueAssessment.object() ) );
+			case MutableArrayElementMutableObjectAssessment assessment ->
+				append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
+			case MutableComponentMutableObjectAssessment<?,?> assessment ->
+				append( " because index " + assessment.elementIndex + " contains mutable " + objectName( assessment.elementAssessment.object() ) );
+			case MutableFieldValueMutableObjectAssessment assessment ->
+				append( " because " + fieldName( assessment.provisoryFieldAssessment.field ) + " contains mutable " + objectName( assessment.fieldValueAssessment.object() ) );
 			case NonEmptyArrayMutableObjectAssessment ignore -> append( " because it is a non-empty array" );
 			case MutableClassMutableObjectAssessment ignore -> append( " because it is of a mutable class" );
 			case SelfAssessedMutableObjectAssessment ignore -> append( " because it assessed itself as mutable" );

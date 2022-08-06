@@ -55,8 +55,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>19</maven.compiler.source>
+		<maven.compiler.target>19</maven.compiler.target>
 	</properties>
 
 	<distributionManagement>
@@ -90,7 +90,7 @@
 					<version>3.4.0</version>
 					<configuration>
 						<doclint>none</doclint>
-						<source>${maven.compiler.source}</source>
+						<!-- PEARL: the maven-javadoc-plugin must be told separately that JDK preview features are enabled, dog knows why. -->
 						<additionalOptions>--enable-preview</additionalOptions>
 					</configuration>
 				</plugin>
@@ -129,8 +129,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.source}</target>
 					<compilerArgs>
 
 						<!-- The "enable-preview" option "Enables preview features of the JVM". Since home projects of mine are all about experimentation, we want this. -->
@@ -218,8 +216,7 @@
 					<includes>
 						<include>**/*.java</include>
 					</includes>
-					<!-- PEARL: maven-surefire-plugin requires to be separately told that JDK preview features must be enabled.
-					            The following magical incantation fixes this. -->
+					<!-- PEARL: the maven-surefire-plugin must be told separately that JDK preview features are enabled, dog knows why. -->
 					<argLine>--enable-preview</argLine>
 					<!-- PEARL: additional magical incantation needed for the enable-preview option to work. (From https://stackoverflow.com/a/69754577/773113) -->
 					<reuseForks>true</reuseForks>

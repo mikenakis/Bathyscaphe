@@ -31,13 +31,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
-import java.time.OffsetDateTime;
-import java.time.OffsetTime;
 import java.time.Period;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -98,9 +95,10 @@ public class T11_FamousImmutableObjects
 
 	@Test public void famous_immutable_objects_are_immutable()
 	{
+		//NOTE: The objects returned by OffsetDateTime.now(), OffsetTime.now(), and ZoneOffset.UTC used to be immutable in JDK 17, but are not anymore.
 		List<Object> objects = List.of( new Object(), getClass(), false, 'c', (byte)1, (short)1, 1, 1L, 1.0f, 1.0, "", //
-			Instant.EPOCH, Duration.ZERO, UUID.randomUUID(), LocalDate.EPOCH, LocalDateTime.now(), LocalTime.MIDNIGHT, MonthDay.now(), OffsetDateTime.now(), //
-			OffsetTime.now(), Period.ZERO, Year.now(), YearMonth.now(), ZoneOffset.UTC, ZonedDateTime.now(), //
+			Instant.EPOCH, Duration.ZERO, UUID.randomUUID(), LocalDate.EPOCH, LocalDateTime.now(), LocalTime.MIDNIGHT, MonthDay.now(), //
+			Period.ZERO, Year.now(), YearMonth.now(), ZonedDateTime.now(), //
 			new BigDecimal( 1 ), new BigInteger( "1" ), getInet4Address(), getInet6Address(), InetSocketAddress.createUnresolved( "", 0 ), //
 			getClass().getDeclaredMethods()[0], getClass().getConstructors()[0], URI.create( "file:///" ), getUrl(), Locale.ROOT, //
 			getStackTraceElement(), File.listRoots()[0] );
