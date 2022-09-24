@@ -7,6 +7,8 @@
 
 package io.github.mikenakis.bathyscaphe.internal.assessments;
 
+import io.github.mikenakis.bathyscaphe.internal.diagnostic.AssessmentPrinter;
+
 /**
  * Base class for object {@link Assessment}s.
  *
@@ -19,4 +21,9 @@ public abstract class ObjectAssessment extends Assessment
 	}
 
 	public abstract boolean isThreadSafe();
+
+	@Override public final String toString()
+	{
+		return String.join( "\n", AssessmentPrinter.getText( this ) );
+	}
 }
