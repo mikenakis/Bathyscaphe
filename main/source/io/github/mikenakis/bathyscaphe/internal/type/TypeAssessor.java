@@ -8,6 +8,8 @@
 package io.github.mikenakis.bathyscaphe.internal.type;
 
 import io.github.mikenakis.bathyscaphe.internal.helpers.Helpers;
+import io.github.mikenakis.bathyscaphe.internal.mykit.MyKit;
+import io.github.mikenakis.bathyscaphe.internal.mykit.Unit;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.ImmutableTypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.TypeAssessment;
 import io.github.mikenakis.bathyscaphe.internal.type.assessments.UnderAssessmentTypeAssessment;
@@ -21,6 +23,8 @@ import io.github.mikenakis.debug.Debug;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Deeply assesses the immutability of types. DO NOT USE; FOR INTERNAL USE ONLY.
@@ -39,6 +43,7 @@ public final class TypeAssessor
 		return assessor;
 	}
 
+	private final Lock lock = new ReentrantLock();
 	private final Map<Class<?>,TypeAssessment> assessmentsByType = new HashMap<>();
 	private final Reflector reflector = new Reflector( this );
 
@@ -52,10 +57,11 @@ public final class TypeAssessor
 		assert addedClassMustBeClassTypeAssertion( jvmClass );
 		assert addedClassMustNotBeExtensibleClassTypeAssertion( jvmClass );
 		assert addedClassMustNotAlreadyBeImmutableAssertion( jvmClass );
-		synchronized( assessmentsByType )
+		MyKit.sync.lock( lock, () -> //
 		{
 			assessmentsByType.put( jvmClass, ImmutableTypeAssessment.instance );
-		}
+			return Unit.instance;
+		} );
 	}
 
 	public void addThreadSafePreassessment( Class<?> jvmClass )
@@ -64,17 +70,17 @@ public final class TypeAssessor
 		assert addedClassMustBeClassTypeAssertion( jvmClass );
 		assert addedClassMustNotBeExtensibleClassTypeAssertion( jvmClass );
 		assert addedClassMustNotAlreadyBeImmutableAssertion( jvmClass );
-		synchronized( assessmentsByType )
+		MyKit.sync.lock( lock, () -> //
 		{
 			assessmentsByType.put( jvmClass, new ThreadSafeMutableTypeAssessment( jvmClass ) );
-		}
+			return Unit.instance;
+		} );
 	}
 
 	public TypeAssessment assess( Class<?> type )
 	{
-		synchronized( assessmentsByType )
-		{
-			return Debug.boundary( () -> //
+		return MyKit.sync.lock( lock, () -> //
+			Debug.boundary( () -> //
 			{
 				TypeAssessment existingAssessment = assessmentsByType.get( type );
 				if( existingAssessment != null )
@@ -85,8 +91,7 @@ public final class TypeAssessor
 				assert oldAssessment == UnderAssessmentTypeAssessment.instance;
 				assert !(newAssessment instanceof UnderAssessmentTypeAssessment);
 				return newAssessment;
-			} );
-		}
+			} ) );
 	}
 
 	void addDefaultPreassessment( Class<?> jvmClass, TypeAssessment classAssessment )

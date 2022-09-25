@@ -7,7 +7,11 @@
 
 package io.github.mikenakis.bathyscaphe.internal.mykit;
 
+import io.github.mikenakis.bathyscaphe.internal.mykit.functional.Function0;
+import io.github.mikenakis.debug.Debug;
+
 import java.lang.reflect.Field;
+import java.util.concurrent.locks.Lock;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -16,6 +20,7 @@ import java.util.stream.StreamSupport;
  *
  * @author michael.gr
  */
+@SuppressWarnings( "NewClassNamingConvention" )
 public final class MyKit
 {
 	private MyKit() { }
@@ -156,5 +161,21 @@ public final class MyKit
 	public static <T> Stream<T> streamFromIterable( Iterable<T> iterable )
 	{
 		return StreamSupport.stream( iterable.spliterator(), false );
+	}
+
+	public static final class sync
+	{
+		public static <T> T lock( Lock lock, Function0<T> function )
+		{
+			lock.lock();
+			try
+			{
+				return Debug.boundary( () -> function.invoke() );
+			}
+			finally
+			{
+				lock.unlock();
+			}
+		}
 	}
 }
