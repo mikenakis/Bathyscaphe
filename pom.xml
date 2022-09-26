@@ -55,14 +55,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>19</maven.compiler.source>
-		<maven.compiler.target>19</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<distributionManagement>
 <!--		<repository>-->
 <!--			<id>github-bathyscaphe</id>-->
-<!--			&lt;!&ndash; PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. &ndash;&gt;-->
+<!--			PEARL: In the 'mikenakis/Bathyscaphe' part, there be magic: in GitHub, the name of the artifact repository must match the name of the source code repository. -->
 <!--			<url>https://maven.pkg.github.com/mikenakis/Bathyscaphe</url>-->
 <!--		</repository>-->
 		<repository>
