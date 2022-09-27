@@ -34,7 +34,7 @@ public final class MutableFieldValueMutableObjectAssessment extends MutableObjec
 		assert declaringTypeAssessment.type.isAssignableFrom( object.getClass() );
 		assert declaringTypeAssessment.type == provisoryFieldAssessment.field.getDeclaringClass();
 		assert List.of( declaringTypeAssessment.type.getDeclaredFields() ).contains( provisoryFieldAssessment.field );
-		assert fieldValueAssessment.object().equals( MyKit.getFieldValue( object, provisoryFieldAssessment.field ) );
+		assert fieldValueAssessment.object().equals( MyKit.getFieldValue( object, provisoryFieldAssessment.field ) ); //note: this is a bit problematic because if the `equals()` method of that object throws, it might appear as a failure of Bathyscaphe.
 		this.object = object;
 		this.declaringTypeAssessment = declaringTypeAssessment;
 		this.provisoryFieldAssessment = provisoryFieldAssessment;
